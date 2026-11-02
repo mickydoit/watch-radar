@@ -4,6 +4,8 @@ A daily research agent that watches the second-hand market for a short list of s
 
 It runs as a Claude Code **scheduled cloud routine** every morning at 07:00 Brisbane. Each run clones this repo, reads `watchlist.yml`, searches Chrono24, WatchRecon, eBay, dealers, WatchCharts and the auction houses, compares against what it has already seen, commits the updated state and reports, and sends one email.
 
+Email goes out through [Resend](https://resend.com) using two environment variables set on the cloud environment, not in this repo: `RADAR_TO` (recipient) and `RESEND_API_KEY`. Optional `RADAR_FROM` overrides the sender once a domain is verified in Resend. No mailbox account is connected to the routine.
+
 ## Files
 
 | Path | Purpose |
