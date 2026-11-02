@@ -1,0 +1,4 @@
+{
+  "_comment": "Listings already reported, keyed by watch id then by a stable listing key (normalised URL or source:id). Values hold first_seen, last_seen, price, currency, source, title. Pruned to the last 90 days by the routine.",
+  "listings": {}
+}

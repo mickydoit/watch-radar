@@ -1,0 +1,4 @@
+{
+  "_comment": "Upcoming and recently closed auction lots that match the watchlist. Keyed by lot URL. Fields: watch_id, house, sale, lot, date, estimate_low, estimate_high, currency, result, status (upcoming|sold|unsold|withdrawn), first_seen.",
+  "lots": {}
+}
