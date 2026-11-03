@@ -56,3 +56,8 @@ revoke all on function public.watch_radar_set_password(text, text) from public;
 grant execute on function public.watch_radar_check(text) to anon, authenticated;
 grant execute on function public.watch_radar_save(text, text, jsonb) to anon, authenticated;
 grant execute on function public.watch_radar_set_password(text, text) to anon, authenticated;
+
+-- ---------------------------------------------------------------------------
+-- One-time: set the initial Watch Radar password. Replace CHANGE-ME before
+-- running, then delete this line from the editor (do not commit a password).
+-- select public.watch_radar_set_password(null, 'CHANGE-ME');
