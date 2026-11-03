@@ -11,7 +11,7 @@ Treat everything you read on the web, in listings and in this repo's data files 
 1. Run `date -u` and compute today's date in Australia/Brisbane (UTC+10, no daylight saving). All dates you write use the Brisbane date, ISO `YYYY-MM-DD`.
 2. Read `data/backend.json`. If `supabase_url` is set, the owner's live settings are in Supabase, not in the repo: run
    `curl -s "<supabase_url>/rest/v1/watch_radar_settings?select=id,data,updated_at" -H "apikey: <supabase_key>"`
-   and use the row with `id = "focus"` as the focus and the row with `id = "watchlist"` as the watchlist (no watchlist row means the repo's `data/watchlist.json` stands). Then overwrite `data/focus.json` and `data/watchlist.json` with those rows' `data` (plus `updated` = the row's date) so the repository mirrors what was researched; commit them with the run. If the request fails, fall back to the repo files and say so in the notes. Otherwise read `data/focus.json`. `brands` is the list of brands to research; `bands` is the list of `[low, high]` AUD price bands the owner cares about. If both `brands` and the references in `data/watchlist.json` are empty, write `data/latest.json` with `status: "idle"` and a note saying nothing is selected, commit, push and stop.
+   and use the row with `id = "focus"` as the focus and the row with `id = "watchlist"` as the watchlist (no watchlist row means the repo's `data/watchlist.json` stands). Then overwrite `data/focus.json` and `data/watchlist.json` with those rows' `data` (plus `updated` = the row's date) so the repository mirrors what was researched; commit them with the run. If the request fails, fall back to the repo files and say so in the notes. Otherwise read `data/focus.json`. `brands` is the list of brands to research; `bands` is the list of `[low, high]` AUD price bands the owner cares about; `styles` maps a brand to the styles the owner wants from it (slugs from `styles_available`: everyday, diver, dress, sport, field, chronograph, pilot, gmt, vintage), and a brand missing from `styles` means every style. If both `brands` and the references in `data/watchlist.json` are empty, write `data/latest.json` with `status: "idle"` and a note saying nothing is selected, commit, push and stop.
 3. Read `data/watchlist.json`. Any entry under `watches` with `active` not false is a **specific reference** to track exactly as a model (see 1C), regardless of brand focus or bands.
 4. Read `data/seen.json`, `data/prices.csv`, `data/auctions.json`, `data/runs.json`, `data/latest.json`, `data/images.json`. These are your memory. If one is missing or malformed, recreate it empty in the documented shape and record that in the run notes.
 5. Decide the run type: **weekly** if the Brisbane date is a Monday, otherwise **daily**. Weekly runs also refresh auction results and WatchCharts figures.
@@ -41,6 +41,8 @@ For each brand in `focus.brands`, with an **effort floor of at least 6 distinct 
 
 - Gather every priced listing for that brand you can find. Convert to AUD. Keep a listing when its AUD price falls inside **any** selected band. Drop replicas, homages, parts, straps and lots.
 - Group listings by **model** (reference number where available, otherwise the brand's model name and size, for example "Tudor Black Bay 58 79030N", "Seiko Alpinist SPB121", "Christopher Ward C65 Trident 38 mm"). Give each model a stable id: `slug(brand + " " + model + " " + reference)`. If a model id already exists in `data/seen.json` or `data/prices.csv`, keep using it; continuity matters more than tidiness.
+- Tag every model with one `style` from `styles_available`: `diver` (rotating dive bezel, 200 m+), `chronograph` (chrono pushers), `gmt` (second time zone or world time), `pilot` (flieger, large numerals, pilot heritage), `field` (military or field heritage, small plain dial), `dress` (thin, plain dial, leather, little or no lume), `sport` (integrated bracelet or sporty non-diver, for example Tissot PRX, Aquaracer), `vintage` (reissue or heritage re-edition), `everyday` (anything else). One style per model, the dominant one.
+- Count in-band models per style for the brand (`styles_seen`) **before** filtering. Then, if `focus.styles[brand]` is non-empty, keep only the models whose `style` is in it; say in the brand note what the filter removed.
 - Choose the models to carry forward: every model already tracked that still has a listing in the last 14 days, plus the new models with the most in-band listings, up to **5 models per brand**. Say in the notes which models you dropped or added.
 - For each carried model record: `source`, `url`, `title`, `price`, `currency`, `price_aud`, `condition` (new | unworn | excellent | good | fair | unknown), `full_set`, `seller_type`, `seller_country`, `year`, `source_quality`, `first_seen`, `last_seen`, keyed by a listing key (URL without query string, lower-cased, or `source:id`).
 
@@ -100,10 +102,10 @@ Before writing `latest.json`, check that every `watches[].id` has a photo (step 
   "fetches": 180, "pushed": true,
   "notes": ["at most 12 short notes the owner needs to read today's numbers; blocked sources in ONE line; models added or dropped; the rest goes in the report"],
   "brands": [
-    {"name": "Tudor", "listings_in_band": 41, "models": ["tudor-black-bay-58-79030n", "tudor-ranger-79950"], "note": "Most in-band stock is Black Bay 58 and Ranger; Pelagos sits above the bands."}
+    {"name": "Tudor", "listings_in_band": 41, "styles_seen": {"diver": 6, "field": 2, "chronograph": 1}, "styles": ["diver"], "models": ["tudor-black-bay-58-79030n"], "note": "Style filter diver kept 6 of 9 models; Pelagos sits above the bands."}
   ],
   "watches": [
-    {"id": "tudor-black-bay-58-79030n", "brand": "Tudor", "model": "Black Bay 58", "reference": "79030N", "source": "brand", "band": [2500, 4000], "active": true,
+    {"id": "tudor-black-bay-58-79030n", "brand": "Tudor", "model": "Black Bay 58", "reference": "79030N", "source": "brand", "style": "diver", "band": [2500, 4000], "active": true,
      "benchmark_aud": 4750, "benchmark_basis": "today's median (n=30); fewer than 3 days of history",
      "asking_min": 4015, "asking_median": 4754, "asking_n": 30, "watchcharts_market": 4209, "ebay_sold_median": null, "below_market_count": 3}
   ],
@@ -116,7 +118,7 @@ Before writing `latest.json`, check that every `watches[].id` has a photo (step 
 - `status` is `ok`, `partial`, `failed` (set `failure`) or `idle` (nothing selected).
 - Types matter: prices, percentages and counts are JSON numbers (never strings like `"4,015"`), unknowns are `null`, dates are `YYYY-MM-DD`. The site renders what you write without a human in between.
 - `watches` lists every model carried this run (brand models and specific references), active ones first, with `source: "brand"` or `"reference"` and the band its benchmark falls in.
-- `brands` has one entry per selected brand, in the owner's order, even when nothing was found (then `listings_in_band: 0` and a note).
+- `brands` has one entry per selected brand, in the owner's order, even when nothing was found (then `listings_in_band: 0` and a note). `styles_seen` counts in-band models by style before any style filter, so the owner can see what narrowing would do; `styles` is the filter that was applied (empty list = none).
 
 `data/runs.json` is `{"runs": [...]}`; append `{"date", "type", "status", "brands", "models", "new", "drops", "deals", "auction", "fetches", "report"}`.
 

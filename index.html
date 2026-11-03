@@ -180,6 +180,15 @@ td.num,th.num{text-align:right}
 .check-item:hover,.check-item[aria-pressed="true"]{color:var(--ink)}
 .check-item i{width:14px;height:14px;border:1px solid var(--ink-3);border-radius:50%;flex:0 0 auto;transition:all .25s var(--ease)}
 .check-item[aria-pressed="true"] i{background:var(--green);border-color:var(--green);box-shadow:inset 0 0 0 3px var(--bg)}
+#stylePick{border-top:1px solid var(--hair)}
+.style-row{display:grid;grid-template-columns:180px 1fr;gap:10px 24px;padding:16px 0;border-bottom:1px solid var(--hair);align-items:baseline}
+.style-row .name{color:var(--ink)}
+.style-row .chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:inherit;border:1px solid var(--ink-3);border-radius:999px;padding:7px 14px;color:var(--ink-2);background:none;cursor:pointer;transition:all .2s var(--ease)}
+.chip:hover{color:var(--ink);border-color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:var(--bg)}
+.chip small{font-size:inherit;opacity:.65;margin-left:6px}
+@media (max-width:900px){.style-row{grid-template-columns:1fr;gap:10px}}
 .field-group{margin-top:clamp(56px,8vh,88px)}
 .field-group>.f12{margin-bottom:18px;display:flex;justify-content:space-between;align-items:baseline}
 .field-group>.f12 .acts{display:flex;gap:18px}
@@ -267,6 +276,7 @@ footer .runs div{display:flex;gap:16px;padding:6px 0;border-top:1px solid var(--
   <div class="grid">
     <div class="span-r" style="grid-column:4/13">
       <div class="field-group" style="margin-top:0"><div class="f12"><span>Brands</span><span class="acts"><button id="brandAll">Select all</button><button id="brandNone">Clear</button><span id="brandCount" class="muted"></span></span></div><div class="check-grid" id="brandPick"></div></div>
+      <div class="field-group" id="styleGroup" style="display:none"><div class="f12"><span>Styles, per brand</span><span class="muted">Nothing ticked means every style</span></div><div id="stylePick"></div></div>
       <div class="field-group"><div class="f12"><span>Price range, AUD</span></div><div class="check-grid" id="bandPick"></div></div>
       <div class="field-group refs"><div class="f12"><span>Specific references</span><span class="acts"><button id="addBtn">Add</button></span></div><div id="wlForm"></div><div id="wlList"></div></div>
       <div class="submit-row"><button class="btn-submit green" id="saveBtn" disabled>Save<span>→</span></button><span class="msg f12" id="saveMsg"></span></div>
@@ -299,6 +309,8 @@ const pad = n => String(n).padStart(2, '0');
 const brisbaneDate = iso => { try { const p = new Intl.DateTimeFormat('en-CA', { timeZone: 'Australia/Brisbane', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date(iso)); const g = t => p.find(x => x.type === t).value; return g('year') + '-' + g('month') + '-' + g('day'); } catch (e) { return String(iso).slice(0, 10); } };
 const store = { get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} } };
 const SRC = { 'WatchCharts Marketplace': 'WatchCharts', 'eBay US': 'eBay', 'eBay AU': 'eBay', 'eBay UK': 'eBay' };
+const STYLES_DEFAULT = ['everyday', 'diver', 'dress', 'sport', 'field', 'chronograph', 'pilot', 'gmt', 'vintage'];
+const STYLE_LABEL = { gmt: 'GMT / travel', vintage: 'Vintage-inspired' }; const styleName = s => STYLE_LABEL[s] || s.charAt(0).toUpperCase() + s.slice(1);
 const srcName = s => SRC[s] || s || '';
 
 // theme + clock
@@ -334,10 +346,11 @@ async function load() {
   const [latest, prices, seen, auctions, runs, wl, images, focus, backend] = await Promise.all([j('data/latest.json'), t('data/prices.csv').then(parseCSV).catch(() => []), j('data/seen.json').catch(() => ({ listings: {} })), j('data/auctions.json').catch(() => ({ lots: {} })), j('data/runs.json').catch(() => ({ runs: [] })), j('data/watchlist.json').catch(() => null), j('data/images.json').catch(() => ({ images: {} })), j('data/focus.json').catch(() => null), j('data/backend.json').catch(() => ({}))]);
   Object.assign(state, { latest, prices, seen: seen.listings || {}, auctions: auctions.lots || {}, runs: runs.runs || [], images: images.images || {} });
   state.wl = wl && Array.isArray(wl.watches) ? wl : { defaults: { currency: 'AUD', markets: ['worldwide'], home_country: 'Australia' }, watches: [] };
-  state.focus = focus && Array.isArray(focus.brands_available) ? focus : { currency: 'AUD', brands_available: [], bands_available: [[300, 1000], [1000, 2000], [2000, 2500], [2500, 4000]], brands: [], bands: [], updated: null };
+  state.focus = focus && Array.isArray(focus.brands_available) ? focus : { currency: 'AUD', brands_available: [], bands_available: [[300, 1000], [1000, 2000], [2000, 2500], [2500, 4000]], brands: [], bands: [], styles: {}, updated: null };
   state.repo = latest.repo_url || `https://github.com/${REPO.owner}/${REPO.name}`;
   state.backend = backend && backend.supabase_url ? backend : null;
   if (state.backend) { try { const r = await fetch(state.backend.supabase_url + '/rest/v1/watch_radar_settings?select=id,data,updated_at', { headers: { apikey: state.backend.supabase_key } }); if (r.ok) for (const row of await r.json()) { if (row.id === 'focus' && row.data && Array.isArray(row.data.brands)) state.focus = { ...state.focus, ...row.data, updated: row.updated_at ? brisbaneDate(row.updated_at) : state.focus.updated }; if (row.id === 'watchlist' && row.data && Array.isArray(row.data.watches)) state.wl = row.data; } } catch (e) {} }
+  const F = state.focus; if (!Array.isArray(F.styles_available) || !F.styles_available.length) F.styles_available = STYLES_DEFAULT; F.styles = F.styles && typeof F.styles === 'object' && !Array.isArray(F.styles) ? F.styles : {}; for (const b of Object.keys(F.styles)) { F.styles[b] = Array.isArray(F.styles[b]) ? F.styles[b].filter(x => F.styles_available.includes(x)) : []; if (!F.styles[b].length) delete F.styles[b]; }
 }
 function parseCSV(text) { const lines = text.trim().split(/\r?\n/); if (lines.length < 2) return []; const h = lines[0].split(','); return lines.slice(1).filter(Boolean).map(l => { const cells = []; let cur = '', q = false; for (const ch of l) { if (ch === '"') q = !q; else if (ch === ',' && !q) { cells.push(cur); cur = ''; } else cur += ch; } cells.push(cur); const o = {}; h.forEach((k, i) => o[k.trim()] = (cells[i] || '').trim()); o.value = o.value === '' ? null : Number(o.value); o.n = o.n === '' ? null : Number(o.n); return o; }); }
 function watches() { const stats = new Map((state.latest.watches || []).map(w => [w.id, w])); const refs = state.wl.watches.map(w => ({ ...stats.get(w.id), ...w, active: w.active !== false, source: 'reference' })); const found = (state.latest.watches || []).filter(w => w.source !== 'reference' && !state.wl.watches.some(r => r.id === w.id)).map(w => ({ ...w, active: w.active !== false })); return [...found, ...refs]; }
@@ -469,12 +482,20 @@ function markDirty(d = true, which = 'wl') { if (which === 'all') { state.wlDirt
 const fmtBand = b => 'A$' + b[0].toLocaleString('en-AU') + ' – ' + b[1].toLocaleString('en-AU');
 function renderFocus() {
   const F = state.focus, bp = $('#brandPick'), dp = $('#bandPick'); bp.innerHTML = ''; dp.innerHTML = '';
-  for (const b of F.brands_available) { const on = F.brands.includes(b); bp.append(el('button', { class: 'check-item f16', 'aria-pressed': String(on), onclick: () => { F.brands = on ? F.brands.filter(x => x !== b) : F.brands_available.filter(x => x === b || F.brands.includes(x)); markDirty(true, 'focus'); renderFocus(); } }, el('i'), b)); }
+  for (const b of F.brands_available) { const on = F.brands.includes(b); bp.append(el('button', { class: 'check-item f16', 'aria-pressed': String(on), onclick: () => { F.brands = on ? F.brands.filter(x => x !== b) : F.brands_available.filter(x => x === b || F.brands.includes(x)); if (on) delete F.styles[b]; markDirty(true, 'focus'); renderFocus(); } }, el('i'), b)); }
+  renderStyles();
   $('#brandCount').textContent = F.brands.length ? F.brands.length + ' / ' + F.brands_available.length : '';
   for (const band of F.bands_available) { const on = F.bands.some(x => x[0] === band[0] && x[1] === band[1]); dp.append(el('button', { class: 'check-item f16', 'aria-pressed': String(on), onclick: () => { F.bands = on ? F.bands.filter(x => !(x[0] === band[0] && x[1] === band[1])) : [...F.bands, band].sort((a, c) => a[0] - c[0]); markDirty(true, 'focus'); renderFocus(); } }, el('i'), fmtBand(band))); }
 }
+function renderStyles() {
+  const F = state.focus, host = $('#stylePick'); host.innerHTML = ''; $('#styleGroup').style.display = F.brands.length ? '' : 'none';
+  const seen = new Map((state.latest && state.latest.brands || []).map(b => [String(b.name || '').toLowerCase(), b.styles_seen || {}]));
+  for (const b of F.brands) { const cur = F.styles[b] || []; const counts = seen.get(b.toLowerCase()) || {}; const chips = el('div', { class: 'chips' });
+    for (const st of F.styles_available) { const on = cur.includes(st); const n = num(counts[st]); chips.append(el('button', { type: 'button', class: 'chip f12', 'aria-pressed': String(on), onclick: () => { const next = on ? cur.filter(x => x !== st) : [...cur, st]; if (next.length) F.styles[b] = F.styles_available.filter(x => next.includes(x)); else delete F.styles[b]; markDirty(true, 'focus'); renderStyles(); } }, styleName(st), n ? el('small', {}, String(n)) : null)); }
+    host.append(el('div', { class: 'style-row' }, el('div', { class: 'name f16' }, b, cur.length ? null : el('span', { class: 'f12 muted', style: 'margin-left:12px' }, 'all styles')), chips)); }
+}
 $('#brandAll').onclick = () => { state.focus.brands = [...state.focus.brands_available]; markDirty(true, 'focus'); renderFocus(); };
-$('#brandNone').onclick = () => { state.focus.brands = []; markDirty(true, 'focus'); renderFocus(); };
+$('#brandNone').onclick = () => { state.focus.brands = []; state.focus.styles = {}; markDirty(true, 'focus'); renderFocus(); };
 
 // specific references
 const CONDS = ['new', 'unworn', 'excellent', 'good', 'fair'], MARKETS = ['worldwide', 'au', 'eu', 'us', 'uk', 'jp'];
@@ -524,7 +545,7 @@ async function rpc(fn, args) { const r = await fetch(state.backend.supabase_url 
 async function putFile(path, obj, message) { const api = `https://api.github.com/repos/${REPO.owner}/${REPO.name}/contents/${path}`; const headers = { Authorization: 'Bearer ' + token(), Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' }; const cur = await fetch(api + '?ref=' + REPO.branch, { headers }); if (cur.status === 401) throw new Error('GitHub rejected the token (401).'); if (cur.status === 403) throw new Error('The token cannot write to this repository (403).'); const sha = cur.ok ? (await cur.json()).sha : undefined; const content = btoa(unescape(encodeURIComponent(JSON.stringify(obj, null, 2) + '\n'))); const r = await fetch(api, { method: 'PUT', headers, body: JSON.stringify({ message, content, sha, branch: REPO.branch }) }); if (!r.ok) { const t = await r.text(); throw new Error('GitHub refused the save (' + r.status + '). ' + t.slice(0, 160)); } }
 async function save() {
   const btn = $('#saveBtn'), msg = $('#saveMsg'), F = state.focus;
-  const focusDoc = { currency: F.currency || 'AUD', brands_available: F.brands_available, bands_available: F.bands_available, brands: F.brands, bands: F.bands, updated: new Date().toISOString().slice(0, 10) }; const wlDoc = { defaults: state.wl.defaults, watches: state.wl.watches };
+  const styles = {}; for (const b of F.brands) if (F.styles[b] && F.styles[b].length) styles[b] = F.styles[b]; const focusDoc = { currency: F.currency || 'AUD', brands_available: F.brands_available, bands_available: F.bands_available, styles_available: F.styles_available, brands: F.brands, bands: F.bands, styles, updated: new Date().toISOString().slice(0, 10) }; const wlDoc = { defaults: state.wl.defaults, watches: state.wl.watches };
   if (state.backend) { if (!password()) { renderTokenBox(true); return; } btn.disabled = true; msg.className = 'msg f12'; msg.textContent = 'Saving…'; try { if (state.focusDirty) await rpc('watch_radar_save', { p_password: password(), p_id: 'focus', p_data: focusDoc }); if (state.wlDirty) await rpc('watch_radar_save', { p_password: password(), p_id: 'watchlist', p_data: wlDoc }); F.updated = focusDoc.updated; markDirty(false, 'all'); msg.className = 'msg f12 ok'; msg.textContent = 'Saved. Tomorrow’s run uses this selection.'; render(); } catch (e) { msg.className = 'msg f12 err'; msg.textContent = e.message; btn.disabled = false; if (/wrong password/i.test(e.message)) { state.pw = null; store.set('radar-pw', null); renderTokenBox(true); } } return; }
   if (!token()) { renderTokenBox(true); return; } btn.disabled = true; msg.className = 'msg f12'; msg.textContent = 'Saving…';
   try { if (state.focusDirty) { F.updated = focusDoc.updated; await putFile('data/focus.json', { _comment: 'Research focus, edited from the site.', ...focusDoc }, 'focus: ' + F.brands.length + ' brands, ' + F.bands.length + ' bands (edited on the site)'); } if (state.wlDirty) await putFile('data/watchlist.json', { _comment: 'Specific references, edited from the site.', ...wlDoc }, 'watchlist: ' + state.wl.watches.length + ' references (edited on the site)'); markDirty(false, 'all'); msg.className = 'msg f12 ok'; msg.textContent = 'Saved. Tomorrow’s run uses this selection.'; render(); } catch (e) { msg.className = 'msg f12 err'; msg.textContent = e.message; btn.disabled = false; }
