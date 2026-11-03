@@ -120,7 +120,7 @@
    "https://www.ebay.com/b/rolex-submariner-date-126610ln/31387/bn_7122303384": {
     "watch_id": "rolex-126610ln",
     "source": "eBay",
-    "url": "https://www.ebay.com/b/rolex-submariner-date-126610ln/31387/bn_7122303384",
+    "url": null,
     "title": "Rolex 126610LN new (eBay category snippet ~$15,699)",
     "price": 15699,
     "currency": "USD",
@@ -135,7 +135,8 @@
     "source_quality": "snippet",
     "match": false,
     "below_market_pct": -2.2,
-    "flag": null
+    "flag": null,
+    "overview_url": "https://www.ebay.com/b/rolex-submariner-date-126610ln/31387/bn_7122303384"
    },
    "https://www.bobswatches.com/pre-owned-steel-rolex-submariner-ref-126610-black-cerachrom-bezel.html": {
     "watch_id": "rolex-126610ln",
@@ -1204,7 +1205,7 @@
    "https://www.ebay.com/shop/tudor-black-bay-58-79030n": {
     "watch_id": "tudor-bb58-79030n",
     "source": "eBay",
-    "url": "https://www.ebay.com/shop/tudor-black-bay-58-79030n?_nkw=tudor+black+bay+58+79030n",
+    "url": null,
     "title": "Tudor Black Bay 58 79030N 39mm full set (eBay dealer snippet)",
     "price": 4381.6,
     "currency": "USD",
@@ -1219,7 +1220,8 @@
     "source_quality": "snippet",
     "match": false,
     "below_market_pct": -31.6,
-    "flag": null
+    "flag": null,
+    "overview_url": "https://www.ebay.com/shop/tudor-black-bay-58-79030n?_nkw=tudor+black+bay+58+79030n"
    },
    "https://marketplace.watchcharts.com/listings/watch_model/326": {
     "watch_id": "tudor-bb58-79030n",
@@ -4126,7 +4128,7 @@
    },
    "snippet:wp-twelve40-basalt-999": {
     "source": "Reddit r/Watchexchange (via WatchPatrol)",
-    "url": "https://www.watchpatrol.net/discover/brands/christopher-ward/the-twelve/",
+    "url": null,
     "title": "[WTS] Christopher Ward The Twelve Basalt Gray 40mm Full Set",
     "price": 999,
     "currency": "USD",
@@ -4141,11 +4143,12 @@
     "below_market_pct": 21.9,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/christopher-ward/the-twelve/"
    },
    "snippet:wp-twelve40-glacier-1054": {
     "source": "Reddit r/Watchexchange (via WatchPatrol)",
-    "url": "https://www.watchpatrol.net/discover/brands/christopher-ward/the-twelve/",
+    "url": null,
     "title": "[WTS] Christopher Ward The Twelve Glacier Blue 40mm (shipped)",
     "price": 1054,
     "currency": "USD",
@@ -4160,7 +4163,8 @@
     "below_market_pct": 17.5,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/christopher-ward/the-twelve/"
    }
   },
   "christopher-ward-the-twelve-36mm": {
@@ -4223,7 +4227,7 @@
    },
    "snippet:wp-twelve36-glacier-1100": {
     "source": "Reddit r/Watchexchange (via WatchPatrol)",
-    "url": "https://www.watchpatrol.net/discover/brands/christopher-ward/the-twelve/",
+    "url": null,
     "title": "[WTS] Christopher Ward The Twelve 36mm Glacier Blue",
     "price": 1100,
     "currency": "USD",
@@ -4238,11 +4242,12 @@
     "below_market_pct": 16.9,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/christopher-ward/the-twelve/"
    },
    "snippet:wp-twelve36-midnight-975": {
     "source": "Reddit r/Watchexchange (via WatchPatrol)",
-    "url": "https://www.watchpatrol.net/discover/brands/christopher-ward/the-twelve/",
+    "url": null,
     "title": "[WTS] Christopher Ward The Twelve 36mm Midnight Sun",
     "price": 975,
     "currency": "USD",
@@ -4257,11 +4262,12 @@
     "below_market_pct": 26.3,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/christopher-ward/the-twelve/"
    },
    "snippet:ebay-twelve36-frosted-lichen-1100": {
     "source": "eBay.com",
-    "url": "https://www.ebay.com/shop/the-twelve-watch",
+    "url": null,
     "title": "Christopher Ward The Twelve 36mm Frosted Lichen",
     "price": 1100,
     "currency": "USD",
@@ -4276,7 +4282,8 @@
     "below_market_pct": 16.9,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.ebay.com/shop/the-twelve-watch"
    }
   },
   "christopher-ward-the-twelve-38mm": {
@@ -5242,7 +5249,7 @@
    },
    "watchrecon:fc-303-silver-roman-38-575": {
     "source": "WatchRecon (r/Watchexchange)",
-    "url": "https://www.watchrecon.com/?query=frederique+constant",
+    "url": null,
     "title": "Frederique Constant Classics Automatic FC-303 Silver Roman Dial 38mm",
     "price": 575,
     "currency": "USD",
@@ -5257,7 +5264,8 @@
     "below_market_pct": 61.3,
     "match": false,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchrecon.com/?query=frederique+constant"
    }
   },
   "iwc-vintage-automatic-pellaton-cal-85x": {
@@ -6092,7 +6100,7 @@
   "longines-master-collection-38-5mm-l2-628-4-78-6": {
    "watchrecon:master-collection-l2.628.4.78.6-800": {
     "source": "WatchRecon (r/Watchexchange)",
-    "url": "https://www.watchrecon.com/?query=longines+master+collection",
+    "url": null,
     "title": "Longines Master Collection 38.5mm (L2.628.4.78.6), silver barleycorn dial, blued hands, box and 2 straps",
     "price": 800,
     "currency": "USD",
@@ -6107,7 +6115,8 @@
     "below_market_pct": 5.9,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchrecon.com/?query=longines+master+collection"
    },
    "watchpatrol:master-collection-l2.628-1100": {
     "source": "WatchPatrol (Reddit)",
@@ -6265,7 +6274,7 @@
    },
    "watchrecon:conquest-38-l3.720.4.52.6-1399": {
     "source": "WatchRecon (r/Watchexchange)",
-    "url": "https://www.watchrecon.com/?query=longines+conquest",
+    "url": null,
     "title": "2026 Longines Conquest 38mm sunray black (L3.720.4.52.6), full kit",
     "price": 1399,
     "currency": "USD",
@@ -6280,11 +6289,12 @@
     "below_market_pct": 39.2,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchrecon.com/?query=longines+conquest"
    },
    "watchrecon:conquest-38-new-1400": {
     "source": "WatchRecon (r/Watchexchange)",
-    "url": "https://www.watchrecon.com/?query=longines+conquest",
+    "url": null,
     "title": "Longines Conquest 38mm, new, full presentation (combo listing with Jack Mason)",
     "price": 1400,
     "currency": "USD",
@@ -6299,7 +6309,8 @@
     "below_market_pct": 39.1,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchrecon.com/?query=longines+conquest"
    },
    "https://www.watchpatrol.net/listing/3670610/": {
     "source": "WatchPatrol (Reddit)",
@@ -6343,7 +6354,7 @@
   "longines-master-collection-big-date-l2-676-4-78-3": {
    "watchrecon:master-collection-big-date-l2.676.4.78.3-1200": {
     "source": "WatchRecon (r/Watchexchange)",
-    "url": "https://www.watchrecon.com/?query=longines+master+collection",
+    "url": null,
     "title": "Longines Master Collection Big Date Small Seconds, late 2000s (L2.676.4.78.3)",
     "price": 1200,
     "currency": "USD",
@@ -6358,7 +6369,8 @@
     "below_market_pct": 0.0,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchrecon.com/?query=longines+master+collection"
    }
   },
   "longines-conquest-41mm-l3-830-4": {
@@ -6459,7 +6471,7 @@
    },
    "watchrecon:conquest-41-l3.830.4-green-1275": {
     "source": "WatchRecon (r/Watchexchange)",
-    "url": "https://www.watchrecon.com/?query=longines+conquest",
+    "url": null,
     "title": "Longines Conquest Automatic 41mm olive green (L3.830.4)",
     "price": 1275,
     "currency": "USD",
@@ -6474,11 +6486,12 @@
     "below_market_pct": 46.9,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchrecon.com/?query=longines+conquest"
    },
    "watchrecon:conquest-41-green-2025-1599": {
     "source": "WatchRecon (r/Watchexchange)",
-    "url": "https://www.watchrecon.com/?query=longines+conquest",
+    "url": null,
     "title": "Longines Conquest 41mm sunray green (2025)",
     "price": 1599,
     "currency": "USD",
@@ -6493,7 +6506,8 @@
     "below_market_pct": 33.4,
     "match": false,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchrecon.com/?query=longines+conquest"
    }
   },
   "meistersinger-neo-36mm-automatic-ne908n": {
@@ -7573,7 +7587,7 @@
    },
    "snippet:wp-cc36-cream-coral-exhibition-1250": {
     "source": "Reddit r/Watchexchange (via WatchPatrol)",
-    "url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/",
+    "url": null,
     "title": "[WTS/WTT] Nomos Club Campus Cream Coral 36mm Exhibition Caseback",
     "price": 1250,
     "currency": "USD",
@@ -7588,11 +7602,12 @@
     "below_market_pct": 13.5,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/"
    },
    "snippet:wp-cc36-cream-coral-serviced-1199": {
     "source": "Reddit r/Watchexchange (via WatchPatrol)",
-    "url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/",
+    "url": null,
     "title": "[WTS] Nomos Club Campus Cream Coral 36 (full service)",
     "price": 1199,
     "currency": "USD",
@@ -7607,11 +7622,12 @@
     "below_market_pct": 17.0,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/"
    },
    "snippet:wp-cc36-blue-purple-850": {
     "source": "Reddit r/Watchexchange (via WatchPatrol)",
-    "url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/",
+    "url": null,
     "title": "[WTS] Nomos Club Campus Blue/Purple 36mm",
     "price": 850,
     "currency": "USD",
@@ -7626,11 +7642,12 @@
     "below_market_pct": 41.2,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/"
    },
    "snippet:wp-cc36-nonstop-red-1050": {
     "source": "Reddit r/Watchexchange (via WatchPatrol)",
-    "url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/",
+    "url": null,
     "title": "[WTS] Nomos Club Campus Nonstop Red 36",
     "price": 1050,
     "currency": "USD",
@@ -7645,11 +7662,12 @@
     "below_market_pct": 27.3,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/"
    },
    "snippet:wp-cc36-absolute-grey-1111": {
     "source": "Reddit r/Watchexchange (via WatchPatrol)",
-    "url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/",
+    "url": null,
     "title": "[WTS] Nomos Club Campus Absolute Grey 36mm",
     "price": 1111,
     "currency": "USD",
@@ -7664,11 +7682,12 @@
     "below_market_pct": 23.1,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/"
    },
    "snippet:wp-cc36-full-rose-new-1750": {
     "source": "Reddit r/Watchexchange (via WatchPatrol)",
-    "url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/",
+    "url": null,
     "title": "[WTS] Nomos Club Campus Full Rose 36 - New 2026 w/ OEM clasp",
     "price": 1750,
     "currency": "USD",
@@ -7683,11 +7702,12 @@
     "below_market_pct": -21.1,
     "match": false,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/"
    },
    "snippet:wp-cc36-full-rose-new-1599": {
     "source": "Reddit r/Watchexchange (via WatchPatrol)",
-    "url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/",
+    "url": null,
     "title": "[WTS] Nomos Glashutte Club Campus 36 Full Rose - New 2026",
     "price": 1599,
     "currency": "USD",
@@ -7702,7 +7722,8 @@
     "below_market_pct": -10.7,
     "match": false,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/"
    }
   },
   "nomos-glashutte-club-campus-38": {
@@ -8240,7 +8261,7 @@
    },
    "snippet:wp-cc38-future-orange-975": {
     "source": "Reddit r/Watchexchange (via WatchPatrol)",
-    "url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/",
+    "url": null,
     "title": "[WTS] Nomos Club Campus 38 Future Orange",
     "price": 975,
     "currency": "USD",
@@ -8255,11 +8276,12 @@
     "below_market_pct": 38.3,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/"
    },
    "snippet:wp-cc38-neon-night-le-1999": {
     "source": "Reddit r/Watchexchange (via WatchPatrol)",
-    "url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/",
+    "url": null,
     "title": "[WTS] Nomos Club Campus 38 Neon Night Limited Edition",
     "price": 1999,
     "currency": "USD",
@@ -8274,13 +8296,14 @@
     "below_market_pct": -26.6,
     "match": false,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/"
    }
   },
   "nomos-glashutte-orion-35": {
    "snippet:wp-orion35-999": {
     "source": "Reddit r/Watchexchange (via WatchPatrol)",
-    "url": "https://www.watchpatrol.net/discover/brands/nomos/orion/",
+    "url": null,
     "title": "[WTS] Nomos Orion 35",
     "price": 999,
     "currency": "USD",
@@ -8295,11 +8318,12 @@
     "below_market_pct": 35.1,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/orion/"
    },
    "snippet:wp-orion35-309-open-1050": {
     "source": "Reddit r/Watchexchange (via WatchPatrol)",
-    "url": "https://www.watchpatrol.net/discover/brands/nomos/orion/",
+    "url": null,
     "title": "[WTS] Nomos Orion 35mm Reference 309 with Open Caseback",
     "price": 1050,
     "currency": "USD",
@@ -8314,11 +8338,12 @@
     "below_market_pct": 31.7,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/orion/"
    },
    "snippet:wp-orion35-exhibition-950": {
     "source": "Reddit r/Watchexchange (via WatchPatrol)",
-    "url": "https://www.watchpatrol.net/discover/brands/nomos/orion/",
+    "url": null,
     "title": "[WTS] Nomos Orion 35 Exhibition Caseback",
     "price": 950,
     "currency": "USD",
@@ -8333,11 +8358,12 @@
     "below_market_pct": 38.3,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/orion/"
    },
    "snippet:wp-orion35-309-sapphire-1800": {
     "source": "Reddit r/Watchexchange (via WatchPatrol)",
-    "url": "https://www.watchpatrol.net/discover/brands/nomos/orion/",
+    "url": null,
     "title": "[WTS] Nomos Orion 35mm Ref. 309 Sapphire Case back",
     "price": 1800,
     "currency": "USD",
@@ -8352,11 +8378,12 @@
     "below_market_pct": -17.0,
     "match": false,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/orion/"
    },
    "snippet:wp-orion35-309-duw4001-1744": {
     "source": "French forum (via WatchPatrol)",
-    "url": "https://www.watchpatrol.net/discover/brands/nomos/orion/",
+    "url": null,
     "title": "[Vends] Nomos Orion 309 - DUW4001 (French forum)",
     "price": 1744,
     "currency": "USD",
@@ -8371,7 +8398,8 @@
     "below_market_pct": -13.4,
     "match": false,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/orion/"
    },
    "https://omegaforums.net/threads/nomos-orion-anthracite-dial-35mm.123702/": {
     "source": "OmegaForums",
@@ -9995,7 +10023,7 @@
    },
    "watchpatrol:oris-bcpd40-fullkit-1395": {
     "source": "Reddit r/Watchexchange via WatchPatrol",
-    "url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/",
+    "url": null,
     "title": "[WTS] Oris Big Crown Pointer Date 40mm full kit",
     "price": 1395,
     "currency": "USD",
@@ -10010,11 +10038,12 @@
     "below_market_pct": 21.7,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/"
    },
    "watchpatrol:oris-bcpd40-fullkit-1650": {
     "source": "Reddit r/Watchexchange via WatchPatrol",
-    "url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/",
+    "url": null,
     "title": "[WTS] Oris Big Crown Pointer Date 40mm full kit",
     "price": 1650,
     "currency": "USD",
@@ -10029,11 +10058,12 @@
     "below_market_pct": 7.4,
     "match": false,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/"
    },
    "watchpatrol:oris-bcpd40-950": {
     "source": "Reddit r/Watchexchange via WatchPatrol",
-    "url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/",
+    "url": null,
     "title": "[WTS] Oris Big Crown Pointer Date 40mm",
     "price": 950,
     "currency": "USD",
@@ -10048,11 +10078,12 @@
     "below_market_pct": 46.7,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/"
    },
    "watchpatrol:oris-bcpd40-blue-1200": {
     "source": "Reddit r/Watchexchange via WatchPatrol",
-    "url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/",
+    "url": null,
     "title": "[WTS] Oris Big Crown Pointer Date 40mm Blue",
     "price": 1200,
     "currency": "USD",
@@ -10067,11 +10098,12 @@
     "below_market_pct": 32.6,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/"
    },
    "watchpatrol:oris-bcpd-754-7741-4065-1400": {
     "source": "Reddit r/Watchexchange via WatchPatrol",
-    "url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/",
+    "url": null,
     "title": "[WTS] Oris Big Crown Pointer Date 01 754 7741 4065-07 5 20 6x",
     "price": 1400,
     "currency": "USD",
@@ -10086,7 +10118,8 @@
     "below_market_pct": 21.4,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/"
    },
    "https://www.ebay.com/itm/117341208661": {
     "source": "eBay",
@@ -10187,7 +10220,7 @@
    },
    "watchpatrol:oris-bcpd-7628-980": {
     "source": "Reddit r/Watchexchange via WatchPatrol",
-    "url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/",
+    "url": null,
     "title": "[WTS] Oris Big Crown Pointer Date ref. 7628 all stainless",
     "price": 980,
     "currency": "USD",
@@ -10202,11 +10235,12 @@
     "below_market_pct": 12.1,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/"
    },
    "watchpatrol:oris-bcpd-7463c-850": {
     "source": "Reddit r/Watchexchange via WatchPatrol",
-    "url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/",
+    "url": null,
     "title": "[WTS] Oris Big Crown Pointer Date ref. 7463C",
     "price": 850,
     "currency": "USD",
@@ -10221,11 +10255,12 @@
     "below_market_pct": 23.7,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/"
    },
    "watchpatrol:oris-bcpd-7543-1250": {
     "source": "Reddit r/Watchexchange via WatchPatrol",
-    "url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/",
+    "url": null,
     "title": "[WTS] Oris Big Crown Pointer Date 7543 40mm (discontinued)",
     "price": 1250,
     "currency": "USD",
@@ -10240,11 +10275,12 @@
     "below_market_pct": -12.1,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/"
    },
    "watchpatrol:oris-bcpd-7400b-699": {
     "source": "Reddit r/Watchexchange via WatchPatrol",
-    "url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/",
+    "url": null,
     "title": "[WTS] Oris Big Crown Pointer Date 1990s ref. 7400B",
     "price": 699,
     "currency": "USD",
@@ -10259,7 +10295,8 @@
     "below_market_pct": 37.3,
     "match": false,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/"
    }
   },
   "oris-big-crown-propilot-big-day-date-44mm-01-752-7760": {
@@ -11041,7 +11078,7 @@
    },
    "watchrecon:watch_swap:spb465:685": {
     "source": "Reddit r/watch_swap (via WatchRecon)",
-    "url": "https://www.watchrecon.com/?query=seiko+presage",
+    "url": null,
     "title": "Seiko Presage Classic SPB465 with box, papers, extra strap",
     "price": 685,
     "currency": "USD",
@@ -11056,7 +11093,8 @@
     "below_market_pct": 8.6,
     "match": false,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchrecon.com/?query=seiko+presage"
    }
   },
   "sinn-556-i-556-010": {
@@ -11157,7 +11195,7 @@
    },
    "watchpatrol:sinn-556i-2026-hlink-1000": {
     "source": "Reddit r/Watchexchange via WatchPatrol",
-    "url": "https://www.watchpatrol.net/discover/brands/sinn/556i/",
+    "url": null,
     "title": "[WTS] 2026 Sinn 556 I on H-Link Quick Adjust Bracelet",
     "price": 1000,
     "currency": "USD",
@@ -11172,11 +11210,12 @@
     "below_market_pct": 28.6,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/sinn/556i/"
    },
    "watchpatrol:sinn-556i-hlink-556010-1130": {
     "source": "Reddit r/Watchexchange via WatchPatrol",
-    "url": "https://www.watchpatrol.net/discover/brands/sinn/556i/",
+    "url": null,
     "title": "[WTS] Sinn 556 I on H-Link Bracelet (Ref. 556.010)",
     "price": 1130,
     "currency": "USD",
@@ -11191,11 +11230,12 @@
     "below_market_pct": 19.3,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/sinn/556i/"
    },
    "watchpatrol:sinn-556i-hlink-930": {
     "source": "Reddit r/Watchexchange via WatchPatrol",
-    "url": "https://www.watchpatrol.net/discover/brands/sinn/556i/",
+    "url": null,
     "title": "[WTS] Sinn 556i w/ H-Link",
     "price": 930,
     "currency": "USD",
@@ -11210,11 +11250,12 @@
     "below_market_pct": 33.6,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/sinn/556i/"
    },
    "watchpatrol:sinn-556i-2023-fullkit-1400": {
     "source": "Reddit r/Watchexchange via WatchPatrol",
-    "url": "https://www.watchpatrol.net/discover/brands/sinn/556i/",
+    "url": null,
     "title": "[WTS] 2023 Sinn 556 I (556.010) full kit",
     "price": 1400,
     "currency": "USD",
@@ -11229,11 +11270,12 @@
     "below_market_pct": 0.0,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/sinn/556i/"
    },
    "watchpatrol:sinn-556irs-fullset-1200": {
     "source": "Reddit r/Watchexchange via WatchPatrol",
-    "url": "https://www.watchpatrol.net/discover/brands/sinn/556i/",
+    "url": null,
     "title": "[WTS] Sinn 556 I RS 38.5mm full set, $1,200 firm",
     "price": 1200,
     "currency": "USD",
@@ -11248,11 +11290,12 @@
     "below_market_pct": 14.3,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/sinn/556i/"
    },
    "watchpatrol:sinn-556irs-2026-1675": {
     "source": "Reddit r/Watchexchange via WatchPatrol",
-    "url": "https://www.watchpatrol.net/discover/brands/sinn/556i/",
+    "url": null,
     "title": "[WTS] 2026 Sinn 556 I RS with H-Link quick-adjust clasp",
     "price": 1675,
     "currency": "USD",
@@ -11267,7 +11310,8 @@
     "below_market_pct": -19.7,
     "match": false,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/sinn/556i/"
    }
   },
   "sinn-556-a-556-014": {
@@ -11330,7 +11374,7 @@
    },
    "watchpatrol:sinn-556a-1150": {
     "source": "Reddit r/Watchexchange via WatchPatrol",
-    "url": "https://www.watchpatrol.net/discover/brands/sinn/556a/",
+    "url": null,
     "title": "[WTS] Sinn 556A",
     "price": 1150,
     "currency": "USD",
@@ -11345,11 +11389,12 @@
     "below_market_pct": 17.9,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/sinn/556a/"
    },
    "watchpatrol:sinn-556a-2023-385-1200": {
     "source": "Reddit r/Watchexchange via WatchPatrol",
-    "url": "https://www.watchpatrol.net/discover/brands/sinn/556a/",
+    "url": null,
     "title": "[WTS] Sinn 556 A 38.5mm 2023",
     "price": 1200,
     "currency": "USD",
@@ -11364,11 +11409,12 @@
     "below_market_pct": 14.3,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/sinn/556a/"
    },
    "watchpatrol:sinn-556a-2023-1400": {
     "source": "Reddit r/Watchexchange via WatchPatrol",
-    "url": "https://www.watchpatrol.net/discover/brands/sinn/556a/",
+    "url": null,
     "title": "[WTS] Sinn 556 A 2023",
     "price": 1400,
     "currency": "USD",
@@ -11383,11 +11429,12 @@
     "below_market_pct": 0.0,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/sinn/556a/"
    },
    "watchpatrol:sinn-556ars-1285": {
     "source": "Reddit r/Watchexchange via WatchPatrol",
-    "url": "https://www.watchpatrol.net/discover/brands/sinn/556a/",
+    "url": null,
     "title": "[WTS] Sinn 556 A RS",
     "price": 1285,
     "currency": "USD",
@@ -11402,7 +11449,8 @@
     "below_market_pct": 8.2,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/sinn/556a/"
    }
   },
   "sinn-104-st-sa-104-010": {
@@ -11617,7 +11665,7 @@
    },
    "watchpatrol:sinn-104-i-w-1255": {
     "source": "Reddit r/Watchexchange via WatchPatrol",
-    "url": "https://www.watchpatrol.net/de/entdecken/marken/sinn/104-st-sa/",
+    "url": null,
     "title": "[WTS] Sinn 104 St Sa I W",
     "price": 1255,
     "currency": "USD",
@@ -11632,11 +11680,12 @@
     "below_market_pct": 28.2,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/de/entdecken/marken/sinn/104-st-sa/"
    },
    "watchpatrol:sinn-104-i-b-1136": {
     "source": "Reddit r/Watchexchange via WatchPatrol",
-    "url": "https://www.watchpatrol.net/de/entdecken/marken/sinn/104-st-sa/",
+    "url": null,
     "title": "[WTS] Sinn 104 St Sa I B",
     "price": 1136,
     "currency": "USD",
@@ -11651,11 +11700,12 @@
     "below_market_pct": 35.0,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/de/entdecken/marken/sinn/104-st-sa/"
    },
    "watchpatrol:sinn-104-mg-1800": {
     "source": "Reddit r/Watchexchange via WatchPatrol",
-    "url": "https://www.watchpatrol.net/de/entdecken/marken/sinn/104-st-sa/",
+    "url": null,
     "title": "[WTS] Sinn 104 St Sa I MG (metallic green)",
     "price": 1800,
     "currency": "USD",
@@ -11670,11 +11720,12 @@
     "below_market_pct": -3.0,
     "match": false,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/de/entdecken/marken/sinn/104-st-sa/"
    },
    "watchpatrol:sinn-104-i-white-999": {
     "source": "Reddit r/Watchexchange via WatchPatrol",
-    "url": "https://www.watchpatrol.net/de/entdecken/marken/sinn/104-st-sa/",
+    "url": null,
     "title": "[WTS] Sinn 104 St Sa I White",
     "price": 999,
     "currency": "USD",
@@ -11689,7 +11740,8 @@
     "below_market_pct": 42.8,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/de/entdecken/marken/sinn/104-st-sa/"
    }
   },
   "sinn-434-st-34mm-434-010": {
@@ -11832,7 +11884,7 @@
    },
    "watchpatrol:pink-lemonade:1": {
     "source": "WatchPatrol (search snippet)",
-    "url": "https://www.watchpatrol.net/discover/brands/studio-underd0g/pink-lemonade/",
+    "url": null,
     "title": "Studio Underdog Series 02 - Pink Lemonade (forum ask, undated)",
     "price": 600.0,
     "currency": "USD",
@@ -11847,11 +11899,12 @@
     "below_market_pct": 29.4,
     "match": false,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/studio-underd0g/pink-lemonade/"
    },
    "watchpatrol:pink-lemonade:2": {
     "source": "WatchPatrol (search snippet)",
-    "url": "https://www.watchpatrol.net/discover/brands/studio-underd0g/pink-lemonade/",
+    "url": null,
     "title": "Studio Underd0g Pink Lemonade (forum ask, undated)",
     "price": 700.0,
     "currency": "USD",
@@ -11866,11 +11919,12 @@
     "below_market_pct": 17.6,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/studio-underd0g/pink-lemonade/"
    },
    "watchpatrol:pink-lemonade:3": {
     "source": "WatchPatrol (search snippet)",
-    "url": "https://www.watchpatrol.net/discover/brands/studio-underd0g/pink-lemonade/",
+    "url": null,
     "title": "Studio Underd0g Pink Lemonade (forum ask, undated)",
     "price": 735.0,
     "currency": "USD",
@@ -11885,11 +11939,12 @@
     "below_market_pct": 13.5,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/studio-underd0g/pink-lemonade/"
    },
    "watchpatrol:pink-lemonade:4": {
     "source": "WatchPatrol (search snippet)",
-    "url": "https://www.watchpatrol.net/discover/brands/studio-underd0g/pink-lemonade/",
+    "url": null,
     "title": "Studio Underd0g Pink Lemonade (forum ask, undated)",
     "price": 850.0,
     "currency": "USD",
@@ -11904,11 +11959,12 @@
     "below_market_pct": 0.0,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/studio-underd0g/pink-lemonade/"
    },
    "watchpatrol:pink-lemonade:5": {
     "source": "WatchPatrol (search snippet)",
-    "url": "https://www.watchpatrol.net/discover/brands/studio-underd0g/pink-lemonade/",
+    "url": null,
     "title": "Te koop: Studio Underd0g Pink Lemonade (EUR 950)",
     "price": 950.0,
     "currency": "EUR",
@@ -11923,7 +11979,8 @@
     "below_market_pct": -25.1,
     "match": true,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchpatrol.net/discover/brands/studio-underd0g/pink-lemonade/"
    }
   },
   "studio-underd0g-02series-steffany-blue-02sbmi": {
@@ -12433,7 +12490,7 @@
    },
    "watchrecon:prx-pm80-40-black-t137.407.11.051.00-525": {
     "source": "WatchRecon (r/Watchexchange)",
-    "url": "https://www.watchrecon.com/?query=tissot+prx",
+    "url": null,
     "title": "Tissot PRX Powermatic 80 40mm Black Dial (T137.407.11.051.00) - Full Set, Warranty Card Dated Oct 2026 - $525",
     "price": 525,
     "currency": "USD",
@@ -12448,7 +12505,8 @@
     "below_market_pct": 28.2,
     "match": false,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchrecon.com/?query=tissot+prx"
    },
    "https://www.jared.com/previously-owned-tissot-prx-powermatic-80-mens-automatic-watch-t1374071105100/p/v-886566809": {
     "source": "Jared (pre-owned)",
@@ -12587,7 +12645,7 @@
    },
    "watchrecon:gentleman-silicium-blue-t127.407.11.041.00-550": {
     "source": "WatchRecon (r/Watchexchange)",
-    "url": "https://www.watchrecon.com/?query=tissot+gentleman",
+    "url": null,
     "title": "Tissot Gentleman Powermatic 80 Silicium beautiful Blue Dial - Box & White Tag (T127.407.11.041.00)",
     "price": 550,
     "currency": "USD",
@@ -12602,11 +12660,12 @@
     "below_market_pct": 32.7,
     "match": false,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchrecon.com/?query=tissot+gentleman"
    },
    "watchrecon:gentleman-silicium-blue-fullset-490": {
     "source": "WatchRecon (r/Watchexchange)",
-    "url": "https://www.watchrecon.com/?query=tissot+gentleman",
+    "url": null,
     "title": "Tissot Gentleman Powermatic 80 Silicium - Blue Dial - Full Set",
     "price": 490,
     "currency": "USD",
@@ -12621,7 +12680,8 @@
     "below_market_pct": 40.0,
     "match": false,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.watchrecon.com/?query=tissot+gentleman"
    },
    "https://www.ebay.com/itm/256061593337": {
     "source": "eBay.com",
@@ -12644,7 +12704,7 @@
    },
    "ebay:shop-gentleman-silicium-t127.407.11.041.00-579.99": {
     "source": "eBay.com",
-    "url": "https://www.ebay.com/shop/tissot-gentleman-powermatic-80-silicium",
+    "url": null,
     "title": "Tissot Gentleman Blue Men's Watch - T127.407.11.041.00 Pre-Owned",
     "price": 579.99,
     "currency": "USD",
@@ -12659,7 +12719,8 @@
     "below_market_pct": 29.0,
     "match": false,
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-03"
+    "last_seen": "2026-11-03",
+    "overview_url": "https://www.ebay.com/shop/tissot-gentleman-powermatic-80-silicium"
    }
   },
   "tissot-ballade-powermatic-80-cosc-39mm-t1564081103300": {
