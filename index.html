@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watch Radar</title>
+<meta name="description" content="Daily research on second-hand listings, asking prices and auctions for a short list of watches.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%239085e9' stroke-width='3'/%3E%3Cpath d='M16 8v8l5 3' fill='none' stroke='%239085e9' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f6f5f2;--surface:#fcfcfb;--surface-2:#f0efec;--line:#e2e0da;
+  --ink:#0b0b0b;--ink-2:#52514e;--ink-3:#8a8880;
+  --accent:#6250d6;--accent-soft:#e6e2fa;
+  --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;
+  --good:#0ca30c;--warn:#fab219;--serious:#ec835a;--crit:#d03b3b;
+  --radius:14px;--shadow:0 1px 2px rgba(0,0,0,.04),0 6px 18px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#121212;--surface:#1a1a19;--surface-2:#242423;--line:#2f2f2d;
+    --ink:#f0efec;--ink-2:#c3c2b7;--ink-3:#8d8c84;
+    --accent:#9085e9;--accent-soft:#2a2740;
+    --s1:#3987e5;--s2:#d95926;--s3:#199e70;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#121212;--surface:#1a1a19;--surface-2:#242423;--line:#2f2f2d;
+  --ink:#f0efec;--ink-2:#c3c2b7;--ink-3:#8d8c84;
+  --accent:#9085e9;--accent-soft:#2a2740;
+  --s1:#3987e5;--s2:#d95926;--s3:#199e70;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px 64px}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;padding:28px 0 18px}
+h1{font-size:28px;letter-spacing:-.02em;margin:0;font-weight:700}
+h1 small{display:block;font-size:13px;font-weight:500;color:var(--ink-2);letter-spacing:0;margin-top:2px}
+.status{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;font-size:12.5px;font-weight:600;background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line)}
+.pill .dot{width:8px;height:8px;border-radius:50%;background:var(--ink-3)}
+.pill.fresh .dot{background:var(--good)}.pill.stale .dot{background:var(--warn)}.pill.failed .dot{background:var(--crit)}.pill.pending .dot{background:var(--accent)}
+button.ghost{background:var(--surface);border:1px solid var(--line);color:var(--ink-2);border-radius:999px;padding:5px 11px;font:inherit;font-size:12.5px;cursor:pointer}
+button.ghost:hover{border-color:var(--accent)}
+.banner{background:var(--accent-soft);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;margin:0 0 18px;font-size:14px;color:var(--ink)}
+.banner code{background:transparent;font-weight:600}
+nav.tabs{display:flex;gap:4px;overflow-x:auto;margin:6px 0 18px;border-bottom:1px solid var(--line);scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{background:none;border:0;border-bottom:2px solid transparent;color:var(--ink-2);padding:10px 12px;font:inherit;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap;margin-bottom:-1px}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+nav.tabs button .n{display:inline-block;min-width:18px;padding:0 5px;margin-left:6px;border-radius:999px;background:var(--surface-2);color:var(--ink-2);font-size:11px;line-height:18px;text-align:center}
+section[hidden]{display:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 16px 12px;display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:border-color .15s}
+.card:hover,.card:focus-visible{border-color:var(--accent);outline:none}
+.card .brand{font-size:12px;font-weight:600;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+.card .model{font-size:16px;font-weight:650;line-height:1.25}
+.card .ref{font-size:12.5px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.hero{display:flex;align-items:baseline;gap:8px;margin-top:4px}
+.hero .v{font-size:26px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.hero .l{font-size:12px;color:var(--ink-2)}
+.meta{display:flex;gap:14px;font-size:12.5px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.meta b{color:var(--ink);font-weight:600}
+.delta{font-size:12.5px;font-weight:600;display:inline-flex;align-items:center;gap:4px}
+.delta.up{color:var(--serious)}.delta.down{color:var(--good)}.delta.flat{color:var(--ink-3)}
+.spark{width:100%;height:44px;display:block;margin-top:2px}
+.spark path{fill:none;stroke:var(--s1);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.spark .area{fill:var(--s1);opacity:.08;stroke:none}
+.spark .end{fill:var(--s1)}
+.empty{color:var(--ink-2);padding:28px 0;text-align:center;border:1px dashed var(--line);border-radius:var(--radius);font-size:14px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;align-items:center}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink-2);border-radius:999px;padding:5px 11px;font:inherit;font-size:12.5px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent-soft);color:var(--ink);border-color:var(--accent)}
+.list{display:flex;flex-direction:column;gap:10px}
+.row{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;display:grid;grid-template-columns:1fr auto;gap:4px 16px;align-items:start}
+.row .t{font-weight:600;line-height:1.3}
+.row .t a{color:var(--ink)}
+.row .sub{font-size:12.5px;color:var(--ink-2);grid-column:1}
+.row .price{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;font-size:16px;white-space:nowrap}
+.row .price small{display:block;font-size:11.5px;color:var(--ink-2);font-weight:500}
+.row .was{text-decoration:line-through;color:var(--ink-3);font-weight:500;font-size:12px;margin-right:6px}
+.tag{display:inline-block;font-size:11px;font-weight:600;padding:1px 7px;border-radius:999px;background:var(--surface-2);color:var(--ink-2);margin-right:4px;vertical-align:1px}
+.tag.new{background:var(--accent-soft);color:var(--accent)}
+.tag.drop{background:color-mix(in srgb,var(--good) 14%,transparent);color:var(--good)}
+.lede{margin:0 0 14px;color:var(--ink-2);font-size:14px;max-width:70ch}
+.tag.verify{background:color-mix(in srgb,var(--serious) 16%,transparent);color:var(--serious)}
+.tag.grey{background:color-mix(in srgb,var(--s2) 14%,transparent);color:var(--s2)}
+.tag.clean{background:color-mix(in srgb,var(--good) 14%,transparent);color:var(--good)}
+.bench{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--ink-2);margin:0 0 8px;font-variant-numeric:tabular-nums}
+.bench b{color:var(--ink)}
+.row .why{font-size:12.5px;color:var(--ink-2);grid-column:1/-1;margin-top:2px}
+.group-h{font-size:13px;font-weight:700;color:var(--ink-2);margin:18px 0 8px;text-transform:uppercase;letter-spacing:.05em}
+.group-h:first-child{margin-top:0}
+.viz{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:14px}
+.viz .head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:6px}
+.viz h3{margin:0;font-size:15px}
+.viz h3 small{color:var(--ink-2);font-weight:500;margin-left:6px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-2)}
+.legend i{display:inline-block;width:14px;height:2px;vertical-align:middle;margin-right:6px;border-radius:1px}
+.chart{position:relative;width:100%;height:220px}
+.chart svg{width:100%;height:100%;display:block;overflow:visible}
+.chart .grid line{stroke:var(--line);stroke-width:1}
+.chart .ax text{fill:var(--ink-3);font-size:11px;font-variant-numeric:tabular-nums}
+.chart .ser{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.chart .pt{stroke:var(--surface);stroke-width:2}
+.chart .cross{stroke:var(--ink-3);stroke-width:1;stroke-dasharray:3 3;display:none}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12px;line-height:1.4;padding:6px 9px;border-radius:8px;transform:translate(-50%,-110%);white-space:nowrap;display:none;z-index:2;font-variant-numeric:tabular-nums}
+.tip b{font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}
+th{color:var(--ink-2);font-weight:600;font-size:12px}
+td.num,th.num{text-align:right}
+details summary{cursor:pointer;color:var(--ink-2);font-size:12.5px;margin-top:8px}
+.notes{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
+.notes ul{margin:6px 0 0;padding-left:18px;color:var(--ink-2);font-size:14px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:13.5px;margin-bottom:8px}
+.kv dt{color:var(--ink-2)}.kv dd{margin:0;font-variant-numeric:tabular-nums}
+.runs .row{grid-template-columns:auto 1fr auto}
+.runs .d{font-weight:600;font-variant-numeric:tabular-nums}
+footer{margin-top:40px;font-size:12.5px;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:6px 16px}
+@media (max-width:560px){h1{font-size:24px}.row{grid-template-columns:1fr}.row .price{text-align:left}.chart{height:190px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Watch Radar <small id="subtitle">Second-hand listings, prices and auctions for the watches on your list</small></h1>
+    <div class="status">
+      <span class="pill pending" id="status"><span class="dot"></span><span id="statusText">Loading…</span></span>
+      <button class="ghost" id="theme" title="Toggle light/dark">◐ Theme</button>
+    </div>
+  </header>
+
+  <div class="banner" id="banner" hidden></div>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-tab="deals">Below market<span class="n" id="nDeals">0</span></button>
+    <button role="tab" aria-selected="false" data-tab="watches">Watches</button>
+    <button role="tab" aria-selected="false" data-tab="listings">New listings<span class="n" id="nListings">0</span></button>
+    <button role="tab" aria-selected="false" data-tab="drops">Price drops<span class="n" id="nDrops">0</span></button>
+    <button role="tab" aria-selected="false" data-tab="auctions">Auctions<span class="n" id="nAuctions">0</span></button>
+    <button role="tab" aria-selected="false" data-tab="history">Price history</button>
+    <button role="tab" aria-selected="false" data-tab="runs">Runs</button>
+  </nav>
+
+  <section id="tab-deals"><p class="lede" id="dealsLede"></p><div class="filters" id="fDeals"></div><div id="deals"></div></section>
+  <section id="tab-watches" hidden><div class="grid" id="watches"></div></section>
+  <section id="tab-listings" hidden><div class="filters" id="fListings"></div><div class="list" id="listings"></div></section>
+  <section id="tab-drops" hidden><div class="list" id="drops"></div></section>
+  <section id="tab-auctions" hidden><div id="auctions"></div></section>
+  <section id="tab-history" hidden><div class="filters" id="fHistory"></div><div id="history"></div></section>
+  <section id="tab-runs" hidden><div class="notes" id="runNotes"></div><div class="list runs" id="runs" style="margin-top:14px"></div></section>
+
+  <footer>
+    <span id="footLeft">Data is committed to this repository by a daily cloud routine.</span>
+    <a id="repoLink" href="#" target="_blank" rel="noopener">Repository</a>
+    <a id="watchlistLink" href="#" target="_blank" rel="noopener">Edit watchlist</a>
+    <a id="reportsLink" href="#" target="_blank" rel="noopener">Run reports</a>
+  </footer>
+</div>
+
+<script>
+(() => {
+'use strict';
+const $ = (s, r = document) => r.querySelector(s);
+const el = (tag, attrs = {}, ...kids) => {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === 'class') n.className = v; else if (k === 'html') n.innerHTML = v; else if (k.startsWith('on')) n.addEventListener(k.slice(2), v); else n.setAttribute(k, v);
+  }
+  for (const k of kids) if (k != null) n.append(k.nodeType ? k : document.createTextNode(String(k)));
+  return n;
+};
+const fmtAUD = v => v == null || isNaN(v) ? '—' : 'A$' + Math.round(v).toLocaleString('en-AU');
+const fmtMoney = (v, c) => v == null || isNaN(v) ? (c ? 'POA' : '—') : (c || '') + ' ' + Math.round(v).toLocaleString('en-AU');
+const fmtDate = d => { if (!d) return '—'; const [y, m, dd] = d.split('-').map(Number); return new Date(Date.UTC(y, m - 1, dd)).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', timeZone: 'UTC' }); };
+const daysAgo = d => { if (!d) return Infinity; const t = Date.UTC(...d.split('-').map((x, i) => i === 1 ? x - 1 : +x)); return (Date.now() - t) / 864e5; };
+const pct = (a, b) => (a == null || b == null || !b) ? null : (a - b) / b * 100;
+
+// ---- theme ----
+const root = document.documentElement;
+try { const t = localStorage.getItem('radar-theme'); if (t) root.dataset.theme = t; } catch (e) {}
+$('#theme').onclick = () => {
+  const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  root.dataset.theme = dark ? 'light' : 'dark';
+  try { localStorage.setItem('radar-theme', root.dataset.theme); } catch (e) {}
+  render();
+};
+
+// ---- tabs ----
+document.querySelectorAll('nav.tabs button').forEach(b => b.onclick = () => showTab(b.dataset.tab));
+function showTab(name) {
+  document.querySelectorAll('nav.tabs button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
+  document.querySelectorAll('section[id^="tab-"]').forEach(s => s.hidden = s.id !== 'tab-' + name);
+  try { localStorage.setItem('radar-tab', name); } catch (e) {}
+  if (name === 'history') renderHistory();
+}
+
+// ---- data ----
+const state = { latest: null, prices: [], seen: {}, auctions: {}, runs: [], filter: 'all', dFilter: 'all', hFilter: null, repo: '' };
+
+async function load() {
+  const bust = '?t=' + Math.floor(Date.now() / 6e4);
+  const j = async p => { const r = await fetch(p + bust, { cache: 'no-store' }); if (!r.ok) throw new Error(p + ' ' + r.status); return r.json(); };
+  const t = async p => { const r = await fetch(p + bust, { cache: 'no-store' }); if (!r.ok) throw new Error(p + ' ' + r.status); return r.text(); };
+  const [latest, prices, seen, auctions, runs] = await Promise.all([
+    j('data/latest.json'),
+    t('data/prices.csv').then(parseCSV).catch(() => []),
+    j('data/seen.json').catch(() => ({ listings: {} })),
+    j('data/auctions.json').catch(() => ({ lots: {} })),
+    j('data/runs.json').catch(() => ({ runs: [] })),
+  ]);
+  Object.assign(state, { latest, prices, seen: seen.listings || {}, auctions: auctions.lots || {}, runs: runs.runs || [] });
+  state.repo = latest.repo_url || 'https://github.com/mickydoit/watch-radar';
+}
+function parseCSV(text) {
+  const lines = text.trim().split(/\r?\n/); if (lines.length < 2) return [];
+  const h = lines[0].split(',');
+  return lines.slice(1).filter(Boolean).map(l => {
+    const cells = []; let cur = '', q = false;
+    for (const ch of l) { if (ch === '"') q = !q; else if (ch === ',' && !q) { cells.push(cur); cur = ''; } else cur += ch; }
+    cells.push(cur);
+    const o = {}; h.forEach((k, i) => o[k.trim()] = (cells[i] || '').trim());
+    o.value = o.value === '' ? null : Number(o.value); o.n = o.n === '' ? null : Number(o.n);
+    return o;
+  });
+}
+
+// ---- derived ----
+function watchMeta(id) { return (state.latest.watches || []).find(w => w.id === id) || { id, brand: '', model: id, reference: '' }; }
+function series(id, metric) {
+  const m = new Map();
+  for (const r of state.prices) if (r.watch_id === id && r.metric === metric && r.value != null) m.set(r.date, r.value);
+  return [...m.entries()].sort((a, b) => a[0] < b[0] ? -1 : 1).map(([date, value]) => ({ date, value }));
+}
+function allSeen() {
+  const out = [];
+  for (const [wid, byKey] of Object.entries(state.seen)) for (const [key, l] of Object.entries(byKey || {})) out.push({ watch_id: wid, key, ...l });
+  return out;
+}
+
+// ---- render ----
+function render() {
+  const L = state.latest;
+  // status
+  const pill = $('#status'), txt = $('#statusText');
+  pill.className = 'pill';
+  if (!L.run_date || L.status === 'pending') { pill.classList.add('pending'); txt.textContent = 'Waiting for the first run'; }
+  else {
+    const age = daysAgo(L.run_date);
+    const when = fmtDate(L.run_date) + (L.run_at_local ? ' · ' + L.run_at_local : '');
+    if (L.status === 'failed') { pill.classList.add('failed'); txt.textContent = 'Last run failed · ' + when; }
+    else if (age > 1.6) { pill.classList.add('stale'); txt.textContent = 'Stale · last run ' + when; }
+    else { pill.classList.add(L.status === 'partial' ? 'stale' : 'fresh'); txt.textContent = (L.status === 'partial' ? 'Partial run · ' : 'Updated ') + when; }
+  }
+  // banner
+  const b = $('#banner'); b.hidden = true;
+  if (L.example_watchlist) { b.hidden = false; b.innerHTML = 'The watchlist still holds Claude’s four <b>example</b> watches. Edit <code>watchlist.yml</code> in the repository to track your own; the next run picks it up.'; }
+  else if (L.status === 'failed' && L.failure) { b.hidden = false; b.textContent = 'Last run did not complete: ' + L.failure; }
+  // links
+  $('#repoLink').href = state.repo; $('#watchlistLink').href = state.repo + '/edit/main/watchlist.yml'; $('#reportsLink').href = state.repo + '/tree/main/reports';
+  $('#footLeft').textContent = 'Asking prices as listed, converted to AUD' + (L.fx && L.fx.USD_AUD ? ' (USD→AUD ' + L.fx.USD_AUD + ')' : '') + '. Updated by a daily cloud routine.';
+
+  renderDeals(); renderWatches(); renderListings(); renderDrops(); renderAuctions(); renderRuns();
+  if (!$('#tab-history').hidden) renderHistory();
+  const counts = { nDeals: (L.deals || []).length, nListings: recentListings().length, nDrops: (L.price_drops || []).length, nAuctions: Object.values(state.auctions).filter(a => a.status === 'upcoming').length };
+  for (const [k, v] of Object.entries(counts)) $('#' + k).textContent = v;
+}
+
+function flagTag(f) {
+  if (f === 'verify') return el('span', { class: 'tag verify', title: 'Unusually cheap, private seller or incomplete set: check before you trust it' }, 'VERIFY');
+  if (f === 'grey-new') return el('span', { class: 'tag grey', title: 'New from a grey-market dealer: no authorised-dealer warranty' }, 'GREY NEW');
+  return el('span', { class: 'tag clean' }, 'CLEAN');
+}
+function dealRow(d) {
+  const bits = [d.condition, d.full_set ? 'full set' : d.full_set === false ? 'no box/papers' : null, d.year, d.seller_type, d.seller_country, d.source].filter(Boolean).join(' · ');
+  return el('div', { class: 'row' },
+    el('div', { class: 't' }, flagTag(d.flag), el('a', { href: d.url, target: '_blank', rel: 'noopener' }, d.title || d.url)),
+    el('div', { class: 'price' }, el('span', { class: 'delta down', style: 'font-size:12px;margin-right:8px' }, '↓ ' + (d.below_market_pct != null ? d.below_market_pct.toFixed(1) : '?') + '%'), fmtAUD(d.price_aud), el('small', {}, d.currency && d.currency !== 'AUD' && d.price != null ? fmtMoney(d.price, d.currency) : '\u00a0')),
+    el('div', { class: 'sub' }, bits, d.first_seen ? ' · seen ' + fmtDate(d.first_seen) : ''),
+    d.why ? el('div', { class: 'why' }, d.why) : null
+  );
+}
+function renderDeals() {
+  const L = state.latest, host = $('#deals'), f = $('#fDeals'), lede = $('#dealsLede'); host.innerHTML = ''; f.innerHTML = '';
+  lede.textContent = 'Each watch gets a market benchmark: the median asking price across every marketplace, dealer and grey-market site the agent could read, like-for-like on condition, smoothed over 30 days. Listings under that benchmark land here, best discount first. A big discount is a reason to look closer, not a bargain yet.';
+  const deals = (L.deals || []).slice().sort((a, b) => (b.below_market_pct || 0) - (a.below_market_pct || 0));
+  const watches = (L.watches || []).filter(w => deals.some(d => d.watch_id === w.id));
+  if (watches.length > 1) {
+    const chip = (id, label) => el('button', { class: 'chip', 'aria-pressed': String(state.dFilter === id), onclick: () => { state.dFilter = id; renderDeals(); } }, label);
+    f.append(chip('all', 'All'), ...watches.map(w => chip(w.id, (w.brand + ' ' + (w.reference || w.model)).trim())));
+  }
+  if (!deals.length) { host.append(el('div', { class: 'empty' }, L.run_date ? 'Nothing is priced below its market benchmark right now.' : 'Below-market listings appear here after the first run.')); return; }
+  for (const w of L.watches || []) {
+    if (state.dFilter !== 'all' && state.dFilter !== w.id) continue;
+    const mine = deals.filter(d => d.watch_id === w.id); if (!mine.length) continue;
+    host.append(el('div', { class: 'group-h' }, w.brand + ' ' + w.model + ' · ' + w.reference));
+    host.append(el('div', { class: 'bench' },
+      el('span', {}, 'market ', el('b', {}, fmtAUD(w.benchmark_aud))),
+      w.asking_min != null ? el('span', {}, 'lowest ask ', el('b', {}, fmtAUD(w.asking_min))) : null,
+      w.asking_n != null ? el('span', {}, el('b', {}, w.asking_n), ' listings compared') : null,
+      w.watchcharts_market != null ? el('span', {}, 'WatchCharts ', el('b', {}, fmtAUD(w.watchcharts_market))) : null,
+      w.benchmark_basis ? el('span', { style: 'color:var(--ink-3)' }, w.benchmark_basis) : null));
+    host.append(el('div', { class: 'list' }, ...mine.map(dealRow)));
+  }
+}
+function renderWatches() {
+  const host = $('#watches'); host.innerHTML = '';
+  const watches = state.latest.watches || [];
+  if (!watches.length) { host.append(el('div', { class: 'empty' }, 'No watches yet. Add entries to watchlist.yml.')); return; }
+  for (const w of watches) {
+    const med = series(w.id, 'asking_median'), min = series(w.id, 'asking_min'), n = series(w.id, 'asking_n');
+    const last = med.at(-1), prev = med.at(-2);
+    const lastMin = min.at(-1), lastN = n.at(-1);
+    const change = prev && last ? pct(last.value, prev.value) : null;
+    const ago30 = med.filter(p => daysAgo(p.date) >= 29).at(-1);
+    const change30 = ago30 && last ? pct(last.value, ago30.value) : null;
+    const card = el('div', { class: 'card', tabindex: '0', role: 'button', 'aria-label': 'Price history for ' + w.brand + ' ' + w.model,
+      onclick: () => { state.hFilter = w.id; showTab('history'); }, onkeydown: e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); state.hFilter = w.id; showTab('history'); } } },
+      el('div', { class: 'brand' }, w.brand || ' '),
+      el('div', { class: 'model' }, w.model || w.id),
+      el('div', { class: 'ref' }, [w.reference, w.ceiling ? 'ceiling ' + fmtAUD(w.ceiling) : null].filter(Boolean).join(' · ')),
+      el('div', { class: 'hero' }, el('span', { class: 'v' }, lastMin ? fmtAUD(lastMin.value) : '—'), el('span', { class: 'l' }, 'lowest ask')),
+      el('div', { class: 'meta' }, el('span', {}, 'market ', el('b', {}, w.benchmark_aud ? fmtAUD(w.benchmark_aud) : last ? fmtAUD(last.value) : '—')), el('span', {}, 'listings ', el('b', {}, w.asking_n != null ? w.asking_n : lastN ? lastN.value : '—')), w.below_market_count ? el('span', {}, el('b', { style: 'color:var(--good)' }, w.below_market_count), ' below market') : null),
+      deltaEl(change, 'vs last run', change30),
+      sparkline(med)
+    );
+    host.append(card);
+  }
+}
+function deltaEl(change, label, change30) {
+  if (change == null && change30 == null) return el('div', { class: 'delta flat' }, 'no comparison yet');
+  const wrap = el('div', { style: 'display:flex;gap:12px;flex-wrap:wrap' });
+  const one = (c, l) => { if (c == null) return null; const cls = Math.abs(c) < 0.5 ? 'flat' : c > 0 ? 'up' : 'down'; const arrow = cls === 'flat' ? '→' : c > 0 ? '↑' : '↓'; return el('span', { class: 'delta ' + cls }, arrow + ' ' + Math.abs(c).toFixed(1) + '% ', el('span', { style: 'font-weight:500;color:var(--ink-3)' }, l)); };
+  wrap.append(...[one(change, label), one(change30, 'vs 30 d')].filter(Boolean));
+  return wrap;
+}
+function sparkline(pts) {
+  const W = 240, H = 44, p = 3;
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.setAttribute('class', 'spark'); svg.setAttribute('preserveAspectRatio', 'none'); svg.setAttribute('aria-hidden', 'true');
+  if (pts.length < 2) { const t = document.createElementNS('http://www.w3.org/2000/svg', 'text'); t.setAttribute('x', 0); t.setAttribute('y', H - 6); t.setAttribute('fill', 'var(--ink-3)'); t.setAttribute('font-size', '11'); t.textContent = pts.length ? 'one data point so far' : 'no price data yet'; svg.append(t); return svg; }
+  const vs = pts.map(q => q.value), lo = Math.min(...vs), hi = Math.max(...vs), span = hi - lo || 1;
+  const x = i => p + i / (pts.length - 1) * (W - 2 * p), y = v => H - p - (v - lo) / span * (H - 2 * p);
+  const d = pts.map((q, i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(q.value).toFixed(1)).join(' ');
+  const area = document.createElementNS('http://www.w3.org/2000/svg', 'path'); area.setAttribute('class', 'area'); area.setAttribute('d', d + ` L${x(pts.length - 1).toFixed(1)} ${H} L${x(0)} ${H} Z`);
+  const line = document.createElementNS('http://www.w3.org/2000/svg', 'path'); line.setAttribute('d', d); line.setAttribute('vector-effect', 'non-scaling-stroke');
+  const end = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); end.setAttribute('class', 'end'); end.setAttribute('cx', x(pts.length - 1)); end.setAttribute('cy', y(vs.at(-1))); end.setAttribute('r', 3);
+  svg.append(area, line, end); return svg;
+}
+
+function recentListings() {
+  return allSeen().filter(l => l.match !== false && daysAgo(l.first_seen) <= 14).sort((a, b) => (b.first_seen || '').localeCompare(a.first_seen || '') || (a.price_aud || 0) - (b.price_aud || 0));
+}
+function listingRow(l, opts = {}) {
+  const w = watchMeta(l.watch_id);
+  const bits = [l.condition, l.full_set ? 'full set' : null, l.seller_country, l.source].filter(Boolean).join(' · ');
+  const isNew = state.latest.run_date && l.first_seen === state.latest.run_date;
+  return el('div', { class: 'row' },
+    el('div', { class: 't' }, isNew && !opts.drop ? el('span', { class: 'tag new' }, 'NEW') : null, opts.drop ? el('span', { class: 'tag drop' }, 'DROP') : null, el('a', { href: l.url, target: '_blank', rel: 'noopener' }, l.title || l.url)),
+    el('div', { class: 'price' }, opts.drop && l.was_aud ? el('span', { class: 'was' }, fmtAUD(l.was_aud)) : null, fmtAUD(l.price_aud), el('small', {}, l.currency && l.currency !== 'AUD' && l.price != null ? fmtMoney(l.price, l.currency) : ' ')),
+    el('div', { class: 'sub' }, el('span', { class: 'tag' }, (w.brand + ' ' + (w.reference || w.model)).trim()), bits, ' · seen ', fmtDate(l.first_seen))
+  );
+}
+function renderListings() {
+  const host = $('#listings'), f = $('#fListings'); host.innerHTML = ''; f.innerHTML = '';
+  const items = recentListings();
+  const ids = [...new Set(items.map(i => i.watch_id))];
+  if (ids.length > 1) {
+    const chip = (id, label) => el('button', { class: 'chip', 'aria-pressed': String(state.filter === id), onclick: () => { state.filter = id; renderListings(); } }, label);
+    f.append(chip('all', 'All'), ...ids.map(id => { const w = watchMeta(id); return chip(id, (w.brand + ' ' + (w.reference || w.model)).trim()); }));
+  }
+  const shown = items.filter(i => state.filter === 'all' || i.watch_id === state.filter);
+  if (!shown.length) { host.append(el('div', { class: 'empty' }, state.latest.run_date ? 'No listings matched your criteria in the last 14 days.' : 'Listings appear here after the first run.')); return; }
+  let lastDate = null;
+  for (const l of shown) {
+    if (l.first_seen !== lastDate) { host.append(el('div', { class: 'group-h' }, l.first_seen === state.latest.run_date ? 'Found in the latest run · ' + fmtDate(l.first_seen) : fmtDate(l.first_seen))); lastDate = l.first_seen; }
+    host.append(listingRow(l));
+  }
+}
+function renderDrops() {
+  const host = $('#drops'); host.innerHTML = '';
+  const drops = state.latest.price_drops || [];
+  if (!drops.length) { host.append(el('div', { class: 'empty' }, 'No price drops of 5% or more in the latest run.')); return; }
+  for (const d of drops) host.append(listingRow(d, { drop: true }));
+}
+function renderAuctions() {
+  const host = $('#auctions'); host.innerHTML = '';
+  const lots = Object.entries(state.auctions).map(([url, a]) => ({ url, ...a }));
+  const up = lots.filter(a => a.status === 'upcoming').sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+  const done = lots.filter(a => a.status !== 'upcoming').sort((a, b) => (b.date || '').localeCompare(a.date || '')).slice(0, 20);
+  const lotRow = a => {
+    const w = watchMeta(a.watch_id);
+    const est = a.estimate_low != null ? fmtMoney(a.estimate_low, a.currency) + (a.estimate_high != null ? '–' + Math.round(a.estimate_high).toLocaleString('en-AU') : '') : null;
+    return el('div', { class: 'row' },
+      el('div', { class: 't' }, el('a', { href: a.url, target: '_blank', rel: 'noopener' }, [a.house, a.sale, a.lot ? 'lot ' + a.lot : null].filter(Boolean).join(' · '))),
+      el('div', { class: 'price' }, a.status === 'sold' ? fmtMoney(a.result, a.currency) : a.status === 'unsold' ? 'Unsold' : (est || 'Estimate TBC'), el('small', {}, a.status === 'sold' ? 'sold' : a.status === 'upcoming' ? 'estimate' : a.status)),
+      el('div', { class: 'sub' }, el('span', { class: 'tag' }, (w.brand + ' ' + (w.reference || w.model)).trim()), fmtDate(a.date), a.notes ? ' · ' + a.notes : '')
+    );
+  };
+  if (!up.length && !done.length) { host.append(el('div', { class: 'empty' }, 'No auction lots found for the tracked references yet.')); return; }
+  if (up.length) { host.append(el('div', { class: 'group-h' }, 'Upcoming'), el('div', { class: 'list' }, ...up.map(lotRow))); }
+  if (done.length) { host.append(el('div', { class: 'group-h' }, 'Recent results'), el('div', { class: 'list' }, ...done.map(lotRow))); }
+}
+
+// ---- price history charts ----
+const SERIES = [
+  { metric: 'asking_median', label: 'Median ask', color: 'var(--s1)' },
+  { metric: 'asking_min', label: 'Lowest ask', color: 'var(--s3)' },
+  { metric: 'watchcharts_market', label: 'WatchCharts market', color: 'var(--s2)' },
+];
+function renderHistory() {
+  const host = $('#history'), f = $('#fHistory'); host.innerHTML = ''; f.innerHTML = '';
+  const watches = state.latest.watches || [];
+  if (!watches.length) { host.append(el('div', { class: 'empty' }, 'No watches yet.')); return; }
+  if (!state.hFilter || !watches.some(w => w.id === state.hFilter)) state.hFilter = 'all';
+  const chip = (id, label) => el('button', { class: 'chip', 'aria-pressed': String(state.hFilter === id), onclick: () => { state.hFilter = id; renderHistory(); } }, label);
+  f.append(chip('all', 'All'), ...watches.map(w => chip(w.id, (w.brand + ' ' + (w.reference || w.model)).trim())));
+  for (const w of watches) {
+    if (state.hFilter !== 'all' && state.hFilter !== w.id) continue;
+    const data = SERIES.map(s => ({ ...s, pts: series(w.id, s.metric) })).filter(s => s.pts.length);
+    const box = el('div', { class: 'viz' });
+    box.append(el('div', { class: 'head' }, el('h3', {}, w.brand + ' ' + w.model, el('small', {}, w.reference)), el('div', { class: 'legend' }, ...data.map(s => el('span', {}, el('i', { style: 'background:' + s.color }), s.label)))));
+    if (!data.length) { box.append(el('div', { class: 'empty' }, 'No price rows yet.')); host.append(box); continue; }
+    box.append(lineChart(data, w.ceiling));
+    // table view
+    const dates = [...new Set(data.flatMap(s => s.pts.map(p => p.date)))].sort().reverse().slice(0, 30);
+    const tbl = el('table', {}, el('thead', {}, el('tr', {}, el('th', {}, 'Date'), ...data.map(s => el('th', { class: 'num' }, s.label)))),
+      el('tbody', {}, ...dates.map(d => el('tr', {}, el('td', {}, fmtDate(d)), ...data.map(s => { const p = s.pts.find(q => q.date === d); return el('td', { class: 'num' }, p ? fmtAUD(p.value) : '—'); })))));
+    box.append(el('details', {}, el('summary', {}, 'Table view (last 30 rows)'), tbl));
+    host.append(box);
+  }
+}
+function lineChart(data, ceiling) {
+  const W = 800, H = 220, m = { t: 12, r: 64, b: 24, l: 56 };
+  const wrap = el('div', { class: 'chart' });
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.setAttribute('preserveAspectRatio', 'none');
+  const dates = [...new Set(data.flatMap(s => s.pts.map(p => p.date)))].sort();
+  const vals = data.flatMap(s => s.pts.map(p => p.value)).concat(ceiling ? [ceiling] : []);
+  let lo = Math.min(...vals), hi = Math.max(...vals); if (lo === hi) { lo *= 0.95; hi *= 1.05; }
+  const pad = (hi - lo) * 0.08; lo -= pad; hi += pad;
+  const t0 = Date.parse(dates[0]), t1 = Date.parse(dates.at(-1)) || t0 + 1;
+  const x = d => dates.length < 2 ? (m.l + W - m.r) / 2 : m.l + (Date.parse(d) - t0) / (t1 - t0) * (W - m.l - m.r);
+  const y = v => m.t + (1 - (v - lo) / (hi - lo)) * (H - m.t - m.b);
+  const ns = 'http://www.w3.org/2000/svg', mk = (t, a) => { const n = document.createElementNS(ns, t); for (const [k, v] of Object.entries(a)) n.setAttribute(k, v); return n; };
+  // grid + y axis (4 lines)
+  const g = mk('g', { class: 'grid' }), ax = mk('g', { class: 'ax' });
+  for (let i = 0; i <= 4; i++) { const v = lo + (hi - lo) * i / 4, yy = y(v); g.append(mk('line', { x1: m.l, x2: W - m.r, y1: yy, y2: yy })); const t = mk('text', { x: m.l - 8, y: yy + 4, 'text-anchor': 'end' }); t.textContent = 'A$' + (v >= 10000 ? (v / 1000).toFixed(1) + 'k' : Math.round(v).toLocaleString()); ax.append(t); }
+  // x labels: first, last, and up to 3 between
+  const n = Math.min(dates.length, 5);
+  for (let i = 0; i < n; i++) { const d = dates[Math.round(i * (dates.length - 1) / Math.max(n - 1, 1))]; const t = mk('text', { x: x(d), y: H - 6, 'text-anchor': i === 0 ? 'start' : i === n - 1 ? 'end' : 'middle' }); t.textContent = fmtDate(d); ax.append(t); }
+  svg.append(g, ax);
+  if (ceiling) { svg.append(mk('line', { x1: m.l, x2: W - m.r, y1: y(ceiling), y2: y(ceiling), stroke: 'var(--ink-3)', 'stroke-dasharray': '4 4', 'stroke-width': 1 })); const t = mk('text', { x: m.l + 6, y: y(ceiling) - 4, 'text-anchor': 'start', fill: 'var(--ink-3)', 'font-size': 11 }); t.textContent = 'your ceiling ' + fmtAUD(ceiling); svg.append(t); }
+  for (const s of data) {
+    const d = s.pts.map((p, i) => (i ? 'L' : 'M') + x(p.date).toFixed(1) + ' ' + y(p.value).toFixed(1)).join(' ');
+    svg.append(mk('path', { class: 'ser', d, stroke: s.color, 'vector-effect': 'non-scaling-stroke' }));
+    if (s.pts.length <= 12) for (const p of s.pts) svg.append(mk('circle', { class: 'pt', cx: x(p.date), cy: y(p.value), r: 4, fill: s.color }));
+  }
+  // direct labels at the right edge, pushed apart so they never overlap
+  const labels = data.map(s => { const last = s.pts.at(-1); return { s, v: last.value, y: y(last.value) }; }).sort((a, b) => a.y - b.y);
+  for (let i = 1; i < labels.length; i++) if (labels[i].y - labels[i - 1].y < 13) labels[i].y = labels[i - 1].y + 13;
+  for (let i = labels.length - 1; i >= 0; i--) { if (labels[i].y > H - m.b - 2) labels[i].y = H - m.b - 2; if (i < labels.length - 1 && labels[i + 1].y - labels[i].y < 13) labels[i].y = labels[i + 1].y - 13; }
+  for (const L of labels) { const t = mk('text', { x: W - m.r + 4, y: L.y + 4, 'text-anchor': 'start', fill: L.s.color, 'font-size': 11, 'font-weight': 600 }); t.textContent = fmtAUD(L.v); svg.append(t); }
+  const cross = mk('line', { class: 'cross', y1: m.t, y2: H - m.b }); svg.append(cross);
+  const tip = el('div', { class: 'tip' });
+  wrap.append(svg, tip);
+  svg.addEventListener('mousemove', e => {
+    const r = svg.getBoundingClientRect(); const px = (e.clientX - r.left) / r.width * W;
+    let best = null, bd = 1e9; for (const d of dates) { const dd = Math.abs(x(d) - px); if (dd < bd) { bd = dd; best = d; } }
+    if (!best) return;
+    cross.style.display = 'block'; cross.setAttribute('x1', x(best)); cross.setAttribute('x2', x(best));
+    tip.style.display = 'block'; tip.style.left = (x(best) / W * 100) + '%'; tip.style.top = (m.t / H * 100) + '%';
+    tip.innerHTML = '<b>' + fmtDate(best) + '</b><br>' + data.map(s => { const p = s.pts.find(q => q.date === best); return p ? s.label + ': ' + fmtAUD(p.value) : null; }).filter(Boolean).join('<br>');
+  });
+  svg.addEventListener('mouseleave', () => { cross.style.display = 'none'; tip.style.display = 'none'; });
+  return wrap;
+}
+
+function renderRuns() {
+  const L = state.latest, notes = $('#runNotes'), host = $('#runs'); notes.innerHTML = ''; host.innerHTML = '';
+  const kv = el('dl', { class: 'kv' });
+  const add = (k, v) => kv.append(el('dt', {}, k), el('dd', {}, v));
+  add('Last run', L.run_date ? fmtDate(L.run_date) + (L.run_at_local ? ' at ' + L.run_at_local : '') + (L.run_type ? ' · ' + L.run_type : '') : 'not yet');
+  add('Status', L.status || 'pending');
+  if (L.fetches != null) add('Pages fetched', L.fetches);
+  if (L.fx) add('Exchange rates', Object.entries(L.fx).map(([k, v]) => k.replace('_', '→') + ' ' + v).join(', '));
+  add('State saved', L.pushed === false ? 'no (push failed)' : L.pushed ? 'yes' : '—');
+  notes.append(el('h3', { style: 'margin:0 0 8px;font-size:15px' }, 'Latest run'), kv);
+  if (L.notes && L.notes.length) notes.append(el('div', { style: 'font-size:13px;color:var(--ink-2);font-weight:600' }, 'Notes'), el('ul', {}, ...L.notes.map(n => el('li', {}, n))));
+  const runs = [...state.runs].sort((a, b) => (b.date || '').localeCompare(a.date || '')).slice(0, 60);
+  if (!runs.length) { host.append(el('div', { class: 'empty' }, 'Run history appears here after the first run.')); return; }
+  for (const r of runs) host.append(el('div', { class: 'row' },
+    el('div', { class: 'd' }, fmtDate(r.date)),
+    el('div', {}, el('span', { class: 'tag' }, r.type || 'daily'), el('span', { class: 'tag' }, r.status || 'ok'), ' ', (r.new != null ? r.new + ' new · ' : '') + (r.drops != null ? r.drops + ' drops · ' : '') + (r.auction != null ? r.auction + ' auction' : '')),
+    el('div', {}, r.report ? el('a', { href: state.repo + '/blob/main/' + r.report, target: '_blank', rel: 'noopener' }, 'report') : '')
+  ));
+}
+
+// ---- boot ----
+load().then(() => {
+  render();
+  let tab = 'deals'; try { tab = localStorage.getItem('radar-tab') || tab; } catch (e) {}
+  showTab(tab);
+}).catch(err => {
+  $('#status').className = 'pill failed'; $('#statusText').textContent = 'Could not load data';
+  $('#watches').append(el('div', { class: 'empty' }, 'Could not load data/latest.json. ' + err.message));
+});
+})();
+</script>
+</body>
+</html>

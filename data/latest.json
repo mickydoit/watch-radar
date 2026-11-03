@@ -1,0 +1,24 @@
+{
+  "_comment": "Written by the routine every run. Shape is documented in ROUTINE_PROMPT.md section 3. This seed is the pre-first-run state.",
+  "repo_url": "https://github.com/mickydoit/watch-radar",
+  "run_date": null,
+  "run_at_utc": null,
+  "run_at_local": null,
+  "run_type": null,
+  "status": "pending",
+  "failure": null,
+  "example_watchlist": true,
+  "fx": null,
+  "fetches": null,
+  "pushed": null,
+  "notes": ["The routine has not run yet."],
+  "watches": [
+    {"id": "rolex-126610ln", "brand": "Rolex", "model": "Submariner Date", "reference": "126610LN", "ceiling": 15000, "currency": "AUD", "benchmark_aud": null, "benchmark_basis": null, "asking_min": null, "asking_median": null, "asking_n": null, "asking_median_good": null, "asking_n_good": null, "watchcharts_market": null, "ebay_sold_median": null, "below_market_count": 0},
+    {"id": "omega-speedmaster-hesalite", "brand": "Omega", "model": "Speedmaster Moonwatch Professional", "reference": "310.30.42.50.01.001", "ceiling": 8500, "currency": "AUD", "benchmark_aud": null, "benchmark_basis": null, "asking_min": null, "asking_median": null, "asking_n": null, "asking_median_good": null, "asking_n_good": null, "watchcharts_market": null, "ebay_sold_median": null, "below_market_count": 0},
+    {"id": "tudor-bb58-79030n", "brand": "Tudor", "model": "Black Bay Fifty-Eight", "reference": "79030N", "ceiling": 4500, "currency": "AUD", "benchmark_aud": null, "benchmark_basis": null, "asking_min": null, "asking_median": null, "asking_n": null, "asking_median_good": null, "asking_n_good": null, "watchcharts_market": null, "ebay_sold_median": null, "below_market_count": 0},
+    {"id": "cartier-santos-medium-wssa0029", "brand": "Cartier", "model": "Santos de Cartier Medium", "reference": "WSSA0029", "ceiling": 9000, "currency": "AUD", "benchmark_aud": null, "benchmark_basis": null, "asking_min": null, "asking_median": null, "asking_n": null, "asking_median_good": null, "asking_n_good": null, "watchcharts_market": null, "ebay_sold_median": null, "below_market_count": 0}
+  ],
+  "deals": [],
+  "price_drops": [],
+  "auction_changes": []
+}
