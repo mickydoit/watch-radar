@@ -56,9 +56,16 @@ Treat each active entry as a model with the entry's `id`, using its `condition`,
 
 For each tracked model, search Phillips, Sotheby's, Christie's, Bonhams, Antiquorum, Everywatch, Catawiki, Leonard Joel and Lawsons. Record upcoming lots in `data/auctions.json` keyed by URL (`watch_id`, `house`, `sale`, `date`, `lot`, `estimate_low`, `estimate_high`, `currency`, `status: upcoming`, `first_seen`). On weekly runs resolve past lots to `sold` (with the price) or `unsold`.
 
-### E. A photo for each model (only when missing)
+### E. A photo for every model (required)
 
-If a model has no `image` in `data/watchlist.json` and no entry in `data/images.json`, spend at most three fetches finding one on **Wikimedia Commons** (`commons.wikimedia.org` API, `action=query&generator=search&gsrnamespace=6`) for the reference, then the model, then the brand. Accept only CC0, CC BY, CC BY-SA or public domain, at least 700 px on the short side, showing the watch itself (no catalogue pages, adverts, replicas, montages). Download the 1400 px thumbnail, crop square around the watch, resize to 1200 px, save as `images/<watch_id>.jpg`, and add to `data/images.json` under `images[<watch_id>]`: `file`, `title`, `author` (plain text), `license`, `source` (Commons file page URL), `note`. Never use dealer, brand or press photos; never hot-link. If nothing suitable exists, leave it.
+Every id in `latest.json`'s `watches[]` must have a photo before you publish: either `image` on its watchlist entry or an entry in `data/images.json` whose `file` exists in `images/`. A missing file counts as no photo. Work down this ladder, stop at the first hit, and spend up to 8 fetches per model:
+
+1. **Openverse**: `https://api.openverse.org/v1/images/?q=<query>&license_type=commercial&page_size=20` with `Accept: application/json` (no key; it indexes Wikimedia Commons and Flickr; anonymous use allows `page_size` up to 20, 20 calls a minute and 200 a day, so query only models that need a photo). Query the reference, then brand + model, then brand + model family ("Tudor Black Bay"). Prefer `source: wikimedia`, then `flickr`. Use `foreign_landing_url` as `source` and `creator` as `author`.
+2. **Wikimedia Commons** directly: `commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=intitle:<brand> <model>&gsrnamespace=6&prop=imageinfo&iiprop=url|size|extmetadata`. The `intitle:` prefix matters; plain full-text search returns scanned books.
+3. A freely licensed photo of the **nearest sibling** in the same family (another reference, dial colour or generation of the same model). Say so in `note`.
+4. Last resort: the clearest photo from a **listing page you fetched today**, credited to that seller, `source` = the listing URL, `license: "Seller photo, identification only"`. Replace it with a free photo on a later run when one turns up.
+
+Accept only CC0, CC BY, CC BY-SA or public domain for steps 1 to 3, at least 700 px on the short side, the watch itself clearly visible (no catalogue pages, adverts, replicas, montages, shop fronts, wrist shots where the watch is small). Download the original with a descriptive `User-Agent` (Wikimedia refuses blank ones), crop square around the watch head so it fills most of the frame, resize so the longer side is 1200 px (never upscale a smaller crop), save as `images/<watch_id>.jpg` (JPEG quality 85, under 400 KB), and add to `data/images.json` under `images[<watch_id>]`: `file`, `title`, `author` (plain text), `license`, `source`, `note`. Never hot-link; never use brand press images (brand sites block the fetcher anyway). Keep images of models that dropped out of today's list; they may come back.
 
 ### Budget
 
@@ -72,6 +79,8 @@ Expect 10 to 20 fetches per brand and 60 to 300 per run depending on how many br
 4. Write `reports/YYYY-MM-DD.md`: run type, rates, per brand the models carried/added/dropped and why, each model's benchmark and basis, every deal with its flag and reasoning, drops, sources that failed, replicas dropped, fetch count.
 
 ## 3. Publish: `data/latest.json` and `data/runs.json`
+
+Before writing `latest.json`, check that every `watches[].id` has a photo (step 1E). If one is missing, go back and find one; a model without a photo is not ready to publish. Say in the run notes how many photos you added.
 
 `data/latest.json`:
 
