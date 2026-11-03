@@ -153,7 +153,8 @@
   "Photos: 70 added, 20 freely licensed (several are nearest-sibling family shots), 50 seller photos for identification only, because Wikimedia rate-limited this session (HTTP 429). Free photos should replace these on later runs.",
   "Seiko vintage 6139 chronograph dropped at publish (chronograph not in the Seiko filter). Paulin carries 3 models, Orient and King Seiko 4, Oris 4, IWC 1 (vintage Pellaton automatics only).",
   "Two Catawiki lots noted (Sinn 556 I, MeisterSinger Perigraph); pages blocked, so dates are unknown.",
-  "No price drops: every listing is first seen today under the new focus."
+  "No price drops: every listing is first seen today under the new focus.",
+  "Link audit 3 Nov evening: every listing address was fetched; 594 confirmed live, 2 sold out, 1 gone, 65 could not be read (eBay, Chrono24, WatchCharts). Aggregator overview pages are no longer used as listing links."
  ],
  "brands": [
   {
@@ -2020,7 +2021,8 @@
    "below_market_pct": 51.2,
    "flag": "verify",
    "why": "51.2% under; price from search snippet, page not read",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "unverified"
   },
   {
    "watch_id": "tudor-prince-date-32mm-72033",
@@ -2040,7 +2042,8 @@
    "below_market_pct": 50.6,
    "flag": "verify",
    "why": "50.6% under",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "tudor-prince-oysterdate-34mm-74033",
@@ -2060,7 +2063,8 @@
    "below_market_pct": 49.8,
    "flag": "verify",
    "why": "49.8% under; private seller",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "longines-conquest-38mm-l3-720-4",
@@ -2080,7 +2084,8 @@
    "below_market_pct": 47.8,
    "flag": "verify",
    "why": "47.8% under; private seller; price from search snippet, page not read",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "unverified"
   },
   {
    "watch_id": "longines-conquest-41mm-l3-830-4",
@@ -2101,7 +2106,8 @@
    "flag": "verify",
    "why": "46.9% under; private seller",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchrecon.com/?query=longines+conquest"
+   "overview_url": "https://www.watchrecon.com/?query=longines+conquest",
+   "availability": "unverified"
   },
   {
    "watch_id": "oris-big-crown-pointer-date-40mm-01-754-7741",
@@ -2122,7 +2128,8 @@
    "flag": "verify",
    "why": "46.7% under; private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/",
+   "availability": "unverified"
   },
   {
    "watch_id": "meistersinger-perigraph-43mm-am1008",
@@ -2142,7 +2149,8 @@
    "below_market_pct": 46.3,
    "flag": "verify",
    "why": "46.3% under",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "oris-big-crown-propilot-big-day-date-44mm-01-752-7760",
@@ -2162,7 +2170,8 @@
    "below_market_pct": 45.6,
    "flag": "verify",
    "why": "45.6% under; private seller; price from search snippet, page not read",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "unverified"
   },
   {
    "watch_id": "sinn-104-st-sa-104-010",
@@ -2183,7 +2192,8 @@
    "flag": "verify",
    "why": "42.8% under; private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/de/entdecken/marken/sinn/104-st-sa/"
+   "overview_url": "https://www.watchpatrol.net/de/entdecken/marken/sinn/104-st-sa/",
+   "availability": "unverified"
   },
   {
    "watch_id": "nomos-glashutte-club-campus-36",
@@ -2204,7 +2214,8 @@
    "flag": "verify",
    "why": "41.2% under; private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/",
+   "availability": "unverified"
   },
   {
    "watch_id": "orient-star-contemporary-mechanical-moon-phase-re-ay0002s",
@@ -2224,7 +2235,8 @@
    "below_market_pct": 39.6,
    "flag": "verify",
    "why": "39.6% under; private seller",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "tudor-princess-date-92500",
@@ -2244,7 +2256,8 @@
    "below_market_pct": 39.3,
    "flag": "verify",
    "why": "39.3% under",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "longines-conquest-38mm-l3-720-4",
@@ -2265,7 +2278,8 @@
    "flag": "verify",
    "why": "39.2% under; private seller",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchrecon.com/?query=longines+conquest"
+   "overview_url": "https://www.watchrecon.com/?query=longines+conquest",
+   "availability": "unverified"
   },
   {
    "watch_id": "longines-conquest-38mm-l3-720-4",
@@ -2286,7 +2300,8 @@
    "flag": "verify",
    "why": "39.1% under; private seller",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchrecon.com/?query=longines+conquest"
+   "overview_url": "https://www.watchrecon.com/?query=longines+conquest",
+   "availability": "unverified"
   },
   {
    "watch_id": "tudor-prince-oysterdate-34mm-74033",
@@ -2306,7 +2321,8 @@
    "below_market_pct": 38.8,
    "flag": "verify",
    "why": "38.8% under",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "nomos-glashutte-club-campus-38",
@@ -2327,7 +2343,8 @@
    "flag": "verify",
    "why": "38.3% under; private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/",
+   "availability": "unverified"
   },
   {
    "watch_id": "nomos-glashutte-orion-35",
@@ -2348,7 +2365,8 @@
    "flag": "verify",
    "why": "38.3% under; private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/orion/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/orion/",
+   "availability": "unverified"
   },
   {
    "watch_id": "tudor-prince-date-32mm-72000",
@@ -2368,7 +2386,8 @@
    "below_market_pct": 37.1,
    "flag": "verify",
    "why": "37.1% under",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "christopher-ward-c63-sealander-automatic-39mm",
@@ -2388,7 +2407,8 @@
    "below_market_pct": 35.4,
    "flag": "verify",
    "why": "35.4% under; private seller; price from search snippet, page not read",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "unverified"
   },
   {
    "watch_id": "omega-constellation-c-case-168-0056",
@@ -2408,7 +2428,8 @@
    "below_market_pct": 35.3,
    "flag": "verify",
    "why": "35.3% under; private seller",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "longines-la-grande-classique-automatic-38mm-l4-918-4",
@@ -2428,7 +2449,8 @@
    "below_market_pct": 35.1,
    "flag": "verify",
    "why": "35.1% under; marked down from RRP",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "nomos-glashutte-orion-35",
@@ -2449,7 +2471,8 @@
    "flag": "verify",
    "why": "35.1% under; private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/orion/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/orion/",
+   "availability": "unverified"
   },
   {
    "watch_id": "tudor-prince-date-32mm-72033",
@@ -2469,7 +2492,8 @@
    "below_market_pct": 35.1,
    "flag": "verify",
    "why": "35.1% under",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "sinn-104-st-sa-104-010",
@@ -2490,7 +2514,8 @@
    "flag": "verify",
    "why": "35.0% under; private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/de/entdecken/marken/sinn/104-st-sa/"
+   "overview_url": "https://www.watchpatrol.net/de/entdecken/marken/sinn/104-st-sa/",
+   "availability": "unverified"
   },
   {
    "watch_id": "longines-la-grande-classique-automatic-38mm-l4-918-4",
@@ -2510,7 +2535,8 @@
    "below_market_pct": 34.3,
    "flag": "verify",
    "why": "34.3% under; marked down from RRP",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "oris-artelier-complication-01-581-7592",
@@ -2530,7 +2556,8 @@
    "below_market_pct": 34.2,
    "flag": "verify",
    "why": "34.2% under",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "longines-la-grande-classique-automatic-38mm-l4-918-4",
@@ -2550,7 +2577,8 @@
    "below_market_pct": 33.7,
    "flag": "verify",
    "why": "33.7% under; marked down from RRP",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "sinn-556-i-556-010",
@@ -2571,7 +2599,8 @@
    "flag": "verify",
    "why": "33.6% under; private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/sinn/556i/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/sinn/556i/",
+   "availability": "unverified"
   },
   {
    "watch_id": "king-seiko-ksk-37mm-reissue-spb279",
@@ -2591,7 +2620,8 @@
    "below_market_pct": 32.6,
    "flag": "verify",
    "why": "32.6% under; private seller; price from search snippet, page not read",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "unverified"
   },
   {
    "watch_id": "oris-big-crown-pointer-date-40mm-01-754-7741",
@@ -2612,7 +2642,8 @@
    "flag": "verify",
    "why": "32.6% under; private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/",
+   "availability": "unverified"
   },
   {
    "watch_id": "nomos-glashutte-orion-35",
@@ -2633,7 +2664,8 @@
    "flag": "verify",
    "why": "31.7% under; private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/orion/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/orion/",
+   "availability": "unverified"
   },
   {
    "watch_id": "tudor-prince-date-32mm-72033",
@@ -2653,7 +2685,8 @@
    "below_market_pct": 31.1,
    "flag": "verify",
    "why": "31.1% under; private seller",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "iwc-vintage-automatic-pellaton-cal-85x",
@@ -2673,7 +2706,8 @@
    "below_market_pct": 30.8,
    "flag": "verify",
    "why": "30.8% under; private seller",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "iwc-vintage-automatic-pellaton-cal-85x",
@@ -2693,7 +2727,8 @@
    "below_market_pct": 30.2,
    "flag": "verify",
    "why": "30.2% under; private seller",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "frederique-constant-classics-art-deco-round-fc-200mp-ar",
@@ -2713,7 +2748,8 @@
    "below_market_pct": 29.9,
    "flag": "clean",
    "why": "Authorised retailer, new with warranty, 29.9% under the pre-owned benchmark; price from search snippet, page not read; marked down from RRP",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "unverified"
   },
   {
    "watch_id": "tudor-prince-date-32mm-72033",
@@ -2733,7 +2769,8 @@
    "below_market_pct": 29.6,
    "flag": "verify",
    "why": "29.6% under",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "sinn-556-i-556-010",
@@ -2754,7 +2791,8 @@
    "flag": "verify",
    "why": "28.6% under; private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/sinn/556i/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/sinn/556i/",
+   "availability": "unverified"
   },
   {
    "watch_id": "nomos-glashutte-orion-35",
@@ -2774,7 +2812,8 @@
    "below_market_pct": 28.5,
    "flag": "verify",
    "why": "28.5% under; private seller; price from search snippet, page not read",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "longines-la-grande-classique-automatic-38mm-l4-918-4",
@@ -2794,7 +2833,8 @@
    "below_market_pct": 28.2,
    "flag": "verify",
    "why": "28.2% under; marked down from RRP",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "sinn-104-st-sa-104-010",
@@ -2815,7 +2855,8 @@
    "flag": "verify",
    "why": "28.2% under; private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/de/entdecken/marken/sinn/104-st-sa/"
+   "overview_url": "https://www.watchpatrol.net/de/entdecken/marken/sinn/104-st-sa/",
+   "availability": "unverified"
   },
   {
    "watch_id": "nomos-glashutte-club-campus-36",
@@ -2836,7 +2877,8 @@
    "flag": "verify",
    "why": "27.3% under; private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/",
+   "availability": "unverified"
   },
   {
    "watch_id": "christopher-ward-the-twelve-36mm",
@@ -2857,7 +2899,8 @@
    "flag": "verify",
    "why": "26.3% under; private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/christopher-ward/the-twelve/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/christopher-ward/the-twelve/",
+   "availability": "unverified"
   },
   {
    "watch_id": "tudor-princess-date-92514",
@@ -2877,7 +2920,8 @@
    "below_market_pct": 24.6,
    "flag": "clean",
    "why": "24.6% under benchmark",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "iwc-vintage-automatic-pellaton-cal-85x",
@@ -2897,7 +2941,8 @@
    "below_market_pct": 24.4,
    "flag": "verify",
    "why": "private seller",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "oris-big-crown-pointer-date-earlier-refs-7543-7628-7629",
@@ -2917,7 +2962,8 @@
    "below_market_pct": 23.7,
    "flag": "clean",
    "why": "23.7% under benchmark; price from search snippet, page not read",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "unverified"
   },
   {
    "watch_id": "oris-big-crown-pointer-date-earlier-refs-7543-7628-7629",
@@ -2938,7 +2984,8 @@
    "flag": "verify",
    "why": "private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/",
+   "availability": "unverified"
   },
   {
    "watch_id": "tudor-prince-date-32mm-72000",
@@ -2958,7 +3005,8 @@
    "below_market_pct": 23.7,
    "flag": "clean",
    "why": "23.7% under benchmark",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "nomos-glashutte-club-campus-36",
@@ -2979,7 +3027,8 @@
    "flag": "verify",
    "why": "private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/",
+   "availability": "unverified"
   },
   {
    "watch_id": "christopher-ward-the-twelve-40mm",
@@ -2999,7 +3048,8 @@
    "below_market_pct": 22.5,
    "flag": "verify",
    "why": "private seller; price from search snippet, page not read",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "unverified"
   },
   {
    "watch_id": "tudor-princess-date-92500",
@@ -3019,7 +3069,8 @@
    "below_market_pct": 22.4,
    "flag": "clean",
    "why": "22.4% under benchmark",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "tudor-princess-date-92500",
@@ -3039,7 +3090,8 @@
    "below_market_pct": 22.4,
    "flag": "clean",
    "why": "22.4% under benchmark",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "frederique-constant-classics-index-automatic-40mm-fc-303",
@@ -3059,7 +3111,8 @@
    "below_market_pct": 22.1,
    "flag": "clean",
    "why": "Authorised retailer, new with warranty, 22.1% under the pre-owned benchmark",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "christopher-ward-the-twelve-40mm",
@@ -3080,7 +3133,8 @@
    "flag": "verify",
    "why": "private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/christopher-ward/the-twelve/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/christopher-ward/the-twelve/",
+   "availability": "unverified"
   },
   {
    "watch_id": "oris-big-crown-pointer-date-40mm-01-754-7741",
@@ -3101,7 +3155,8 @@
    "flag": "verify",
    "why": "private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/",
+   "availability": "unverified"
   },
   {
    "watch_id": "oris-big-crown-pointer-date-40mm-01-754-7741",
@@ -3122,7 +3177,8 @@
    "flag": "verify",
    "why": "private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/",
+   "availability": "unverified"
   },
   {
    "watch_id": "frederique-constant-classics-carree-ladies-23mm-fc-200mc",
@@ -3142,7 +3198,8 @@
    "below_market_pct": 21.2,
    "flag": "clean",
    "why": "Authorised retailer, new with warranty, 21.2% under the pre-owned benchmark; marked down from RRP",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "orient-star-m34-f7-semi-skeleton-re-by0010l",
@@ -3162,7 +3219,8 @@
    "below_market_pct": 20.9,
    "flag": "clean",
    "why": "Authorised retailer, new with warranty, 20.9% under the pre-owned benchmark; price from search snippet, page not read",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "nomos-glashutte-club-campus-38",
@@ -3182,7 +3240,8 @@
    "below_market_pct": 20.7,
    "flag": "clean",
    "why": "20.7% under benchmark",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "frederique-constant-classics-carree-ladies-23mm-fc-200mc",
@@ -3202,7 +3261,8 @@
    "below_market_pct": 19.5,
    "flag": "clean",
    "why": "Authorised retailer, new with warranty, 19.5% under the pre-owned benchmark; price from search snippet, page not read; marked down from RRP",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "sinn-556-i-556-010",
@@ -3223,7 +3283,8 @@
    "flag": "verify",
    "why": "private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/sinn/556i/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/sinn/556i/",
+   "availability": "unverified"
   },
   {
    "watch_id": "studio-underd0g-02series-red-l0lly-02rlb",
@@ -3243,7 +3304,8 @@
    "below_market_pct": 19.0,
    "flag": "verify",
    "why": "private seller",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "omega-seamaster-automatic-vintage",
@@ -3263,7 +3325,8 @@
    "below_market_pct": 18.8,
    "flag": "verify",
    "why": "private seller",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "seiko-presage-urushi-sarx029",
@@ -3283,7 +3346,8 @@
    "below_market_pct": 18.8,
    "flag": "clean",
    "why": "18.8% under benchmark; price from search snippet, page not read",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "unverified"
   },
   {
    "watch_id": "seiko-presage-urushi-sarx029",
@@ -3303,7 +3367,8 @@
    "below_market_pct": 18.3,
    "flag": "clean",
    "why": "18.3% under benchmark; price from search snippet, page not read",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "unverified"
   },
   {
    "watch_id": "omega-constellation-c-case-168-0056",
@@ -3323,7 +3388,8 @@
    "below_market_pct": 18.1,
    "flag": "verify",
    "why": "private seller",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "sinn-556-a-556-014",
@@ -3344,7 +3410,8 @@
    "flag": "verify",
    "why": "private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/sinn/556a/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/sinn/556a/",
+   "availability": "unverified"
   },
   {
    "watch_id": "studio-underd0g-02series-pink-lem0nade-02plcb",
@@ -3365,7 +3432,8 @@
    "flag": "verify",
    "why": "private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/studio-underd0g/pink-lemonade/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/studio-underd0g/pink-lemonade/",
+   "availability": "unverified"
   },
   {
    "watch_id": "christopher-ward-the-twelve-40mm",
@@ -3386,7 +3454,8 @@
    "flag": "verify",
    "why": "private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/christopher-ward/the-twelve/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/christopher-ward/the-twelve/",
+   "availability": "unverified"
   },
   {
    "watch_id": "christopher-ward-the-twelve-38mm",
@@ -3406,7 +3475,8 @@
    "below_market_pct": 17.4,
    "flag": "clean",
    "why": "Authorised retailer, new with warranty, 17.4% under the pre-owned benchmark",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "christopher-ward-the-twelve-38mm",
@@ -3426,7 +3496,8 @@
    "below_market_pct": 17.4,
    "flag": "clean",
    "why": "Authorised retailer, new with warranty, 17.4% under the pre-owned benchmark",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "nomos-glashutte-club-campus-36",
@@ -3447,7 +3518,8 @@
    "flag": "verify",
    "why": "private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/",
+   "availability": "unverified"
   },
   {
    "watch_id": "nomos-glashutte-club-campus-38",
@@ -3467,7 +3539,8 @@
    "below_market_pct": 17.0,
    "flag": "clean",
    "why": "17.0% under benchmark",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "christopher-ward-the-twelve-36mm",
@@ -3488,7 +3561,8 @@
    "flag": "verify",
    "why": "private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/christopher-ward/the-twelve/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/christopher-ward/the-twelve/",
+   "availability": "unverified"
   },
   {
    "watch_id": "christopher-ward-the-twelve-36mm",
@@ -3509,7 +3583,8 @@
    "flag": "verify",
    "why": "private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.ebay.com/shop/the-twelve-watch"
+   "overview_url": "https://www.ebay.com/shop/the-twelve-watch",
+   "availability": "unverified"
   },
   {
    "watch_id": "seiko-presage-classic-series-40-2mm-spb463",
@@ -3529,7 +3604,8 @@
    "below_market_pct": 16.7,
    "flag": "clean",
    "why": "Authorised retailer, new with warranty, 16.7% under the pre-owned benchmark; marked down from RRP",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "omega-seamaster-automatic-vintage",
@@ -3549,7 +3625,8 @@
    "below_market_pct": 16.6,
    "flag": "verify",
    "why": "private seller",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "tissot-ballade-powermatic-80-cosc-39mm-t1564081103300",
@@ -3569,7 +3646,8 @@
    "below_market_pct": 15.7,
    "flag": "clean",
    "why": "Authorised retailer, new with warranty, 15.7% under the pre-owned benchmark; marked down from RRP",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "frederique-constant-classics-index-automatic-40mm-fc-303",
@@ -3589,7 +3667,8 @@
    "below_market_pct": 15.3,
    "flag": "clean",
    "why": "Authorised retailer, new with warranty, 15.3% under the pre-owned benchmark",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "studio-underd0g-02series-mim0sa-fears-02mig",
@@ -3609,7 +3688,8 @@
    "below_market_pct": 14.8,
    "flag": "verify",
    "why": "private seller",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "studio-underd0g-02series-steffany-blue-02sbmi",
@@ -3629,7 +3709,8 @@
    "below_market_pct": 14.7,
    "flag": "verify",
    "why": "private seller",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "omega-de-ville-prestige-quartz-34-4510",
@@ -3649,7 +3730,8 @@
    "below_market_pct": 14.3,
    "flag": "verify",
    "why": "private seller; price from search snippet, page not read",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "unverified"
   },
   {
    "watch_id": "sinn-556-i-556-010",
@@ -3670,7 +3752,8 @@
    "flag": "verify",
    "why": "private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/sinn/556i/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/sinn/556i/",
+   "availability": "unverified"
   },
   {
    "watch_id": "sinn-556-a-556-014",
@@ -3691,27 +3774,8 @@
    "flag": "verify",
    "why": "private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/sinn/556a/"
-  },
-  {
-   "watch_id": "frederique-constant-classics-quartz-40mm-fc-220",
-   "key": "https://en.maier.fr/watchmaking-jewelry-brands/frederique-constant/watches/quartz/classics-quartz_fc-220ss5b6",
-   "title": "Frederique Constant Classics Quartz FC-220SS5B6",
-   "url": "https://en.maier.fr/watchmaking-jewelry-brands/frederique-constant/watches/quartz/classics-quartz_fc-220ss5b6",
-   "price": 750.0,
-   "currency": "EUR",
-   "price_aud": 1199,
-   "condition": "new",
-   "full_set": true,
-   "seller_type": "authorised",
-   "seller_country": "FR",
-   "source": "Maier",
-   "source_quality": "snippet",
-   "benchmark_aud": 1395,
-   "below_market_pct": 14.1,
-   "flag": "clean",
-   "why": "Authorised retailer, new with warranty, 14.1% under the pre-owned benchmark; price from search snippet, page not read",
-   "first_seen": "2026-11-03"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/sinn/556a/",
+   "availability": "unverified"
   },
   {
    "watch_id": "frederique-constant-classics-business-timer-fc-270",
@@ -3731,7 +3795,8 @@
    "below_market_pct": 14.0,
    "flag": "clean",
    "why": "Authorised retailer, new with warranty, 14.0% under the pre-owned benchmark; price from search snippet, page not read; marked down from RRP",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "seiko-presage-classic-series-40-2mm-spb463",
@@ -3751,7 +3816,8 @@
    "below_market_pct": 13.8,
    "flag": "clean",
    "why": "13.8% under benchmark; price from search snippet, page not read",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "unverified"
   },
   {
    "watch_id": "seiko-presage-sharp-edged-spb167",
@@ -3771,7 +3837,8 @@
    "below_market_pct": 13.8,
    "flag": "verify",
    "why": "private seller",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "frederique-constant-classics-art-deco-round-fc-200mp-ar",
@@ -3791,7 +3858,8 @@
    "below_market_pct": 13.7,
    "flag": "clean",
    "why": "Authorised retailer, new with warranty, 13.7% under the pre-owned benchmark; price from search snippet, page not read",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "king-seiko-ksk-37mm-reissue-spb279",
@@ -3811,7 +3879,8 @@
    "below_market_pct": 13.6,
    "flag": "verify",
    "why": "private seller; price from search snippet, page not read",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "unverified"
   },
   {
    "watch_id": "orient-star-contemporary-three-hand-re-bq0002l",
@@ -3831,7 +3900,8 @@
    "below_market_pct": 13.6,
    "flag": "clean",
    "why": "Authorised retailer, new with warranty, 13.6% under the pre-owned benchmark; price from search snippet, page not read",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "nomos-glashutte-club-campus-36",
@@ -3852,7 +3922,8 @@
    "flag": "verify",
    "why": "private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/nomos/club-campus/",
+   "availability": "unverified"
   },
   {
    "watch_id": "studio-underd0g-02series-pink-lem0nade-02plcb",
@@ -3873,7 +3944,8 @@
    "flag": "verify",
    "why": "private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/studio-underd0g/pink-lemonade/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/studio-underd0g/pink-lemonade/",
+   "availability": "unverified"
   },
   {
    "watch_id": "seiko-presage-urushi-sarx029",
@@ -3893,7 +3965,8 @@
    "below_market_pct": 13.3,
    "flag": "clean",
    "why": "13.3% under benchmark; price from search snippet, page not read",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "unverified"
   },
   {
    "watch_id": "orient-star-contemporary-three-hand-re-bq0002l",
@@ -3913,7 +3986,8 @@
    "below_market_pct": 13.2,
    "flag": "clean",
    "why": "13.2% under benchmark",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "orient-star-contemporary-three-hand-re-bq0002l",
@@ -3933,7 +4007,8 @@
    "below_market_pct": 13.2,
    "flag": "clean",
    "why": "13.2% under benchmark",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "frederique-constant-classics-carree-ladies-23mm-fc-200mc",
@@ -3953,7 +4028,8 @@
    "below_market_pct": 13.1,
    "flag": "clean",
    "why": "Authorised retailer, new with warranty, 13.1% under the pre-owned benchmark; price from search snippet, page not read",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "unverified"
   },
   {
    "watch_id": "oris-big-crown-pointer-date-earlier-refs-7543-7628-7629",
@@ -3974,7 +4050,8 @@
    "flag": "verify",
    "why": "private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/oris/big-crown-pointer-date/",
+   "availability": "unverified"
   },
   {
    "watch_id": "meistersinger-yaara-q-36mm-yaq917s",
@@ -3994,7 +4071,8 @@
    "below_market_pct": 12.0,
    "flag": "clean",
    "why": "Authorised retailer, new with warranty, 12.0% under the pre-owned benchmark",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "omega-geneve-vintage",
@@ -4014,7 +4092,8 @@
    "below_market_pct": 11.8,
    "flag": "verify",
    "why": "private seller",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "omega-geneve-vintage",
@@ -4034,7 +4113,8 @@
    "below_market_pct": 11.8,
    "flag": "verify",
    "why": "private seller",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "frederique-constant-classics-art-deco-round-fc-200mp-ar",
@@ -4054,7 +4134,8 @@
    "below_market_pct": 11.7,
    "flag": "clean",
    "why": "Authorised retailer, new with warranty, 11.7% under the pre-owned benchmark; marked down from RRP",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "seiko-presage-sharp-edged-spb167",
@@ -4074,7 +4155,8 @@
    "below_market_pct": 11.6,
    "flag": "grey-new",
    "why": "New from a grey-market dealer; no maker warranty assumed; price from search snippet, page not read; marked down from RRP",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "sinn-556-i-mother-of-pearl-556-0105",
@@ -4094,7 +4176,8 @@
    "below_market_pct": 11.6,
    "flag": "clean",
    "why": "11.6% under benchmark",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "omega-constellation-c-case-168-0056",
@@ -4114,7 +4197,8 @@
    "below_market_pct": 10.7,
    "flag": "verify",
    "why": "private seller",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "christopher-ward-c63-sealander-automatic-39mm",
@@ -4134,7 +4218,8 @@
    "below_market_pct": 10.3,
    "flag": "clean",
    "why": "Authorised retailer, new with warranty, 10.3% under the pre-owned benchmark",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "christopher-ward-c63-sealander-automatic-39mm",
@@ -4154,7 +4239,8 @@
    "below_market_pct": 10.3,
    "flag": "clean",
    "why": "Authorised retailer, new with warranty, 10.3% under the pre-owned benchmark",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "christopher-ward-c63-sealander-automatic-39mm",
@@ -4174,7 +4260,8 @@
    "below_market_pct": 10.3,
    "flag": "clean",
    "why": "Authorised retailer, new with warranty, 10.3% under the pre-owned benchmark",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "frederique-constant-classics-quartz-40mm-fc-220",
@@ -4194,7 +4281,8 @@
    "below_market_pct": 10.1,
    "flag": "clean",
    "why": "Authorised retailer, new with warranty, 10.1% under the pre-owned benchmark; marked down from RRP",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "omega-constellation-c-case-168-0056",
@@ -4214,7 +4302,8 @@
    "below_market_pct": 9.9,
    "flag": "verify",
    "why": "private seller",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "sinn-556-a-556-014",
@@ -4235,7 +4324,8 @@
    "flag": "verify",
    "why": "private seller; price from search snippet, page not read",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchpatrol.net/discover/brands/sinn/556a/"
+   "overview_url": "https://www.watchpatrol.net/discover/brands/sinn/556a/",
+   "availability": "unverified"
   },
   {
    "watch_id": "orient-star-m45-f7-small-second-re-bs0002s",
@@ -4255,7 +4345,8 @@
    "below_market_pct": 8.1,
    "flag": "clean",
    "why": "8.1% under benchmark",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "orient-star-m45-f7-small-second-re-bs0002s",
@@ -4275,7 +4366,8 @@
    "below_market_pct": 8.1,
    "flag": "clean",
    "why": "8.1% under benchmark",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "meistersinger-yaara-q-36mm-yaq917s",
@@ -4295,7 +4387,8 @@
    "below_market_pct": 7.3,
    "flag": "clean",
    "why": "Authorised retailer, new with warranty, 7.3% under the pre-owned benchmark",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "orient-star-m45-f7-small-second-re-bs0002s",
@@ -4315,7 +4408,8 @@
    "below_market_pct": 6.4,
    "flag": "clean",
    "why": "Authorised retailer, new with warranty, 6.4% under the pre-owned benchmark; price from search snippet, page not read",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "omega-geneve-vintage",
@@ -4335,7 +4429,8 @@
    "below_market_pct": 6.0,
    "flag": "verify",
    "why": "private seller",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "longines-master-collection-38-5mm-l2-628-4-78-6",
@@ -4356,7 +4451,8 @@
    "flag": "verify",
    "why": "private seller",
    "first_seen": "2026-11-03",
-   "overview_url": "https://www.watchrecon.com/?query=longines+master+collection"
+   "overview_url": "https://www.watchrecon.com/?query=longines+master+collection",
+   "availability": "unverified"
   },
   {
    "watch_id": "omega-de-ville-prestige-quartz-34-4510",
@@ -4376,7 +4472,8 @@
    "below_market_pct": 5.3,
    "flag": "verify",
    "why": "private seller; price from search snippet, page not read",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "unverified"
   },
   {
    "watch_id": "orient-star-contemporary-mechanical-moon-phase-re-ay0002s",
@@ -4396,7 +4493,8 @@
    "below_market_pct": 5.3,
    "flag": "clean",
    "why": "Authorised retailer, new with warranty, 5.3% under the pre-owned benchmark; price from search snippet, page not read",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   },
   {
    "watch_id": "studio-underd0g-02series-mim0sa-fears-02mig",
@@ -4416,7 +4514,8 @@
    "below_market_pct": 4.7,
    "flag": "clean",
    "why": "Authorised retailer, new with warranty, 4.7% under the pre-owned benchmark",
-   "first_seen": "2026-11-03"
+   "first_seen": "2026-11-03",
+   "availability": "active"
   }
  ],
  "price_drops": [],
@@ -4451,5 +4550,6 @@
    "first_seen": "2026-11-03",
    "change": "new lot"
   }
- ]
+ ],
+ "sold": []
 }

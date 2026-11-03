@@ -316,7 +316,7 @@ const SRC = { 'WatchCharts Marketplace': 'WatchCharts', 'eBay US': 'eBay', 'eBay
 const STYLES_DEFAULT = ['everyday', 'diver', 'dress', 'sport', 'field', 'chronograph', 'pilot', 'gmt', 'vintage'];
 const STYLE_LABEL = { gmt: 'GMT / travel', vintage: 'Vintage-inspired' }; const styleName = s => STYLE_LABEL[s] || s.charAt(0).toUpperCase() + s.slice(1);
 const srcName = s => SRC[s] || s || '';
-const OVERVIEW = /watchpatrol\.net\/(?:[a-z]{2}\/)?(?:discover|entdecken|decouvrir|descubrir)\/|watchrecon\.com\/?\?|ebay\.[a-z.]+\/(?:shop|sch|b)\/|chrono24\.[a-z.]+\/(?:search|[a-z-]+\/index\.htm)|watchcharts\.com\/watch(?:es|_model)\//i;
+const OVERVIEW = /watchpatrol\.net\/(?:[a-z]{2}\/)?(?:discover|entdecken|decouvrir|descubrir)\/|watchrecon\.com\/?\?|ebay\.[a-z.]+\/(?:shop|sch|b)\/|chrono24\.[a-z.]+\/(?:search|[a-z-]+\/index\.htm)|watchcharts\.com\/watch(?:es|_model)\/|myer\.com\.au\/(?:b|c|search)\b|\/collections\/[^/?#]+\/?(?:[?#]|$)/i;
 const hasLink = l => /^https?:\/\//.test(String(l.url || '')) && !OVERVIEW.test(l.url);
 const linkOf = l => hasLink(l) ? l.url : 'https://duckduckgo.com/?q=' + encodeURIComponent((l.title || '') + ' ' + (/ebay/i.test(l.source || '') ? 'ebay' : /watchpatrol|reddit/i.test(l.source || '') ? 'watchexchange' : ''));
 

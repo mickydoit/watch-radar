@@ -31,10 +31,11 @@
    "models": 70,
    "new": 630,
    "drops": 0,
-   "deals": 119,
+   "deals": 118,
    "auction": 2,
    "fetches": 374,
-   "report": "reports/2026-11-03.md"
+   "report": "reports/2026-11-03.md",
+   "sold": 0
   }
  ]
 }
