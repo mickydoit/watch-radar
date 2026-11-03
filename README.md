@@ -14,7 +14,8 @@ It runs as a Claude Code **scheduled cloud routine** every morning at 07:00 Bris
 | `ROUTINE_PROMPT.md` | The agent's instructions. The routine itself only says "follow this file", so behaviour changes are a commit here, not a routine edit. |
 | `index.html` | The web app. Static, no build step; reads the `data/` files directly. |
 | `data/latest.json` | What the site shows: today's benchmark per watch, ranked below-market deals with flags, price drops, auction changes, run notes. |
-| `data/runs.json` | One line per run for the Runs tab. |
+| `data/runs.json` | One line per run for the Runs section. |
+| `data/images.json`, `images/` | One freely licensed photo per watch with its credit. The owner can set an image URL on a watchlist entry instead; the routine looks on Wikimedia Commons for watches that have neither. |
 | `data/seen.json` | Every listing seen in the last 90 days, with match flag and below-market %. Drives "new" and "price drop". |
 | `data/prices.csv` | Append-only price history: min / median asking, WatchCharts market price, eBay sold median. |
 | `data/auctions.json` | Upcoming and closed auction lots for the tracked references. |
@@ -23,7 +24,7 @@ It runs as a Claude Code **scheduled cloud routine** every morning at 07:00 Bris
 
 ## Editing the watchlist
 
-Open the site's **Watchlist** tab. You can switch whole brands on or off, pause or resume a reference, edit its criteria, add a new one, or remove one. Saving writes `data/watchlist.json` back to this repo through the GitHub API using a fine-grained personal access token that you create once (repository: this one; permission: Contents, read and write). The token is kept only in your browser's local storage and is sent only to api.github.com. The next run uses the new list. Editing the JSON by hand and pushing works too. Keep each `id` stable; it keys the data files.
+Open the site's **Watchlist** section. You can switch whole brands on or off, pause or resume a reference, edit its criteria, add a new one, or remove one. Saving writes `data/watchlist.json` back to this repo through the GitHub API using a fine-grained personal access token that you create once (repository: this one; permission: Contents, read and write). The token is kept only in your browser's local storage and is sent only to api.github.com. The next run uses the new list. Editing the JSON by hand and pushing works too. Keep each `id` stable; it keys the data files.
 
 ## How "below market" works
 

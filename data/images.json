@@ -1,0 +1,29 @@
+{
+  "_comment": "Images shown for each watch. Owner may override with an image URL on a watchlist entry; the routine may add entries here for watches that lack one, using freely licensed sources only.",
+  "images": {
+    "rolex-126610ln": {
+      "file": "images/rolex-126610ln.jpg",
+      "title": "Rolex Submariner Professional.JPG",
+      "author": "Dr.K.",
+      "license": "CC BY-SA 3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Rolex_Submariner_Professional.JPG",
+      "note": "Representative photo of the model family from Wikimedia Commons, not necessarily this exact reference."
+    },
+    "omega-speedmaster-hesalite": {
+      "file": "images/omega-speedmaster-hesalite.jpg",
+      "title": "OMEGA-Speedmaster-Professional-Front (cropped).jpg",
+      "author": "Torsten Bolten",
+      "license": "Public domain",
+      "source": "https://commons.wikimedia.org/wiki/File:OMEGA-Speedmaster-Professional-Front_(cropped).jpg",
+      "note": "Representative photo of the model family from Wikimedia Commons, not necessarily this exact reference."
+    },
+    "cartier-santos-medium-wssa0029": {
+      "file": "images/cartier-santos-medium-wssa0029.jpg",
+      "title": "Cartier Santos wristwatch.jpg",
+      "author": "Pittigrilli",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Cartier_Santos_wristwatch.jpg",
+      "note": "Representative photo of the model family from Wikimedia Commons, not necessarily this exact reference."
+    }
+  }
+}

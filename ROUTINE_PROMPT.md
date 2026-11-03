@@ -80,6 +80,10 @@ A **price drop** is a listing already in `seen.json` whose new asking price is a
 
 Search the reference against: Phillips, Sotheby's, Christie's, Bonhams, Antiquorum, Everywatch (aggregates results), and Australian houses Leonard Joel and Lawsons. Record upcoming lots (house, sale, date, lot, estimate range, currency, URL) in `data/auctions.json` with `status: upcoming`. On weekly runs, look up results for lots whose date has passed and set `sold` (with the price, premium included if stated) or `unsold`. A lot is **new** if its URL key is absent from the file.
 
+### E. A photo for each watch (only when missing)
+
+The site shows one photo per watch. If a watch has no `image` field in `data/watchlist.json` and no entry in `data/images.json`, spend at most three fetches trying to find one on **Wikimedia Commons** (`commons.wikimedia.org` API, `action=query&generator=search&gsrnamespace=6`) for the reference or, failing that, the model family. Accept only files whose licence is CC0, CC BY, CC BY-SA or public domain, at least 700 px on the short side, showing the watch itself (not a catalogue page, advert, replica or montage). Download the 1400 px thumbnail, crop to a square around the watch, resize to 1200 px, save as `images/<watch_id>.jpg`, and add to `data/images.json` under `images[<watch_id>]`: `file`, `title`, `author` (plain text), `license`, `source` (the Commons file page URL), `note` ("Representative photo of the model family from Wikimedia Commons, not necessarily this exact reference." when the reference differs). Never use dealer, brand or press photos, and never hot-link. If nothing suitable exists, leave it; the site shows a placeholder.
+
 ## 2. Update memory
 
 1. Merge today's listings into `data/seen.json` under `listings[watch_id][key]`. New keys get `first_seen` = today; existing keys get `last_seen` = today, the updated price, and `was_aud` when the price dropped. Delete keys whose `last_seen` is more than 90 days ago. Keep every recorded field listed in section 1A, plus `match`, `below_market_pct`, `flag`.
@@ -144,5 +148,5 @@ If you cannot complete the research (tools unavailable, repo unreadable, time ru
 - Research only. Do not contact sellers, bid, make offers, create accounts or log in anywhere.
 - Report prices as seen, with their currency, plus your AUD conversion. Never invent a figure.
 - A low price is a reason to look closer, not a recommendation. Flags exist so the owner does their own checks.
-- Do not modify `data/watchlist.json`, `ROUTINE_PROMPT.md` or `index.html`.
+- Do not modify `data/watchlist.json`, `ROUTINE_PROMPT.md` or `index.html`. You may add to `data/images.json` and `images/` as described in 1E.
 - Keep the report readable; it is the owner's audit trail for every number on the site.
