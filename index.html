@@ -5,173 +5,273 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Watch Radar</title>
 <meta name="description" content="Daily research on second-hand listings, asking prices and auctions for a short list of watches.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%239085e9' stroke-width='3'/%3E%3Cpath d='M16 8v8l5 3' fill='none' stroke='%239085e9' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111'/%3E%3Ccircle cx='16' cy='16' r='10' fill='none' stroke='%23ffe600' stroke-width='3'/%3E%3Cpath d='M16 9v7l4 3' fill='none' stroke='%23ffe600' stroke-width='3'/%3E%3C/svg%3E">
 <style>
+/* ---------- tokens ---------- */
 :root{
   color-scheme:light;
-  --bg:#f6f5f2;--surface:#fcfcfb;--surface-2:#f0efec;--line:#e2e0da;
-  --ink:#0b0b0b;--ink-2:#52514e;--ink-3:#8a8880;
-  --accent:#6250d6;--accent-soft:#e6e2fa;
+  --paper:#f4f1ea;--paper-2:#ebe7dd;
+  --ink:#111111;--ink-2:#3d3d3d;--ink-3:#6f6f6f;
+  --rule:#111111;--rule-soft:#c7c2b6;
+  --accent:#ffe600;--accent-ink:#111111;
   --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;
   --good:#0ca30c;--warn:#fab219;--serious:#ec835a;--crit:#d03b3b;
-  --radius:14px;--shadow:0 1px 2px rgba(0,0,0,.04),0 6px 18px rgba(0,0,0,.05);
+  --sans:"Helvetica Neue",Helvetica,Arial,"Inter",system-ui,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     color-scheme:dark;
-    --bg:#121212;--surface:#1a1a19;--surface-2:#242423;--line:#2f2f2d;
-    --ink:#f0efec;--ink-2:#c3c2b7;--ink-3:#8d8c84;
-    --accent:#9085e9;--accent-soft:#2a2740;
+    --paper:#121212;--paper-2:#1c1c1c;
+    --ink:#f2efe6;--ink-2:#c9c5bb;--ink-3:#8f8c84;
+    --rule:#f2efe6;--rule-soft:#3a3a3a;
+    --accent:#cbbcff;--accent-ink:#121212;
     --s1:#3987e5;--s2:#d95926;--s3:#199e70;
-    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
   }
 }
 :root[data-theme="dark"]{
   color-scheme:dark;
-  --bg:#121212;--surface:#1a1a19;--surface-2:#242423;--line:#2f2f2d;
-  --ink:#f0efec;--ink-2:#c3c2b7;--ink-3:#8d8c84;
-  --accent:#9085e9;--accent-soft:#2a2740;
+  --paper:#121212;--paper-2:#1c1c1c;
+  --ink:#f2efe6;--ink-2:#c9c5bb;--ink-3:#8f8c84;
+  --rule:#f2efe6;--rule-soft:#3a3a3a;
+  --accent:#cbbcff;--accent-ink:#121212;
   --s1:#3987e5;--s2:#d95926;--s3:#199e70;
-  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
 }
+
+/* ---------- base ---------- */
 *{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
-a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
-.wrap{max-width:1100px;margin:0 auto;padding:0 16px 64px}
-header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;padding:28px 0 18px}
-h1{font-size:28px;letter-spacing:-.02em;margin:0;font-weight:700}
-h1 small{display:block;font-size:13px;font-weight:500;color:var(--ink-2);letter-spacing:0;margin-top:2px}
-.status{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;font-size:12.5px;font-weight:600;background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line)}
-.pill .dot{width:8px;height:8px;border-radius:50%;background:var(--ink-3)}
-.pill.fresh .dot{background:var(--good)}.pill.stale .dot{background:var(--warn)}.pill.failed .dot{background:var(--crit)}.pill.pending .dot{background:var(--accent)}
-button.ghost{background:var(--surface);border:1px solid var(--line);color:var(--ink-2);border-radius:999px;padding:5px 11px;font:inherit;font-size:12.5px;cursor:pointer}
-button.ghost:hover{border-color:var(--accent)}
-.banner{background:var(--accent-soft);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;margin:0 0 18px;font-size:14px;color:var(--ink)}
-.banner code{background:transparent;font-weight:600}
-nav.tabs{display:flex;gap:4px;overflow-x:auto;margin:6px 0 18px;border-bottom:1px solid var(--line);scrollbar-width:none}
-nav.tabs::-webkit-scrollbar{display:none}
-nav.tabs button{background:none;border:0;border-bottom:2px solid transparent;color:var(--ink-2);padding:10px 12px;font:inherit;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap;margin-bottom:-1px}
-nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
-nav.tabs button .n{display:inline-block;min-width:18px;padding:0 5px;margin-left:6px;border-radius:999px;background:var(--surface-2);color:var(--ink-2);font-size:11px;line-height:18px;text-align:center}
+html,body{margin:0;background:var(--paper);color:var(--ink)}
+body{font:17px/1.6 var(--sans);-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+a{color:inherit;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px}
+a:hover{background:var(--accent);color:var(--accent-ink);text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:left}
+input,select,textarea{font:inherit;color:inherit;background:var(--paper);border:2px solid var(--rule);padding:10px 12px;border-radius:0;width:100%}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px 96px}
+@media (max-width:560px){.wrap{padding:0 16px 72px}}
+.mono{font-family:var(--mono)}
+.btn{font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.06em;border:2px solid var(--rule);padding:10px 14px;display:inline-block}
+.btn:hover{background:var(--paper-2)}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn.primary:hover{background:var(--accent);color:var(--accent-ink)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+
+/* ---------- masthead ---------- */
+.mast{padding:40px 0 0;border-bottom:3px solid var(--rule)}
+.mast .top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
+.mast h1{font-size:clamp(56px,11vw,128px);line-height:.9;letter-spacing:-.045em;font-weight:700;text-transform:uppercase;margin:28px 0 28px}
+.mast .sub{font-size:19px;line-height:1.5;max-width:60ch;margin:0 0 36px;color:var(--ink-2)}
+.status{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.06em;border:2px solid var(--rule);padding:8px 12px}
+.status .dot{width:10px;height:10px;background:var(--ink-3)}
+.status.fresh .dot{background:var(--good)}.status.stale .dot{background:var(--warn)}.status.failed .dot{background:var(--crit)}.status.pending .dot{background:var(--accent)}
+.theme{font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.06em;border:2px solid var(--rule);padding:8px 12px}
+.theme:hover{background:var(--accent);color:var(--accent-ink)}
+.banner{border:2px solid var(--rule);background:var(--accent);color:var(--accent-ink);padding:18px 20px;margin:36px 0 0;font-size:17px;line-height:1.5}
+.banner a{color:inherit}
+.banner a:hover{background:var(--accent-ink);color:var(--accent)}
+
+/* ---------- tabs ---------- */
+nav.tabs{display:flex;flex-wrap:wrap;margin:48px 0 64px;border-top:2px solid var(--rule);border-left:2px solid var(--rule)}
+nav.tabs button{flex:1 1 auto;padding:16px 18px;font-family:var(--mono);font-size:14px;text-transform:uppercase;letter-spacing:.06em;border-right:2px solid var(--rule);border-bottom:2px solid var(--rule);display:flex;justify-content:space-between;gap:12px}
+nav.tabs button:hover{background:var(--paper-2)}
+nav.tabs button[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+nav.tabs button .n{opacity:.65}
+@media (max-width:640px){nav.tabs{flex-direction:column}}
 section[hidden]{display:none}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 16px 12px;display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:border-color .15s}
-.card:hover,.card:focus-visible{border-color:var(--accent);outline:none}
-.card .brand{font-size:12px;font-weight:600;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
-.card .model{font-size:16px;font-weight:650;line-height:1.25}
-.card .ref{font-size:12.5px;color:var(--ink-2);font-variant-numeric:tabular-nums}
-.hero{display:flex;align-items:baseline;gap:8px;margin-top:4px}
-.hero .v{font-size:26px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.hero .l{font-size:12px;color:var(--ink-2)}
-.meta{display:flex;gap:14px;font-size:12.5px;color:var(--ink-2);font-variant-numeric:tabular-nums}
-.meta b{color:var(--ink);font-weight:600}
-.delta{font-size:12.5px;font-weight:600;display:inline-flex;align-items:center;gap:4px}
-.delta.up{color:var(--serious)}.delta.down{color:var(--good)}.delta.flat{color:var(--ink-3)}
-.spark{width:100%;height:44px;display:block;margin-top:2px}
-.spark path{fill:none;stroke:var(--s1);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
-.spark .area{fill:var(--s1);opacity:.08;stroke:none}
-.spark .end{fill:var(--s1)}
-.empty{color:var(--ink-2);padding:28px 0;text-align:center;border:1px dashed var(--line);border-radius:var(--radius);font-size:14px}
-.filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;align-items:center}
-.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink-2);border-radius:999px;padding:5px 11px;font:inherit;font-size:12.5px;cursor:pointer}
-.chip[aria-pressed="true"]{background:var(--accent-soft);color:var(--ink);border-color:var(--accent)}
-.list{display:flex;flex-direction:column;gap:10px}
-.row{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;display:grid;grid-template-columns:1fr auto;gap:4px 16px;align-items:start}
-.row .t{font-weight:600;line-height:1.3}
-.row .t a{color:var(--ink)}
-.row .sub{font-size:12.5px;color:var(--ink-2);grid-column:1}
-.row .price{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;font-size:16px;white-space:nowrap}
-.row .price small{display:block;font-size:11.5px;color:var(--ink-2);font-weight:500}
-.row .was{text-decoration:line-through;color:var(--ink-3);font-weight:500;font-size:12px;margin-right:6px}
-.tag{display:inline-block;font-size:11px;font-weight:600;padding:1px 7px;border-radius:999px;background:var(--surface-2);color:var(--ink-2);margin-right:4px;vertical-align:1px}
-.tag.new{background:var(--accent-soft);color:var(--accent)}
-.tag.drop{background:color-mix(in srgb,var(--good) 14%,transparent);color:var(--good)}
-.lede{margin:0 0 14px;color:var(--ink-2);font-size:14px;max-width:70ch}
-.tag.verify{background:color-mix(in srgb,var(--serious) 16%,transparent);color:var(--serious)}
-.tag.grey{background:color-mix(in srgb,var(--s2) 14%,transparent);color:var(--s2)}
-.tag.clean{background:color-mix(in srgb,var(--good) 14%,transparent);color:var(--good)}
-.bench{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--ink-2);margin:0 0 8px;font-variant-numeric:tabular-nums}
-.bench b{color:var(--ink)}
-.row .why{font-size:12.5px;color:var(--ink-2);grid-column:1/-1;margin-top:2px}
-.group-h{font-size:13px;font-weight:700;color:var(--ink-2);margin:18px 0 8px;text-transform:uppercase;letter-spacing:.05em}
-.group-h:first-child{margin-top:0}
-.viz{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:14px}
-.viz .head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:6px}
-.viz h3{margin:0;font-size:15px}
-.viz h3 small{color:var(--ink-2);font-weight:500;margin-left:6px}
-.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-2)}
-.legend i{display:inline-block;width:14px;height:2px;vertical-align:middle;margin-right:6px;border-radius:1px}
-.chart{position:relative;width:100%;height:220px}
+
+/* ---------- common ---------- */
+.lede{font-size:21px;line-height:1.55;max-width:62ch;margin:0 0 48px}
+.group-h{font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin:0 0 16px;padding-top:12px}
+h2.wh{font-size:clamp(28px,4vw,40px);line-height:1.1;letter-spacing:-.025em;font-weight:700;margin:0 0 6px}
+h2.wh small{display:block;font-family:var(--mono);font-size:14px;letter-spacing:.04em;font-weight:400;color:var(--ink-3);margin-top:8px;text-transform:uppercase}
+.block{border-top:3px solid var(--rule);padding-top:28px;margin:0 0 80px}
+.block:last-child{margin-bottom:0}
+.empty{border:2px dashed var(--rule-soft);padding:40px 24px;text-align:center;color:var(--ink-3);font-family:var(--mono);font-size:14px;text-transform:uppercase;letter-spacing:.06em}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 48px}
+.chip{font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.06em;border:2px solid var(--rule);padding:8px 12px}
+.chip:hover{background:var(--paper-2)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.chip.off{color:var(--ink-3);border-color:var(--rule-soft);text-decoration:line-through}
+
+/* benchmark strip */
+.bench{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border:2px solid var(--rule);margin:28px 0 0}
+.bench > div{padding:16px 18px;border-right:2px solid var(--rule);border-bottom:2px solid var(--rule);margin-bottom:-2px}
+.bench dt{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin:0 0 6px}
+.bench dd{margin:0;font-family:var(--mono);font-size:24px;line-height:1.1;letter-spacing:-.02em}
+.bench .basis{grid-column:1/-1;border-right:0;font-size:14px;color:var(--ink-2);padding:12px 18px;font-family:var(--mono)}
+
+/* rows */
+.list{margin-top:24px;border-top:2px solid var(--rule)}
+.row{display:grid;grid-template-columns:1fr auto;gap:8px 32px;padding:24px 0;border-bottom:1px solid var(--rule-soft);align-items:start}
+.row .t{font-size:21px;line-height:1.35;letter-spacing:-.01em}
+.row .t a{text-decoration-thickness:2px}
+.row .sub{font-family:var(--mono);font-size:13px;line-height:1.7;color:var(--ink-2);grid-column:1}
+.row .why{font-size:16px;color:var(--ink-2);grid-column:1/-1;max-width:70ch;margin-top:2px}
+.row .price{text-align:right;font-family:var(--mono);font-size:28px;line-height:1.1;letter-spacing:-.02em;white-space:nowrap}
+.row .price small{display:block;font-size:13px;color:var(--ink-3);margin-top:6px;letter-spacing:0}
+.row .price .pct{display:block;font-size:14px;margin-bottom:6px;color:var(--good)}
+.row .was{display:block;font-size:13px;color:var(--ink-3);text-decoration:line-through;margin-bottom:4px}
+@media (max-width:560px){.row{grid-template-columns:1fr}.row .price{text-align:left;margin-top:4px}.row .t{font-size:19px}}
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;border:1.5px solid currentColor;padding:3px 7px;margin:0 10px 0 0;vertical-align:4px;line-height:1}
+.tag.new{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.tag.drop,.tag.clean,.tag.on{color:var(--good)}
+.tag.verify{color:var(--serious)}
+.tag.grey{color:var(--s2)}
+.tag.plain,.tag.paused{color:var(--ink-3)}
+
+/* watches grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));border-top:2px solid var(--rule);border-left:2px solid var(--rule)}
+.card{border-right:2px solid var(--rule);border-bottom:2px solid var(--rule);padding:28px 24px 24px;display:flex;flex-direction:column;gap:6px}
+.card:hover,.card:focus-visible{background:var(--paper-2);outline:none}
+.card.paused{color:var(--ink-3)}
+.card .brand{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-3)}
+.card .model{font-size:24px;line-height:1.15;letter-spacing:-.02em;font-weight:700}
+.card .ref{font-family:var(--mono);font-size:13px;color:var(--ink-2);margin-bottom:22px}
+.card .hero .v{font-family:var(--mono);font-size:40px;line-height:1;letter-spacing:-.03em;display:block}
+.card .hero .l{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);display:block;margin-top:8px}
+.card .meta{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;margin-top:22px;font-family:var(--mono);font-size:13px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+.card .meta b{display:block;font-weight:400;color:var(--ink);font-size:17px;text-transform:none;letter-spacing:0;margin-top:2px}
+.card .meta b.ok{color:var(--good)}
+.delta{font-family:var(--mono);font-size:13px;margin-top:18px;display:flex;gap:16px;flex-wrap:wrap;color:var(--ink-3)}
+.delta .up{color:var(--serious)}.delta .down{color:var(--good)}.delta .flat{color:var(--ink-3)}
+.spark{width:100%;height:56px;display:block;margin-top:20px}
+.spark path{fill:none;stroke:var(--ink);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.spark .end{fill:var(--ink)}
+.spark text{font-family:var(--mono);font-size:11px;fill:var(--ink-3);text-transform:uppercase;letter-spacing:.08em}
+
+/* charts */
+.viz{margin:0 0 80px}
+.viz .head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin:0 0 24px}
+.legend{display:flex;gap:20px;flex-wrap:wrap;font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
+.legend i{display:inline-block;width:18px;height:3px;vertical-align:middle;margin-right:8px}
+.chart{position:relative;width:100%;height:260px;border:2px solid var(--rule);padding:12px 8px 8px}
 .chart svg{width:100%;height:100%;display:block;overflow:visible}
-.chart .grid line{stroke:var(--line);stroke-width:1}
-.chart .ax text{fill:var(--ink-3);font-size:11px;font-variant-numeric:tabular-nums}
-.chart .ser{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
-.chart .pt{stroke:var(--surface);stroke-width:2}
-.chart .cross{stroke:var(--ink-3);stroke-width:1;stroke-dasharray:3 3;display:none}
-.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12px;line-height:1.4;padding:6px 9px;border-radius:8px;transform:translate(-50%,-110%);white-space:nowrap;display:none;z-index:2;font-variant-numeric:tabular-nums}
-.tip b{font-weight:700}
-table{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
-th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}
-th{color:var(--ink-2);font-weight:600;font-size:12px}
+.chart .grid line{stroke:var(--rule-soft);stroke-width:1;stroke-dasharray:2 4}
+.chart .ax text{fill:var(--ink-3);font-size:11px;font-family:var(--mono)}
+.chart .ser{fill:none;stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}
+.chart .pt{stroke:var(--paper);stroke-width:2}
+.chart .cross{stroke:var(--ink);stroke-width:1;display:none}
+.chart .lbl{font-family:var(--mono);font-size:11px;font-weight:700}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:12px;line-height:1.5;padding:8px 10px;transform:translate(-50%,-110%);white-space:nowrap;display:none;z-index:2}
+.tip b{font-weight:700;display:block;margin-bottom:2px}
+details{margin-top:16px}
+details summary{cursor:pointer;font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2);list-style:none;display:inline-block;border-bottom:1.5px solid var(--rule)}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"+ "}details[open] summary::before{content:"– "}
+table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:14px;margin-top:16px;border-top:2px solid var(--rule)}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--rule-soft)}
+th{font-weight:400;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;font-size:11px}
 td.num,th.num{text-align:right}
-details summary{cursor:pointer;color:var(--ink-2);font-size:12.5px;margin-top:8px}
-.notes{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
-.notes ul{margin:6px 0 0;padding-left:18px;color:var(--ink-2);font-size:14px}
-.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:13.5px;margin-bottom:8px}
-.kv dt{color:var(--ink-2)}.kv dd{margin:0;font-variant-numeric:tabular-nums}
-.runs .row{grid-template-columns:auto 1fr auto}
-.runs .d{font-weight:600;font-variant-numeric:tabular-nums}
-footer{margin-top:40px;font-size:12.5px;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:6px 16px}
-@media (max-width:560px){h1{font-size:24px}.row{grid-template-columns:1fr}.row .price{text-align:left}.chart{height:190px}}
+
+/* runs */
+.kv{display:grid;grid-template-columns:max-content 1fr;gap:12px 32px;font-family:var(--mono);font-size:15px;margin:0 0 40px;border:2px solid var(--rule);padding:24px}
+.kv dt{text-transform:uppercase;letter-spacing:.06em;font-size:12px;color:var(--ink-3);padding-top:2px}
+.kv dd{margin:0}
+h3.mh{font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin:0 0 16px;font-weight:400}
+.notes ul{margin:0 0 16px;padding:0;list-style:none}
+.notes li{padding:12px 0;border-bottom:1px solid var(--rule-soft);font-size:16px;line-height:1.55;color:var(--ink-2);max-width:80ch}
+.notes details{margin:0 0 56px}
+.runs .row{grid-template-columns:max-content 1fr max-content;align-items:center;padding:16px 0}
+.runs .d{font-family:var(--mono);font-size:15px}
+.runs .mid{font-family:var(--mono);font-size:13px;color:var(--ink-2)}
+@media (max-width:560px){.runs .row{grid-template-columns:1fr}}
+
+/* watchlist editor */
+.wl-row{display:grid;grid-template-columns:1fr auto;gap:8px 24px;padding:22px 0;border-bottom:1px solid var(--rule-soft);align-items:start}
+.wl-row.paused .t,.wl-row.paused .sub{color:var(--ink-3)}
+.wl-row .t{font-size:21px;line-height:1.3;letter-spacing:-.01em}
+.wl-row .sub{font-family:var(--mono);font-size:13px;line-height:1.7;color:var(--ink-2)}
+.wl-row .acts{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+@media (max-width:640px){.wl-row{grid-template-columns:1fr}.wl-row .acts{justify-content:flex-start}}
+.form{border:2px solid var(--rule);padding:28px 24px;margin:0 0 40px;display:grid;grid-template-columns:repeat(2,1fr);gap:20px 24px}
+.form h3{grid-column:1/-1;margin:0;font-size:24px;letter-spacing:-.02em}
+.form label{display:block;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin-bottom:8px}
+.form .full{grid-column:1/-1}
+.form .opts{display:flex;flex-wrap:wrap;gap:8px}
+.form .opts button{font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.06em;border:2px solid var(--rule);padding:8px 12px}
+.form .opts button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.form .acts{grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.form .err{grid-column:1/-1;font-family:var(--mono);font-size:13px;color:var(--crit)}
+@media (max-width:640px){.form{grid-template-columns:1fr}}
+.savebar{position:sticky;bottom:0;background:var(--paper);border-top:3px solid var(--rule);margin-top:48px;padding:18px 0;display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between}
+.savebar .msg{font-family:var(--mono);font-size:13px;color:var(--ink-2);max-width:60ch}
+.savebar .msg.ok{color:var(--good)}.savebar .msg.err{color:var(--crit)}
+.tokenbox{border:2px solid var(--rule);padding:24px;margin-top:24px;max-width:70ch}
+.tokenbox p{margin:0 0 14px;font-size:16px;line-height:1.55}
+.tokenbox ol{margin:0 0 18px;padding-left:22px;font-size:16px;line-height:1.6}
+.tokenbox .trow{display:flex;gap:10px;flex-wrap:wrap}
+.tokenbox input{flex:1 1 260px;font-family:var(--mono)}
+
+footer{margin-top:96px;border-top:3px solid var(--rule);padding-top:20px;font-family:var(--mono);font-size:13px;line-height:1.8;color:var(--ink-2);display:flex;flex-wrap:wrap;gap:4px 28px;justify-content:space-between}
+footer nav{display:flex;gap:20px;flex-wrap:wrap}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <h1>Watch Radar <small id="subtitle">Second-hand listings, prices and auctions for the watches on your list</small></h1>
-    <div class="status">
-      <span class="pill pending" id="status"><span class="dot"></span><span id="statusText">Loading…</span></span>
-      <button class="ghost" id="theme" title="Toggle light/dark">◐ Theme</button>
+  <header class="mast">
+    <div class="top">
+      <span>Daily market research · Watches</span>
+      <button class="theme" id="theme" aria-label="Toggle light and dark theme">Theme</button>
     </div>
+    <h1>Watch<br>Radar</h1>
+    <p class="sub">Second-hand listings, asking prices and auction lots for the references on your list, checked every morning and compared against what the market is really asking.</p>
+    <span class="status pending" id="status"><span class="dot"></span><span id="statusText">Loading</span></span>
+    <div class="banner" id="banner" hidden></div>
+    <nav class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-tab="deals">Below market<span class="n" id="nDeals">0</span></button>
+      <button role="tab" aria-selected="false" data-tab="watches">Watches</button>
+      <button role="tab" aria-selected="false" data-tab="listings">New listings<span class="n" id="nListings">0</span></button>
+      <button role="tab" aria-selected="false" data-tab="drops">Price drops<span class="n" id="nDrops">0</span></button>
+      <button role="tab" aria-selected="false" data-tab="auctions">Auctions<span class="n" id="nAuctions">0</span></button>
+      <button role="tab" aria-selected="false" data-tab="history">Price history</button>
+      <button role="tab" aria-selected="false" data-tab="runs">Runs</button>
+      <button role="tab" aria-selected="false" data-tab="watchlist">Watchlist</button>
+    </nav>
   </header>
-
-  <div class="banner" id="banner" hidden></div>
-
-  <nav class="tabs" role="tablist">
-    <button role="tab" aria-selected="true" data-tab="deals">Below market<span class="n" id="nDeals">0</span></button>
-    <button role="tab" aria-selected="false" data-tab="watches">Watches</button>
-    <button role="tab" aria-selected="false" data-tab="listings">New listings<span class="n" id="nListings">0</span></button>
-    <button role="tab" aria-selected="false" data-tab="drops">Price drops<span class="n" id="nDrops">0</span></button>
-    <button role="tab" aria-selected="false" data-tab="auctions">Auctions<span class="n" id="nAuctions">0</span></button>
-    <button role="tab" aria-selected="false" data-tab="history">Price history</button>
-    <button role="tab" aria-selected="false" data-tab="runs">Runs</button>
-  </nav>
 
   <section id="tab-deals"><p class="lede" id="dealsLede"></p><div class="filters" id="fDeals"></div><div id="deals"></div></section>
   <section id="tab-watches" hidden><div class="grid" id="watches"></div></section>
-  <section id="tab-listings" hidden><div class="filters" id="fListings"></div><div class="list" id="listings"></div></section>
-  <section id="tab-drops" hidden><div class="list" id="drops"></div></section>
+  <section id="tab-listings" hidden><div class="filters" id="fListings"></div><div id="listings"></div></section>
+  <section id="tab-drops" hidden><div id="drops"></div></section>
   <section id="tab-auctions" hidden><div id="auctions"></div></section>
   <section id="tab-history" hidden><div class="filters" id="fHistory"></div><div id="history"></div></section>
-  <section id="tab-runs" hidden><div class="notes" id="runNotes"></div><div class="list runs" id="runs" style="margin-top:14px"></div></section>
+  <section id="tab-runs" hidden><div class="notes" id="runNotes"></div><div class="runs" id="runs"></div></section>
+  <section id="tab-watchlist" hidden>
+    <p class="lede">Choose what the agent researches. Switch whole brands on or off, pause or edit individual references, or add a new one. Changes are saved to the repository and picked up by the next run.</p>
+    <h3 class="mh">Focus by brand</h3>
+    <div class="filters" id="brandFocus"></div>
+    <h3 class="mh">References</h3>
+    <div id="wlForm"></div>
+    <div id="wlList"></div>
+    <div class="savebar" id="savebar">
+      <span class="msg" id="saveMsg">No unsaved changes</span>
+      <span style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn" id="addBtn">+ Add a reference</button>
+        <button class="btn primary" id="saveBtn" disabled>Save to repository</button>
+      </span>
+    </div>
+    <div id="tokenbox"></div>
+  </section>
 
   <footer>
-    <span id="footLeft">Data is committed to this repository by a daily cloud routine.</span>
-    <a id="repoLink" href="#" target="_blank" rel="noopener">Repository</a>
-    <a id="watchlistLink" href="#" target="_blank" rel="noopener">Edit watchlist</a>
-    <a id="reportsLink" href="#" target="_blank" rel="noopener">Run reports</a>
+    <span id="footLeft">Asking prices as listed, converted to AUD. Updated by a daily cloud routine.</span>
+    <nav>
+      <a id="repoLink" href="#" target="_blank" rel="noopener">Repository</a>
+      <a id="reportsLink" href="#" target="_blank" rel="noopener">Run reports</a>
+      <a id="routineLink" href="https://claude.ai/code/routines" target="_blank" rel="noopener">Routine</a>
+    </nav>
   </footer>
 </div>
 
 <script>
 (() => {
 'use strict';
+const REPO = { owner: 'mickydoit', name: 'watch-radar', branch: 'main', path: 'data/watchlist.json' };
 const $ = (s, r = document) => r.querySelector(s);
 const el = (tag, attrs = {}, ...kids) => {
   const n = document.createElement(tag);
   for (const [k, v] of Object.entries(attrs)) {
-    if (k === 'class') n.className = v; else if (k === 'html') n.innerHTML = v; else if (k.startsWith('on')) n.addEventListener(k.slice(2), v); else n.setAttribute(k, v);
+    if (k === 'class') n.className = v; else if (k === 'html') n.innerHTML = v; else if (k.startsWith('on')) n.addEventListener(k.slice(2), v); else if (v != null) n.setAttribute(k, v);
   }
   for (const k of kids) if (k != null) n.append(k.nodeType ? k : document.createTextNode(String(k)));
   return n;
@@ -181,15 +281,16 @@ const fmtMoney = (v, c) => v == null || isNaN(v) ? (c ? 'POA' : '—') : (c || '
 const fmtDate = d => { if (!d) return '—'; const [y, m, dd] = d.split('-').map(Number); return new Date(Date.UTC(y, m - 1, dd)).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', timeZone: 'UTC' }); };
 const daysAgo = d => { if (!d) return Infinity; const t = Date.UTC(...d.split('-').map((x, i) => i === 1 ? x - 1 : +x)); return (Date.now() - t) / 864e5; };
 const pct = (a, b) => (a == null || b == null || !b) ? null : (a - b) / b * 100;
+const label = w => (w.brand + ' ' + (w.reference || w.model)).trim();
+const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const store = { get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} } };
 
 // ---- theme ----
 const root = document.documentElement;
-try { const t = localStorage.getItem('radar-theme'); if (t) root.dataset.theme = t; } catch (e) {}
+{ const t = store.get('radar-theme'); if (t) root.dataset.theme = t; }
 $('#theme').onclick = () => {
   const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-  root.dataset.theme = dark ? 'light' : 'dark';
-  try { localStorage.setItem('radar-theme', root.dataset.theme); } catch (e) {}
-  render();
+  root.dataset.theme = dark ? 'light' : 'dark'; store.set('radar-theme', root.dataset.theme); render();
 };
 
 // ---- tabs ----
@@ -197,26 +298,28 @@ document.querySelectorAll('nav.tabs button').forEach(b => b.onclick = () => show
 function showTab(name) {
   document.querySelectorAll('nav.tabs button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
   document.querySelectorAll('section[id^="tab-"]').forEach(s => s.hidden = s.id !== 'tab-' + name);
-  try { localStorage.setItem('radar-tab', name); } catch (e) {}
+  store.set('radar-tab', name);
   if (name === 'history') renderHistory();
 }
 
 // ---- data ----
-const state = { latest: null, prices: [], seen: {}, auctions: {}, runs: [], filter: 'all', dFilter: 'all', hFilter: null, repo: '' };
+const state = { latest: null, prices: [], seen: {}, auctions: {}, runs: [], wl: null, wlSha: null, wlDirty: false, editing: null, filter: 'all', dFilter: 'all', hFilter: null, repo: '' };
 
 async function load() {
   const bust = '?t=' + Math.floor(Date.now() / 6e4);
   const j = async p => { const r = await fetch(p + bust, { cache: 'no-store' }); if (!r.ok) throw new Error(p + ' ' + r.status); return r.json(); };
   const t = async p => { const r = await fetch(p + bust, { cache: 'no-store' }); if (!r.ok) throw new Error(p + ' ' + r.status); return r.text(); };
-  const [latest, prices, seen, auctions, runs] = await Promise.all([
+  const [latest, prices, seen, auctions, runs, wl] = await Promise.all([
     j('data/latest.json'),
     t('data/prices.csv').then(parseCSV).catch(() => []),
     j('data/seen.json').catch(() => ({ listings: {} })),
     j('data/auctions.json').catch(() => ({ lots: {} })),
     j('data/runs.json').catch(() => ({ runs: [] })),
+    j('data/watchlist.json').catch(() => null),
   ]);
   Object.assign(state, { latest, prices, seen: seen.listings || {}, auctions: auctions.lots || {}, runs: runs.runs || [] });
-  state.repo = latest.repo_url || 'https://github.com/mickydoit/watch-radar';
+  state.wl = wl && Array.isArray(wl.watches) ? wl : { defaults: { currency: 'AUD', markets: ['worldwide'], home_country: 'Australia' }, watches: (latest.watches || []).map(w => ({ id: w.id, brand: w.brand, model: w.model, reference: w.reference, ceiling: w.ceiling, condition: ['unworn', 'excellent'], full_set: false, markets: ['worldwide'], active: true })) };
+  state.repo = latest.repo_url || `https://github.com/${REPO.owner}/${REPO.name}`;
 }
 function parseCSV(text) {
   const lines = text.trim().split(/\r?\n/); if (lines.length < 2) return [];
@@ -231,8 +334,12 @@ function parseCSV(text) {
   });
 }
 
-// ---- derived ----
-function watchMeta(id) { return (state.latest.watches || []).find(w => w.id === id) || { id, brand: '', model: id, reference: '' }; }
+// ---- derived: the watch list the page shows = watchlist.json merged with the latest run's numbers ----
+function watches() {
+  const stats = new Map((state.latest.watches || []).map(w => [w.id, w]));
+  return state.wl.watches.map(w => ({ ...stats.get(w.id), ...w, active: w.active !== false }));
+}
+function watchMeta(id) { return watches().find(w => w.id === id) || (state.latest.watches || []).find(w => w.id === id) || { id, brand: '', model: id, reference: '' }; }
 function series(id, metric) {
   const m = new Map();
   for (const r of state.prices) if (r.watch_id === id && r.metric === metric && r.value != null) m.set(r.date, r.value);
@@ -243,128 +350,138 @@ function allSeen() {
   for (const [wid, byKey] of Object.entries(state.seen)) for (const [key, l] of Object.entries(byKey || {})) out.push({ watch_id: wid, key, ...l });
   return out;
 }
+function recentListings() {
+  return allSeen().filter(l => l.match !== false && daysAgo(l.first_seen) <= 14).sort((a, b) => (b.first_seen || '').localeCompare(a.first_seen || '') || (a.price_aud || 0) - (b.price_aud || 0));
+}
 
 // ---- render ----
 function render() {
   const L = state.latest;
-  // status
   const pill = $('#status'), txt = $('#statusText');
-  pill.className = 'pill';
+  pill.className = 'status';
   if (!L.run_date || L.status === 'pending') { pill.classList.add('pending'); txt.textContent = 'Waiting for the first run'; }
   else {
     const age = daysAgo(L.run_date);
     const when = fmtDate(L.run_date) + (L.run_at_local ? ' · ' + L.run_at_local : '');
     if (L.status === 'failed') { pill.classList.add('failed'); txt.textContent = 'Last run failed · ' + when; }
     else if (age > 1.6) { pill.classList.add('stale'); txt.textContent = 'Stale · last run ' + when; }
-    else { pill.classList.add(L.status === 'partial' ? 'stale' : 'fresh'); txt.textContent = (L.status === 'partial' ? 'Partial run · ' : 'Updated ') + when; }
+    else { pill.classList.add(L.status === 'partial' ? 'stale' : 'fresh'); txt.textContent = (L.status === 'partial' ? 'Partial run · ' : 'Updated · ') + when; }
   }
-  // banner
   const b = $('#banner'); b.hidden = true;
-  if (L.example_watchlist) { b.hidden = false; b.innerHTML = 'The watchlist still holds Claude’s four <b>example</b> watches. Edit <code>watchlist.yml</code> in the repository to track your own; the next run picks it up.'; }
+  const examples = watches().filter(w => w.example && w.active);
+  if (examples.length) { b.hidden = false; b.innerHTML = ''; b.append('The list still holds ' + examples.length + ' of Claude’s example watches. ', el('a', { href: '#', onclick: e => { e.preventDefault(); showTab('watchlist'); } }, 'Open the Watchlist tab'), ' to replace them with your own.'); }
   else if (L.status === 'failed' && L.failure) { b.hidden = false; b.textContent = 'Last run did not complete: ' + L.failure; }
-  // links
-  $('#repoLink').href = state.repo; $('#watchlistLink').href = state.repo + '/edit/main/watchlist.yml'; $('#reportsLink').href = state.repo + '/tree/main/reports';
-  $('#footLeft').textContent = 'Asking prices as listed, converted to AUD' + (L.fx && L.fx.USD_AUD ? ' (USD→AUD ' + L.fx.USD_AUD + ')' : '') + '. Updated by a daily cloud routine.';
+  $('#repoLink').href = state.repo; $('#reportsLink').href = state.repo + '/tree/main/reports';
+  $('#footLeft').textContent = 'Asking prices as listed, converted to AUD' + (L.fx && L.fx.USD_AUD ? ' at USD ' + L.fx.USD_AUD : '') + '. Updated by a daily cloud routine.';
 
-  renderDeals(); renderWatches(); renderListings(); renderDrops(); renderAuctions(); renderRuns();
+  renderDeals(); renderWatches(); renderListings(); renderDrops(); renderAuctions(); renderRuns(); renderWatchlist();
   if (!$('#tab-history').hidden) renderHistory();
   const counts = { nDeals: (L.deals || []).length, nListings: recentListings().length, nDrops: (L.price_drops || []).length, nAuctions: Object.values(state.auctions).filter(a => a.status === 'upcoming').length };
   for (const [k, v] of Object.entries(counts)) $('#' + k).textContent = v;
 }
 
 function flagTag(f) {
-  if (f === 'verify') return el('span', { class: 'tag verify', title: 'Unusually cheap, private seller or incomplete set: check before you trust it' }, 'VERIFY');
-  if (f === 'grey-new') return el('span', { class: 'tag grey', title: 'New from a grey-market dealer: no authorised-dealer warranty' }, 'GREY NEW');
-  return el('span', { class: 'tag clean' }, 'CLEAN');
+  if (f === 'verify') return el('span', { class: 'tag verify', title: 'Unusually cheap, private seller or incomplete set. Check before you trust it.' }, 'Verify');
+  if (f === 'grey-new') return el('span', { class: 'tag grey', title: 'New from a grey-market dealer. No authorised-dealer warranty.' }, 'Grey new');
+  return el('span', { class: 'tag clean' }, 'Clean');
+}
+function priceCell(l, opts = {}) {
+  const c = el('div', { class: 'price' });
+  if (opts.pct && l.below_market_pct != null) c.append(el('span', { class: 'pct' }, '−' + l.below_market_pct.toFixed(1) + '% vs market'));
+  if (opts.drop && l.was_aud) c.append(el('span', { class: 'was' }, fmtAUD(l.was_aud)));
+  c.append(fmtAUD(l.price_aud));
+  if (l.currency && l.currency !== 'AUD' && l.price != null) c.append(el('small', {}, fmtMoney(l.price, l.currency)));
+  return c;
 }
 function dealRow(d) {
-  const bits = [d.condition, d.full_set ? 'full set' : d.full_set === false ? 'no box/papers' : null, d.year, d.seller_type, d.seller_country, d.source].filter(Boolean).join(' · ');
+  const bits = [d.condition, d.full_set ? 'full set' : d.full_set === false ? 'no box/papers' : null, d.year, d.seller_type, d.seller_country, d.source, d.source_quality === 'snippet' ? 'price from search snippet' : null].filter(Boolean).join('  ·  ');
   return el('div', { class: 'row' },
     el('div', { class: 't' }, flagTag(d.flag), el('a', { href: d.url, target: '_blank', rel: 'noopener' }, d.title || d.url)),
-    el('div', { class: 'price' }, el('span', { class: 'delta down', style: 'font-size:12px;margin-right:8px' }, '↓ ' + (d.below_market_pct != null ? d.below_market_pct.toFixed(1) : '?') + '%'), fmtAUD(d.price_aud), el('small', {}, d.currency && d.currency !== 'AUD' && d.price != null ? fmtMoney(d.price, d.currency) : '\u00a0')),
-    el('div', { class: 'sub' }, bits, d.first_seen ? ' · seen ' + fmtDate(d.first_seen) : ''),
+    priceCell(d, { pct: true }),
+    el('div', { class: 'sub' }, bits, d.first_seen ? '  ·  seen ' + fmtDate(d.first_seen) : ''),
     d.why ? el('div', { class: 'why' }, d.why) : null
   );
 }
 function renderDeals() {
   const L = state.latest, host = $('#deals'), f = $('#fDeals'), lede = $('#dealsLede'); host.innerHTML = ''; f.innerHTML = '';
-  lede.textContent = 'Each watch gets a market benchmark: the median asking price across every marketplace, dealer and grey-market site the agent could read, like-for-like on condition, smoothed over 30 days. Listings under that benchmark land here, best discount first. A big discount is a reason to look closer, not a bargain yet.';
+  lede.textContent = 'Each watch gets a market benchmark: the median asking price across every marketplace, dealer and grey-market site the agent could read, like-for-like on condition and smoothed over thirty days. Anything priced under that benchmark is listed here, best discount first. A big discount is a reason to look closer, not a bargain yet.';
   const deals = (L.deals || []).slice().sort((a, b) => (b.below_market_pct || 0) - (a.below_market_pct || 0));
-  const watches = (L.watches || []).filter(w => deals.some(d => d.watch_id === w.id));
-  if (watches.length > 1) {
-    const chip = (id, label) => el('button', { class: 'chip', 'aria-pressed': String(state.dFilter === id), onclick: () => { state.dFilter = id; renderDeals(); } }, label);
-    f.append(chip('all', 'All'), ...watches.map(w => chip(w.id, (w.brand + ' ' + (w.reference || w.model)).trim())));
+  const ws = watches().filter(w => deals.some(d => d.watch_id === w.id));
+  if (ws.length > 1) {
+    const chip = (id, lab) => el('button', { class: 'chip', 'aria-pressed': String(state.dFilter === id), onclick: () => { state.dFilter = id; renderDeals(); } }, lab);
+    f.append(chip('all', 'All'), ...ws.map(w => chip(w.id, label(w))));
   }
-  if (!deals.length) { host.append(el('div', { class: 'empty' }, L.run_date ? 'Nothing is priced below its market benchmark right now.' : 'Below-market listings appear here after the first run.')); return; }
-  for (const w of L.watches || []) {
+  if (!deals.length) { host.append(el('div', { class: 'empty' }, L.run_date ? 'Nothing is priced below its market benchmark right now' : 'Below-market listings appear here after the first run')); return; }
+  for (const w of watches()) {
     if (state.dFilter !== 'all' && state.dFilter !== w.id) continue;
     const mine = deals.filter(d => d.watch_id === w.id); if (!mine.length) continue;
-    host.append(el('div', { class: 'group-h' }, w.brand + ' ' + w.model + ' · ' + w.reference));
-    host.append(el('div', { class: 'bench' },
-      el('span', {}, 'market ', el('b', {}, fmtAUD(w.benchmark_aud))),
-      w.asking_min != null ? el('span', {}, 'lowest ask ', el('b', {}, fmtAUD(w.asking_min))) : null,
-      w.asking_n != null ? el('span', {}, el('b', {}, w.asking_n), ' listings compared') : null,
-      w.watchcharts_market != null ? el('span', {}, 'WatchCharts ', el('b', {}, fmtAUD(w.watchcharts_market))) : null,
-      w.benchmark_basis ? el('span', { style: 'color:var(--ink-3)' }, w.benchmark_basis) : null));
-    host.append(el('div', { class: 'list' }, ...mine.map(dealRow)));
+    const block = el('div', { class: 'block' });
+    block.append(el('h2', { class: 'wh' }, w.brand + ' ' + w.model, el('small', {}, w.reference)));
+    const bench = el('dl', { class: 'bench' });
+    const cell = (k, v) => el('div', {}, el('dt', {}, k), el('dd', {}, v));
+    bench.append(cell('Market', fmtAUD(w.benchmark_aud)));
+    if (w.asking_min != null) bench.append(cell('Lowest ask', fmtAUD(w.asking_min)));
+    if (w.asking_n != null) bench.append(cell('Listings compared', String(w.asking_n)));
+    if (w.watchcharts_market != null) bench.append(cell('WatchCharts', fmtAUD(w.watchcharts_market)));
+    if (w.benchmark_basis) bench.append(el('div', { class: 'basis' }, 'Basis: ' + w.benchmark_basis));
+    block.append(bench, el('div', { class: 'list' }, ...mine.map(dealRow)));
+    host.append(block);
   }
 }
+
 function renderWatches() {
   const host = $('#watches'); host.innerHTML = '';
-  const watches = state.latest.watches || [];
-  if (!watches.length) { host.append(el('div', { class: 'empty' }, 'No watches yet. Add entries to watchlist.yml.')); return; }
-  for (const w of watches) {
+  const ws = watches();
+  if (!ws.length) { host.append(el('div', { class: 'empty' }, 'No watches yet. Add one on the Watchlist tab')); return; }
+  for (const w of ws) {
     const med = series(w.id, 'asking_median'), min = series(w.id, 'asking_min'), n = series(w.id, 'asking_n');
-    const last = med.at(-1), prev = med.at(-2);
-    const lastMin = min.at(-1), lastN = n.at(-1);
+    const last = med.at(-1), prev = med.at(-2), lastMin = min.at(-1), lastN = n.at(-1);
     const change = prev && last ? pct(last.value, prev.value) : null;
     const ago30 = med.filter(p => daysAgo(p.date) >= 29).at(-1);
     const change30 = ago30 && last ? pct(last.value, ago30.value) : null;
-    const card = el('div', { class: 'card', tabindex: '0', role: 'button', 'aria-label': 'Price history for ' + w.brand + ' ' + w.model,
-      onclick: () => { state.hFilter = w.id; showTab('history'); }, onkeydown: e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); state.hFilter = w.id; showTab('history'); } } },
-      el('div', { class: 'brand' }, w.brand || ' '),
-      el('div', { class: 'model' }, w.model || w.id),
-      el('div', { class: 'ref' }, [w.reference, w.ceiling ? 'ceiling ' + fmtAUD(w.ceiling) : null].filter(Boolean).join(' · ')),
-      el('div', { class: 'hero' }, el('span', { class: 'v' }, lastMin ? fmtAUD(lastMin.value) : '—'), el('span', { class: 'l' }, 'lowest ask')),
-      el('div', { class: 'meta' }, el('span', {}, 'market ', el('b', {}, w.benchmark_aud ? fmtAUD(w.benchmark_aud) : last ? fmtAUD(last.value) : '—')), el('span', {}, 'listings ', el('b', {}, w.asking_n != null ? w.asking_n : lastN ? lastN.value : '—')), w.below_market_count ? el('span', {}, el('b', { style: 'color:var(--good)' }, w.below_market_count), ' below market') : null),
-      deltaEl(change, 'vs last run', change30),
+    const open = () => { state.hFilter = w.id; showTab('history'); window.scrollTo({ top: $('#tab-history').offsetTop - 24, behavior: 'smooth' }); };
+    const card = el('button', { class: 'card' + (w.active ? '' : ' paused'), 'aria-label': 'Price history for ' + w.brand + ' ' + w.model, onclick: open },
+      el('span', { class: 'brand' }, (w.brand || ' '), w.active ? null : el('span', { class: 'tag paused', style: 'margin-left:10px' }, 'Paused')),
+      el('span', { class: 'model' }, w.model || w.id),
+      el('span', { class: 'ref' }, [w.reference, w.ceiling ? 'ceiling ' + fmtAUD(w.ceiling) : null].filter(Boolean).join('  ·  ')),
+      el('span', { class: 'hero' }, el('span', { class: 'v' }, lastMin ? fmtAUD(lastMin.value) : w.asking_min != null ? fmtAUD(w.asking_min) : '—'), el('span', { class: 'l' }, 'Lowest ask')),
+      el('span', { class: 'meta' },
+        el('span', {}, 'Market', el('b', {}, w.benchmark_aud ? fmtAUD(w.benchmark_aud) : last ? fmtAUD(last.value) : '—')),
+        el('span', {}, 'Listings', el('b', {}, w.asking_n != null ? String(w.asking_n) : lastN ? String(lastN.value) : '—')),
+        el('span', {}, 'Below market', el('b', { class: w.below_market_count ? 'ok' : '' }, String(w.below_market_count || 0)))
+      ),
+      deltaEl(change, change30),
       sparkline(med)
     );
     host.append(card);
   }
 }
-function deltaEl(change, label, change30) {
-  if (change == null && change30 == null) return el('div', { class: 'delta flat' }, 'no comparison yet');
-  const wrap = el('div', { style: 'display:flex;gap:12px;flex-wrap:wrap' });
-  const one = (c, l) => { if (c == null) return null; const cls = Math.abs(c) < 0.5 ? 'flat' : c > 0 ? 'up' : 'down'; const arrow = cls === 'flat' ? '→' : c > 0 ? '↑' : '↓'; return el('span', { class: 'delta ' + cls }, arrow + ' ' + Math.abs(c).toFixed(1) + '% ', el('span', { style: 'font-weight:500;color:var(--ink-3)' }, l)); };
-  wrap.append(...[one(change, label), one(change30, 'vs 30 d')].filter(Boolean));
-  return wrap;
+function deltaEl(change, change30) {
+  const one = (c, l) => { if (c == null) return null; const cls = Math.abs(c) < 0.5 ? 'flat' : c > 0 ? 'up' : 'down'; const arrow = cls === 'flat' ? '→' : c > 0 ? '↑' : '↓'; return el('span', { class: cls }, arrow + ' ' + Math.abs(c).toFixed(1) + '% ' + l); };
+  const parts = [one(change, 'vs last run'), one(change30, 'vs 30 d')].filter(Boolean);
+  return el('span', { class: 'delta' }, ...(parts.length ? parts : ['No comparison yet']));
 }
 function sparkline(pts) {
-  const W = 240, H = 44, p = 3;
-  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  const W = 240, H = 56, p = 3, ns = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(ns, 'svg');
   svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.setAttribute('class', 'spark'); svg.setAttribute('preserveAspectRatio', 'none'); svg.setAttribute('aria-hidden', 'true');
-  if (pts.length < 2) { const t = document.createElementNS('http://www.w3.org/2000/svg', 'text'); t.setAttribute('x', 0); t.setAttribute('y', H - 6); t.setAttribute('fill', 'var(--ink-3)'); t.setAttribute('font-size', '11'); t.textContent = pts.length ? 'one data point so far' : 'no price data yet'; svg.append(t); return svg; }
+  if (pts.length < 2) { const t = document.createElementNS(ns, 'text'); t.setAttribute('x', 0); t.setAttribute('y', H - 8); t.textContent = pts.length ? 'One data point so far' : 'No price data yet'; svg.append(t); return svg; }
   const vs = pts.map(q => q.value), lo = Math.min(...vs), hi = Math.max(...vs), span = hi - lo || 1;
   const x = i => p + i / (pts.length - 1) * (W - 2 * p), y = v => H - p - (v - lo) / span * (H - 2 * p);
   const d = pts.map((q, i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(q.value).toFixed(1)).join(' ');
-  const area = document.createElementNS('http://www.w3.org/2000/svg', 'path'); area.setAttribute('class', 'area'); area.setAttribute('d', d + ` L${x(pts.length - 1).toFixed(1)} ${H} L${x(0)} ${H} Z`);
-  const line = document.createElementNS('http://www.w3.org/2000/svg', 'path'); line.setAttribute('d', d); line.setAttribute('vector-effect', 'non-scaling-stroke');
-  const end = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); end.setAttribute('class', 'end'); end.setAttribute('cx', x(pts.length - 1)); end.setAttribute('cy', y(vs.at(-1))); end.setAttribute('r', 3);
-  svg.append(area, line, end); return svg;
+  const line = document.createElementNS(ns, 'path'); line.setAttribute('d', d); line.setAttribute('vector-effect', 'non-scaling-stroke');
+  const end = document.createElementNS(ns, 'rect'); end.setAttribute('class', 'end'); end.setAttribute('x', x(pts.length - 1) - 3); end.setAttribute('y', y(vs.at(-1)) - 3); end.setAttribute('width', 6); end.setAttribute('height', 6);
+  svg.append(line, end); return svg;
 }
 
-function recentListings() {
-  return allSeen().filter(l => l.match !== false && daysAgo(l.first_seen) <= 14).sort((a, b) => (b.first_seen || '').localeCompare(a.first_seen || '') || (a.price_aud || 0) - (b.price_aud || 0));
-}
 function listingRow(l, opts = {}) {
   const w = watchMeta(l.watch_id);
-  const bits = [l.condition, l.full_set ? 'full set' : null, l.seller_country, l.source].filter(Boolean).join(' · ');
+  const bits = [l.condition, l.full_set ? 'full set' : null, l.seller_country, l.source].filter(Boolean).join('  ·  ');
   const isNew = state.latest.run_date && l.first_seen === state.latest.run_date;
   return el('div', { class: 'row' },
-    el('div', { class: 't' }, isNew && !opts.drop ? el('span', { class: 'tag new' }, 'NEW') : null, opts.drop ? el('span', { class: 'tag drop' }, 'DROP') : null, el('a', { href: l.url, target: '_blank', rel: 'noopener' }, l.title || l.url)),
-    el('div', { class: 'price' }, opts.drop && l.was_aud ? el('span', { class: 'was' }, fmtAUD(l.was_aud)) : null, fmtAUD(l.price_aud), el('small', {}, l.currency && l.currency !== 'AUD' && l.price != null ? fmtMoney(l.price, l.currency) : ' ')),
-    el('div', { class: 'sub' }, el('span', { class: 'tag' }, (w.brand + ' ' + (w.reference || w.model)).trim()), bits, ' · seen ', fmtDate(l.first_seen))
+    el('div', { class: 't' }, isNew && !opts.drop ? el('span', { class: 'tag new' }, 'New') : null, opts.drop ? el('span', { class: 'tag drop' }, 'Drop') : null, el('a', { href: l.url, target: '_blank', rel: 'noopener' }, l.title || l.url)),
+    priceCell(l, { drop: opts.drop }),
+    el('div', { class: 'sub' }, el('span', { class: 'tag plain' }, label(w)), bits, '  ·  seen ', fmtDate(l.first_seen))
   );
 }
 function renderListings() {
@@ -372,22 +489,25 @@ function renderListings() {
   const items = recentListings();
   const ids = [...new Set(items.map(i => i.watch_id))];
   if (ids.length > 1) {
-    const chip = (id, label) => el('button', { class: 'chip', 'aria-pressed': String(state.filter === id), onclick: () => { state.filter = id; renderListings(); } }, label);
-    f.append(chip('all', 'All'), ...ids.map(id => { const w = watchMeta(id); return chip(id, (w.brand + ' ' + (w.reference || w.model)).trim()); }));
+    const chip = (id, lab) => el('button', { class: 'chip', 'aria-pressed': String(state.filter === id), onclick: () => { state.filter = id; renderListings(); } }, lab);
+    f.append(chip('all', 'All'), ...ids.map(id => chip(id, label(watchMeta(id)))));
   }
   const shown = items.filter(i => state.filter === 'all' || i.watch_id === state.filter);
-  if (!shown.length) { host.append(el('div', { class: 'empty' }, state.latest.run_date ? 'No listings matched your criteria in the last 14 days.' : 'Listings appear here after the first run.')); return; }
-  let lastDate = null;
+  if (!shown.length) { host.append(el('div', { class: 'empty' }, state.latest.run_date ? 'No listings matched your criteria in the last 14 days' : 'Listings appear here after the first run')); return; }
+  let lastDate = null, list = null;
   for (const l of shown) {
-    if (l.first_seen !== lastDate) { host.append(el('div', { class: 'group-h' }, l.first_seen === state.latest.run_date ? 'Found in the latest run · ' + fmtDate(l.first_seen) : fmtDate(l.first_seen))); lastDate = l.first_seen; }
-    host.append(listingRow(l));
+    if (l.first_seen !== lastDate) {
+      host.append(el('div', { class: 'group-h' }, l.first_seen === state.latest.run_date ? 'Found in the latest run · ' + fmtDate(l.first_seen) : fmtDate(l.first_seen)));
+      list = el('div', { class: 'list', style: 'margin-top:0;margin-bottom:56px' }); host.append(list); lastDate = l.first_seen;
+    }
+    list.append(listingRow(l));
   }
 }
 function renderDrops() {
   const host = $('#drops'); host.innerHTML = '';
   const drops = state.latest.price_drops || [];
-  if (!drops.length) { host.append(el('div', { class: 'empty' }, 'No price drops of 5% or more in the latest run.')); return; }
-  for (const d of drops) host.append(listingRow(d, { drop: true }));
+  if (!drops.length) { host.append(el('div', { class: 'empty' }, 'No price drops of 5% or more in the latest run')); return; }
+  host.append(el('div', { class: 'list', style: 'margin-top:0' }, ...drops.map(d => listingRow(d, { drop: true }))));
 }
 function renderAuctions() {
   const host = $('#auctions'); host.innerHTML = '';
@@ -397,15 +517,16 @@ function renderAuctions() {
   const lotRow = a => {
     const w = watchMeta(a.watch_id);
     const est = a.estimate_low != null ? fmtMoney(a.estimate_low, a.currency) + (a.estimate_high != null ? '–' + Math.round(a.estimate_high).toLocaleString('en-AU') : '') : null;
+    const price = el('div', { class: 'price' }, a.status === 'sold' ? fmtMoney(a.result, a.currency) : a.status === 'unsold' ? 'Unsold' : (est || 'Estimate TBC'), el('small', {}, a.status === 'sold' ? 'sold' : a.status === 'upcoming' ? 'estimate' : a.status));
     return el('div', { class: 'row' },
       el('div', { class: 't' }, el('a', { href: a.url, target: '_blank', rel: 'noopener' }, [a.house, a.sale, a.lot ? 'lot ' + a.lot : null].filter(Boolean).join(' · '))),
-      el('div', { class: 'price' }, a.status === 'sold' ? fmtMoney(a.result, a.currency) : a.status === 'unsold' ? 'Unsold' : (est || 'Estimate TBC'), el('small', {}, a.status === 'sold' ? 'sold' : a.status === 'upcoming' ? 'estimate' : a.status)),
-      el('div', { class: 'sub' }, el('span', { class: 'tag' }, (w.brand + ' ' + (w.reference || w.model)).trim()), fmtDate(a.date), a.notes ? ' · ' + a.notes : '')
+      price,
+      el('div', { class: 'sub' }, el('span', { class: 'tag plain' }, label(w)), fmtDate(a.date), a.notes ? '  ·  ' + a.notes : '')
     );
   };
-  if (!up.length && !done.length) { host.append(el('div', { class: 'empty' }, 'No auction lots found for the tracked references yet.')); return; }
-  if (up.length) { host.append(el('div', { class: 'group-h' }, 'Upcoming'), el('div', { class: 'list' }, ...up.map(lotRow))); }
-  if (done.length) { host.append(el('div', { class: 'group-h' }, 'Recent results'), el('div', { class: 'list' }, ...done.map(lotRow))); }
+  if (!up.length && !done.length) { host.append(el('div', { class: 'empty' }, 'No auction lots found for the tracked references yet')); return; }
+  if (up.length) host.append(el('div', { class: 'group-h' }, 'Upcoming'), el('div', { class: 'list', style: 'margin-top:0;margin-bottom:56px' }, ...up.map(lotRow)));
+  if (done.length) host.append(el('div', { class: 'group-h' }, 'Recent results'), el('div', { class: 'list', style: 'margin-top:0' }, ...done.map(lotRow)));
 }
 
 // ---- price history charts ----
@@ -416,30 +537,30 @@ const SERIES = [
 ];
 function renderHistory() {
   const host = $('#history'), f = $('#fHistory'); host.innerHTML = ''; f.innerHTML = '';
-  const watches = state.latest.watches || [];
-  if (!watches.length) { host.append(el('div', { class: 'empty' }, 'No watches yet.')); return; }
-  if (!state.hFilter || !watches.some(w => w.id === state.hFilter)) state.hFilter = 'all';
-  const chip = (id, label) => el('button', { class: 'chip', 'aria-pressed': String(state.hFilter === id), onclick: () => { state.hFilter = id; renderHistory(); } }, label);
-  f.append(chip('all', 'All'), ...watches.map(w => chip(w.id, (w.brand + ' ' + (w.reference || w.model)).trim())));
-  for (const w of watches) {
+  const ws = watches();
+  if (!ws.length) { host.append(el('div', { class: 'empty' }, 'No watches yet')); return; }
+  if (!state.hFilter || !ws.some(w => w.id === state.hFilter)) state.hFilter = 'all';
+  const chip = (id, lab) => el('button', { class: 'chip', 'aria-pressed': String(state.hFilter === id), onclick: () => { state.hFilter = id; renderHistory(); } }, lab);
+  f.append(chip('all', 'All'), ...ws.map(w => chip(w.id, label(w))));
+  for (const w of ws) {
     if (state.hFilter !== 'all' && state.hFilter !== w.id) continue;
     const data = SERIES.map(s => ({ ...s, pts: series(w.id, s.metric) })).filter(s => s.pts.length);
     const box = el('div', { class: 'viz' });
-    box.append(el('div', { class: 'head' }, el('h3', {}, w.brand + ' ' + w.model, el('small', {}, w.reference)), el('div', { class: 'legend' }, ...data.map(s => el('span', {}, el('i', { style: 'background:' + s.color }), s.label)))));
-    if (!data.length) { box.append(el('div', { class: 'empty' }, 'No price rows yet.')); host.append(box); continue; }
+    box.append(el('div', { class: 'head' }, el('h2', { class: 'wh' }, w.brand + ' ' + w.model, el('small', {}, w.reference)), el('div', { class: 'legend' }, ...data.map(s => el('span', {}, el('i', { style: 'background:' + s.color }), s.label)))));
+    if (!data.length) { box.append(el('div', { class: 'empty' }, 'No price rows yet')); host.append(box); continue; }
     box.append(lineChart(data, w.ceiling));
-    // table view
     const dates = [...new Set(data.flatMap(s => s.pts.map(p => p.date)))].sort().reverse().slice(0, 30);
     const tbl = el('table', {}, el('thead', {}, el('tr', {}, el('th', {}, 'Date'), ...data.map(s => el('th', { class: 'num' }, s.label)))),
       el('tbody', {}, ...dates.map(d => el('tr', {}, el('td', {}, fmtDate(d)), ...data.map(s => { const p = s.pts.find(q => q.date === d); return el('td', { class: 'num' }, p ? fmtAUD(p.value) : '—'); })))));
-    box.append(el('details', {}, el('summary', {}, 'Table view (last 30 rows)'), tbl));
+    box.append(el('details', {}, el('summary', {}, 'Table view, last 30 rows'), tbl));
     host.append(box);
   }
 }
 function lineChart(data, ceiling) {
-  const W = 800, H = 220, m = { t: 12, r: 64, b: 24, l: 56 };
+  const W = 800, H = 240, m = { t: 14, r: 72, b: 26, l: 60 };
   const wrap = el('div', { class: 'chart' });
-  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.setAttribute('preserveAspectRatio', 'none');
+  const ns = 'http://www.w3.org/2000/svg', mk = (t, a) => { const n = document.createElementNS(ns, t); for (const [k, v] of Object.entries(a)) n.setAttribute(k, v); return n; };
+  const svg = mk('svg', { viewBox: `0 0 ${W} ${H}`, preserveAspectRatio: 'none' });
   const dates = [...new Set(data.flatMap(s => s.pts.map(p => p.date)))].sort();
   const vals = data.flatMap(s => s.pts.map(p => p.value)).concat(ceiling ? [ceiling] : []);
   let lo = Math.min(...vals), hi = Math.max(...vals); if (lo === hi) { lo *= 0.95; hi *= 1.05; }
@@ -447,25 +568,21 @@ function lineChart(data, ceiling) {
   const t0 = Date.parse(dates[0]), t1 = Date.parse(dates.at(-1)) || t0 + 1;
   const x = d => dates.length < 2 ? (m.l + W - m.r) / 2 : m.l + (Date.parse(d) - t0) / (t1 - t0) * (W - m.l - m.r);
   const y = v => m.t + (1 - (v - lo) / (hi - lo)) * (H - m.t - m.b);
-  const ns = 'http://www.w3.org/2000/svg', mk = (t, a) => { const n = document.createElementNS(ns, t); for (const [k, v] of Object.entries(a)) n.setAttribute(k, v); return n; };
-  // grid + y axis (4 lines)
   const g = mk('g', { class: 'grid' }), ax = mk('g', { class: 'ax' });
-  for (let i = 0; i <= 4; i++) { const v = lo + (hi - lo) * i / 4, yy = y(v); g.append(mk('line', { x1: m.l, x2: W - m.r, y1: yy, y2: yy })); const t = mk('text', { x: m.l - 8, y: yy + 4, 'text-anchor': 'end' }); t.textContent = 'A$' + (v >= 10000 ? (v / 1000).toFixed(1) + 'k' : Math.round(v).toLocaleString()); ax.append(t); }
-  // x labels: first, last, and up to 3 between
+  for (let i = 0; i <= 4; i++) { const v = lo + (hi - lo) * i / 4, yy = y(v); g.append(mk('line', { x1: m.l, x2: W - m.r, y1: yy, y2: yy })); const t = mk('text', { x: m.l - 10, y: yy + 4, 'text-anchor': 'end' }); t.textContent = 'A$' + (v >= 10000 ? (v / 1000).toFixed(1) + 'k' : Math.round(v).toLocaleString()); ax.append(t); }
   const n = Math.min(dates.length, 5);
   for (let i = 0; i < n; i++) { const d = dates[Math.round(i * (dates.length - 1) / Math.max(n - 1, 1))]; const t = mk('text', { x: x(d), y: H - 6, 'text-anchor': i === 0 ? 'start' : i === n - 1 ? 'end' : 'middle' }); t.textContent = fmtDate(d); ax.append(t); }
   svg.append(g, ax);
-  if (ceiling) { svg.append(mk('line', { x1: m.l, x2: W - m.r, y1: y(ceiling), y2: y(ceiling), stroke: 'var(--ink-3)', 'stroke-dasharray': '4 4', 'stroke-width': 1 })); const t = mk('text', { x: m.l + 6, y: y(ceiling) - 4, 'text-anchor': 'start', fill: 'var(--ink-3)', 'font-size': 11 }); t.textContent = 'your ceiling ' + fmtAUD(ceiling); svg.append(t); }
+  if (ceiling) { svg.append(mk('line', { x1: m.l, x2: W - m.r, y1: y(ceiling), y2: y(ceiling), stroke: 'var(--ink)', 'stroke-dasharray': '6 4', 'stroke-width': 1 })); const t = mk('text', { class: 'lbl', x: m.l + 6, y: y(ceiling) - 5, fill: 'var(--ink-2)', 'font-weight': 400 }); t.textContent = 'ceiling ' + fmtAUD(ceiling); svg.append(t); }
   for (const s of data) {
     const d = s.pts.map((p, i) => (i ? 'L' : 'M') + x(p.date).toFixed(1) + ' ' + y(p.value).toFixed(1)).join(' ');
     svg.append(mk('path', { class: 'ser', d, stroke: s.color, 'vector-effect': 'non-scaling-stroke' }));
-    if (s.pts.length <= 12) for (const p of s.pts) svg.append(mk('circle', { class: 'pt', cx: x(p.date), cy: y(p.value), r: 4, fill: s.color }));
+    if (s.pts.length <= 12) for (const p of s.pts) svg.append(mk('rect', { class: 'pt', x: x(p.date) - 4, y: y(p.value) - 4, width: 8, height: 8, fill: s.color }));
   }
-  // direct labels at the right edge, pushed apart so they never overlap
   const labels = data.map(s => { const last = s.pts.at(-1); return { s, v: last.value, y: y(last.value) }; }).sort((a, b) => a.y - b.y);
-  for (let i = 1; i < labels.length; i++) if (labels[i].y - labels[i - 1].y < 13) labels[i].y = labels[i - 1].y + 13;
-  for (let i = labels.length - 1; i >= 0; i--) { if (labels[i].y > H - m.b - 2) labels[i].y = H - m.b - 2; if (i < labels.length - 1 && labels[i + 1].y - labels[i].y < 13) labels[i].y = labels[i + 1].y - 13; }
-  for (const L of labels) { const t = mk('text', { x: W - m.r + 4, y: L.y + 4, 'text-anchor': 'start', fill: L.s.color, 'font-size': 11, 'font-weight': 600 }); t.textContent = fmtAUD(L.v); svg.append(t); }
+  for (let i = 1; i < labels.length; i++) if (labels[i].y - labels[i - 1].y < 14) labels[i].y = labels[i - 1].y + 14;
+  for (let i = labels.length - 1; i >= 0; i--) { if (labels[i].y > H - m.b - 2) labels[i].y = H - m.b - 2; if (i < labels.length - 1 && labels[i + 1].y - labels[i].y < 14) labels[i].y = labels[i + 1].y - 14; }
+  for (const L of labels) { const t = mk('text', { class: 'lbl', x: W - m.r + 6, y: L.y + 4, fill: L.s.color }); t.textContent = fmtAUD(L.v); svg.append(t); }
   const cross = mk('line', { class: 'cross', y1: m.t, y2: H - m.b }); svg.append(cross);
   const tip = el('div', { class: 'tip' });
   wrap.append(svg, tip);
@@ -475,7 +592,7 @@ function lineChart(data, ceiling) {
     if (!best) return;
     cross.style.display = 'block'; cross.setAttribute('x1', x(best)); cross.setAttribute('x2', x(best));
     tip.style.display = 'block'; tip.style.left = (x(best) / W * 100) + '%'; tip.style.top = (m.t / H * 100) + '%';
-    tip.innerHTML = '<b>' + fmtDate(best) + '</b><br>' + data.map(s => { const p = s.pts.find(q => q.date === best); return p ? s.label + ': ' + fmtAUD(p.value) : null; }).filter(Boolean).join('<br>');
+    tip.innerHTML = '<b>' + fmtDate(best) + '</b>' + data.map(s => { const p = s.pts.find(q => q.date === best); return p ? s.label + ' ' + fmtAUD(p.value) : null; }).filter(Boolean).join('<br>');
   });
   svg.addEventListener('mouseleave', () => { cross.style.display = 'none'; tip.style.display = 'none'; });
   return wrap;
@@ -487,28 +604,144 @@ function renderRuns() {
   const add = (k, v) => kv.append(el('dt', {}, k), el('dd', {}, v));
   add('Last run', L.run_date ? fmtDate(L.run_date) + (L.run_at_local ? ' at ' + L.run_at_local : '') + (L.run_type ? ' · ' + L.run_type : '') : 'not yet');
   add('Status', L.status || 'pending');
-  if (L.fetches != null) add('Pages fetched', L.fetches);
-  if (L.fx) add('Exchange rates', Object.entries(L.fx).map(([k, v]) => k.replace('_', '→') + ' ' + v).join(', '));
-  add('State saved', L.pushed === false ? 'no (push failed)' : L.pushed ? 'yes' : '—');
-  notes.append(el('h3', { style: 'margin:0 0 8px;font-size:15px' }, 'Latest run'), kv);
-  if (L.notes && L.notes.length) notes.append(el('div', { style: 'font-size:13px;color:var(--ink-2);font-weight:600' }, 'Notes'), el('ul', {}, ...L.notes.map(n => el('li', {}, n))));
+  if (L.fetches != null) add('Pages fetched', String(L.fetches));
+  if (L.fx) add('Exchange rates', Object.entries(L.fx).map(([k, v]) => k.replace('_AUD', '') + ' ' + v).join('  ·  '));
+  add('State saved', L.pushed === false ? 'no, push failed' : L.pushed ? 'yes' : '—');
+  notes.append(el('h3', { class: 'mh' }, 'Latest run'), kv);
+  const ns = L.notes || [];
+  if (ns.length) {
+    notes.append(el('h3', { class: 'mh' }, 'Notes'), el('ul', {}, ...ns.slice(0, 6).map(n => el('li', {}, n))));
+    if (ns.length > 6) notes.append(el('details', {}, el('summary', {}, (ns.length - 6) + ' more notes'), el('ul', {}, ...ns.slice(6).map(n => el('li', {}, n)))));
+  }
   const runs = [...state.runs].sort((a, b) => (b.date || '').localeCompare(a.date || '')).slice(0, 60);
-  if (!runs.length) { host.append(el('div', { class: 'empty' }, 'Run history appears here after the first run.')); return; }
-  for (const r of runs) host.append(el('div', { class: 'row' },
+  if (!runs.length) { host.append(el('div', { class: 'empty' }, 'Run history appears here after the first run')); return; }
+  host.append(el('h3', { class: 'mh' }, 'History'));
+  const list = el('div', { class: 'list', style: 'margin-top:0' });
+  for (const r of runs) list.append(el('div', { class: 'row' },
     el('div', { class: 'd' }, fmtDate(r.date)),
-    el('div', {}, el('span', { class: 'tag' }, r.type || 'daily'), el('span', { class: 'tag' }, r.status || 'ok'), ' ', (r.new != null ? r.new + ' new · ' : '') + (r.drops != null ? r.drops + ' drops · ' : '') + (r.auction != null ? r.auction + ' auction' : '')),
-    el('div', {}, r.report ? el('a', { href: state.repo + '/blob/main/' + r.report, target: '_blank', rel: 'noopener' }, 'report') : '')
+    el('div', { class: 'mid' }, [r.type || 'daily', r.status || 'ok', r.new != null ? r.new + ' new' : null, r.drops != null ? r.drops + ' drops' : null, r.deals != null ? r.deals + ' below market' : null, r.auction != null ? r.auction + ' auction' : null].filter(Boolean).join('  ·  ')),
+    el('div', { class: 'mid' }, r.report ? el('a', { href: state.repo + '/blob/main/' + r.report, target: '_blank', rel: 'noopener' }, 'Report') : '')
   ));
+  host.append(list);
 }
+
+// ---- watchlist editor ----
+const CONDS = ['new', 'unworn', 'excellent', 'good', 'fair'];
+const MARKETS = ['worldwide', 'au', 'eu', 'us', 'uk', 'jp'];
+function markDirty(d = true) { state.wlDirty = d; $('#saveBtn').disabled = !d; const m = $('#saveMsg'); m.className = 'msg'; m.textContent = d ? 'Unsaved changes. Save to the repository to apply them at the next run.' : 'No unsaved changes'; }
+function renderWatchlist() {
+  const wl = state.wl, host = $('#wlList'), bf = $('#brandFocus'); host.innerHTML = ''; bf.innerHTML = '';
+  const brands = [...new Set(wl.watches.map(w => w.brand).filter(Boolean))].sort();
+  if (!brands.length) bf.append(el('span', { class: 'empty', style: 'flex:1' }, 'Add a reference to start'));
+  for (const b of brands) {
+    const mine = wl.watches.filter(w => w.brand === b), on = mine.some(w => w.active !== false);
+    bf.append(el('button', { class: 'chip' + (on ? '' : ' off'), 'aria-pressed': String(on), title: on ? 'Pause research on every ' + b : 'Resume research on every ' + b,
+      onclick: () => { mine.forEach(w => w.active = !on); markDirty(); render(); } }, b + ' · ' + mine.filter(w => w.active !== false).length + '/' + mine.length));
+  }
+  if (!wl.watches.length) { host.append(el('div', { class: 'empty' }, 'No references yet')); }
+  const list = el('div', { class: 'list', style: 'margin-top:0' });
+  wl.watches.forEach((w, i) => {
+    const on = w.active !== false;
+    const meta = [ (w.condition || []).join('/'), w.full_set ? 'box & papers required' : 'any set', w.ceiling ? 'ceiling ' + fmtAUD(w.ceiling) : 'no ceiling', (w.markets || ['worldwide']).join('/'), w.example ? 'example' : null ].filter(Boolean).join('  ·  ');
+    list.append(el('div', { class: 'wl-row' + (on ? '' : ' paused') },
+      el('div', {}, el('div', { class: 't' }, el('span', { class: 'tag ' + (on ? 'on' : 'paused') }, on ? 'Researching' : 'Paused'), (w.brand + ' ' + w.model).trim(), el('span', { class: 'mono', style: 'color:var(--ink-3);margin-left:10px;font-size:14px' }, w.reference || '')), el('div', { class: 'sub' }, meta)),
+      el('div', { class: 'acts' },
+        el('button', { class: 'btn', onclick: () => { w.active = !on; markDirty(); render(); } }, on ? 'Pause' : 'Resume'),
+        el('button', { class: 'btn', onclick: () => { state.editing = i; renderForm(); } }, 'Edit'),
+        el('button', { class: 'btn', onclick: () => { if (confirm('Remove ' + label(w) + ' from the watchlist? Its history stays in the data files.')) { wl.watches.splice(i, 1); markDirty(); render(); } } }, 'Remove'))
+    ));
+  });
+  host.append(list);
+  renderForm(); renderTokenBox();
+}
+function renderForm() {
+  const host = $('#wlForm'); host.innerHTML = '';
+  if (state.editing == null) return;
+  const isNew = state.editing === 'new';
+  const src = isNew ? { brand: '', model: '', reference: '', aliases: [], condition: ['unworn', 'excellent'], full_set: false, ceiling: null, markets: ['worldwide'], notes: '', active: true } : state.wl.watches[state.editing];
+  const d = JSON.parse(JSON.stringify(src));
+  const f = el('form', { class: 'form', onsubmit: e => { e.preventDefault(); commit(); } });
+  const field = (lab, input, full) => el('div', { class: full ? 'full' : '' }, el('label', {}, lab), input);
+  const text = (k, ph) => el('input', { type: 'text', value: d[k] || '', placeholder: ph || '', oninput: e => d[k] = e.target.value });
+  const toggles = (k, opts, exclusive) => { const box = el('div', { class: 'opts' }); const draw = () => { box.innerHTML = ''; for (const o of opts) box.append(el('button', { type: 'button', 'aria-pressed': String((d[k] || []).includes(o)), onclick: () => { let cur = d[k] || []; if (exclusive && o === exclusive) cur = [o]; else { cur = cur.filter(x => x !== exclusive); cur = cur.includes(o) ? cur.filter(x => x !== o) : [...cur, o]; } d[k] = cur.length ? cur : [exclusive || opts[0]]; draw(); } }, o)); }; draw(); return box; };
+  const err = el('div', { class: 'err' });
+  f.append(
+    el('h3', {}, isNew ? 'Add a reference' : 'Edit ' + label(src)),
+    field('Brand', text('brand', 'Rolex')),
+    field('Model', text('model', 'Submariner Date')),
+    field('Reference', text('reference', '126610LN')),
+    field('Aliases, comma separated', el('input', { type: 'text', value: (d.aliases || []).join(', '), placeholder: 'Sub 41 black, 126610 LN', oninput: e => d.aliases = e.target.value.split(',').map(s => s.trim()).filter(Boolean) })),
+    field('Acceptable condition', toggles('condition', CONDS)),
+    field('Markets, where the seller is', toggles('markets', MARKETS, 'worldwide')),
+    field('Box and papers', (() => { const b = el('div', { class: 'opts' }); const draw = () => { b.innerHTML = ''; b.append(el('button', { type: 'button', 'aria-pressed': String(!!d.full_set), onclick: () => { d.full_set = true; draw(); } }, 'Required'), el('button', { type: 'button', 'aria-pressed': String(!d.full_set), onclick: () => { d.full_set = false; draw(); } }, 'Any')); }; draw(); return b; })()),
+    field('Price ceiling in AUD, blank for none', el('input', { type: 'number', min: 0, step: 100, value: d.ceiling ?? '', oninput: e => d.ceiling = e.target.value === '' ? null : Number(e.target.value) })),
+    field('Notes for the agent', el('textarea', { rows: 2, placeholder: 'Dial variants to include or avoid, years, anything that helps matching', oninput: e => d.notes = e.target.value }, d.notes || ''), true),
+    err,
+    el('div', { class: 'acts' }, el('button', { type: 'submit', class: 'btn primary' }, isNew ? 'Add to list' : 'Apply'), el('button', { type: 'button', class: 'btn', onclick: () => { state.editing = null; renderForm(); } }, 'Cancel'))
+  );
+  function commit() {
+    d.brand = (d.brand || '').trim(); d.model = (d.model || '').trim(); d.reference = (d.reference || '').trim();
+    if (!d.brand || !d.model) { err.textContent = 'Brand and model are required.'; return; }
+    if (!d.reference) { err.textContent = 'A reference number is required so the agent can match listings exactly.'; return; }
+    delete d.example;
+    if (isNew) {
+      let id = slug(d.brand + '-' + d.model + '-' + d.reference), base = id, k = 2;
+      while (state.wl.watches.some(w => w.id === id)) id = base + '-' + k++;
+      d.id = id; d.active = true; state.wl.watches.push(d);
+    } else Object.assign(state.wl.watches[state.editing], d);
+    state.editing = null; markDirty(); render();
+  }
+  host.append(f); f.scrollIntoView({ behavior: 'smooth', block: 'start' }); const first = f.querySelector('input'); if (first && isNew) first.focus({ preventScroll: true });
+}
+$('#addBtn').onclick = () => { state.editing = 'new'; renderForm(); };
+
+// GitHub save: a fine-grained token scoped to this one repo, kept only in this browser.
+function token() { return store.get('radar-gh-token'); }
+function renderTokenBox(force) {
+  const box = $('#tokenbox'); box.innerHTML = '';
+  if (token() && !force) { box.append(el('p', { class: 'mono', style: 'font-size:13px;color:var(--ink-3);margin:16px 0 0' }, 'A GitHub token is stored in this browser for saving. ', el('button', { class: 'btn', style: 'margin-left:8px', onclick: () => { store.set('radar-gh-token', null); renderTokenBox(); } }, 'Forget it'))); return; }
+  if (!force) return;
+  const inp = el('input', { type: 'password', placeholder: 'github_pat_…', autocomplete: 'off' });
+  box.append(el('div', { class: 'tokenbox' },
+    el('p', {}, el('b', {}, 'Saving needs a GitHub token.'), ' It stays in this browser only and is sent straight to GitHub, nowhere else.'),
+    el('ol', {},
+      el('li', {}, el('a', { href: 'https://github.com/settings/personal-access-tokens/new', target: '_blank', rel: 'noopener' }, 'Create a fine-grained token'), ' on GitHub.'),
+      el('li', {}, 'Repository access: Only select repositories, choose ', el('span', { class: 'mono' }, REPO.name), '.'),
+      el('li', {}, 'Permissions: Contents, Read and write. Nothing else.'),
+      el('li', {}, 'Generate it, copy it, paste it here.')),
+    el('div', { class: 'trow' }, inp, el('button', { class: 'btn primary', onclick: () => { const v = inp.value.trim(); if (!v) return; store.set('radar-gh-token', v); renderTokenBox(); save(); } }, 'Use token'))
+  ));
+  inp.focus();
+}
+async function save() {
+  if (!token()) { renderTokenBox(true); return; }
+  const btn = $('#saveBtn'), msg = $('#saveMsg');
+  btn.disabled = true; msg.className = 'msg'; msg.textContent = 'Saving…';
+  const api = `https://api.github.com/repos/${REPO.owner}/${REPO.name}/contents/${REPO.path}`;
+  const headers = { Authorization: 'Bearer ' + token(), Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
+  try {
+    const cur = await fetch(api + '?ref=' + REPO.branch, { headers });
+    if (cur.status === 401) throw new Error('GitHub rejected the token (401). Forget it below and create a new one.');
+    if (cur.status === 403 || cur.status === 404) throw new Error('The token cannot see this repository (' + cur.status + '). Check it has Contents read and write on ' + REPO.name + '.');
+    const sha = cur.ok ? (await cur.json()).sha : undefined;
+    const out = { _comment: 'The watchlist. Edited from the Watch Radar site or by hand. The routine reads it at the start of every run; entries with active:false are skipped.', defaults: state.wl.defaults, watches: state.wl.watches };
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(out, null, 2) + '\n')));
+    const summary = state.wl.watches.filter(w => w.active !== false).length + ' active of ' + state.wl.watches.length;
+    const r = await fetch(api, { method: 'PUT', headers, body: JSON.stringify({ message: 'watchlist: ' + summary + ' (edited on the site)', content, sha, branch: REPO.branch }) });
+    if (!r.ok) { const t = await r.text(); throw new Error('GitHub refused the save (' + r.status + '). ' + t.slice(0, 160)); }
+    markDirty(false); msg.className = 'msg ok'; msg.textContent = 'Saved. The next run (07:00 Brisbane) uses this list. The site itself refreshes within a few minutes.';
+  } catch (e) { msg.className = 'msg err'; msg.textContent = e.message; btn.disabled = false; }
+}
+$('#saveBtn').onclick = save;
+window.addEventListener('beforeunload', e => { if (state.wlDirty) { e.preventDefault(); e.returnValue = ''; } });
 
 // ---- boot ----
 load().then(() => {
-  render();
-  let tab = 'deals'; try { tab = localStorage.getItem('radar-tab') || tab; } catch (e) {}
-  showTab(tab);
+  render(); markDirty(false);
+  showTab(store.get('radar-tab') || 'deals');
 }).catch(err => {
-  $('#status').className = 'pill failed'; $('#statusText').textContent = 'Could not load data';
-  $('#watches').append(el('div', { class: 'empty' }, 'Could not load data/latest.json. ' + err.message));
+  $('#status').className = 'status failed'; $('#statusText').textContent = 'Could not load data';
+  $('#deals').append(el('div', { class: 'empty' }, 'Could not load data/latest.json. ' + err.message));
 });
 })();
 </script>

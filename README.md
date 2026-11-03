@@ -4,13 +4,13 @@ A daily research agent that scans the market for a short list of specific watche
 
 **Site:** https://mickydoit.github.io/watch-radar/ (GitHub Pages, served from this repo's `main`).
 
-It runs as a Claude Code **scheduled cloud routine** every morning at 07:00 Brisbane. Each run clones this repo, reads `watchlist.yml`, gathers every listing it can find for each reference, computes a median benchmark (like-for-like on condition, smoothed over 30 days), flags listings under it, records price history and auction lots, writes `data/latest.json`, commits and pushes. Pages redeploys on the push. Nothing is emailed and no mail account is attached.
+It runs as a Claude Code **scheduled cloud routine** every morning at 07:00 Brisbane. Each run clones this repo, reads `data/watchlist.json`, gathers every listing it can find for each reference, computes a median benchmark (like-for-like on condition, smoothed over 30 days), flags listings under it, records price history and auction lots, writes `data/latest.json`, commits and pushes. Pages redeploys on the push. Nothing is emailed and no mail account is attached.
 
 ## Files
 
 | Path | Purpose |
 |---|---|
-| `watchlist.yml` | **The only file you normally edit.** One entry per watch: reference, acceptable condition, full-set requirement, price ceiling, markets. |
+| `data/watchlist.json` | What the agent researches. Edit it from the site's **Watchlist** tab (brand on/off, pause, edit, add) or by hand. Entries with `active: false` are skipped. |
 | `ROUTINE_PROMPT.md` | The agent's instructions. The routine itself only says "follow this file", so behaviour changes are a commit here, not a routine edit. |
 | `index.html` | The web app. Static, no build step; reads the `data/` files directly. |
 | `data/latest.json` | What the site shows: today's benchmark per watch, ranked below-market deals with flags, price drops, auction changes, run notes. |
@@ -23,7 +23,7 @@ It runs as a Claude Code **scheduled cloud routine** every morning at 07:00 Bris
 
 ## Editing the watchlist
 
-Change `watchlist.yml`, commit, push. The next run picks it up. Keep each watch's `id` stable; it is the key in the data files. To stop tracking a watch, delete its entry; its history stays in the data files.
+Open the site's **Watchlist** tab. You can switch whole brands on or off, pause or resume a reference, edit its criteria, add a new one, or remove one. Saving writes `data/watchlist.json` back to this repo through the GitHub API using a fine-grained personal access token that you create once (repository: this one; permission: Contents, read and write). The token is kept only in your browser's local storage and is sent only to api.github.com. The next run uses the new list. Editing the JSON by hand and pushing works too. Keep each `id` stable; it keys the data files.
 
 ## How "below market" works
 
