@@ -347,12 +347,12 @@ $('#theme').onclick = () => {
 };
 
 // ---- data ----
-const state = { latest: null, prices: [], seen: {}, auctions: {}, runs: [], wl: null, focus: null, images: {}, wlDirty: false, focusDirty: false, editing: null, repo: '' };
+const state = { latest: null, prices: [], seen: {}, auctions: {}, runs: [], wl: null, focus: null, images: {}, backend: null, wlDirty: false, focusDirty: false, editing: null, repo: '' };
 async function load() {
   const bust = '?t=' + Math.floor(Date.now() / 6e4);
   const j = async p => { const r = await fetch(p + bust, { cache: 'no-store' }); if (!r.ok) throw new Error(p + ' ' + r.status); return r.json(); };
   const t = async p => { const r = await fetch(p + bust, { cache: 'no-store' }); if (!r.ok) throw new Error(p + ' ' + r.status); return r.text(); };
-  const [latest, prices, seen, auctions, runs, wl, images, focus] = await Promise.all([
+  const [latest, prices, seen, auctions, runs, wl, images, focus, backend] = await Promise.all([
     j('data/latest.json'),
     t('data/prices.csv').then(parseCSV).catch(() => []),
     j('data/seen.json').catch(() => ({ listings: {} })),
@@ -361,11 +361,22 @@ async function load() {
     j('data/watchlist.json').catch(() => null),
     j('data/images.json').catch(() => ({ images: {} })),
     j('data/focus.json').catch(() => null),
+    j('data/backend.json').catch(() => ({})),
   ]);
   Object.assign(state, { latest, prices, seen: seen.listings || {}, auctions: auctions.lots || {}, runs: runs.runs || [], images: images.images || {} });
   state.wl = wl && Array.isArray(wl.watches) ? wl : { defaults: { currency: 'AUD', markets: ['worldwide'], home_country: 'Australia' }, watches: (latest.watches || []).map(w => ({ id: w.id, brand: w.brand, model: w.model, reference: w.reference, ceiling: w.ceiling, condition: ['unworn', 'excellent'], full_set: false, markets: ['worldwide'], active: true })) };
   state.focus = focus && Array.isArray(focus.brands_available) ? focus : { currency: 'AUD', brands_available: [], bands_available: [[300, 1000], [1000, 2000], [2000, 2500], [2500, 4000]], brands: [], bands: [], updated: null };
   state.repo = latest.repo_url || `https://github.com/${REPO.owner}/${REPO.name}`;
+  state.backend = backend && backend.supabase_url ? backend : null;
+  if (state.backend) {
+    try {
+      const r = await fetch(state.backend.supabase_url + '/rest/v1/watch_radar_settings?select=id,data,updated_at', { headers: { apikey: state.backend.supabase_key } });
+      if (r.ok) for (const row of await r.json()) {
+        if (row.id === 'focus' && row.data && Array.isArray(row.data.brands)) state.focus = { ...state.focus, ...row.data, updated: row.updated_at ? row.updated_at.slice(0, 10) : state.focus.updated };
+        if (row.id === 'watchlist' && row.data && Array.isArray(row.data.watches)) state.wl = row.data;
+      }
+    } catch (e) { state.backendError = e.message; }
+  }
 }
 function parseCSV(text) {
   const lines = text.trim().split(/\r?\n/); if (lines.length < 2) return [];
@@ -672,8 +683,23 @@ function renderForm() {
 $('#addBtn').onclick = () => { $('#refsBox').open = true; state.editing = 'new'; renderForm(); };
 
 function token() { return store.get('radar-gh-token'); }
+function password() { return state.pw || store.get('radar-pw'); }
 function renderTokenBox(force) {
+  if (force === undefined) force = state.boxOpen; state.boxOpen = !!force;
   const box = $('#tokenbox'); box.innerHTML = '';
+  if (state.backend) {
+    if (password() && !force) { box.append(el('p', { style: 'font-size:13px;color:var(--ink-3);margin:16px 0 0' }, store.get('radar-pw') ? 'The password is remembered on this device. ' : 'Unlocked for this visit. ', el('button', { class: 'link', style: 'margin-left:8px', onclick: () => { store.set('radar-pw', null); state.pw = null; renderTokenBox(); } }, 'Forget'), el('button', { class: 'link', style: 'margin-left:16px', onclick: () => renderPasswordChange() }, 'Change password'))); return; }
+    if (!force) return;
+    const inp = el('input', { type: 'password', placeholder: 'Password', autocomplete: 'current-password' });
+    const remember = el('input', { type: 'checkbox', style: 'width:auto;margin:0 8px 0 0' });
+    const go = async () => { const v = inp.value; if (!v) return; state.pw = v; if (remember.checked) store.set('radar-pw', v); renderTokenBox(false); save(); };
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); go(); } });
+    box.append(el('div', { class: 'tokenbox' },
+      el('p', {}, el('b', {}, 'Enter the Watch Radar password to save.'), ' It is checked by the database, never stored in the page.'),
+      el('div', { class: 'trow' }, inp, el('button', { class: 'btn primary', onclick: go }, 'Unlock')),
+      el('label', { style: 'display:flex;align-items:center;font-size:13px;color:var(--ink-2);margin-top:14px;text-transform:none;letter-spacing:0' }, remember, 'Remember on this device')));
+    inp.focus(); return;
+  }
   if (token() && !force) { box.append(el('p', { style: 'font-size:13px;color:var(--ink-3);margin:16px 0 0' }, 'A GitHub token is stored in this browser for saving. ', el('button', { class: 'link', style: 'margin-left:8px', onclick: () => { store.set('radar-gh-token', null); renderTokenBox(); } }, 'Forget it'))); return; }
   if (!force) return;
   const inp = el('input', { type: 'password', placeholder: 'github_pat_…', autocomplete: 'off' });
@@ -684,9 +710,23 @@ function renderTokenBox(force) {
       el('li', {}, 'Repository access: Only select repositories, choose ' + REPO.name + '.'),
       el('li', {}, 'Permissions: Contents, Read and write. Nothing else.'),
       el('li', {}, 'Generate it, copy it, paste it here.')),
-    el('div', { class: 'trow' }, inp, el('button', { class: 'btn primary', onclick: () => { const v = inp.value.trim(); if (!v) return; store.set('radar-gh-token', v); renderTokenBox(); save(); } }, 'Use token'))
+    el('div', { class: 'trow' }, inp, el('button', { class: 'btn primary', onclick: () => { const v = inp.value.trim(); if (!v) return; store.set('radar-gh-token', v); renderTokenBox(false); save(); } }, 'Use token'))
   ));
   inp.focus();
+}
+function renderPasswordChange() {
+  const box = $('#tokenbox'); box.innerHTML = '';
+  const oldI = el('input', { type: 'password', placeholder: 'Current password', autocomplete: 'current-password' });
+  const newI = el('input', { type: 'password', placeholder: 'New password, 8 characters or more', autocomplete: 'new-password' });
+  const msg = el('p', { style: 'font-size:13px;margin:12px 0 0;color:var(--red)' });
+  box.append(el('div', { class: 'tokenbox' }, el('p', {}, el('b', {}, 'Change the password.')), el('div', { class: 'trow', style: 'flex-direction:column' }, oldI, newI),
+    el('div', { style: 'display:flex;gap:12px;margin-top:14px' }, el('button', { class: 'btn primary', onclick: async () => { try { await rpc('watch_radar_set_password', { p_old: oldI.value, p_new: newI.value }); state.pw = newI.value; if (store.get('radar-pw')) store.set('radar-pw', newI.value); renderTokenBox(); } catch (e) { msg.textContent = e.message; } } }, 'Change'), el('button', { class: 'btn', onclick: () => renderTokenBox(false) }, 'Cancel')), msg));
+  oldI.focus();
+}
+async function rpc(fn, args) {
+  const r = await fetch(state.backend.supabase_url + '/rest/v1/rpc/' + fn, { method: 'POST', headers: { apikey: state.backend.supabase_key, Authorization: 'Bearer ' + state.backend.supabase_key, 'Content-Type': 'application/json' }, body: JSON.stringify(args) });
+  if (!r.ok) { let m = 'The database refused the request (' + r.status + ').'; try { const j = await r.json(); if (j.message) m = /wrong password/i.test(j.message) ? 'Wrong password.' : j.message; } catch (e) {} throw new Error(m); }
+  return r.json();
 }
 async function putFile(path, obj, message) {
   const api = `https://api.github.com/repos/${REPO.owner}/${REPO.name}/contents/${path}`;
@@ -700,18 +740,27 @@ async function putFile(path, obj, message) {
   if (!r.ok) { const t = await r.text(); throw new Error('GitHub refused the save (' + r.status + '). ' + t.slice(0, 160)); }
 }
 async function save() {
-  if (!token()) { renderTokenBox(true); return; }
   const btn = $('#saveBtn'), msg = $('#saveMsg');
-  btn.disabled = true; msg.className = 'msg'; msg.textContent = 'Saving\u2026';
+  const F = state.focus;
+  const focusDoc = { currency: F.currency || 'AUD', brands_available: F.brands_available, bands_available: F.bands_available, brands: F.brands, bands: F.bands, updated: new Date().toISOString().slice(0, 10) };
+  const wlDoc = { defaults: state.wl.defaults, watches: state.wl.watches };
+  if (state.backend) {
+    if (!password()) { renderTokenBox(true); return; }
+    btn.disabled = true; msg.className = 'msg'; msg.textContent = 'Saving…';
+    try {
+      if (state.focusDirty) await rpc('watch_radar_save', { p_password: password(), p_id: 'focus', p_data: focusDoc });
+      if (state.wlDirty) await rpc('watch_radar_save', { p_password: password(), p_id: 'watchlist', p_data: wlDoc });
+      F.updated = focusDoc.updated;
+      markDirty(false, 'all'); msg.className = 'msg ok'; msg.textContent = 'Saved. Tomorrow’s 07:00 Brisbane run researches this selection.'; render();
+    } catch (e) { msg.className = 'msg err'; msg.textContent = e.message; btn.disabled = false; if (/wrong password/i.test(e.message)) { state.pw = null; store.set('radar-pw', null); renderTokenBox(true); } }
+    return;
+  }
+  if (!token()) { renderTokenBox(true); return; }
+  btn.disabled = true; msg.className = 'msg'; msg.textContent = 'Saving…';
   try {
-    if (state.focusDirty) {
-      const F = state.focus; F.updated = new Date().toISOString().slice(0, 10);
-      await putFile('data/focus.json', { _comment: 'Research focus, edited from the site. The routine researches every selected brand within the selected AUD price bands at the next run.', currency: F.currency || 'AUD', brands_available: F.brands_available, bands_available: F.bands_available, brands: F.brands, bands: F.bands, updated: F.updated }, 'focus: ' + F.brands.length + ' brands, ' + F.bands.length + ' bands (edited on the site)');
-    }
-    if (state.wlDirty) {
-      await putFile('data/watchlist.json', { _comment: 'Specific references to track in addition to the brand focus in data/focus.json. Optional. Entries with active:false are skipped.', defaults: state.wl.defaults, watches: state.wl.watches }, 'watchlist: ' + state.wl.watches.length + ' references (edited on the site)');
-    }
-    markDirty(false, 'all'); msg.className = 'msg ok'; msg.textContent = 'Saved. Tomorrow\u2019s 07:00 Brisbane run researches this selection. The site itself refreshes within a few minutes.'; render();
+    if (state.focusDirty) { F.updated = focusDoc.updated; await putFile('data/focus.json', { _comment: 'Research focus, edited from the site. The routine researches every selected brand within the selected AUD price bands at the next run.', ...focusDoc }, 'focus: ' + F.brands.length + ' brands, ' + F.bands.length + ' bands (edited on the site)'); }
+    if (state.wlDirty) await putFile('data/watchlist.json', { _comment: 'Specific references to track in addition to the brand focus in data/focus.json. Optional. Entries with active:false are skipped.', ...wlDoc }, 'watchlist: ' + state.wl.watches.length + ' references (edited on the site)');
+    markDirty(false, 'all'); msg.className = 'msg ok'; msg.textContent = 'Saved. Tomorrow’s 07:00 Brisbane run researches this selection. The site itself refreshes within a few minutes.'; render();
   } catch (e) { msg.className = 'msg err'; msg.textContent = e.message; btn.disabled = false; }
 }
 $('#saveBtn').onclick = save;
@@ -725,7 +774,7 @@ function watchAnchors() {
 }
 
 // ---- boot ----
-let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (state.latest && state.editing == null) render(); }, 200); });
+let rt, lastW = window.innerWidth; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (window.innerWidth === lastW) return; lastW = window.innerWidth; if (state.latest && state.editing == null) render(); }, 200); });
 load().then(() => { render(); markDirty(false); watchAnchors(); }).catch(err => {
   $('#status').className = 'status failed'; $('#statusText').textContent = 'Could not load data';
   $('#deals').append(el('div', { class: 'empty' }, 'Could not load data/latest.json. ' + err.message));
