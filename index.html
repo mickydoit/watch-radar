@@ -5,306 +5,287 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Watch Radar</title>
 <meta name="description" content="Daily research on second-hand watch listings, benchmarked against the market.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23111' stroke-width='1.5'/%3E%3Cpath d='M16 9v7l4 3' fill='none' stroke='%23111' stroke-width='1.5'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23111' stroke-width='1.2'/%3E%3Ccircle cx='16' cy='16' r='1.6' fill='%23111'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
 <style>
-/* ---------- tokens ---------- */
 :root{
-  color-scheme:light;
-  --paper:#ffffff;--panel:#f6f6f5;--panel-2:#eeeeec;
-  --ink:#111111;--ink-2:#6b6b6b;--ink-3:#adadad;
-  --hair:#e7e7e5;--hair-2:#d2d2cf;
-  --red:#cf2e34;--good:#1d8a3a;--warn:#c08f14;
+  --bg:#f8f6f2;--bg-2:#efece6;--ink:#111111;--ink-2:#6f6c66;--ink-3:#b5b1a8;--hair:#e3dfd7;
+  --green:#263b1c;--good:#1f7a3a;--warn:#b58a1c;--red:#c0392b;
   --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;
-  --font:"Montserrat",Helvetica,Arial,sans-serif;
-  --gutter:clamp(20px,6vw,88px);
-  --ease:cubic-bezier(.2,.7,.2,1);
+  --sans:"Helvetica Neue",Helvetica,"Inter",Arial,sans-serif;
+  --g:16px;--col:calc((100vw - 2*var(--g)) / 12);
+  --ease:cubic-bezier(.22,.8,.2,1);
 }
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    color-scheme:dark;
-    --paper:#101010;--panel:#181818;--panel-2:#202020;
-    --ink:#f2f2f0;--ink-2:#9a9a98;--ink-3:#585856;
-    --hair:#242424;--hair-2:#363636;
-    --red:#e4555a;--good:#52bd6c;--warn:#d7ad4a;
-    --s1:#3987e5;--s2:#d95926;--s3:#199e70;
-  }
-}
-:root[data-theme="dark"]{
-  color-scheme:dark;
-  --paper:#101010;--panel:#181818;--panel-2:#202020;
-  --ink:#f2f2f0;--ink-2:#9a9a98;--ink-3:#585856;
-  --hair:#242424;--hair-2:#363636;
-  --red:#e4555a;--good:#52bd6c;--warn:#d7ad4a;
-  --s1:#3987e5;--s2:#d95926;--s3:#199e70;
-}
-
-/* ---------- base ---------- */
+:root[data-theme="dark"]{--bg:#111110;--bg-2:#19191a;--ink:#f1efe9;--ink-2:#8f8c85;--ink-3:#4e4c48;--hair:#262623;--green:#9fc08d;--good:#5bbf78;--warn:#d4ad4f;--red:#e06459;--s1:#3987e5;--s2:#d95926;--s3:#199e70}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:88px}
-html,body{margin:0;background:var(--paper);color:var(--ink)}
-body{font:300 16px/1.55 var(--font);-webkit-font-smoothing:antialiased;font-feature-settings:"tnum" 1;opacity:0;transition:opacity .35s var(--ease)}
+html{scroll-behavior:smooth}
+html,body{margin:0;background:var(--bg);color:var(--ink)}
+body{font:400 16px/1.3 var(--sans);-webkit-font-smoothing:antialiased;font-feature-settings:"tnum" 1;letter-spacing:-.005em;opacity:0;transition:opacity .5s var(--ease)}
 body.ready{opacity:1}
-a{color:inherit;text-decoration:none;border-bottom:1px solid var(--hair-2);transition:border-color .15s}
-a:hover{border-color:var(--ink)}
-button{font:inherit;font-weight:300;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:left}
-input,textarea{font:inherit;font-weight:300;color:inherit;background:var(--paper);border:1px solid var(--hair-2);padding:12px 14px;border-radius:0;width:100%;transition:border-color .15s}
-input:focus,textarea:focus{outline:none;border-color:var(--ink)}
-button:focus-visible{outline:1px solid var(--ink);outline-offset:3px}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:left;letter-spacing:inherit}
+input,textarea{font:inherit;color:inherit;background:transparent;border:0;border-bottom:1px solid var(--ink);padding:10px 0;width:100%;border-radius:0;letter-spacing:-.01em}
+input:focus,textarea:focus{outline:none}
+button:focus-visible,a:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
 img{display:block;max-width:100%}
-.wrap{max-width:1180px;margin:0 auto;padding:0 var(--gutter)}
-.caps{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:400;color:var(--ink-2)}
-.btn{display:inline-block;border:1px solid var(--ink);padding:12px 20px;font-size:13px;letter-spacing:.1em;text-transform:uppercase;line-height:1.2;transition:background .15s,color .15s,opacity .15s}
-.btn:hover{background:var(--ink);color:var(--paper)}
-.btn.primary{background:var(--ink);color:var(--paper)}
-.btn.primary:hover{background:var(--ink-2);border-color:var(--ink-2)}
-.btn[disabled]{opacity:.25;cursor:default}
-.btn[disabled]:hover{background:var(--ink);color:var(--paper)}
-.btn.quiet{border-color:var(--hair-2);color:var(--ink-2)}
-.btn.quiet:hover{border-color:var(--ink);color:var(--ink);background:none}
-.link{font-size:13px;letter-spacing:.06em;color:var(--ink-2);border-bottom:1px solid transparent;padding:2px 0;transition:color .15s,border-color .15s}
-.link:hover{color:var(--ink);border-bottom-color:var(--ink)}
+::selection{background:#44300033;color:var(--ink)}
 
-/* ---------- top bar ---------- */
-.bar{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--hair)}
-.bar .in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;height:64px}
-.wordmark{font-size:14px;font-weight:400;letter-spacing:.42em;white-space:nowrap}
-.wordmark span{font-weight:300;color:var(--ink-2)}
-.anchors{display:flex;gap:32px;justify-content:center}
-.anchors a{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);border-bottom:1px solid transparent;padding:4px 0;white-space:nowrap}
-.anchors a:hover,.anchors a.on{color:var(--ink);border-bottom-color:var(--ink)}
-.bar .r{justify-self:end;display:flex;align-items:center;gap:24px}
-.status{display:inline-flex;align-items:center;gap:9px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);white-space:nowrap}
-.status .dot{width:6px;height:6px;border-radius:50%;background:var(--ink-3)}
-.status.fresh .dot{background:var(--good)}.status.stale .dot{background:var(--warn)}.status.failed .dot{background:var(--red)}
-.theme{width:28px;height:28px;display:grid;place-items:center;color:var(--ink-2);border-radius:50%}
-.theme:hover{color:var(--ink);background:var(--panel)}
-.theme svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.4}
-@media (max-width:900px){.anchors{display:none}.bar .in{grid-template-columns:1fr auto}}
-@media (max-width:560px){.status .txt{display:none}}
+/* type scale, after the reference */
+.f12{font-size:12px;line-height:1;text-transform:uppercase;letter-spacing:0;font-weight:400}
+.f16{font-size:16px;line-height:1.3;font-weight:400}
+.f24{font-size:24px;line-height:1.2;font-weight:300;letter-spacing:-.01em}
+.f24.up{font-weight:400;text-transform:uppercase;letter-spacing:0}
+.f40{font-size:clamp(28px,2.8vw,40px);line-height:1.2;font-weight:400;letter-spacing:-.04em}
+.f90{font-size:clamp(48px,6.3vw,90px);line-height:1.24;font-weight:400;letter-spacing:-.04em;margin:0}
+.light{font-weight:300}
+.muted{color:var(--ink-2)}
 
-/* ---------- sections ---------- */
-section{padding:112px 0 0}
-.sec-h{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 32px;margin:0 0 40px}
-.sec-h .caps{margin-bottom:14px;display:block}
-h1{font-size:clamp(30px,3.4vw,44px);line-height:1.2;font-weight:300;letter-spacing:-.01em;margin:0}
-h1 em{font-style:normal;color:var(--ink-2)}
-.sec-h .aside{font-size:13px;color:var(--ink-2);letter-spacing:.02em}
-.notice{display:flex;align-items:center;gap:18px;border:1px solid var(--hair);padding:18px 22px;margin:0 0 40px;font-size:14.5px;line-height:1.5;max-width:64ch}
-.notice a{border-bottom-color:var(--ink)}
-.notice i{width:6px;height:6px;border-radius:50%;background:var(--warn);flex:0 0 auto}
-.empty{padding:36px 0;color:var(--ink-2);font-size:14.5px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
-.group-h{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);font-weight:400;margin:48px 0 6px}
-.group-h:first-child{margin-top:0}
+/* rolling link */
+.roll{display:inline-block;overflow:hidden;line-height:1;height:12px;vertical-align:top}
+.roll span{display:block;transition:transform .5s var(--ease)}
+.roll span+span{color:var(--ink)}
+a:hover .roll span,button:hover .roll span{transform:translateY(-100%)}
 
-/* ---------- rows ---------- */
-.rows{border-top:1px solid var(--hair)}
-.row{display:grid;grid-template-columns:52px 1fr auto;gap:3px 24px;padding:22px 0;border-bottom:1px solid var(--hair);align-items:start;transition:background .15s}
-.row .thumb{width:52px;height:52px;border-radius:50%;background:var(--panel);overflow:hidden;grid-column:1;grid-row:1/span 2;display:grid;place-items:center;font-size:15px;font-weight:300;color:var(--ink-3)}
-.row .thumb img{width:100%;height:100%;object-fit:cover}
-.row .t{font-size:17px;line-height:1.45;font-weight:300;grid-column:2;grid-row:1}
-.row .t a{border-bottom-color:transparent}
-.row .t a:hover{border-bottom-color:var(--ink)}
-.row .sub{font-size:12.5px;line-height:1.7;color:var(--ink-2);grid-column:2;grid-row:2;letter-spacing:.01em}
-.row .price{text-align:right;font-size:20px;line-height:1.1;font-weight:300;white-space:nowrap;grid-column:3;grid-row:1/span 2}
-.row .price small{display:block;font-size:12px;color:var(--ink-2);margin-top:7px;letter-spacing:.03em}
-.row .price .pct{display:block;font-size:12px;letter-spacing:.06em;margin-bottom:7px;color:var(--good)}
-.row .was{display:block;font-size:12px;color:var(--ink-3);text-decoration:line-through;margin-bottom:5px}
-.row.nothumb{grid-template-columns:1fr auto}
-.row.nothumb .t,.row.nothumb .sub{grid-column:1}
-.row.nothumb .price{grid-column:2}
-@media (max-width:640px){
-  .row{grid-template-columns:44px 1fr;gap:3px 16px;padding:18px 0}.row .thumb{width:44px;height:44px;grid-row:1/span 3}
-  .row .t{grid-column:2;grid-row:1;font-size:16px}.row .price{grid-column:2;grid-row:2;text-align:left;margin:4px 0 2px;font-size:18px}.row .sub{grid-column:2;grid-row:3}
-  .row.nothumb{grid-template-columns:1fr}.row.nothumb .t,.row.nothumb .price,.row.nothumb .sub{grid-column:1}
-}
-.tag{display:inline-block;font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:400;margin:0 12px 0 0;vertical-align:3px;color:var(--ink-2)}
-.tag.new{color:var(--ink)}.tag.drop,.tag.clean{color:var(--good)}.tag.verify{color:var(--red)}.tag.grey{color:var(--s2)}.tag.paused{color:var(--ink-3)}
+/* grid */
+.grid{display:grid;grid-template-columns:repeat(12,1fr);column-gap:0;padding:0 var(--g)}
+.c1{grid-column:1/4}.c4{grid-column:4/8}.c8{grid-column:8/11}.c11{grid-column:11/13}
+.span-l{grid-column:1/8}.span-r{grid-column:8/13}
 
-/* ---------- watches ---------- */
-.brand-h{margin:88px 0 0;padding:0 0 20px;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 32px;border-bottom:1px solid var(--ink)}
-.brand-h:first-child{margin-top:0}
-.brand-h h2{font-size:clamp(22px,2.2vw,28px);font-weight:300;margin:0;letter-spacing:.01em}
-.brand-h span{font-size:12.5px;color:var(--ink-2);letter-spacing:.02em}
-.watch{display:grid;grid-template-columns:minmax(240px,4fr) 7fr;gap:40px clamp(32px,6vw,88px);padding:56px 0;border-bottom:1px solid var(--hair);align-items:start}
-.watch:last-child{border-bottom:0}
-.watch.paused{opacity:.5}
-.photo{aspect-ratio:4/5;background:var(--panel);overflow:hidden;position:relative}
-@media (min-width:861px){.photo{position:sticky;top:88px}}
-.photo img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
-.watch:hover .photo img{transform:scale(1.02)}
-.photo .ph{position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(40px,6vw,72px);font-weight:300;color:var(--hair-2);letter-spacing:.05em}
-.photo .credit{position:absolute;left:0;right:0;bottom:0;padding:10px 14px;font-size:10px;letter-spacing:.06em;color:var(--ink-3);opacity:0;transition:opacity .2s}
-.photo:hover .credit{opacity:1}
-.photo .credit a{border-bottom-color:transparent}
-.watch h3{font-size:clamp(24px,2.6vw,34px);line-height:1.2;font-weight:300;margin:0 0 6px;letter-spacing:-.01em}
-.watch .ref{font-size:12.5px;color:var(--ink-2);letter-spacing:.06em;margin:0 0 36px;text-transform:uppercase}
-.figs{display:grid;grid-template-columns:repeat(3,1fr);gap:24px 20px;margin:0 0 12px}
-.figs dt{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);margin:0 0 8px;font-weight:400}
-.figs dd{margin:0;font-size:clamp(22px,2vw,28px);line-height:1;font-weight:300}
-.figs dd.ok{color:var(--good)}
-.figs dd small{display:block;font-size:12px;color:var(--ink-2);margin-top:8px;font-weight:300;letter-spacing:.02em}
-.fine{font-size:12.5px;color:var(--ink-2);letter-spacing:.01em;margin:0 0 36px;line-height:1.7}
-.chart-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 24px;margin:0 0 10px}
-.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);font-weight:400}
-.legend i{display:inline-block;width:14px;height:2px;vertical-align:middle;margin-right:8px}
-.chart{position:relative;width:100%;height:190px}
+/* header */
+header.top{position:fixed;top:0;left:0;right:0;z-index:20;padding-top:var(--g);height:84px;background:linear-gradient(var(--bg) 0,var(--bg) 62%,transparent)}
+header.top .f12{line-height:1.15}
+header.top .mark{justify-self:start;margin-top:-2px}
+header.top .mark svg{width:72px;height:40px;stroke:var(--ink);fill:none;stroke-width:1.1;stroke-linecap:round}
+header.top nav button{display:block}
+header.top nav button+button{margin-top:2px}
+header.top .time{line-height:1.15}
+header.top .time b{font-weight:400;letter-spacing:.02em}
+header.top .time .dot{display:inline-block;width:18px;text-align:center}
+header.top .circle{position:absolute;right:var(--g);top:var(--g);width:52px;height:52px;border:1px solid var(--ink);border-radius:50%;display:grid;place-items:center;transition:background .3s var(--ease),color .3s}
+header.top .circle i{width:6px;height:6px;border:1px solid currentColor;border-radius:50%;display:block;transform:translateX(12px)}
+header.top .circle:hover{background:var(--ink);color:var(--bg)}
+@media (max-width:900px){.c4{display:none}.c8{grid-column:5/9}.c11{grid-column:9/12}header.top .circle{width:44px;height:44px;top:10px}}
+@media (max-width:600px){.c1{grid-column:1/5}.c8{grid-column:5/10}.c11{display:none}}
+
+/* views */
+main{padding-top:128px;min-height:100vh}
+.view{display:none}
+.view.on{display:block;animation:vin .7s var(--ease)}
+@keyframes vin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.page-h{align-items:start;margin:0 0 clamp(80px,14vh,160px)}
+.page-h .sub{padding-top:14px;line-height:1.15}
+.page-h .sub p{margin:0}
+.page-h .sub p+p{margin-top:12px}
+.page-h .f90{margin-top:-14px}
+@media (max-width:900px){.page-h .span-l,.page-h .span-r{grid-column:1/13}.page-h .span-r{margin-top:28px}}
+
+/* horizontal gallery */
+.gal{position:relative;margin:0 0 clamp(80px,14vh,160px)}
+.gal .track{display:flex;gap:9px;overflow-x:auto;overflow-y:hidden;padding:0 var(--g);scroll-snap-type:x proximity;scroll-padding:0 var(--g);scrollbar-width:none;cursor:grab}
+.gal .track::-webkit-scrollbar{display:none}
+.gal .track.drag{cursor:grabbing;scroll-snap-type:none}
+.tile{flex:0 0 clamp(260px,27.5vw,396px);scroll-snap-align:start;text-decoration:none;display:block}
+.tile .cap{display:flex;justify-content:space-between;gap:12px;height:12px;margin:0 0 10px;white-space:nowrap}
+.tile .cap .muted{color:var(--ink-2)}
+.tile .im{aspect-ratio:4/5;background:var(--bg-2);overflow:hidden;position:relative;clip-path:inset(0 0 0 0);transition:clip-path .9s var(--ease)}
+.tile .im img{width:100%;height:100%;object-fit:cover;transform:scale(1.001);transition:transform 1.1s var(--ease)}
+.tile:hover .im img{transform:scale(1.04)}
+.tile .im .ph{position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(40px,5vw,72px);font-weight:300;letter-spacing:-.04em;color:var(--ink-3)}
+.tile .under{display:flex;justify-content:space-between;margin-top:10px;height:12px}
+.gal.reveal .tile .im{clip-path:inset(0 0 100% 0)}
+.gal .hint{position:absolute;right:var(--g);top:-28px}
+
+/* lists, archive-style */
+.list{padding:0 var(--g)}
+.lrow{display:grid;grid-template-columns:repeat(12,1fr);align-items:baseline;padding:22px 0;border-top:1px solid var(--hair);text-decoration:none;transition:opacity .3s}
+.list:hover .lrow{opacity:.45}.list .lrow:hover{opacity:1}
+.lrow:last-child{border-bottom:1px solid var(--hair)}
+.lrow .n{grid-column:1/2}
+.lrow .t{grid-column:2/8;padding-right:24px}
+.lrow .m{grid-column:8/11;line-height:1.5}
+.lrow .p{grid-column:11/13;text-align:right;white-space:nowrap}
+.lrow .p .pct{display:block;margin-top:6px;color:var(--good)}
+.lrow .p .was{display:block;margin-top:6px;color:var(--ink-3);text-decoration:line-through}
+.flag{display:inline-block;margin-right:10px;vertical-align:4px}
+.flag.verify{color:var(--red)}.flag.grey{color:var(--s2)}.flag.new{color:var(--green)}.flag.drop{color:var(--good)}
+.list .empty{padding:40px 0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+@media (max-width:900px){.lrow{grid-template-columns:1fr auto;row-gap:8px;padding:18px 0}.lrow .n{display:none}.lrow .t{grid-column:1;padding:0;font-size:19px}.lrow .p{grid-column:2;grid-row:1}.lrow .m{grid-column:1/3}}
+.sec-lab{padding:0 var(--g);margin:clamp(72px,10vh,120px) 0 18px}
+
+/* about-style watch sections */
+.brand{margin:0 0 clamp(96px,16vh,200px)}
+.brand .page-h{margin-bottom:clamp(40px,7vh,80px)}
+.model{align-items:start;margin:0 0 clamp(72px,10vh,120px)}
+.model .pic{grid-column:1/4;position:sticky;top:112px}
+.model .pic .im{aspect-ratio:4/5;background:var(--bg-2);overflow:hidden;position:relative}
+.model .pic img{width:100%;height:100%;object-fit:cover}
+.model .pic .ph{position:absolute;inset:0;display:grid;place-items:center;font-size:72px;font-weight:300;letter-spacing:-.04em;color:var(--ink-3)}
+.model .pic .credit{margin-top:8px;color:var(--ink-3)}
+.model .pic .credit a:hover{color:var(--ink)}
+.model .body{grid-column:8/13}
+.model .body .f24.up{margin:0 0 28px}
+.model .body .f24.up .r{color:var(--ink-2);margin-left:14px}
+.nl{margin:0;padding:0;list-style:none}
+.nl li{display:grid;grid-template-columns:52px 1fr auto;gap:0 12px;padding:6px 0;align-items:baseline}
+.nl li .k{color:var(--ink)}
+.nl li .v{text-align:right;white-space:nowrap}
+.nl li .v small{display:block;font-size:12px;color:var(--ink-2);margin-top:4px;letter-spacing:0}
+.nl li .v.ok{color:var(--good)}
+.chart-h{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin:44px 0 12px}
+.legend{display:flex;gap:16px}
+.legend i{display:inline-block;width:12px;height:1.5px;vertical-align:middle;margin-right:7px}
+.chart{position:relative;width:100%;height:200px}
 .chart svg{width:100%;height:100%;display:block;overflow:visible}
 .chart .grid line{stroke:var(--hair);stroke-width:1}
-.chart .ax text{fill:var(--ink-2);font-size:10.5px;font-family:var(--font);letter-spacing:.04em}
-.chart .ser{fill:none;stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round}
-.chart .pt{stroke:var(--paper);stroke-width:2}
+.chart .ax text{fill:var(--ink-2);font-size:11px;font-family:var(--sans)}
+.chart .ser{fill:none;stroke-width:1.4;stroke-linejoin:round;stroke-linecap:round}
+.chart .pt{stroke:var(--bg);stroke-width:2}
 .chart .cross{stroke:var(--ink-3);stroke-width:1;display:none}
-.chart .lbl{font-family:var(--font);font-size:10.5px;font-weight:500;letter-spacing:.02em}
-.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--paper);font-size:12px;line-height:1.6;padding:8px 12px;transform:translate(-50%,-110%);white-space:nowrap;display:none;z-index:2;letter-spacing:.03em}
-.tip b{font-weight:500;display:block;margin-bottom:2px}
-.sub-h{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);font-weight:400;margin:44px 0 2px;display:flex;justify-content:space-between;align-items:baseline;gap:16px}
-.sub-h span:last-child{letter-spacing:.02em;text-transform:none;font-size:12.5px;color:var(--ink-3)}
-.watch .rows .row{padding:18px 0}
-.watch .rows .row .t{font-size:15.5px}
-.watch .rows .row .price{font-size:17px}
-details{margin-top:16px}
-details summary{cursor:pointer;font-size:12.5px;letter-spacing:.06em;color:var(--ink-2);list-style:none;display:inline-block;border-bottom:1px solid transparent;transition:color .15s,border-color .15s}
-details summary:hover{color:var(--ink);border-bottom-color:var(--ink)}
+.chart .lbl{font-family:var(--sans);font-size:11px;font-weight:400}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12px;line-height:1.5;padding:8px 12px;transform:translate(-50%,-110%);white-space:nowrap;display:none;z-index:2}
+.tip b{font-weight:400;display:block;margin-bottom:2px;text-transform:uppercase;font-size:11px}
+.model .sub-h{margin:44px 0 10px;display:flex;justify-content:space-between}
+.model .mini{border-top:1px solid var(--hair)}
+.model .mini a{display:grid;grid-template-columns:1fr auto;gap:4px 20px;padding:14px 0;border-bottom:1px solid var(--hair);align-items:baseline}
+.model .mini a .f12{color:var(--ink-2);grid-column:1;margin-top:2px}
+.model .mini a .f16{grid-column:1}
+.model .mini a .pr{grid-column:2;grid-row:1/span 2;text-align:right;white-space:nowrap}
+.model .mini a .pr span{display:block;color:var(--good);margin-top:6px}
+details summary{list-style:none;cursor:pointer;display:inline-block;color:var(--ink-2)}
 details summary::-webkit-details-marker{display:none}
-details summary::after{content:"›";display:inline-block;margin-left:6px;transition:transform .2s}
-details[open] summary::after{transform:rotate(90deg)}
-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:18px;border-top:1px solid var(--hair)}
-th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--hair);font-weight:300}
-th{color:var(--ink-2);letter-spacing:.12em;text-transform:uppercase;font-size:10.5px;font-weight:400}
+details summary:hover{color:var(--ink)}
+table{width:100%;border-collapse:collapse;margin-top:14px;font-size:14px}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--hair);font-weight:400}
+th{color:var(--ink-2);font-size:11px;text-transform:uppercase;letter-spacing:0}
 td.num,th.num{text-align:right}
-@media (max-width:860px){.watch{grid-template-columns:1fr;gap:28px;padding:44px 0}.photo{aspect-ratio:1/1;max-width:400px}}
+@media (max-width:900px){.model .pic{grid-column:1/13;position:static;max-width:360px}.model .body{grid-column:1/13;margin-top:28px}}
 
-/* ---------- focus ---------- */
-.pick{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));border-top:1px solid var(--hair);border-left:1px solid var(--hair)}
-.pick button{display:flex;align-items:center;gap:14px;padding:15px 18px;border-right:1px solid var(--hair);border-bottom:1px solid var(--hair);font-size:14.5px;color:var(--ink-2);min-height:54px;transition:color .15s,background .15s}
-.pick button:hover{color:var(--ink);background:var(--panel)}
-.pick button i{width:13px;height:13px;border:1px solid var(--hair-2);flex:0 0 auto;display:grid;place-items:center;transition:all .15s var(--ease)}
-.pick button[aria-pressed="true"]{color:var(--ink)}
-.pick button[aria-pressed="true"] i{background:var(--ink);border-color:var(--ink)}
-.pick button[aria-pressed="true"] i::after{content:"";width:4px;height:7px;border:solid var(--paper);border-width:0 1.5px 1.5px 0;transform:translateY(-1px) rotate(45deg)}
-.pick.bands{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
-.pickall{display:flex;gap:24px;align-items:center;margin:14px 0 0}
-.pickall .caps{margin-left:auto;letter-spacing:.08em;text-transform:none;font-size:12.5px}
-.savebar{position:sticky;bottom:0;background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--hair);margin-top:56px;padding:18px 0;display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between}
-.savebar .msg{font-size:13px;color:var(--ink-2);max-width:56ch;letter-spacing:.01em}
-.savebar .msg.ok{color:var(--good)}.savebar .msg.err{color:var(--red)}
-.tokenbox{border:1px solid var(--hair);padding:28px 30px;margin-top:24px;max-width:62ch}
-.tokenbox p{margin:0 0 16px;font-size:14.5px;line-height:1.6}
-.tokenbox b{font-weight:500}
-.tokenbox ol{margin:0 0 20px;padding-left:20px;font-size:14.5px;line-height:1.7}
-.tokenbox .trow{display:flex;gap:10px;flex-wrap:wrap}
-.tokenbox input{flex:1 1 240px}
-.tokenbox label.chk{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-2);margin-top:14px}
-.tokenbox label.chk input{width:auto;margin:0}
-.unlocked{font-size:12.5px;color:var(--ink-3);margin:14px 0 0;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
-.wl-row{display:grid;grid-template-columns:40px 1fr auto;gap:2px 20px;padding:18px 0;border-bottom:1px solid var(--hair);align-items:center}
-.wl-row .thumb{width:40px;height:40px;border-radius:50%;background:var(--panel);overflow:hidden;grid-column:1;grid-row:1/span 2}
-.wl-row .thumb img{width:100%;height:100%;object-fit:cover}
-.wl-row .t{grid-column:2;grid-row:1;font-size:16px;line-height:1.4}
-.wl-row .sub{grid-column:2;grid-row:2;font-size:12.5px;line-height:1.7;color:var(--ink-2)}
-.wl-row .acts{grid-column:3;grid-row:1/span 2;display:flex;gap:20px}
-.wl-row.paused .t,.wl-row.paused .sub{color:var(--ink-3)}
-@media (max-width:640px){.wl-row{grid-template-columns:40px 1fr}.wl-row .thumb{grid-row:1/span 3}.wl-row .acts{grid-row:3;grid-column:2;margin-top:6px}}
-.form{border:1px solid var(--hair);padding:36px;margin:0 0 48px;display:grid;grid-template-columns:repeat(2,1fr);gap:24px 32px}
-.form h4{grid-column:1/-1;margin:0 0 4px;font-size:22px;font-weight:300;line-height:1.3}
-.form label{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin-bottom:9px;font-weight:400}
+/* overlays: menu + focus (contact-style) */
+.overlay{position:fixed;inset:0;z-index:30;background:var(--bg);display:none;overflow:auto;padding-top:128px;padding-bottom:80px}
+.overlay.on{display:block;animation:vin .6s var(--ease)}
+.overlay .close{position:fixed;right:var(--g);top:var(--g);width:52px;height:52px;border:1px solid var(--ink);border-radius:50%;display:grid;place-items:center;z-index:31;transition:background .3s,color .3s}
+.overlay .close:hover{background:var(--ink);color:var(--bg)}
+.overlay .close svg{width:12px;height:12px;stroke:currentColor;stroke-width:1.2}
+.menu-list{padding:0 var(--g)}
+.menu-list button{display:block;font-size:clamp(40px,7vw,96px);line-height:1.1;letter-spacing:-.04em;font-weight:400;color:var(--ink-3);transition:color .4s var(--ease),transform .5s var(--ease)}
+.menu-list button:hover,.menu-list button.on{color:var(--ink);transform:translateX(12px)}
+.menu-foot{padding:0 var(--g);margin-top:64px}
+.menu-foot div+div{margin-top:10px}
+
+/* focus form */
+.check-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0 24px;border-top:1px solid var(--hair)}
+.check-item{display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid var(--hair);color:var(--ink-2);transition:color .2s}
+.check-item:hover,.check-item[aria-pressed="true"]{color:var(--ink)}
+.check-item i{width:14px;height:14px;border:1px solid var(--ink-3);border-radius:50%;flex:0 0 auto;transition:all .25s var(--ease)}
+.check-item[aria-pressed="true"] i{background:var(--green);border-color:var(--green);box-shadow:inset 0 0 0 3px var(--bg)}
+.field-group{margin-top:clamp(56px,8vh,88px)}
+.field-group>.f12{margin-bottom:18px;display:flex;justify-content:space-between;align-items:baseline}
+.field-group>.f12 .acts{display:flex;gap:18px}
+.field-group>.f12 .acts button{color:var(--ink-2)}
+.field-group>.f12 .acts button:hover{color:var(--ink)}
+.btn-submit{display:inline-flex;align-items:center;gap:16px;height:56px;padding:0 28px;border:1px solid var(--ink);border-radius:999px;transition:background .3s var(--ease),color .3s,opacity .3s}
+.btn-submit:hover{background:var(--ink);color:var(--bg)}
+.btn-submit.green{background:var(--green);border-color:var(--green);color:#f8f6f2}
+.btn-submit.green:hover{background:var(--ink);border-color:var(--ink)}
+.btn-submit[disabled]{opacity:.25;cursor:default}
+.btn-submit[disabled]:hover{background:none;color:inherit}
+.submit-row{display:flex;flex-wrap:wrap;align-items:center;gap:24px;margin-top:clamp(56px,8vh,88px)}
+.submit-row .msg{color:var(--ink-2)}
+.submit-row .msg.ok{color:var(--good)}.submit-row .msg.err{color:var(--red)}
+.paper{margin-top:40px;max-width:560px}
+.paper .trow{display:flex;gap:24px;align-items:flex-end}
+.paper label.chk{display:flex;align-items:center;gap:10px;margin-top:20px;color:var(--ink-2)}
+.paper label.chk input{width:14px;height:14px;border:1px solid var(--ink-3);appearance:none;border-radius:50%;padding:0;margin:0}
+.paper label.chk input:checked{background:var(--green);border-color:var(--green);box-shadow:inset 0 0 0 3px var(--bg)}
+.paper .lnk{display:flex;gap:20px;margin-top:20px;color:var(--ink-2)}
+.paper .lnk button:hover{color:var(--ink)}
+.refs .rrow{display:grid;grid-template-columns:1fr auto;gap:4px 20px;padding:16px 0;border-bottom:1px solid var(--hair);align-items:baseline}
+.refs .rrow .acts{display:flex;gap:18px;color:var(--ink-2)}
+.refs .rrow .acts button:hover{color:var(--ink)}
+.refs .rrow.paused{color:var(--ink-3)}
+.form{margin:28px 0 40px;display:grid;grid-template-columns:repeat(2,1fr);gap:28px 40px;max-width:900px}
 .form .full{grid-column:1/-1}
-.form .opts{display:flex;flex-wrap:wrap;gap:8px}
-.form .opts button{font-size:12.5px;letter-spacing:.08em;border:1px solid var(--hair-2);padding:9px 13px;color:var(--ink-2);transition:all .15s}
-.form .opts button:hover{border-color:var(--ink);color:var(--ink)}
-.form .opts button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.form .acts{grid-column:1/-1;display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:4px}
-.form .err{grid-column:1/-1;font-size:13.5px;color:var(--red)}
-@media (max-width:640px){.form{grid-template-columns:1fr;padding:24px 20px}}
+.form label{display:block;margin-bottom:6px;color:var(--ink-2)}
+.form .opts{display:flex;flex-wrap:wrap;gap:8px 18px;padding:10px 0;border-bottom:1px solid var(--ink)}
+.form .opts button{color:var(--ink-3);transition:color .2s}
+.form .opts button[aria-pressed="true"]{color:var(--ink)}
+.form .acts{grid-column:1/-1;display:flex;gap:16px;align-items:center}
+.form .err{grid-column:1/-1;color:var(--red)}
+@media (max-width:640px){.form{grid-template-columns:1fr}}
 
-/* ---------- footer ---------- */
-footer{margin-top:128px;border-top:1px solid var(--hair);padding:28px 0 64px;font-size:12.5px;line-height:1.9;color:var(--ink-2);letter-spacing:.02em}
-footer .in{display:flex;flex-wrap:wrap;gap:6px 32px;justify-content:space-between;align-items:baseline}
-footer nav{display:flex;gap:24px;flex-wrap:wrap}
-footer a{border-bottom-color:transparent}
-footer a:hover{border-bottom-color:var(--ink)}
-footer .run{margin-top:4px}
-footer .credits{margin-top:6px;font-size:11.5px;color:var(--ink-3)}
-footer .notes{margin-top:14px;max-width:80ch}
-footer .notes ul{margin:12px 0 0;padding:0;list-style:none}
-footer .notes li{padding:10px 0;border-top:1px solid var(--hair);font-size:13px;line-height:1.6}
-footer .runs{margin-top:10px}
-footer .runs div{display:flex;gap:18px;padding:8px 0;border-top:1px solid var(--hair);font-size:13px}
-footer .runs div span:first-child{min-width:58px}
+/* footer */
+footer{padding:clamp(80px,12vh,140px) var(--g) 40px;display:grid;grid-template-columns:repeat(12,1fr);row-gap:28px}
+footer .l{grid-column:1/8;line-height:1.5}
+footer .r{grid-column:8/13;line-height:1.5}
+footer .r a:hover,footer .l a:hover{color:var(--ink)}
+footer details{margin-top:12px}
+footer ul{margin:12px 0 0;padding:0;list-style:none;max-width:70ch}
+footer li{padding:8px 0;border-top:1px solid var(--hair);font-size:14px;line-height:1.5;color:var(--ink-2)}
+footer .runs div{display:flex;gap:16px;padding:6px 0;border-top:1px solid var(--hair);font-size:12px;text-transform:uppercase}
+@media (max-width:900px){footer .l,footer .r{grid-column:1/13}}
 </style>
 </head>
 <body>
-<div class="bar"><div class="wrap in">
-  <div class="wordmark">WATCH <span>RADAR</span></div>
-  <nav class="anchors" id="anchors"><a href="#today">Today</a><a href="#watches">Watches</a><a href="#auctions">Auctions</a><a href="#focus">Focus</a></nav>
-  <div class="r">
-    <span class="status" id="status"><span class="dot"></span><span class="txt" id="statusText"></span></span>
-    <button class="theme" id="theme" aria-label="Toggle light and dark"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4v16a8 8 0 0 0 0-16z" fill="currentColor" stroke="none"/></svg></button>
-  </div>
-</div></div>
+<header class="top grid">
+  <a class="c1 f12" href="#today" id="homeLink">Watch<br>Radar</a>
+  <a class="c4 mark" href="#today" aria-label="Watch Radar"><svg viewBox="0 0 72 40"><path d="M6 32c6-14 14-24 22-26 6-1 7 5 3 12-4 8-9 14-14 18 10-8 20-10 30-10 6 0 10 2 14 6"/><circle cx="60" cy="31" r="1.2" fill="currentColor" stroke="none"/></svg></a>
+  <nav class="c8 f12"><button id="menuBtn"><span class="roll"><span>Menu</span><span>Menu</span></span></button><button id="focusBtn"><span class="roll"><span>Focus</span><span>Focus</span></span></button></nav>
+  <div class="c11 f12 time"><div>Local time</div><div><b id="clock">— . —</b></div></div>
+  <button class="circle" id="theme" aria-label="Toggle light and dark"><i></i></button>
+</header>
 
-<main class="wrap">
-  <section id="today">
-    <div class="sec-h"><div><span class="caps" id="todayDate"></span><h1 id="todayH"></h1></div><span class="aside" id="todayAside"></span></div>
-    <div class="notice" id="notice" hidden><i></i><span id="noticeText"></span></div>
-    <div id="deals"></div>
-  </section>
-
-  <section id="watches">
-    <div class="sec-h"><h1>Watches</h1><span class="aside" id="watchesAside"></span></div>
-    <div id="watchList"></div>
-  </section>
-
-  <section id="auctions">
-    <div class="sec-h"><h1>Auctions</h1><span class="aside" id="auctionsAside"></span></div>
-    <div id="auctionList"></div>
-  </section>
-
-  <section id="focus">
-    <div class="sec-h"><h1>Focus</h1><span class="aside">What the agent researches each morning</span></div>
-    <h3 class="caps" style="margin:0 0 16px">Brands</h3>
-    <div class="pick" id="brandPick"></div>
-    <div class="pickall"><button class="link" id="brandAll">Select all</button><button class="link" id="brandNone">Clear</button><span class="caps" id="brandCount"></span></div>
-    <h3 class="caps" style="margin:48px 0 16px">Price range, AUD</h3>
-    <div class="pick bands" id="bandPick"></div>
-    <details id="refsBox" style="margin-top:56px"><summary>Specific references</summary>
-      <div id="wlForm" style="margin-top:24px"></div>
-      <div class="rows" id="wlList" style="margin-top:20px"></div>
-      <p style="margin:18px 0 0"><button class="btn quiet" id="addBtn">Add a reference</button></p>
-    </details>
-    <div class="savebar" id="savebar">
-      <span class="msg" id="saveMsg">No unsaved changes</span>
-      <button class="btn primary" id="saveBtn" disabled>Save</button>
+<main>
+  <section class="view on" id="today">
+    <div class="grid page-h">
+      <h1 class="f90 span-l" id="todayH">&nbsp;</h1>
+      <div class="span-r sub f12"><p id="todayDate"></p><p class="muted" id="todayNote"></p></div>
     </div>
-    <div id="tokenbox"></div>
+    <div class="gal reveal" id="gal"><div class="track" id="track"></div></div>
+    <div class="sec-lab f12" id="dealsLab">Under market</div>
+    <div class="list" id="deals"></div>
+  </section>
+
+  <section class="view" id="watches"><div id="watchList"></div></section>
+
+  <section class="view" id="auctions">
+    <div class="grid page-h"><h1 class="f90 span-l">auctions</h1><div class="span-r sub f12"><p>Lots for the tracked models</p><p class="muted" id="auctionsNote"></p></div></div>
+    <div id="auctionList"></div>
   </section>
 </main>
 
-<footer><div class="wrap">
-  <div class="in">
-    <span id="footLeft"></span>
-    <nav><a id="repoLink" href="#" target="_blank" rel="noopener">Repository</a><a id="reportsLink" href="#" target="_blank" rel="noopener">Reports</a><a href="https://claude.ai/code/routines" target="_blank" rel="noopener">Routine</a></nav>
+<div class="overlay" id="menu">
+  <button class="close" id="menuClose" aria-label="Close"><svg viewBox="0 0 12 12"><path d="M1 1l10 10M11 1L1 11"/></svg></button>
+  <div class="menu-list" id="menuList"></div>
+  <div class="menu-foot f12 muted"><div id="menuRun"></div><div><a href="https://github.com/mickydoit/watch-radar" target="_blank" rel="noopener">Repository</a></div></div>
+</div>
+
+<div class="overlay" id="focus">
+  <button class="close" id="focusClose" aria-label="Close"><svg viewBox="0 0 12 12"><path d="M1 1l10 10M11 1L1 11"/></svg></button>
+  <div class="grid page-h"><h1 class="f90 span-l">focus</h1><div class="span-r sub f12"><p>What the agent researches</p><p class="muted">Saved selections are picked up by the next morning's run</p></div></div>
+  <div class="grid">
+    <div class="span-r" style="grid-column:4/13">
+      <div class="field-group" style="margin-top:0"><div class="f12"><span>Brands</span><span class="acts"><button id="brandAll">Select all</button><button id="brandNone">Clear</button><span id="brandCount" class="muted"></span></span></div><div class="check-grid" id="brandPick"></div></div>
+      <div class="field-group"><div class="f12"><span>Price range, AUD</span></div><div class="check-grid" id="bandPick"></div></div>
+      <div class="field-group refs"><div class="f12"><span>Specific references</span><span class="acts"><button id="addBtn">Add</button></span></div><div id="wlForm"></div><div id="wlList"></div></div>
+      <div class="submit-row"><button class="btn-submit green" id="saveBtn" disabled>Save<span>→</span></button><span class="msg f12" id="saveMsg"></span></div>
+      <div id="tokenbox"></div>
+    </div>
   </div>
-  <div class="run" id="footRun"></div>
-  <div class="credits" id="credits"></div>
-</div></footer>
+</div>
+
+<footer class="f12">
+  <div class="l muted"><div id="footLeft"></div><div id="footRun"></div><div id="credits"></div></div>
+  <div class="r muted"><div><a id="repoLink" href="#" target="_blank" rel="noopener">Repository</a></div><div><a id="reportsLink" href="#" target="_blank" rel="noopener">Run reports</a></div><div><a href="https://claude.ai/code/routines" target="_blank" rel="noopener">Routine</a></div></div>
+</footer>
 
 <script>
 (() => {
 'use strict';
 const REPO = { owner: 'mickydoit', name: 'watch-radar', branch: 'main' };
 const $ = (s, r = document) => r.querySelector(s);
-const el = (tag, attrs = {}, ...kids) => {
-  const n = document.createElement(tag);
-  for (const [k, v] of Object.entries(attrs)) {
-    if (k === 'class') n.className = v; else if (k === 'html') n.innerHTML = v; else if (k.startsWith('on')) n.addEventListener(k.slice(2), v); else if (v != null) n.setAttribute(k, v);
-  }
-  for (const k of kids) if (k != null) n.append(k.nodeType ? k : document.createTextNode(String(k)));
-  return n;
-};
+const el = (tag, attrs = {}, ...kids) => { const n = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) { if (k === 'class') n.className = v; else if (k === 'html') n.innerHTML = v; else if (k.startsWith('on')) n.addEventListener(k.slice(2), v); else if (v != null) n.setAttribute(k, v); } for (const k of kids) if (k != null) n.append(k.nodeType ? k : document.createTextNode(String(k))); return n; };
 const fmtAUD = v => v == null || isNaN(v) ? '—' : 'A$' + Math.round(v).toLocaleString('en-AU');
 const fmtMoney = (v, c) => v == null || isNaN(v) ? (c ? 'POA' : '—') : (c || '') + ' ' + Math.round(v).toLocaleString('en-AU');
 const fmtDate = d => { if (!d) return '—'; const [y, m, dd] = d.split('-').map(Number); return new Date(Date.UTC(y, m - 1, dd)).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', timeZone: 'UTC' }); };
@@ -313,398 +294,244 @@ const daysAgo = d => { if (!d) return Infinity; const t = Date.UTC(...d.split('-
 const pct = (a, b) => (a == null || b == null || !b) ? null : (a - b) / b * 100;
 const label = w => (w.brand + ' ' + (w.reference || w.model)).trim();
 const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const pad = n => String(n).padStart(2, '0');
 const store = { get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} } };
 const SRC = { 'WatchCharts Marketplace': 'WatchCharts', 'eBay US': 'eBay', 'eBay AU': 'eBay', 'eBay UK': 'eBay' };
-const srcName = s => SRC[s] || s;
+const srcName = s => SRC[s] || s || '';
 
-// ---- theme ----
-const root = document.documentElement;
-{ const t = store.get('radar-theme'); if (t) root.dataset.theme = t; }
-$('#theme').onclick = () => { const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; root.dataset.theme = dark ? 'light' : 'dark'; store.set('radar-theme', root.dataset.theme); render(); };
+// theme + clock
+const root = document.documentElement; { const t = store.get('radar-theme'); if (t) root.dataset.theme = t; }
+$('#theme').onclick = () => { root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark'; store.set('radar-theme', root.dataset.theme); render(); };
+function tick() { const p = new Intl.DateTimeFormat('en-AU', { timeZone: 'Australia/Brisbane', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date()); const h = p.find(x => x.type === 'hour').value, m = p.find(x => x.type === 'minute').value; $('#clock').innerHTML = h + '<span class="dot">.</span>' + m; }
+tick(); setInterval(tick, 15000);
 
-// ---- data ----
+// views + overlays
+const VIEWS = ['today', 'watches', 'auctions'];
+function show(v) { if (!VIEWS.includes(v)) v = 'today'; VIEWS.forEach(id => $('#' + id).classList.toggle('on', id === v)); closeOverlays(); window.scrollTo({ top: 0, behavior: 'instant' }); if (location.hash !== '#' + v) history.replaceState(null, '', '#' + v); if (v === 'today') revealGallery(); renderMenu(); }
+function closeOverlays() { $('#menu').classList.remove('on'); $('#focus').classList.remove('on'); document.body.style.overflow = ''; }
+function openOverlay(id) { closeOverlays(); $('#' + id).classList.add('on'); document.body.style.overflow = 'hidden'; }
+$('#menuBtn').onclick = () => openOverlay('menu'); $('#menuClose').onclick = closeOverlays;
+$('#focusBtn').onclick = () => { openOverlay('focus'); }; $('#focusClose').onclick = closeOverlays;
+window.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlays(); });
+window.addEventListener('hashchange', () => show(location.hash.slice(1)));
+$('#homeLink').onclick = e => { e.preventDefault(); show('today'); };
+function renderMenu() {
+  const host = $('#menuList'); host.innerHTML = '';
+  const cur = VIEWS.find(id => $('#' + id).classList.contains('on'));
+  for (const [id, name] of [['today', 'today'], ['watches', 'watches'], ['auctions', 'auctions']]) host.append(el('button', { class: id === cur ? 'on' : '', onclick: () => show(id) }, name));
+  host.append(el('button', { onclick: () => openOverlay('focus') }, 'focus'));
+  const L = state.latest; $('#menuRun').textContent = L && L.run_date ? 'Last run ' + fmtDate(L.run_date) + (L.run_at_local ? ', ' + L.run_at_local : '') : '';
+}
+
+// data
 const state = { latest: null, prices: [], seen: {}, auctions: {}, runs: [], wl: null, focus: null, images: {}, backend: null, wlDirty: false, focusDirty: false, editing: null, boxOpen: false, pw: null, repo: '' };
 async function load() {
   const bust = '?t=' + Math.floor(Date.now() / 6e4);
   const j = async p => { const r = await fetch(p + bust, { cache: 'no-store' }); if (!r.ok) throw new Error(p + ' ' + r.status); return r.json(); };
   const t = async p => { const r = await fetch(p + bust, { cache: 'no-store' }); if (!r.ok) throw new Error(p + ' ' + r.status); return r.text(); };
-  const [latest, prices, seen, auctions, runs, wl, images, focus, backend] = await Promise.all([
-    j('data/latest.json'), t('data/prices.csv').then(parseCSV).catch(() => []), j('data/seen.json').catch(() => ({ listings: {} })), j('data/auctions.json').catch(() => ({ lots: {} })), j('data/runs.json').catch(() => ({ runs: [] })), j('data/watchlist.json').catch(() => null), j('data/images.json').catch(() => ({ images: {} })), j('data/focus.json').catch(() => null), j('data/backend.json').catch(() => ({})),
-  ]);
+  const [latest, prices, seen, auctions, runs, wl, images, focus, backend] = await Promise.all([j('data/latest.json'), t('data/prices.csv').then(parseCSV).catch(() => []), j('data/seen.json').catch(() => ({ listings: {} })), j('data/auctions.json').catch(() => ({ lots: {} })), j('data/runs.json').catch(() => ({ runs: [] })), j('data/watchlist.json').catch(() => null), j('data/images.json').catch(() => ({ images: {} })), j('data/focus.json').catch(() => null), j('data/backend.json').catch(() => ({}))]);
   Object.assign(state, { latest, prices, seen: seen.listings || {}, auctions: auctions.lots || {}, runs: runs.runs || [], images: images.images || {} });
   state.wl = wl && Array.isArray(wl.watches) ? wl : { defaults: { currency: 'AUD', markets: ['worldwide'], home_country: 'Australia' }, watches: [] };
   state.focus = focus && Array.isArray(focus.brands_available) ? focus : { currency: 'AUD', brands_available: [], bands_available: [[300, 1000], [1000, 2000], [2000, 2500], [2500, 4000]], brands: [], bands: [], updated: null };
   state.repo = latest.repo_url || `https://github.com/${REPO.owner}/${REPO.name}`;
   state.backend = backend && backend.supabase_url ? backend : null;
-  if (state.backend) {
-    try {
-      const r = await fetch(state.backend.supabase_url + '/rest/v1/watch_radar_settings?select=id,data,updated_at', { headers: { apikey: state.backend.supabase_key } });
-      if (r.ok) for (const row of await r.json()) {
-        if (row.id === 'focus' && row.data && Array.isArray(row.data.brands)) state.focus = { ...state.focus, ...row.data, updated: row.updated_at ? row.updated_at.slice(0, 10) : state.focus.updated };
-        if (row.id === 'watchlist' && row.data && Array.isArray(row.data.watches)) state.wl = row.data;
-      }
-    } catch (e) {}
-  }
+  if (state.backend) { try { const r = await fetch(state.backend.supabase_url + '/rest/v1/watch_radar_settings?select=id,data,updated_at', { headers: { apikey: state.backend.supabase_key } }); if (r.ok) for (const row of await r.json()) { if (row.id === 'focus' && row.data && Array.isArray(row.data.brands)) state.focus = { ...state.focus, ...row.data, updated: row.updated_at ? row.updated_at.slice(0, 10) : state.focus.updated }; if (row.id === 'watchlist' && row.data && Array.isArray(row.data.watches)) state.wl = row.data; } } catch (e) {} }
 }
-function parseCSV(text) {
-  const lines = text.trim().split(/\r?\n/); if (lines.length < 2) return [];
-  const h = lines[0].split(',');
-  return lines.slice(1).filter(Boolean).map(l => {
-    const cells = []; let cur = '', q = false;
-    for (const ch of l) { if (ch === '"') q = !q; else if (ch === ',' && !q) { cells.push(cur); cur = ''; } else cur += ch; }
-    cells.push(cur);
-    const o = {}; h.forEach((k, i) => o[k.trim()] = (cells[i] || '').trim());
-    o.value = o.value === '' ? null : Number(o.value); o.n = o.n === '' ? null : Number(o.n);
-    return o;
-  });
-}
-
-// ---- derived ----
-function watches() {
-  const stats = new Map((state.latest.watches || []).map(w => [w.id, w]));
-  const refs = state.wl.watches.map(w => ({ ...stats.get(w.id), ...w, active: w.active !== false, source: 'reference' }));
-  const found = (state.latest.watches || []).filter(w => w.source !== 'reference' && !state.wl.watches.some(r => r.id === w.id)).map(w => ({ ...w, active: w.active !== false }));
-  return [...found, ...refs];
-}
+function parseCSV(text) { const lines = text.trim().split(/\r?\n/); if (lines.length < 2) return []; const h = lines[0].split(','); return lines.slice(1).filter(Boolean).map(l => { const cells = []; let cur = '', q = false; for (const ch of l) { if (ch === '"') q = !q; else if (ch === ',' && !q) { cells.push(cur); cur = ''; } else cur += ch; } cells.push(cur); const o = {}; h.forEach((k, i) => o[k.trim()] = (cells[i] || '').trim()); o.value = o.value === '' ? null : Number(o.value); o.n = o.n === '' ? null : Number(o.n); return o; }); }
+function watches() { const stats = new Map((state.latest.watches || []).map(w => [w.id, w])); const refs = state.wl.watches.map(w => ({ ...stats.get(w.id), ...w, active: w.active !== false, source: 'reference' })); const found = (state.latest.watches || []).filter(w => w.source !== 'reference' && !state.wl.watches.some(r => r.id === w.id)).map(w => ({ ...w, active: w.active !== false })); return [...found, ...refs]; }
 function watchMeta(id) { return watches().find(w => w.id === id) || (state.latest.watches || []).find(w => w.id === id) || { id, brand: '', model: id, reference: '' }; }
 function imageOf(w) { if (w.image) return { src: w.image }; const i = state.images[w.id]; return i ? { src: i.file, credit: i } : null; }
 function series(id, metric) { const m = new Map(); for (const r of state.prices) if (r.watch_id === id && r.metric === metric && r.value != null) m.set(r.date, r.value); return [...m.entries()].sort((a, b) => a[0] < b[0] ? -1 : 1).map(([date, value]) => ({ date, value })); }
 function allSeen() { const out = []; for (const [wid, byKey] of Object.entries(state.seen)) for (const [key, l] of Object.entries(byKey || {})) out.push({ watch_id: wid, key, ...l }); return out; }
 function recentMatches(wid) { return allSeen().filter(l => l.watch_id === wid && l.match !== false && daysAgo(l.first_seen) <= 14).sort((a, b) => (b.first_seen || '').localeCompare(a.first_seen || '') || (a.price_aud || 0) - (b.price_aud || 0)); }
 
-// ---- render ----
+// render
 function render() {
   const L = state.latest, F = state.focus;
-  const pill = $('#status'), txt = $('#statusText'); pill.className = 'status';
-  if (!L.run_date || L.status === 'pending' || L.status === 'idle') { txt.textContent = 'No run yet'; }
-  else { const age = daysAgo(L.run_date); pill.classList.add(L.status === 'failed' ? 'failed' : age > 1.6 || L.status === 'partial' ? 'stale' : 'fresh'); txt.textContent = fmtDate(L.run_date) + (L.run_at_local ? ' · ' + L.run_at_local.replace(' Brisbane', '') : ''); }
-  const n = $('#notice'), nt = $('#noticeText'); n.hidden = true;
-  if (!F.brands.length && !state.wl.watches.length) { n.hidden = false; nt.innerHTML = ''; nt.append('Nothing selected yet. ', el('a', { href: '#focus' }, 'Choose brands and a price range'), ' and the next morning’s run will research them.'); }
-  else if (L.status === 'failed' && L.failure) { n.hidden = false; nt.textContent = 'The last run did not complete: ' + L.failure; }
-  else if (F.updated && L.run_date && F.updated > L.run_date) { n.hidden = false; nt.textContent = 'Focus changed since the last run. Tomorrow morning’s run researches the new selection.'; }
   $('#repoLink').href = state.repo; $('#reportsLink').href = state.repo + '/tree/main/reports';
-  $('#footLeft').textContent = 'Asking prices as listed, converted to AUD' + (L.fx && L.fx.USD_AUD ? ' at USD ' + L.fx.USD_AUD : '') + '.';
-  renderToday(); renderWatches(); renderAuctions(); renderFocus(); renderWatchlist(); renderFooter();
+  $('#footLeft').textContent = 'Asking prices as listed, converted to AUD' + (L.fx && L.fx.USD_AUD ? ' at USD ' + L.fx.USD_AUD : '') + '. Benchmark is the median asking price across the market, smoothed over 30 days.';
+  renderToday(); renderWatches(); renderAuctions(); renderFocus(); renderWatchlist(); renderFooter(); renderMenu();
 }
-function flagTag(f) {
-  if (f === 'verify') return el('span', { class: 'tag verify', title: 'Unusually cheap, private seller or incomplete set. Check before you trust it.' }, 'Verify');
-  if (f === 'grey-new') return el('span', { class: 'tag grey', title: 'New from a grey-market dealer, without an authorised-dealer warranty.' }, 'Grey');
-  return null;
-}
-function thumb(w) { const im = imageOf(w); return el('div', { class: 'thumb' }, im ? el('img', { src: im.src, alt: '', loading: 'lazy' }) : (w.brand || '?').slice(0, 1)); }
-function priceCell(l, opts = {}) {
-  const c = el('div', { class: 'price' });
-  if (opts.pct && l.below_market_pct != null) c.append(el('span', { class: 'pct' }, '−' + l.below_market_pct.toFixed(0) + '%'));
-  if (opts.drop && l.was_aud) c.append(el('span', { class: 'was' }, fmtAUD(l.was_aud)));
-  c.append(fmtAUD(l.price_aud) + (l.source_quality === 'snippet' ? ' ≈' : '')); if (l.source_quality === 'snippet') c.title = 'Price read from a search result, not the listing page';
-  if (l.currency && l.currency !== 'AUD' && l.price != null) c.append(el('small', {}, fmtMoney(l.price, l.currency)));
-  return c;
-}
-function dealRow(d, opts = {}) {
-  const w = watchMeta(d.watch_id);
-  const bits = [opts.watch ? label(w) : null, d.condition && d.condition !== 'unknown' ? d.condition : null, d.full_set ? 'full set' : null, d.seller_type === 'private' ? 'private seller' : null, [srcName(d.source), d.seller_country].filter(Boolean).join(' '), d.first_seen ? fmtDate(d.first_seen) : null].filter(Boolean).join('  ·  ');
-  const isNew = state.latest.run_date && d.first_seen === state.latest.run_date;
-  return el('div', { class: 'row' + (opts.thumb ? '' : ' nothumb') },
-    opts.thumb ? thumb(w) : null,
-    el('div', { class: 't' }, flagTag(d.flag) || (isNew && !opts.drop ? el('span', { class: 'tag new' }, 'New') : null), opts.drop ? el('span', { class: 'tag drop' }, 'Drop') : null, el('a', { href: d.url, target: '_blank', rel: 'noopener', title: d.why || '' }, d.title || d.url)),
-    priceCell(d, { pct: d.below_market_pct != null && !opts.drop, drop: opts.drop }),
-    el('div', { class: 'sub' }, bits)
-  );
+function flag(d, isNew, drop) { if (drop) return el('span', { class: 'flag f12 drop' }, 'Drop'); if (d.flag === 'verify') return el('span', { class: 'flag f12 verify', title: 'Unusually cheap, private seller or incomplete set. Check before you trust it.' }, 'Verify'); if (d.flag === 'grey-new') return el('span', { class: 'flag f12 grey', title: 'New from a grey-market dealer, without an authorised-dealer warranty.' }, 'Grey'); if (isNew) return el('span', { class: 'flag f12 new' }, 'New'); return null; }
+function dealRow(d, i, opts = {}) {
+  const w = watchMeta(d.watch_id); const isNew = state.latest.run_date && d.first_seen === state.latest.run_date;
+  const meta = [label(w), d.condition && d.condition !== 'unknown' ? d.condition : null, d.full_set ? 'full set' : null, d.seller_type === 'private' ? 'private seller' : null, [srcName(d.source), d.seller_country].filter(Boolean).join(' '), d.first_seen ? fmtDate(d.first_seen) : null].filter(Boolean).join(' · ');
+  return el('a', { class: 'lrow', href: d.url, target: '_blank', rel: 'noopener', title: d.why || '' },
+    el('span', { class: 'n f12 muted' }, pad(i + 1)),
+    el('span', { class: 't f24 light' }, flag(d, isNew, opts.drop), d.title || d.url),
+    el('span', { class: 'm f12 muted' }, meta),
+    el('span', { class: 'p f16' }, fmtAUD(d.price_aud) + (d.source_quality === 'snippet' ? ' ≈' : ''), opts.drop && d.was_aud ? el('span', { class: 'was f12' }, fmtAUD(d.was_aud)) : (d.below_market_pct != null ? el('span', { class: 'pct f12' }, '−' + d.below_market_pct.toFixed(0) + '% vs market') : null)));
 }
 function renderToday() {
-  const L = state.latest, host = $('#deals'); host.innerHTML = '';
-  const deals = (L.deals || []).slice().sort((a, b) => (b.below_market_pct || 0) - (a.below_market_pct || 0));
-  const drops = L.price_drops || [];
-  $('#todayDate').textContent = L.run_date ? fmtLong(L.run_date) : '';
-  if (!L.run_date || L.status === 'idle') { $('#todayH').textContent = 'Nothing to show yet'; $('#todayAside').textContent = 'The agent runs every morning at seven, Brisbane time'; return; }
-  $('#todayH').innerHTML = ''; $('#todayH').append(deals.length ? deals.length + ' under market' : 'Nothing under market', deals.length ? el('em', {}, ' across ' + new Set(deals.map(d => d.watch_id)).size + (new Set(deals.map(d => d.watch_id)).size === 1 ? ' watch' : ' watches')) : null);
-  $('#todayAside').textContent = 'Benchmark: median asking price across the market, 30-day smoothed';
-  if (deals.length) host.append(el('div', { class: 'rows' }, ...deals.map(d => dealRow(d, { thumb: true, watch: true }))));
-  else host.append(el('div', { class: 'empty' }, 'No listing sits under its benchmark today.'));
-  if (drops.length) host.append(el('div', { class: 'group-h' }, 'Price drops'), el('div', { class: 'rows' }, ...drops.map(d => dealRow(d, { thumb: true, watch: true, drop: true }))));
+  const L = state.latest, F = state.focus, host = $('#deals'), track = $('#track'); host.innerHTML = ''; track.innerHTML = '';
+  const deals = (L.deals || []).slice().sort((a, b) => (b.below_market_pct || 0) - (a.below_market_pct || 0)); const drops = L.price_drops || [];
+  $('#todayDate').textContent = L.run_date ? fmtLong(L.run_date) : 'No run yet';
+  const nothing = !F.brands.length && !state.wl.watches.length;
+  $('#todayNote').innerHTML = ''; $('#todayNote').append(nothing ? 'Nothing selected yet. ' : L.status === 'failed' ? 'The last run did not complete. ' : F.updated && L.run_date && F.updated > L.run_date ? 'Focus changed since the last run. ' : 'A daily benchmark across the market. ', nothing ? el('a', { href: '#', style: 'border-bottom:1px solid currentColor', onclick: e => { e.preventDefault(); openOverlay('focus'); } }, 'Choose brands') : null);
+  const nW = new Set(deals.map(d => d.watch_id)).size;
+  $('#todayH').textContent = !L.run_date || L.status === 'idle' ? 'nothing yet' : deals.length ? deals.length + ' under market' : 'nothing under market';
+  // gallery
+  const ws = watches(); $('#gal').style.display = ws.length ? '' : 'none';
+  ws.forEach((w, i) => { const im = imageOf(w); const n = deals.filter(d => d.watch_id === w.id).length; track.append(el('a', { class: 'tile', href: '#watches', onclick: e => { e.preventDefault(); show('watches'); setTimeout(() => { const t = document.getElementById('w-' + w.id); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50); } },
+    el('div', { class: 'cap f12' }, el('span', {}, w.brand), el('span', { class: 'muted' }, pad(i + 1))),
+    el('div', { class: 'im', style: 'transition-delay:' + (i * 90) + 'ms' }, im ? el('img', { src: im.src, alt: w.brand + ' ' + w.model, loading: 'lazy' }) : el('div', { class: 'ph' }, (w.brand || '').slice(0, 1))),
+    el('div', { class: 'under f12' }, el('span', {}, (w.model || '').toUpperCase()), el('span', { class: 'muted' }, w.asking_min != null ? 'from ' + fmtAUD(w.asking_min) : n ? n + ' under' : '')))); });
+  $('#dealsLab').style.display = L.run_date ? '' : 'none';
+  if (deals.length) deals.forEach((d, i) => host.append(dealRow(d, i))); else if (L.run_date) host.append(el('div', { class: 'empty f16 muted' }, 'No listing sits under its benchmark today.'));
+  if (drops.length) { host.append(el('div', { class: 'sec-lab f12', style: 'padding:0' }, 'Price drops')); drops.forEach((d, i) => host.append(dealRow(d, i, { drop: true }))); }
 }
+function revealGallery() { const g = $('#gal'); g.classList.add('reveal'); requestAnimationFrame(() => requestAnimationFrame(() => g.classList.remove('reveal'))); }
+// drag + wheel for the gallery
+(() => { const t = $('#track'); let down = false, sx = 0, sl = 0; t.addEventListener('pointerdown', e => { down = true; sx = e.clientX; sl = t.scrollLeft; t.classList.add('drag'); }); window.addEventListener('pointerup', () => { down = false; t.classList.remove('drag'); }); t.addEventListener('pointermove', e => { if (!down) return; const dx = e.clientX - sx; if (Math.abs(dx) > 4) e.preventDefault(); t.scrollLeft = sl - dx; }); t.addEventListener('click', e => { if (Math.abs(t.scrollLeft - sl) > 6) e.preventDefault(); }, true); t.addEventListener('wheel', e => { if (Math.abs(e.deltaY) > Math.abs(e.deltaX) && t.scrollWidth > t.clientWidth) { t.scrollLeft += e.deltaY; e.preventDefault(); } }, { passive: false }); })();
+
 function renderWatches() {
   const host = $('#watchList'); host.innerHTML = '';
   const ws = watches();
-  $('#watchesAside').textContent = ws.length ? ws.length + (ws.length === 1 ? ' model' : ' models') + ' tracked' : '';
-  if (!ws.length) { host.append(el('div', { class: 'empty' }, state.focus.brands.length ? 'The models the agent finds for your brands appear here after the next run.' : 'Choose brands in Focus; the models the agent finds appear here.')); return; }
+  if (!ws.length) { host.append(el('div', { class: 'grid page-h' }, el('h1', { class: 'f90 span-l' }, 'watches'), el('div', { class: 'span-r sub f12' }, el('p', {}, 'Nothing tracked yet'), el('p', { class: 'muted' }, state.focus.brands.length ? 'The models the agent finds appear here after the next run' : 'Choose brands in Focus')))); return; }
   const brandNotes = new Map((state.latest.brands || []).map(b => [b.name, b]));
-  let lastBrand = null, group = null;
-  for (const w of ws) {
-    if (w.brand !== lastBrand) {
-      const bn = brandNotes.get(w.brand);
-      host.append(el('div', { class: 'brand-h' }, el('h2', {}, w.brand), bn && bn.listings_in_band != null ? el('span', {}, bn.listings_in_band + ' listings in your range') : null));
-      group = el('div'); host.append(group); lastBrand = w.brand;
+  const byBrand = new Map(); ws.forEach(w => { if (!byBrand.has(w.brand)) byBrand.set(w.brand, []); byBrand.get(w.brand).push(w); });
+  for (const [brand, list] of byBrand) {
+    const bn = brandNotes.get(brand);
+    const sec = el('section', { class: 'brand' });
+    sec.append(el('div', { class: 'grid page-h' }, el('h1', { class: 'f90 span-l' }, (brand || '').toLowerCase()), el('div', { class: 'span-r sub f12' }, el('p', {}, list.length + (list.length === 1 ? ' model tracked' : ' models tracked')), bn && bn.listings_in_band != null ? el('p', { class: 'muted' }, bn.listings_in_band + ' listings in your range') : null)));
+    for (const w of list) {
+      const im = imageOf(w);
+      const pic = el('div', { class: 'pic' }, el('div', { class: 'im' }, im ? el('img', { src: im.src, alt: w.brand + ' ' + w.model, loading: 'lazy' }) : el('div', { class: 'ph' }, (w.brand || '').slice(0, 1))), im && im.credit ? el('div', { class: 'credit f12' }, el('a', { href: im.credit.source, target: '_blank', rel: 'noopener' }, 'Photo ' + im.credit.author + ', ' + im.credit.license)) : null);
+      const med = series(w.id, 'asking_median'), prev = med.at(-2), last = med.at(-1); const change = prev && last ? pct(last.value, prev.value) : null;
+      const nl = el('ul', { class: 'nl f24 light' });
+      const li = (n, k, v, sub, cls) => nl.append(el('li', {}, el('span', { class: 'muted' }, n + '.'), el('span', { class: 'k' }, k), el('span', { class: 'v ' + (cls || '') }, v, sub ? el('small', {}, sub) : null)));
+      li('01', 'Lowest ask', w.asking_min != null ? fmtAUD(w.asking_min) : '—');
+      li('02', 'Market', w.benchmark_aud ? fmtAUD(w.benchmark_aud) : '—', change != null ? (change > 0 ? '↑ ' : change < 0 ? '↓ ' : '→ ') + Math.abs(change).toFixed(1) + '% since last run' : null);
+      li('03', 'Under market', String(w.below_market_count || 0), w.asking_n != null ? 'of ' + w.asking_n + ' listings' : null, w.below_market_count ? 'ok' : '');
+      if (w.watchcharts_market != null) li('04', 'WatchCharts', fmtAUD(w.watchcharts_market));
+      if (w.ceiling) li(w.watchcharts_market != null ? '05' : '04', 'Ceiling', fmtAUD(w.ceiling));
+      const body = el('div', { class: 'body' }, el('h2', { class: 'f24 up' }, w.model || w.id, el('span', { class: 'r' }, w.reference || ''), w.active ? null : el('span', { class: 'r' }, 'paused')), nl);
+      const data = SERIES.map(s => ({ ...s, pts: series(w.id, s.metric) })).filter(s => s.pts.length >= 2);
+      if (data.length) { body.append(el('div', { class: 'chart-h f12' }, el('span', { class: 'muted' }, 'Asking prices'), el('div', { class: 'legend muted' }, ...data.map(s => el('span', {}, el('i', { style: 'background:' + s.color }), s.label)))), lineChart(data, w.ceiling)); const dates = [...new Set(data.flatMap(s => s.pts.map(p => p.date)))].sort().reverse().slice(0, 30); body.append(el('details', {}, el('summary', { class: 'f12' }, 'Table →'), el('table', {}, el('thead', {}, el('tr', {}, el('th', {}, 'Date'), ...data.map(s => el('th', { class: 'num' }, s.label)))), el('tbody', {}, ...dates.map(d => el('tr', {}, el('td', {}, fmtDate(d)), ...data.map(s => { const p = s.pts.find(q => q.date === d); return el('td', { class: 'num' }, p ? fmtAUD(p.value) : '—'); }))))))); }
+      const matches = recentMatches(w.id).slice(0, 4);
+      if (matches.length) { body.append(el('div', { class: 'sub-h f12 muted' }, el('span', {}, 'Listings'), el('span', {}, 'last 14 days'))); const mini = el('div', { class: 'mini' }); matches.forEach(l => mini.append(el('a', { href: l.url, target: '_blank', rel: 'noopener' }, el('span', { class: 'f16' }, l.title || l.url), el('span', { class: 'f12' }, [l.condition && l.condition !== 'unknown' ? l.condition : null, l.full_set ? 'full set' : null, [srcName(l.source), l.seller_country].filter(Boolean).join(' '), fmtDate(l.first_seen)].filter(Boolean).join(' · ')), el('span', { class: 'pr f16' }, fmtAUD(l.price_aud) + (l.source_quality === 'snippet' ? ' ≈' : ''), l.below_market_pct != null && l.below_market_pct > 0 ? el('span', { class: 'f12' }, '−' + l.below_market_pct.toFixed(0) + '%') : null)))); body.append(mini); }
+      const lots = Object.entries(state.auctions).map(([url, a]) => ({ url, ...a })).filter(a => a.watch_id === w.id && a.status === 'upcoming').sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+      if (lots.length) { body.append(el('div', { class: 'sub-h f12 muted' }, el('span', {}, 'At auction'))); const mini = el('div', { class: 'mini' }); lots.forEach(a => mini.append(el('a', { href: a.url, target: '_blank', rel: 'noopener' }, el('span', { class: 'f16' }, [a.house, a.sale, a.lot ? 'lot ' + a.lot : null].filter(Boolean).join(' · ')), el('span', { class: 'f12' }, a.date ? fmtDate(a.date) : ''), el('span', { class: 'pr f16' }, a.estimate_low != null ? fmtMoney(a.estimate_low, a.currency) + (a.estimate_high != null ? '–' + Math.round(a.estimate_high).toLocaleString('en-AU') : '') : 'Estimate TBC')))); body.append(mini); }
+      sec.append(el('article', { class: 'grid model', id: 'w-' + w.id }, pic, body));
     }
-    const im = imageOf(w);
-    const photo = el('div', { class: 'photo' },
-      im ? el('img', { src: im.src, alt: w.brand + ' ' + w.model, loading: 'lazy' }) : el('div', { class: 'ph' }, (w.brand || '').slice(0, 1)),
-      im && im.credit ? el('div', { class: 'credit' }, el('a', { href: im.credit.source, target: '_blank', rel: 'noopener' }, 'Photo ' + im.credit.author + ', ' + im.credit.license)) : null);
-    const med = series(w.id, 'asking_median'), prev = med.at(-2), last = med.at(-1);
-    const change = prev && last ? pct(last.value, prev.value) : null;
-    const figs = el('dl', { class: 'figs' });
-    const fig = (k, v, sub, cls) => figs.append(el('div', {}, el('dt', {}, k), el('dd', { class: cls || '' }, v, sub ? el('small', {}, sub) : null)));
-    fig('Lowest ask', w.asking_min != null ? fmtAUD(w.asking_min) : '—');
-    fig('Market', w.benchmark_aud ? fmtAUD(w.benchmark_aud) : '—', change != null ? (change > 0 ? '↑ ' : change < 0 ? '↓ ' : '→ ') + Math.abs(change).toFixed(1) + '% since last run' : null);
-    fig('Under market', String(w.below_market_count || 0), w.asking_n != null ? 'of ' + w.asking_n + ' listings' : null, w.below_market_count ? 'ok' : '');
-    const fine = [w.watchcharts_market != null ? 'WatchCharts ' + fmtAUD(w.watchcharts_market) : null, w.ceiling ? 'ceiling ' + fmtAUD(w.ceiling) : null, w.band ? 'range ' + fmtAUD(w.band[0]) + '–' + Math.round(w.band[1]).toLocaleString('en-AU') : null].filter(Boolean).join('  ·  ');
-    const right = el('div', {}, el('h3', {}, w.model || w.id), el('p', { class: 'ref' }, [w.reference, w.active ? null : 'paused'].filter(Boolean).join('  ·  ')), figs, fine ? el('p', { class: 'fine' }, fine) : null);
-    const data = SERIES.map(s => ({ ...s, pts: series(w.id, s.metric) })).filter(s => s.pts.length >= 2);
-    if (data.length) {
-      right.append(el('div', { class: 'chart-h' }, el('span', { class: 'caps' }, 'Asking prices'), el('div', { class: 'legend' }, ...data.map(s => el('span', {}, el('i', { style: 'background:' + s.color }), s.label)))), lineChart(data, w.ceiling));
-      const dates = [...new Set(data.flatMap(s => s.pts.map(p => p.date)))].sort().reverse().slice(0, 30);
-      right.append(el('details', {}, el('summary', {}, 'Table'), el('table', {}, el('thead', {}, el('tr', {}, el('th', {}, 'Date'), ...data.map(s => el('th', { class: 'num' }, s.label)))), el('tbody', {}, ...dates.map(d => el('tr', {}, el('td', {}, fmtDate(d)), ...data.map(s => { const p = s.pts.find(q => q.date === d); return el('td', { class: 'num' }, p ? fmtAUD(p.value) : '—'); })))))));
-    }
-    const matches = recentMatches(w.id).slice(0, 4);
-    if (matches.length) right.append(el('div', { class: 'sub-h' }, el('span', {}, 'Listings'), el('span', {}, 'last 14 days')), el('div', { class: 'rows' }, ...matches.map(l => dealRow(l))));
-    const lots = Object.entries(state.auctions).map(([url, a]) => ({ url, ...a })).filter(a => a.watch_id === w.id && a.status === 'upcoming').sort((a, b) => (a.date || '').localeCompare(b.date || ''));
-    if (lots.length) right.append(el('div', { class: 'sub-h' }, el('span', {}, 'At auction')), el('div', { class: 'rows' }, ...lots.map(a => lotRow(a))));
-    group.append(el('article', { class: 'watch' + (w.active ? '' : ' paused'), id: 'w-' + w.id }, photo, right));
+    host.append(sec);
   }
-}
-function lotRow(a, opts = {}) {
-  const w = watchMeta(a.watch_id);
-  const est = a.estimate_low != null ? fmtMoney(a.estimate_low, a.currency) + (a.estimate_high != null ? '–' + Math.round(a.estimate_high).toLocaleString('en-AU') : '') : null;
-  const price = el('div', { class: 'price' }, a.status === 'sold' ? fmtMoney(a.result, a.currency) : a.status === 'unsold' ? 'Unsold' : (est || 'Estimate TBC'), el('small', {}, a.status === 'sold' ? 'sold' : a.status === 'upcoming' ? 'estimate' : a.status));
-  return el('div', { class: 'row' + (opts.thumb ? '' : ' nothumb') }, opts.thumb ? thumb(w) : null,
-    el('div', { class: 't' }, el('a', { href: a.url, target: '_blank', rel: 'noopener' }, [a.house, a.sale, a.lot ? 'lot ' + a.lot : null].filter(Boolean).join(' · '))),
-    price,
-    el('div', { class: 'sub' }, [opts.thumb ? label(w) : null, a.date ? fmtDate(a.date) : null].filter(Boolean).join('  ·  ')));
 }
 function renderAuctions() {
   const host = $('#auctionList'); host.innerHTML = '';
   const lots = Object.entries(state.auctions).map(([url, a]) => ({ url, ...a }));
-  const up = lots.filter(a => a.status === 'upcoming').sort((a, b) => (a.date || '').localeCompare(b.date || ''));
-  const done = lots.filter(a => a.status !== 'upcoming').sort((a, b) => (b.date || '').localeCompare(a.date || '')).slice(0, 12);
-  $('#auctionsAside').textContent = up.length ? up.length + ' upcoming' : '';
-  if (!up.length && !done.length) { host.append(el('div', { class: 'empty' }, 'No lots found for the tracked models yet.')); return; }
-  if (up.length) host.append(el('div', { class: 'group-h' }, 'Upcoming'), el('div', { class: 'rows' }, ...up.map(a => lotRow(a, { thumb: true }))));
-  if (done.length) host.append(el('div', { class: 'group-h' }, 'Results'), el('div', { class: 'rows' }, ...done.map(a => lotRow(a, { thumb: true }))));
+  const up = lots.filter(a => a.status === 'upcoming').sort((a, b) => (a.date || '').localeCompare(b.date || '')); const done = lots.filter(a => a.status !== 'upcoming').sort((a, b) => (b.date || '').localeCompare(a.date || '')).slice(0, 12);
+  $('#auctionsNote').textContent = up.length ? up.length + ' upcoming' : 'None upcoming';
+  const row = (a, i) => { const w = watchMeta(a.watch_id); const est = a.estimate_low != null ? fmtMoney(a.estimate_low, a.currency) + (a.estimate_high != null ? '–' + Math.round(a.estimate_high).toLocaleString('en-AU') : '') : null; return el('a', { class: 'lrow', href: a.url, target: '_blank', rel: 'noopener' }, el('span', { class: 'n f12 muted' }, pad(i + 1)), el('span', { class: 't f24 light' }, [a.house, a.sale, a.lot ? 'lot ' + a.lot : null].filter(Boolean).join(' · ')), el('span', { class: 'm f12 muted' }, [label(w), a.date ? fmtDate(a.date) : null].filter(Boolean).join(' · ')), el('span', { class: 'p f16' }, a.status === 'sold' ? fmtMoney(a.result, a.currency) : a.status === 'unsold' ? 'Unsold' : (est || 'Estimate TBC'), el('span', { class: 'f12 muted', style: 'display:block;margin-top:6px' }, a.status === 'upcoming' ? 'estimate' : a.status))); };
+  if (!up.length && !done.length) { host.append(el('div', { class: 'list' }, el('div', { class: 'empty f16 muted' }, 'No lots found for the tracked models yet.'))); return; }
+  if (up.length) { host.append(el('div', { class: 'sec-lab f12', style: 'margin-top:0' }, 'Upcoming')); const l = el('div', { class: 'list' }); up.forEach((a, i) => l.append(row(a, i))); host.append(l); }
+  if (done.length) { host.append(el('div', { class: 'sec-lab f12' }, 'Results')); const l = el('div', { class: 'list' }); done.forEach((a, i) => l.append(row(a, i))); host.append(l); }
 }
 
-// ---- charts ----
-const SERIES = [
-  { metric: 'asking_median', label: 'Median ask', color: 'var(--s1)' },
-  { metric: 'asking_min', label: 'Lowest ask', color: 'var(--s3)' },
-  { metric: 'watchcharts_market', label: 'WatchCharts', color: 'var(--s2)' },
-];
-function chartWidth() { const mw = $('main').clientWidth || 800; return mw < 860 ? Math.max(320, mw) : Math.max(420, Math.round(mw * 7 / 11 - 48)); }
+// chart
+const SERIES = [{ metric: 'asking_median', label: 'Median ask', color: 'var(--s1)' }, { metric: 'asking_min', label: 'Lowest ask', color: 'var(--s3)' }, { metric: 'watchcharts_market', label: 'WatchCharts', color: 'var(--s2)' }];
+function chartWidth() { const mw = document.body.clientWidth || 800; return mw < 900 ? Math.max(320, mw - 32) : Math.max(380, Math.round((mw - 32) * 5 / 12)); }
 function lineChart(data, ceiling) {
-  const W = chartWidth(), H = 190, m = { t: 12, r: 70, b: 24, l: 56 };
-  const wrap = el('div', { class: 'chart' });
-  const ns = 'http://www.w3.org/2000/svg', mk = (t, a) => { const n = document.createElementNS(ns, t); for (const [k, v] of Object.entries(a)) n.setAttribute(k, v); return n; };
+  const W = chartWidth(), H = 200, m = { t: 12, r: 66, b: 24, l: 52 };
+  const wrap = el('div', { class: 'chart' }); const ns = 'http://www.w3.org/2000/svg', mk = (t, a) => { const n = document.createElementNS(ns, t); for (const [k, v] of Object.entries(a)) n.setAttribute(k, v); return n; };
   const svg = mk('svg', { viewBox: `0 0 ${W} ${H}`, preserveAspectRatio: 'none' });
-  const dates = [...new Set(data.flatMap(s => s.pts.map(p => p.date)))].sort();
-  const vals = data.flatMap(s => s.pts.map(p => p.value)).concat(ceiling ? [ceiling] : []);
-  let lo = Math.min(...vals), hi = Math.max(...vals); if (lo === hi) { lo *= 0.95; hi *= 1.05; }
-  const pad = (hi - lo) * 0.08; lo -= pad; hi += pad;
-  const t0 = Date.parse(dates[0]), t1 = Date.parse(dates.at(-1)) || t0 + 1;
-  const x = d => m.l + (Date.parse(d) - t0) / (t1 - t0) * (W - m.l - m.r);
-  const y = v => m.t + (1 - (v - lo) / (hi - lo)) * (H - m.t - m.b);
+  const dates = [...new Set(data.flatMap(s => s.pts.map(p => p.date)))].sort(); const vals = data.flatMap(s => s.pts.map(p => p.value)).concat(ceiling ? [ceiling] : []);
+  let lo = Math.min(...vals), hi = Math.max(...vals); if (lo === hi) { lo *= 0.95; hi *= 1.05; } const padv = (hi - lo) * 0.08; lo -= padv; hi += padv;
+  const t0 = Date.parse(dates[0]), t1 = Date.parse(dates.at(-1)) || t0 + 1; const x = d => m.l + (Date.parse(d) - t0) / (t1 - t0) * (W - m.l - m.r); const y = v => m.t + (1 - (v - lo) / (hi - lo)) * (H - m.t - m.b);
   const g = mk('g', { class: 'grid' }), ax = mk('g', { class: 'ax' });
   for (let i = 0; i <= 3; i++) { const v = lo + (hi - lo) * i / 3, yy = y(v); g.append(mk('line', { x1: m.l, x2: W - m.r, y1: yy, y2: yy })); const t = mk('text', { x: m.l - 10, y: yy + 4, 'text-anchor': 'end' }); t.textContent = 'A$' + (v >= 10000 ? (v / 1000).toFixed(1) + 'k' : Math.round(v).toLocaleString()); ax.append(t); }
-  const n = Math.min(dates.length, 5);
-  for (let i = 0; i < n; i++) { const d = dates[Math.round(i * (dates.length - 1) / Math.max(n - 1, 1))]; const t = mk('text', { x: x(d), y: H - 6, 'text-anchor': i === 0 ? 'start' : i === n - 1 ? 'end' : 'middle' }); t.textContent = fmtDate(d); ax.append(t); }
+  const n = Math.min(dates.length, 5); for (let i = 0; i < n; i++) { const d = dates[Math.round(i * (dates.length - 1) / Math.max(n - 1, 1))]; const t = mk('text', { x: x(d), y: H - 6, 'text-anchor': i === 0 ? 'start' : i === n - 1 ? 'end' : 'middle' }); t.textContent = fmtDate(d); ax.append(t); }
   svg.append(g, ax);
-  if (ceiling) { svg.append(mk('line', { x1: m.l, x2: W - m.r, y1: y(ceiling), y2: y(ceiling), stroke: 'var(--ink-3)', 'stroke-dasharray': '5 4', 'stroke-width': 1 })); const t = mk('text', { class: 'lbl', x: m.l + 6, y: y(ceiling) - 5, fill: 'var(--ink-2)', 'font-weight': 400 }); t.textContent = 'ceiling ' + fmtAUD(ceiling); svg.append(t); }
-  for (const s of data) {
-    const d = s.pts.map((p, i) => (i ? 'L' : 'M') + x(p.date).toFixed(1) + ' ' + y(p.value).toFixed(1)).join(' ');
-    svg.append(mk('path', { class: 'ser', d, stroke: s.color, 'vector-effect': 'non-scaling-stroke' }));
-    if (s.pts.length <= 12) for (const p of s.pts) svg.append(mk('circle', { class: 'pt', cx: x(p.date), cy: y(p.value), r: 3.5, fill: s.color }));
-  }
+  if (ceiling) { svg.append(mk('line', { x1: m.l, x2: W - m.r, y1: y(ceiling), y2: y(ceiling), stroke: 'var(--ink-3)', 'stroke-dasharray': '5 4', 'stroke-width': 1 })); const t = mk('text', { class: 'lbl', x: m.l + 6, y: y(ceiling) - 5, fill: 'var(--ink-2)' }); t.textContent = 'ceiling ' + fmtAUD(ceiling); svg.append(t); }
+  for (const s of data) { const d = s.pts.map((p, i) => (i ? 'L' : 'M') + x(p.date).toFixed(1) + ' ' + y(p.value).toFixed(1)).join(' '); svg.append(mk('path', { class: 'ser', d, stroke: s.color, 'vector-effect': 'non-scaling-stroke' })); if (s.pts.length <= 12) for (const p of s.pts) svg.append(mk('circle', { class: 'pt', cx: x(p.date), cy: y(p.value), r: 3.5, fill: s.color })); }
   const labels = data.map(s => { const last = s.pts.at(-1); return { s, v: last.value, y: y(last.value) }; }).sort((a, b) => a.y - b.y);
   for (let i = 1; i < labels.length; i++) if (labels[i].y - labels[i - 1].y < 14) labels[i].y = labels[i - 1].y + 14;
   for (let i = labels.length - 1; i >= 0; i--) { if (labels[i].y > H - m.b - 2) labels[i].y = H - m.b - 2; if (i < labels.length - 1 && labels[i + 1].y - labels[i].y < 14) labels[i].y = labels[i + 1].y - 14; }
   for (const L of labels) { const t = mk('text', { class: 'lbl', x: W - m.r + 6, y: L.y + 4, fill: L.s.color }); t.textContent = fmtAUD(L.v); svg.append(t); }
-  const cross = mk('line', { class: 'cross', y1: m.t, y2: H - m.b }); svg.append(cross);
-  const tip = el('div', { class: 'tip' }); wrap.append(svg, tip);
-  svg.addEventListener('mousemove', e => {
-    const r = svg.getBoundingClientRect(); const px = (e.clientX - r.left) / r.width * W;
-    let best = null, bd = 1e9; for (const d of dates) { const dd = Math.abs(x(d) - px); if (dd < bd) { bd = dd; best = d; } }
-    if (!best) return;
-    cross.style.display = 'block'; cross.setAttribute('x1', x(best)); cross.setAttribute('x2', x(best));
-    tip.style.display = 'block'; tip.style.left = (x(best) / W * 100) + '%'; tip.style.top = (m.t / H * 100) + '%';
-    tip.innerHTML = '<b>' + fmtDate(best) + '</b>' + data.map(s => { const p = s.pts.find(q => q.date === best); return p ? s.label + ' ' + fmtAUD(p.value) : null; }).filter(Boolean).join('<br>');
-  });
+  const cross = mk('line', { class: 'cross', y1: m.t, y2: H - m.b }); svg.append(cross); const tip = el('div', { class: 'tip' }); wrap.append(svg, tip);
+  svg.addEventListener('mousemove', e => { const r = svg.getBoundingClientRect(); const px = (e.clientX - r.left) / r.width * W; let best = null, bd = 1e9; for (const d of dates) { const dd = Math.abs(x(d) - px); if (dd < bd) { bd = dd; best = d; } } if (!best) return; cross.style.display = 'block'; cross.setAttribute('x1', x(best)); cross.setAttribute('x2', x(best)); tip.style.display = 'block'; tip.style.left = (x(best) / W * 100) + '%'; tip.style.top = (m.t / H * 100) + '%'; tip.innerHTML = '<b>' + fmtDate(best) + '</b>' + data.map(s => { const p = s.pts.find(q => q.date === best); return p ? s.label + ' ' + fmtAUD(p.value) : null; }).filter(Boolean).join('<br>'); });
   svg.addEventListener('mouseleave', () => { cross.style.display = 'none'; tip.style.display = 'none'; });
   return wrap;
 }
 
-// ---- footer: run summary, folded ----
+// footer
 function renderFooter() {
   const L = state.latest, host = $('#footRun'); host.innerHTML = '';
-  if (L.run_date) {
-    const bits = ['Last run ' + fmtDate(L.run_date) + (L.run_at_local ? ' at ' + L.run_at_local : ''), L.status, L.fetches != null ? L.fetches + ' pages read' : null].filter(Boolean).join('  ·  ');
-    const d = el('details', { style: 'margin-top:4px' }, el('summary', {}, bits));
-    const ns = L.notes || [];
-    if (ns.length) d.append(el('div', { class: 'notes' }, el('ul', {}, ...ns.map(x => el('li', {}, x)))));
-    const runs = [...state.runs].sort((a, b) => (b.date || '').localeCompare(a.date || '')).slice(0, 30);
-    if (runs.length) d.append(el('div', { class: 'runs' }, ...runs.map(r => el('div', {}, el('span', {}, fmtDate(r.date)), el('span', {}, [r.type, r.status, r.deals != null ? r.deals + ' under market' : null, r.fetches != null ? r.fetches + ' pages' : null].filter(Boolean).join('  ·  ')), r.report ? el('a', { href: state.repo + '/blob/main/' + r.report, target: '_blank', rel: 'noopener' }, 'Report') : null))));
-    host.append(d);
-  }
-  const creds = Object.values(state.images).filter(i => i.author); const c = $('#credits'); c.innerHTML = '';
-  if (creds.length) { c.append('Photos '); creds.forEach((i, k) => { c.append(el('a', { href: i.source, target: '_blank', rel: 'noopener' }, i.author), ' (' + i.license + ')' + (k < creds.length - 1 ? ', ' : '')); }); c.append(', representative of each model.'); }
+  if (L.run_date) { const d = el('details', {}, el('summary', {}, 'Last run ' + fmtDate(L.run_date) + (L.run_at_local ? ' at ' + L.run_at_local : '') + ' · ' + (L.status || '') + (L.fetches != null ? ' · ' + L.fetches + ' pages read' : '') + ' →')); const ns = L.notes || []; if (ns.length) d.append(el('ul', {}, ...ns.map(x => el('li', {}, x)))); const runs = [...state.runs].sort((a, b) => (b.date || '').localeCompare(a.date || '')).slice(0, 30); if (runs.length) d.append(el('div', { class: 'runs' }, ...runs.map(r => el('div', {}, el('span', {}, fmtDate(r.date)), el('span', {}, [r.type, r.status, r.deals != null ? r.deals + ' under market' : null, r.fetches != null ? r.fetches + ' pages' : null].filter(Boolean).join(' · ')), r.report ? el('a', { href: state.repo + '/blob/main/' + r.report, target: '_blank', rel: 'noopener' }, 'Report') : null)))); host.append(d); }
+  const creds = Object.values(state.images).filter(i => i.author); const c = $('#credits'); c.innerHTML = ''; if (creds.length) { c.append('Photos '); creds.forEach((i, k) => { c.append(el('a', { href: i.source, target: '_blank', rel: 'noopener' }, i.author), ' (' + i.license + ')' + (k < creds.length - 1 ? ', ' : '')); }); c.append(', representative of each model.'); }
 }
 
-// ---- focus ----
-function markDirty(d = true, which = 'wl') { if (which === 'all') { state.wlDirty = d; state.focusDirty = d; } else if (which === 'wl') state.wlDirty = d; else state.focusDirty = d; const any = state.wlDirty || state.focusDirty; $('#saveBtn').disabled = !any; const m = $('#saveMsg'); m.className = 'msg'; m.textContent = any ? 'Unsaved changes' : 'No unsaved changes'; }
+// focus
+function markDirty(d = true, which = 'wl') { if (which === 'all') { state.wlDirty = d; state.focusDirty = d; } else if (which === 'wl') state.wlDirty = d; else state.focusDirty = d; const any = state.wlDirty || state.focusDirty; $('#saveBtn').disabled = !any; const m = $('#saveMsg'); m.className = 'msg f12'; m.textContent = any ? 'Unsaved changes' : ''; }
 const fmtBand = b => 'A$' + b[0].toLocaleString('en-AU') + ' – ' + b[1].toLocaleString('en-AU');
 function renderFocus() {
   const F = state.focus, bp = $('#brandPick'), dp = $('#bandPick'); bp.innerHTML = ''; dp.innerHTML = '';
-  for (const b of F.brands_available) {
-    const on = F.brands.includes(b);
-    bp.append(el('button', { 'aria-pressed': String(on), onclick: () => { F.brands = on ? F.brands.filter(x => x !== b) : F.brands_available.filter(x => x === b || F.brands.includes(x)); markDirty(true, 'focus'); renderFocus(); } }, el('i'), b));
-  }
-  $('#brandCount').textContent = F.brands.length ? F.brands.length + ' of ' + F.brands_available.length : 'None selected';
-  for (const band of F.bands_available) {
-    const on = F.bands.some(x => x[0] === band[0] && x[1] === band[1]);
-    dp.append(el('button', { 'aria-pressed': String(on), onclick: () => { F.bands = on ? F.bands.filter(x => !(x[0] === band[0] && x[1] === band[1])) : [...F.bands, band].sort((a, c) => a[0] - c[0]); markDirty(true, 'focus'); renderFocus(); } }, el('i'), fmtBand(band)));
-  }
+  for (const b of F.brands_available) { const on = F.brands.includes(b); bp.append(el('button', { class: 'check-item f16', 'aria-pressed': String(on), onclick: () => { F.brands = on ? F.brands.filter(x => x !== b) : F.brands_available.filter(x => x === b || F.brands.includes(x)); markDirty(true, 'focus'); renderFocus(); } }, el('i'), b)); }
+  $('#brandCount').textContent = F.brands.length ? F.brands.length + ' / ' + F.brands_available.length : '';
+  for (const band of F.bands_available) { const on = F.bands.some(x => x[0] === band[0] && x[1] === band[1]); dp.append(el('button', { class: 'check-item f16', 'aria-pressed': String(on), onclick: () => { F.bands = on ? F.bands.filter(x => !(x[0] === band[0] && x[1] === band[1])) : [...F.bands, band].sort((a, c) => a[0] - c[0]); markDirty(true, 'focus'); renderFocus(); } }, el('i'), fmtBand(band))); }
 }
 $('#brandAll').onclick = () => { state.focus.brands = [...state.focus.brands_available]; markDirty(true, 'focus'); renderFocus(); };
 $('#brandNone').onclick = () => { state.focus.brands = []; markDirty(true, 'focus'); renderFocus(); };
 
-// ---- specific references ----
-const CONDS = ['new', 'unworn', 'excellent', 'good', 'fair'];
-const MARKETS = ['worldwide', 'au', 'eu', 'us', 'uk', 'jp'];
+// specific references
+const CONDS = ['new', 'unworn', 'excellent', 'good', 'fair'], MARKETS = ['worldwide', 'au', 'eu', 'us', 'uk', 'jp'];
 function renderWatchlist() {
   const wl = state.wl, host = $('#wlList'); host.innerHTML = '';
-  if (!wl.watches.length) host.append(el('div', { style: 'padding:12px 0;color:var(--ink-3);font-size:13px' }, 'None.'));
-  wl.watches.forEach((w, i) => {
-    const on = w.active !== false;
-    const meta = [(w.condition || []).join('/'), w.full_set ? 'box & papers' : null, w.ceiling ? 'ceiling ' + fmtAUD(w.ceiling) : null, (w.markets || ['worldwide']).join('/')].filter(Boolean).join('  ·  ');
-    host.append(el('div', { class: 'wl-row' + (on ? '' : ' paused') }, thumb(w),
-      el('div', { class: 't' }, (w.brand + ' ' + w.model).trim(), el('span', { style: 'color:var(--ink-2);margin-left:12px;font-size:12.5px;letter-spacing:.04em' }, w.reference || '')),
-      el('div', { class: 'acts' },
-        el('button', { class: 'link', onclick: () => { w.active = !on; markDirty(); render(); } }, on ? 'Pause' : 'Resume'),
-        el('button', { class: 'link', onclick: () => { state.editing = i; renderForm(); } }, 'Edit'),
-        el('button', { class: 'link', onclick: () => { if (confirm('Remove ' + label(w) + '?')) { wl.watches.splice(i, 1); markDirty(); render(); } } }, 'Remove')),
-      el('div', { class: 'sub' }, meta)));
-  });
+  if (!wl.watches.length) host.append(el('div', { class: 'f12 muted', style: 'padding:14px 0;border-top:1px solid var(--hair)' }, 'None'));
+  wl.watches.forEach((w, i) => { const on = w.active !== false; host.append(el('div', { class: 'rrow' + (on ? '' : ' paused') }, el('span', { class: 'f24 light' }, (w.brand + ' ' + w.model).trim(), el('span', { class: 'f12 muted', style: 'margin-left:12px' }, w.reference || '')), el('span', { class: 'acts f12' }, el('button', { onclick: () => { w.active = !on; markDirty(); render(); } }, on ? 'Pause' : 'Resume'), el('button', { onclick: () => { state.editing = i; renderForm(); } }, 'Edit'), el('button', { onclick: () => { if (confirm('Remove ' + label(w) + '?')) { wl.watches.splice(i, 1); markDirty(); render(); } } }, 'Remove')), el('span', { class: 'f12 muted', style: 'grid-column:1' }, [(w.condition || []).join('/'), w.full_set ? 'box & papers' : null, w.ceiling ? 'ceiling ' + fmtAUD(w.ceiling) : null, (w.markets || ['worldwide']).join('/')].filter(Boolean).join(' · ')))); });
   renderForm(); renderTokenBox();
 }
 function renderForm() {
-  const host = $('#wlForm'); host.innerHTML = '';
-  if (state.editing == null) return;
-  const isNew = state.editing === 'new';
-  const src = isNew ? { brand: '', model: '', reference: '', aliases: [], condition: ['unworn', 'excellent'], full_set: false, ceiling: null, markets: ['worldwide'], notes: '', image: '', active: true } : state.wl.watches[state.editing];
-  const d = JSON.parse(JSON.stringify(src));
+  const host = $('#wlForm'); host.innerHTML = ''; if (state.editing == null) return;
+  const isNew = state.editing === 'new'; const src = isNew ? { brand: '', model: '', reference: '', aliases: [], condition: ['unworn', 'excellent'], full_set: false, ceiling: null, markets: ['worldwide'], notes: '', image: '', active: true } : state.wl.watches[state.editing]; const d = JSON.parse(JSON.stringify(src));
   const f = el('form', { class: 'form', onsubmit: e => { e.preventDefault(); commit(); } });
-  const field = (lab, input, full) => el('div', { class: full ? 'full' : '' }, el('label', {}, lab), input);
+  const field = (lab, input, full) => el('div', { class: full ? 'full' : '' }, el('label', { class: 'f12' }, lab), input);
   const text = (k, ph) => el('input', { type: 'text', value: d[k] || '', placeholder: ph || '', oninput: e => d[k] = e.target.value });
-  const toggles = (k, opts, exclusive) => { const box = el('div', { class: 'opts' }); const draw = () => { box.innerHTML = ''; for (const o of opts) box.append(el('button', { type: 'button', 'aria-pressed': String((d[k] || []).includes(o)), onclick: () => { let cur = d[k] || []; if (exclusive && o === exclusive) cur = [o]; else { cur = cur.filter(x => x !== exclusive); cur = cur.includes(o) ? cur.filter(x => x !== o) : [...cur, o]; } d[k] = cur.length ? cur : [exclusive || opts[0]]; draw(); } }, o)); }; draw(); return box; };
-  const err = el('div', { class: 'err' });
-  f.append(
-    el('h4', {}, isNew ? 'Add a reference' : 'Edit ' + label(src)),
-    field('Brand', text('brand', 'Tudor')), field('Model', text('model', 'Black Bay 58')),
-    field('Reference', text('reference', '79030N')),
-    field('Aliases', el('input', { type: 'text', value: (d.aliases || []).join(', '), placeholder: 'BB58, Black Bay Fifty-Eight', oninput: e => d.aliases = e.target.value.split(',').map(s => s.trim()).filter(Boolean) })),
-    field('Condition', toggles('condition', CONDS)),
-    field('Seller location', toggles('markets', MARKETS, 'worldwide')),
-    field('Box and papers', (() => { const b = el('div', { class: 'opts' }); const draw = () => { b.innerHTML = ''; b.append(el('button', { type: 'button', 'aria-pressed': String(!!d.full_set), onclick: () => { d.full_set = true; draw(); } }, 'Required'), el('button', { type: 'button', 'aria-pressed': String(!d.full_set), onclick: () => { d.full_set = false; draw(); } }, 'Any')); }; draw(); return b; })()),
-    field('Ceiling, AUD', el('input', { type: 'number', min: 0, step: 100, value: d.ceiling ?? '', placeholder: 'Optional', oninput: e => d.ceiling = e.target.value === '' ? null : Number(e.target.value) })),
-    field('Image URL', el('input', { type: 'url', value: d.image || '', placeholder: 'Optional', oninput: e => d.image = e.target.value.trim() }), true),
-    field('Notes', el('textarea', { rows: 2, placeholder: 'Optional. Dial variants, years, anything that helps matching.', oninput: e => d.notes = e.target.value }, d.notes || ''), true),
-    err,
-    el('div', { class: 'acts' }, el('button', { type: 'submit', class: 'btn primary' }, isNew ? 'Add' : 'Apply'), el('button', { type: 'button', class: 'btn quiet', onclick: () => { state.editing = null; renderForm(); } }, 'Cancel'))
-  );
-  function commit() {
-    d.brand = (d.brand || '').trim(); d.model = (d.model || '').trim(); d.reference = (d.reference || '').trim();
-    if (!d.brand || !d.model) { err.textContent = 'Brand and model are required.'; return; }
-    if (!d.reference) { err.textContent = 'A reference number is required so listings can be matched exactly.'; return; }
-    if (!d.image) delete d.image; delete d.example;
-    if (isNew) { let id = slug(d.brand + '-' + d.model + '-' + d.reference), base = id, k = 2; while (state.wl.watches.some(w => w.id === id)) id = base + '-' + k++; d.id = id; d.active = true; state.wl.watches.push(d); }
-    else Object.assign(state.wl.watches[state.editing], d);
-    state.editing = null; markDirty(); render();
-  }
-  host.append(f); f.scrollIntoView({ behavior: 'smooth', block: 'start' }); if (isNew) { const first = f.querySelector('input'); if (first) first.focus({ preventScroll: true }); }
+  const toggles = (k, opts, exclusive) => { const box = el('div', { class: 'opts f16' }); const draw = () => { box.innerHTML = ''; for (const o of opts) box.append(el('button', { type: 'button', 'aria-pressed': String((d[k] || []).includes(o)), onclick: () => { let cur = d[k] || []; if (exclusive && o === exclusive) cur = [o]; else { cur = cur.filter(x => x !== exclusive); cur = cur.includes(o) ? cur.filter(x => x !== o) : [...cur, o]; } d[k] = cur.length ? cur : [exclusive || opts[0]]; draw(); } }, o)); }; draw(); return box; };
+  const err = el('div', { class: 'err f12' });
+  f.append(field('Brand', text('brand', 'Tudor')), field('Model', text('model', 'Black Bay 58')), field('Reference', text('reference', '79030N')), field('Aliases', el('input', { type: 'text', value: (d.aliases || []).join(', '), placeholder: 'Comma separated', oninput: e => d.aliases = e.target.value.split(',').map(s => s.trim()).filter(Boolean) })), field('Condition', toggles('condition', CONDS)), field('Seller location', toggles('markets', MARKETS, 'worldwide')), field('Box and papers', (() => { const b = el('div', { class: 'opts f16' }); const draw = () => { b.innerHTML = ''; b.append(el('button', { type: 'button', 'aria-pressed': String(!!d.full_set), onclick: () => { d.full_set = true; draw(); } }, 'required'), el('button', { type: 'button', 'aria-pressed': String(!d.full_set), onclick: () => { d.full_set = false; draw(); } }, 'any')); }; draw(); return b; })()), field('Ceiling, AUD', el('input', { type: 'number', min: 0, step: 100, value: d.ceiling ?? '', placeholder: 'Optional', oninput: e => d.ceiling = e.target.value === '' ? null : Number(e.target.value) })), field('Image URL', el('input', { type: 'url', value: d.image || '', placeholder: 'Optional', oninput: e => d.image = e.target.value.trim() }), true), field('Notes', el('textarea', { rows: 2, placeholder: 'Optional', oninput: e => d.notes = e.target.value }, d.notes || ''), true), err, el('div', { class: 'acts' }, el('button', { type: 'submit', class: 'btn-submit' }, isNew ? 'Add' : 'Apply'), el('button', { type: 'button', class: 'f12 muted', onclick: () => { state.editing = null; renderForm(); } }, 'Cancel')));
+  function commit() { d.brand = (d.brand || '').trim(); d.model = (d.model || '').trim(); d.reference = (d.reference || '').trim(); if (!d.brand || !d.model) { err.textContent = 'Brand and model are required.'; return; } if (!d.reference) { err.textContent = 'A reference number is required.'; return; } if (!d.image) delete d.image; delete d.example; if (isNew) { let id = slug(d.brand + '-' + d.model + '-' + d.reference), base = id, k = 2; while (state.wl.watches.some(w => w.id === id)) id = base + '-' + k++; d.id = id; d.active = true; state.wl.watches.push(d); } else Object.assign(state.wl.watches[state.editing], d); state.editing = null; markDirty(); render(); }
+  host.append(f); if (isNew) { const first = f.querySelector('input'); if (first) first.focus({ preventScroll: true }); }
 }
-$('#addBtn').onclick = () => { $('#refsBox').open = true; state.editing = 'new'; renderForm(); };
+$('#addBtn').onclick = () => { state.editing = 'new'; renderForm(); };
 
-// ---- saving ----
+// saving
 function token() { return store.get('radar-gh-token'); }
 function password() { return state.pw || store.get('radar-pw'); }
 function renderTokenBox(force) {
-  if (force === undefined) force = state.boxOpen; state.boxOpen = !!force;
-  const box = $('#tokenbox'); box.innerHTML = '';
+  if (force === undefined) force = state.boxOpen; state.boxOpen = !!force; const box = $('#tokenbox'); box.innerHTML = '';
   if (state.backend) {
-    if (password() && !force) { box.append(el('p', { class: 'unlocked' }, store.get('radar-pw') ? 'Password remembered on this device' : 'Unlocked for this visit', el('button', { class: 'link', onclick: () => { store.set('radar-pw', null); state.pw = null; renderTokenBox(); } }, 'Forget'), el('button', { class: 'link', onclick: () => renderPasswordChange() }, 'Change password'))); return; }
+    if (password() && !force) { box.append(el('div', { class: 'paper' }, el('div', { class: 'lnk f12' }, el('span', {}, store.get('radar-pw') ? 'Password remembered on this device' : 'Unlocked for this visit'), el('button', { onclick: () => { store.set('radar-pw', null); state.pw = null; renderTokenBox(); } }, 'Forget'), el('button', { onclick: () => renderPasswordChange() }, 'Change password')))); return; }
     if (!force) return;
-    const inp = el('input', { type: 'password', placeholder: 'Password', autocomplete: 'current-password' });
-    const remember = el('input', { type: 'checkbox' });
-    const go = async () => { const v = inp.value; if (!v) return; state.pw = v; if (remember.checked) store.set('radar-pw', v); renderTokenBox(false); save(); };
+    const inp = el('input', { type: 'password', placeholder: 'Password', autocomplete: 'current-password' }); const remember = el('input', { type: 'checkbox' });
+    const go = () => { const v = inp.value; if (!v) return; state.pw = v; if (remember.checked) store.set('radar-pw', v); renderTokenBox(false); save(); };
     inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); go(); } });
-    box.append(el('div', { class: 'tokenbox' }, el('p', {}, el('b', {}, 'Enter the password to save.')), el('div', { class: 'trow' }, inp, el('button', { class: 'btn primary', onclick: go }, 'Unlock')), el('label', { class: 'chk' }, remember, 'Remember on this device')));
-    inp.focus(); return;
+    box.append(el('div', { class: 'paper' }, el('div', { class: 'f12 muted', style: 'margin-bottom:8px' }, 'Enter the password to save'), el('div', { class: 'trow' }, el('div', { style: 'flex:1', class: 'f24 light' }, inp), el('button', { class: 'btn-submit', onclick: go }, 'Unlock', el('span', {}, '→'))), el('label', { class: 'chk f12' }, remember, 'Remember on this device'))); inp.focus(); return;
   }
-  if (token() && !force) { box.append(el('p', { class: 'unlocked' }, 'GitHub token stored in this browser', el('button', { class: 'link', onclick: () => { store.set('radar-gh-token', null); renderTokenBox(); } }, 'Forget'))); return; }
+  if (token() && !force) { box.append(el('div', { class: 'paper' }, el('div', { class: 'lnk f12' }, el('span', {}, 'GitHub token stored in this browser'), el('button', { onclick: () => { store.set('radar-gh-token', null); renderTokenBox(); } }, 'Forget')))); return; }
   if (!force) return;
   const inp = el('input', { type: 'password', placeholder: 'github_pat_…', autocomplete: 'off' });
-  box.append(el('div', { class: 'tokenbox' }, el('p', {}, el('b', {}, 'Saving needs a GitHub token.'), ' It stays in this browser and is sent only to GitHub.'),
-    el('ol', {}, el('li', {}, el('a', { href: 'https://github.com/settings/personal-access-tokens/new', target: '_blank', rel: 'noopener' }, 'Create a fine-grained token'), ' on GitHub.'), el('li', {}, 'Repository access: only ' + REPO.name + '.'), el('li', {}, 'Permissions: Contents, read and write.')),
-    el('div', { class: 'trow' }, inp, el('button', { class: 'btn primary', onclick: () => { const v = inp.value.trim(); if (!v) return; store.set('radar-gh-token', v); renderTokenBox(false); save(); } }, 'Use token'))));
-  inp.focus();
+  box.append(el('div', { class: 'paper' }, el('div', { class: 'f12 muted', style: 'margin-bottom:8px' }, 'Saving needs a fine-grained GitHub token with Contents read and write on ' + REPO.name), el('div', { class: 'trow' }, el('div', { style: 'flex:1' }, inp), el('button', { class: 'btn-submit', onclick: () => { const v = inp.value.trim(); if (!v) return; store.set('radar-gh-token', v); renderTokenBox(false); save(); } }, 'Use token')))); inp.focus();
 }
 function renderPasswordChange() {
-  const box = $('#tokenbox'); box.innerHTML = '';
-  const oldI = el('input', { type: 'password', placeholder: 'Current password', autocomplete: 'current-password' });
-  const newI = el('input', { type: 'password', placeholder: 'New password, 8 characters or more', autocomplete: 'new-password' });
-  const msg = el('p', { style: 'font-size:13px;margin:12px 0 0;color:var(--red)' });
-  box.append(el('div', { class: 'tokenbox' }, el('p', {}, el('b', {}, 'Change the password')), el('div', { class: 'trow', style: 'flex-direction:column' }, oldI, newI),
-    el('div', { style: 'display:flex;gap:12px;margin-top:14px' }, el('button', { class: 'btn primary', onclick: async () => { try { await rpc('watch_radar_set_password', { p_old: oldI.value, p_new: newI.value }); state.pw = newI.value; if (store.get('radar-pw')) store.set('radar-pw', newI.value); renderTokenBox(false); } catch (e) { msg.textContent = e.message; } } }, 'Change'), el('button', { class: 'btn quiet', onclick: () => renderTokenBox(false) }, 'Cancel')), msg));
-  oldI.focus();
+  const box = $('#tokenbox'); box.innerHTML = ''; const oldI = el('input', { type: 'password', placeholder: 'Current password', autocomplete: 'current-password' }); const newI = el('input', { type: 'password', placeholder: 'New password, 8 characters or more', autocomplete: 'new-password' }); const msg = el('div', { class: 'f12', style: 'margin-top:12px;color:var(--red)' });
+  box.append(el('div', { class: 'paper' }, el('div', { class: 'f12 muted', style: 'margin-bottom:8px' }, 'Change the password'), oldI, el('div', { style: 'height:12px' }), newI, el('div', { style: 'display:flex;gap:20px;align-items:center;margin-top:24px' }, el('button', { class: 'btn-submit', onclick: async () => { try { await rpc('watch_radar_set_password', { p_old: oldI.value, p_new: newI.value }); state.pw = newI.value; if (store.get('radar-pw')) store.set('radar-pw', newI.value); renderTokenBox(false); } catch (e) { msg.textContent = e.message; } } }, 'Change'), el('button', { class: 'f12 muted', onclick: () => renderTokenBox(false) }, 'Cancel')), msg)); oldI.focus();
 }
-async function rpc(fn, args) {
-  const r = await fetch(state.backend.supabase_url + '/rest/v1/rpc/' + fn, { method: 'POST', headers: { apikey: state.backend.supabase_key, Authorization: 'Bearer ' + state.backend.supabase_key, 'Content-Type': 'application/json' }, body: JSON.stringify(args) });
-  if (!r.ok) { let m = 'The database refused the request (' + r.status + ').'; try { const j = await r.json(); if (j.message) m = /wrong password/i.test(j.message) ? 'Wrong password.' : j.message; } catch (e) {} throw new Error(m); }
-  return r.json();
-}
-async function putFile(path, obj, message) {
-  const api = `https://api.github.com/repos/${REPO.owner}/${REPO.name}/contents/${path}`;
-  const headers = { Authorization: 'Bearer ' + token(), Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
-  const cur = await fetch(api + '?ref=' + REPO.branch, { headers });
-  if (cur.status === 401) throw new Error('GitHub rejected the token (401).');
-  if (cur.status === 403) throw new Error('The token cannot write to this repository (403).');
-  const sha = cur.ok ? (await cur.json()).sha : undefined;
-  const content = btoa(unescape(encodeURIComponent(JSON.stringify(obj, null, 2) + '\n')));
-  const r = await fetch(api, { method: 'PUT', headers, body: JSON.stringify({ message, content, sha, branch: REPO.branch }) });
-  if (!r.ok) { const t = await r.text(); throw new Error('GitHub refused the save (' + r.status + '). ' + t.slice(0, 160)); }
-}
+async function rpc(fn, args) { const r = await fetch(state.backend.supabase_url + '/rest/v1/rpc/' + fn, { method: 'POST', headers: { apikey: state.backend.supabase_key, Authorization: 'Bearer ' + state.backend.supabase_key, 'Content-Type': 'application/json' }, body: JSON.stringify(args) }); if (!r.ok) { let m = 'The database refused the request (' + r.status + ').'; try { const j = await r.json(); if (j.message) m = /wrong password/i.test(j.message) ? 'Wrong password.' : j.message; } catch (e) {} throw new Error(m); } return r.json(); }
+async function putFile(path, obj, message) { const api = `https://api.github.com/repos/${REPO.owner}/${REPO.name}/contents/${path}`; const headers = { Authorization: 'Bearer ' + token(), Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' }; const cur = await fetch(api + '?ref=' + REPO.branch, { headers }); if (cur.status === 401) throw new Error('GitHub rejected the token (401).'); if (cur.status === 403) throw new Error('The token cannot write to this repository (403).'); const sha = cur.ok ? (await cur.json()).sha : undefined; const content = btoa(unescape(encodeURIComponent(JSON.stringify(obj, null, 2) + '\n'))); const r = await fetch(api, { method: 'PUT', headers, body: JSON.stringify({ message, content, sha, branch: REPO.branch }) }); if (!r.ok) { const t = await r.text(); throw new Error('GitHub refused the save (' + r.status + '). ' + t.slice(0, 160)); } }
 async function save() {
   const btn = $('#saveBtn'), msg = $('#saveMsg'), F = state.focus;
-  const focusDoc = { currency: F.currency || 'AUD', brands_available: F.brands_available, bands_available: F.bands_available, brands: F.brands, bands: F.bands, updated: new Date().toISOString().slice(0, 10) };
-  const wlDoc = { defaults: state.wl.defaults, watches: state.wl.watches };
-  if (state.backend) {
-    if (!password()) { renderTokenBox(true); return; }
-    btn.disabled = true; msg.className = 'msg'; msg.textContent = 'Saving…';
-    try {
-      if (state.focusDirty) await rpc('watch_radar_save', { p_password: password(), p_id: 'focus', p_data: focusDoc });
-      if (state.wlDirty) await rpc('watch_radar_save', { p_password: password(), p_id: 'watchlist', p_data: wlDoc });
-      F.updated = focusDoc.updated; markDirty(false, 'all'); msg.className = 'msg ok'; msg.textContent = 'Saved. Tomorrow’s run uses this selection.'; render();
-    } catch (e) { msg.className = 'msg err'; msg.textContent = e.message; btn.disabled = false; if (/wrong password/i.test(e.message)) { state.pw = null; store.set('radar-pw', null); renderTokenBox(true); } }
-    return;
-  }
-  if (!token()) { renderTokenBox(true); return; }
-  btn.disabled = true; msg.className = 'msg'; msg.textContent = 'Saving…';
-  try {
-    if (state.focusDirty) { F.updated = focusDoc.updated; await putFile('data/focus.json', { _comment: 'Research focus, edited from the site.', ...focusDoc }, 'focus: ' + F.brands.length + ' brands, ' + F.bands.length + ' bands (edited on the site)'); }
-    if (state.wlDirty) await putFile('data/watchlist.json', { _comment: 'Specific references, edited from the site.', ...wlDoc }, 'watchlist: ' + state.wl.watches.length + ' references (edited on the site)');
-    markDirty(false, 'all'); msg.className = 'msg ok'; msg.textContent = 'Saved. Tomorrow’s run uses this selection.'; render();
-  } catch (e) { msg.className = 'msg err'; msg.textContent = e.message; btn.disabled = false; }
+  const focusDoc = { currency: F.currency || 'AUD', brands_available: F.brands_available, bands_available: F.bands_available, brands: F.brands, bands: F.bands, updated: new Date().toISOString().slice(0, 10) }; const wlDoc = { defaults: state.wl.defaults, watches: state.wl.watches };
+  if (state.backend) { if (!password()) { renderTokenBox(true); return; } btn.disabled = true; msg.className = 'msg f12'; msg.textContent = 'Saving…'; try { if (state.focusDirty) await rpc('watch_radar_save', { p_password: password(), p_id: 'focus', p_data: focusDoc }); if (state.wlDirty) await rpc('watch_radar_save', { p_password: password(), p_id: 'watchlist', p_data: wlDoc }); F.updated = focusDoc.updated; markDirty(false, 'all'); msg.className = 'msg f12 ok'; msg.textContent = 'Saved. Tomorrow’s run uses this selection.'; render(); } catch (e) { msg.className = 'msg f12 err'; msg.textContent = e.message; btn.disabled = false; if (/wrong password/i.test(e.message)) { state.pw = null; store.set('radar-pw', null); renderTokenBox(true); } } return; }
+  if (!token()) { renderTokenBox(true); return; } btn.disabled = true; msg.className = 'msg f12'; msg.textContent = 'Saving…';
+  try { if (state.focusDirty) { F.updated = focusDoc.updated; await putFile('data/focus.json', { _comment: 'Research focus, edited from the site.', ...focusDoc }, 'focus: ' + F.brands.length + ' brands, ' + F.bands.length + ' bands (edited on the site)'); } if (state.wlDirty) await putFile('data/watchlist.json', { _comment: 'Specific references, edited from the site.', ...wlDoc }, 'watchlist: ' + state.wl.watches.length + ' references (edited on the site)'); markDirty(false, 'all'); msg.className = 'msg f12 ok'; msg.textContent = 'Saved. Tomorrow’s run uses this selection.'; render(); } catch (e) { msg.className = 'msg f12 err'; msg.textContent = e.message; btn.disabled = false; }
 }
 $('#saveBtn').onclick = save;
 window.addEventListener('beforeunload', e => { if (state.wlDirty || state.focusDirty) { e.preventDefault(); e.returnValue = ''; } });
 
-// ---- anchors, resize, boot ----
-function watchAnchors() {
-  const links = [...document.querySelectorAll('#anchors a')]; const secs = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
-  const io = new IntersectionObserver(entries => { entries.forEach(en => { if (en.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + en.target.id)); }); }, { rootMargin: '-45% 0px -50% 0px' });
-  secs.forEach(s => io.observe(s));
-}
+// boot
 let rt, lastW = window.innerWidth; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (window.innerWidth === lastW) return; lastW = window.innerWidth; if (state.latest && state.editing == null) render(); }, 200); });
-load().then(() => { render(); markDirty(false, 'all'); watchAnchors(); document.body.classList.add('ready'); }).catch(err => {
-  document.body.classList.add('ready'); $('#statusText').textContent = 'Could not load'; $('#todayH').textContent = 'Could not load data'; $('#deals').append(el('div', { class: 'empty' }, err.message));
-});
+load().then(() => { render(); markDirty(false, 'all'); show(location.hash.slice(1) || 'today'); document.body.classList.add('ready'); }).catch(err => { document.body.classList.add('ready'); $('#todayH').textContent = 'could not load'; $('#todayNote').textContent = err.message; });
 })();
 </script>
 </body>
