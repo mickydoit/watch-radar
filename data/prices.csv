@@ -1,1 +1,12 @@
 date,watch_id,source,metric,value,currency,n,url
+2026-11-03,rolex-126610ln,mixed,asking_min,21347,AUD,6,
+2026-11-03,rolex-126610ln,mixed,asking_median,22553,AUD,6,
+2026-11-03,omega-speedmaster-hesalite,mixed,asking_min,7424,AUD,11,
+2026-11-03,omega-speedmaster-hesalite,mixed,asking_median,8846,AUD,11,
+2026-11-03,omega-speedmaster-hesalite,mixed,asking_median_good,9578,AUD,7,
+2026-11-03,tudor-bb58-79030n,mixed,asking_min,4779,AUD,3,
+2026-11-03,tudor-bb58-79030n,mixed,asking_median,4783,AUD,3,
+2026-11-03,tudor-bb58-79030n,mixed,asking_median_good,4783,AUD,1,
+2026-11-03,cartier-santos-medium-wssa0029,mixed,asking_min,10702,AUD,3,
+2026-11-03,cartier-santos-medium-wssa0029,mixed,asking_median,11395,AUD,3,
+2026-11-03,cartier-santos-medium-wssa0029,mixed,asking_median_good,11106,AUD,2,

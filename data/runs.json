@@ -1,1 +1,16 @@
-{"_comment": "One object per run, appended by the routine: date, type, status, new, drops, deals, auction, fetches, report.", "runs": []}
+{
+ "_comment": "One object per run, appended by the routine: date, type, status, new, drops, deals, auction, fetches, report.",
+ "runs": [
+  {
+   "date": "2026-11-03",
+   "type": "daily",
+   "status": "partial",
+   "new": 3,
+   "drops": 0,
+   "deals": 4,
+   "auction": 1,
+   "fetches": 37,
+   "report": "reports/2026-11-03.md"
+  }
+ ]
+}

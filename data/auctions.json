@@ -1,4 +1,19 @@
 {
-  "_comment": "Upcoming and recently closed auction lots that match the watchlist. Keyed by lot URL. Fields: watch_id, house, sale, lot, date, estimate_low, estimate_high, currency, result, status (upcoming|sold|unsold|withdrawn), first_seen.",
-  "lots": {}
+ "_comment": "Upcoming and recently closed auction lots that match the watchlist. Keyed by lot URL. Fields: watch_id, house, sale, lot, date, estimate_low, estimate_high, currency, result, status (upcoming|sold|unsold|withdrawn), first_seen.",
+ "lots": {
+  "https://integration.loupethis.com/auctions/omega-speedmaster-moonwatch-professional-310-30-42-50-01-001": {
+   "watch_id": "omega-speedmaster-hesalite",
+   "house": "Loupe This (online)",
+   "sale": "Lot #4565",
+   "lot": "4565",
+   "date": "2026-02-24",
+   "estimate_low": 3000,
+   "estimate_high": 5000,
+   "currency": "USD",
+   "result": 6270,
+   "status": "sold",
+   "note": "10% buyer premium; unclear if result includes it",
+   "first_seen": "2026-11-03"
+  }
+ }
 }
