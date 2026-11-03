@@ -10,7 +10,7 @@ The owner wants continuous, unattended research on sales of a few specific watch
 - **Below-market (added 3 Nov 2026, owner's request):** per watch, a median asking-price benchmark across all readable markets (like-for-like on condition, 30-day median), listings under it ranked by discount and flagged verify / grey-new / clean. *My call:* median not mean; 3% threshold; 25%+ under is auto-flagged verify. Grey-market new sellers added to the source list because that is where below-market new pieces live for non-allocation brands.
 - **Watchlist shape:** reference-level entries with condition list, full-set flag, AUD ceiling and markets. Listings over the ceiling feed price history but are not emailed.
 - **Sources:** Chrono24, WatchRecon, eBay, named dealers for listings; WatchCharts and eBay sold for price; Phillips, Sotheby's, Christie's, Bonhams, Antiquorum, Everywatch, Leonard Joel, Lawsons for auctions.
-- **Model:** `claude-sonnet-5-5` (routine default). *My call;* switch to Opus if the matching quality disappoints.
+- **Model:** `claude-opus-5-5` since 3 Nov 2026 (owner approved after two Sonnet runs under-researched: 8 and 37 fetches, effort floor unmet). Started on `claude-sonnet-5-5`.
 - **Privacy:** repo must be **public** for GitHub Pages on a free account (decided 3 Nov; owner said they don't mind). Watchlist and reports are therefore visible.
 - **Initial watchlist:** four example references chosen by Claude so the first runs are real. The email nags until they are replaced.
 
