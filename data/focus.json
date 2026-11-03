@@ -54,8 +54,127 @@
     "gmt",
     "vintage"
   ],
-  "brands": [],
-  "bands": [],
-  "styles": {},
-  "updated": null
+  "brands": [
+    "anOrdain",
+    "Christopher Ward",
+    "Frederique Constant",
+    "IWC",
+    "King Seiko",
+    "Longines",
+    "MeisterSinger",
+    "NOMOS Glashütte",
+    "Omega",
+    "Orient",
+    "Oris",
+    "Paulin",
+    "Seiko",
+    "Sinn",
+    "Studio Underd0g",
+    "Tissot",
+    "Tudor"
+  ],
+  "bands": [
+    [
+      1000,
+      2000
+    ]
+  ],
+  "styles": {
+    "IWC": [
+      "dress",
+      "sport",
+      "pilot"
+    ],
+    "Oris": [
+      "everyday",
+      "dress",
+      "sport",
+      "pilot",
+      "vintage"
+    ],
+    "Sinn": [
+      "everyday",
+      "dress",
+      "sport",
+      "pilot",
+      "vintage"
+    ],
+    "Omega": [
+      "everyday",
+      "dress",
+      "sport"
+    ],
+    "Seiko": [
+      "everyday",
+      "dress",
+      "sport",
+      "vintage"
+    ],
+    "Tudor": [
+      "everyday",
+      "diver",
+      "dress",
+      "sport",
+      "field",
+      "chronograph",
+      "pilot",
+      "gmt",
+      "vintage"
+    ],
+    "Orient": [
+      "everyday",
+      "dress",
+      "sport"
+    ],
+    "Paulin": [
+      "everyday",
+      "dress",
+      "sport"
+    ],
+    "Tissot": [
+      "everyday",
+      "dress",
+      "sport"
+    ],
+    "Longines": [
+      "everyday",
+      "dress",
+      "sport"
+    ],
+    "anOrdain": [
+      "everyday",
+      "dress",
+      "sport"
+    ],
+    "King Seiko": [
+      "dress",
+      "vintage"
+    ],
+    "MeisterSinger": [
+      "everyday",
+      "dress",
+      "sport"
+    ],
+    "Studio Underd0g": [
+      "everyday",
+      "dress",
+      "sport",
+      "field"
+    ],
+    "Christopher Ward": [
+      "everyday",
+      "dress",
+      "sport",
+      "pilot"
+    ],
+    "NOMOS Glashütte": [
+      "everyday",
+      "dress",
+      "sport"
+    ],
+    "Frederique Constant": [
+      "dress"
+    ]
+  },
+  "updated": "2026-11-03"
 }
