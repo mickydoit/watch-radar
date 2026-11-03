@@ -86,7 +86,7 @@ main{padding-top:128px;min-height:100vh}
 .gal .track{display:flex;gap:9px;overflow-x:auto;overflow-y:hidden;padding:0 var(--g);scroll-snap-type:x proximity;scroll-padding:0 var(--g);scrollbar-width:none;cursor:grab}
 .gal .track::-webkit-scrollbar{display:none}
 .gal .track.drag{cursor:grabbing;scroll-snap-type:none}
-.tile{flex:0 0 clamp(260px,27.5vw,396px);scroll-snap-align:start;text-decoration:none;display:block}
+.tile{flex:0 0 clamp(260px,27.5vw,396px);min-width:0;max-width:clamp(260px,27.5vw,396px);scroll-snap-align:start;text-decoration:none;display:block}
 .tile .cap{display:flex;justify-content:space-between;gap:12px;height:12px;margin:0 0 10px;white-space:nowrap}
 .tile .cap .muted{color:var(--ink-2)}
 .tile .im{aspect-ratio:4/5;background:var(--bg-2);overflow:hidden;position:relative;clip-path:inset(0 0 0 0);transition:clip-path .9s var(--ease)}
