@@ -36,6 +36,20 @@
    "fetches": 374,
    "report": "reports/2026-11-03.md",
    "sold": 0
+  },
+  {
+   "date": "2026-11-04",
+   "type": "daily",
+   "status": "partial",
+   "brands": 17,
+   "models": 74,
+   "new": 366,
+   "drops": 5,
+   "deals": 131,
+   "sold": 9,
+   "auction": 0,
+   "fetches": 707,
+   "report": "reports/2026-11-04.md"
   }
  ]
 }

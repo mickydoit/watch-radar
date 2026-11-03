@@ -1,597 +1,637 @@
 {
-  "_comment": "Images shown for each watch. Owner may override with an image URL on a watchlist entry. The routine must add an entry here for every model it publishes (ROUTINE_PROMPT step 1E), freely licensed where possible.",
-  "images": {
-    "rolex-126610ln": {
-      "file": "images/rolex-126610ln.jpg",
-      "title": "Rolex Submariner Professional.JPG",
-      "author": "Dr.K.",
-      "license": "CC BY-SA 3.0",
-      "source": "https://commons.wikimedia.org/wiki/File:Rolex_Submariner_Professional.JPG",
-      "note": "Representative photo of the model family from Wikimedia Commons, not necessarily this exact reference."
-    },
-    "omega-speedmaster-hesalite": {
-      "file": "images/omega-speedmaster-hesalite.jpg",
-      "title": "OMEGA-Speedmaster-Professional-Front (cropped).jpg",
-      "author": "Torsten Bolten",
-      "license": "Public domain",
-      "source": "https://commons.wikimedia.org/wiki/File:OMEGA-Speedmaster-Professional-Front_(cropped).jpg",
-      "note": "Representative photo of the model family from Wikimedia Commons, not necessarily this exact reference."
-    },
-    "tudor-bb58-79030n": {
-      "file": "images/tudor-bb58-79030n.jpg",
-      "title": "Tudor Black Bay 54 ref. m79000n-0001.jpg",
-      "author": "EMore98",
-      "license": "CC BY-SA 4.0",
-      "source": "https://commons.wikimedia.org/wiki/File:Tudor_Black_Bay_54_ref._m79000n-0001.jpg",
-      "note": "Nearest freely licensed sibling: a Black Bay 54, same steel case and black dial family as the Fifty-Eight. No free photo of the 79030N exists yet."
-    },
-    "cartier-santos-medium-wssa0029": {
-      "file": "images/cartier-santos-medium-wssa0029.jpg",
-      "title": "Cartier Santos wristwatch.jpg",
-      "author": "Pittigrilli",
-      "license": "CC BY-SA 4.0",
-      "source": "https://commons.wikimedia.org/wiki/File:Cartier_Santos_wristwatch.jpg",
-      "note": "Representative photo of the model family from Wikimedia Commons, not necessarily this exact reference."
-    },
-    "christopher-ward-c63-sealander-automatic-39mm": {
-      "file": "images/christopher-ward-c63-sealander-automatic-39mm.jpg",
-      "title": "Christopher Ward C63 Sealander GMT white on bracelet 1",
-      "author": "Mario A. P.",
-      "license": "CC BY-SA 2.0",
-      "source": "https://www.flickr.com/photos/99058495@N00/51890070725",
-      "note": "Nearest sibling: C63 Sealander GMT (same case family), Flickr via Openverse; cropped square."
-    },
-    "christopher-ward-c63-sealander-automatic-36mm": {
-      "file": "images/christopher-ward-c63-sealander-automatic-36mm.jpg",
-      "title": "Christopher Ward C63 Sealander GMT white on bracelet 1",
-      "author": "Mario A. P.",
-      "license": "CC BY-SA 2.0",
-      "source": "https://www.flickr.com/photos/99058495@N00/51890070725",
-      "note": "Nearest sibling: C63 Sealander GMT (same case family), Flickr via Openverse; cropped square."
-    },
-    "christopher-ward-the-twelve-40mm": {
-      "file": "images/christopher-ward-the-twelve-40mm.jpg",
-      "title": "The Twelve 40mm Glacier Blue (pre-owned)",
-      "author": "Serious Watches (seller)",
-      "license": "Seller photo, identification only",
-      "source": "https://www.seriouswatches.com/products/christopher-ward-the-twelve-40mm-glacier-blue-pre-owned-pre1916",
-      "note": "No free-licence Twelve photo found (Openverse 0 hits); seller photo from Serious Watches product feed fetched today."
-    },
-    "christopher-ward-the-twelve-36mm": {
-      "file": "images/christopher-ward-the-twelve-36mm.jpg",
-      "title": "The Twelve 36mm Nordic Blue (pre-owned)",
-      "author": "Serious Watches (seller)",
-      "license": "Seller photo, identification only",
-      "source": "https://www.seriouswatches.com/products/christopher-ward-the-twelve-36mm-nordic-blue-pre-owned-pre1996",
-      "note": "No free-licence Twelve photo found (Openverse 0 hits); seller photo from Serious Watches product feed fetched today."
-    },
-    "christopher-ward-the-twelve-38mm": {
-      "file": "images/christopher-ward-the-twelve-38mm.jpg",
-      "title": "Twelve 38 Ice Cream (pre-owned)",
-      "author": "Serious Watches (seller)",
-      "license": "Seller photo, identification only",
-      "source": "https://www.seriouswatches.com/products/christopher-ward-twelve-38-ice-cream-pre-owned-pre1784",
-      "note": "No free-licence Twelve photo found (Openverse 0 hits); seller photo from Serious Watches product feed fetched today."
-    },
-    "frederique-constant-classics-quartz-40mm-fc-220": {
-      "file": "images/frederique-constant-classics-quartz-40mm-fc-220.jpg",
-      "title": "Wamada Jewellery product photo, Classics Quartz Date blue on leather 40mm (FC-220N5B6)",
-      "author": "Wamada Jewellery",
-      "license": "Seller photo, identification only",
-      "source": "https://wamadajewellery.com.au/products/frederique-constant-classics-quartz-date-blue-on-leather-40mm",
-      "note": "Openverse returned one FC Classics photo (683px short side, below 700px minimum); Commons search rate-limited."
-    },
-    "frederique-constant-classics-carree-ladies-23mm-fc-200mc": {
-      "file": "images/frederique-constant-classics-carree-ladies-23mm-fc-200mc.jpg",
-      "title": "Teddy Baldassarre product photo, Classics Carrée Ladies 23mm silver",
-      "author": "Teddy Baldassarre",
-      "license": "Seller photo, identification only",
-      "source": "https://teddybaldassarre.com/products/classics-carree-ladies-23mm-silver-on-bracelet",
-      "note": "No free photo found."
-    },
-    "frederique-constant-classics-art-deco-round-fc-200mp-ar": {
-      "file": "images/frederique-constant-classics-art-deco-round-fc-200mp-ar.jpg",
-      "title": "Wamada Jewellery product photo, Classics Art Deco Round Ladies FC-200MPW2AR6B",
-      "author": "Wamada Jewellery",
-      "license": "Seller photo, identification only",
-      "source": "https://wamadajewellery.com.au/products/frederique-constant-classics-art-deco-round-ladies-quartz-watch",
-      "note": "No free photo found."
-    },
-    "frederique-constant-classics-business-timer-fc-270": {
-      "file": "images/frederique-constant-classics-business-timer-fc-270.jpg",
-      "title": "Wamada Jewellery product photo, Classics Business Timer FC-270M4P6",
-      "author": "Wamada Jewellery",
-      "license": "Seller photo, identification only",
-      "source": "https://wamadajewellery.com.au/products/frederique-constant-classics-business-timer-quartz-watch",
-      "note": "No free photo found."
-    },
-    "frederique-constant-classics-index-automatic-40mm-fc-303": {
-      "file": "images/frederique-constant-classics-index-automatic-40mm-fc-303.jpg",
-      "title": "Teddy Baldassarre product photo, Classics Index Automatic 40mm blue",
-      "author": "Teddy Baldassarre",
-      "license": "Seller photo, identification only",
-      "source": "https://teddybaldassarre.com/products/classics-index-automatic-blue-dial-on-bracelet",
-      "note": "Openverse \"Frederique Constant Classic Automatic\" (Flickr, CC BY) is 1024x683, below the 700px minimum."
-    },
-    "iwc-vintage-automatic-pellaton-cal-85x": {
-      "file": "images/iwc-vintage-automatic-pellaton-cal-85x.jpg",
-      "title": "IWC Automatic 803A 35mm steel silver (Everywatch listing)",
-      "author": "Timeanagram (dealer, via Everywatch)",
-      "license": "Seller photo, identification only",
-      "source": "https://everywatch.com/iwc/automatic/803a/watch-34730489",
-      "note": "Last resort: an 803A from the carried family. The free Commons IWC cal. 89 sibling could not be downloaded because of Wikimedia HTTP 429."
-    },
-    "king-seiko-45ks-hi-beat-4502-7001": {
-      "file": "images/king-seiko-45ks-hi-beat-4502-7001.jpg",
-      "title": "Seiko King Diashock 25 Jewels, 2. Modell 1967",
-      "author": "Dnalor 01",
-      "license": "CC BY-SA 3.0",
-      "source": "https://commons.wikimedia.org/w/index.php?curid=34915197",
-      "note": "Nearest sibling: 1967 King Seiko 2nd model (44-9990); no free photo of a 45KS found"
-    },
-    "king-seiko-56ks-hi-beat-5626": {
-      "file": "images/king-seiko-56ks-hi-beat-5626.jpg",
-      "title": "Seiko King Diashock 25 Jewels, 2. Modell 1967",
-      "author": "Dnalor 01",
-      "license": "CC BY-SA 3.0",
-      "source": "https://commons.wikimedia.org/w/index.php?curid=34915197",
-      "note": "Nearest sibling: 1967 King Seiko 2nd model (44-9990); no free photo of a 56KS found"
-    },
-    "king-seiko-ksk-37mm-reissue-spb279": {
-      "file": "images/king-seiko-ksk-37mm-reissue-spb279.jpg",
-      "title": "Seiko King Diashock 25 Jewels, 2. Modell 1967",
-      "author": "Dnalor 01",
-      "license": "CC BY-SA 3.0",
-      "source": "https://commons.wikimedia.org/w/index.php?curid=34915197",
-      "note": "Nearest sibling: the 1960s King Seiko 2nd-model design the KSK re-creation is based on; no free photo of the modern SPB279 found"
-    },
-    "king-seiko-44ks-2nd-model-44-2000": {
-      "file": "images/king-seiko-44ks-2nd-model-44-2000.jpg",
-      "title": "Seiko King Diashock 25 Jewels, 2. Modell 1967",
-      "author": "Dnalor 01",
-      "license": "CC BY-SA 3.0",
-      "source": "https://commons.wikimedia.org/w/index.php?curid=34915197",
-      "note": "Same generation (2nd model, 44-9990 reference shown)"
-    },
-    "longines-la-grande-classique-automatic-38mm-l4-918-4": {
-      "file": "images/longines-la-grande-classique-automatic-38mm-l4-918-4.jpg",
-      "title": "Teddy Baldassarre product photo, La Grande Classique de Longines 24mm white",
-      "author": "Teddy Baldassarre",
-      "license": "Seller photo, identification only",
-      "source": "https://teddybaldassarre.com/products/la-grande-classique-de-longines-24mm-white-on-bracelet",
-      "note": "Nearest sibling (24mm quartz La Grande Classique), seller photo. Openverse La Grande Classique hits were dealer adverts (Johnson Watch Co), rejected."
-    },
-    "longines-master-collection-38-5mm-l2-628-4-78-6": {
-      "file": "images/longines-master-collection-38-5mm-l2-628-4-78-6.jpg",
-      "title": "My brand new Longines Master Collection watch",
-      "author": "NGHI TRAN (Flickr)",
-      "license": "CC BY 2.0",
-      "source": "https://www.flickr.com/photos/33203464@N00/1400338145",
-      "note": "Nearest sibling: Master Collection chronograph (black-and-white photo), not the three-hand 38.5mm. Via Openverse."
-    },
-    "longines-conquest-38mm-l3-720-4": {
-      "file": "images/longines-conquest-38mm-l3-720-4.jpg",
-      "title": "Teddy Baldassarre product photo, Conquest 38mm black",
-      "author": "Teddy Baldassarre",
-      "license": "Seller photo, identification only",
-      "source": "https://teddybaldassarre.com/products/conquest-2023-38mm-black",
-      "note": "Free Commons photo \"Longines Conquest 2024\" (EMore98, CC BY-SA 4.0) exists but upload.wikimedia.org returned 429 on every try today; swap it in on a later run."
-    },
-    "longines-master-collection-big-date-l2-676-4-78-3": {
-      "file": "images/longines-master-collection-big-date-l2-676-4-78-3.jpg",
-      "title": "My brand new Longines Master Collection watch",
-      "author": "NGHI TRAN (Flickr)",
-      "license": "CC BY 2.0",
-      "source": "https://www.flickr.com/photos/33203464@N00/1400338145",
-      "note": "Nearest sibling: Master Collection chronograph (shared family photo). Via Openverse."
-    },
-    "longines-conquest-41mm-l3-830-4": {
-      "file": "images/longines-conquest-41mm-l3-830-4.jpg",
-      "title": "Teddy Baldassarre product photo, Conquest 41mm sunray blue",
-      "author": "Teddy Baldassarre",
-      "license": "Seller photo, identification only",
-      "source": "https://teddybaldassarre.com/products/conquest-2023-sunray-blue",
-      "note": "Commons \"Longines Conquest 2024\" is a free candidate but was rate-limited (429) today."
-    },
-    "meistersinger-neo-36mm-automatic-ne908n": {
-      "file": "images/meistersinger-neo-36mm-automatic-ne908n.jpg",
-      "title": "MeisterSinger Neo 36mm NE908N, blue on velour strap",
-      "author": "Teddy Baldassarre",
-      "license": "Seller photo, identification only",
-      "source": "https://teddybaldassarre.com/products/ne908n-2025",
-      "note": "Last resort: no free-licence Neo photo on Openverse; Commons API and upload host returned 429 throughout this run."
-    },
-    "meistersinger-yaara-q-36mm-yaq917s": {
-      "file": "images/meistersinger-yaara-q-36mm-yaq917s.jpg",
-      "title": "MeisterSinger Yaara Q YAQ917S (Define Watches Noosa product photo)",
-      "author": "definewatches.com.au",
-      "license": "Seller photo, identification only",
-      "source": "https://definewatches.com.au/shop/meistersinger/meistersinger-yaara-q-steel-blue-silver-yaq917s/",
-      "note": "Last resort: Openverse/Wikimedia Commons had no usable free photo of this model (Commons API/upload host returned 429 throughout this run)."
-    },
-    "meistersinger-perigraph-43mm-am1008": {
-      "file": "images/meistersinger-perigraph-43mm-am1008.jpg",
-      "title": "MeisterSinger Perigraph 43mm AM1008 (Define Watches Noosa product photo)",
-      "author": "definewatches.com.au",
-      "license": "Seller photo, identification only",
-      "source": "https://definewatches.com.au/shop/meistersinger/meistersinger-perigraph-sunburst-blue-43mm/",
-      "note": "Last resort: Openverse/Wikimedia Commons had no usable free photo of this model (Commons API/upload host returned 429 throughout this run)."
-    },
-    "meistersinger-phanero-35mm-ph307g": {
-      "file": "images/meistersinger-phanero-35mm-ph307g.jpg",
-      "title": "MeisterSinger Phanero PH307G (Define Watches Noosa product photo)",
-      "author": "definewatches.com.au",
-      "license": "Seller photo, identification only",
-      "source": "https://definewatches.com.au/shop/meistersinger/phanero-ph307g-35mm/",
-      "note": "Last resort: Openverse/Wikimedia Commons had no usable free photo of this model (Commons API/upload host returned 429 throughout this run)."
-    },
-    "meistersinger-neo-quartz-36mm-nq203": {
-      "file": "images/meistersinger-neo-quartz-36mm-nq203.jpg",
-      "title": "MeisterSinger Neo Quartz NQ203 (Define Watches Noosa product photo)",
-      "author": "definewatches.com.au",
-      "license": "Seller photo, identification only",
-      "source": "https://definewatches.com.au/shop/meistersinger/neo-f-quartz-nefq203-36mm/",
-      "note": "Last resort: Openverse/Wikimedia Commons had no usable free photo of this model (Commons API/upload host returned 429 throughout this run)."
-    },
-    "nomos-glashutte-club-campus-36": {
-      "file": "images/nomos-glashutte-club-campus-36.jpg",
-      "title": "Club Campus 36mm Endless Blue (717)",
-      "author": "Teddy Baldassarre (seller)",
-      "license": "Seller photo, identification only",
-      "source": "https://teddybaldassarre.com/products/club-campus-endless-blue-steel-back",
-      "note": "No free-licence photo found (Openverse 0 hits, Commons rate-limited); seller photo from Teddy Baldassarre product JSON."
-    },
-    "nomos-glashutte-club-campus-38": {
-      "file": "images/nomos-glashutte-club-campus-38.jpg",
-      "title": "Club Campus 38 Night (736)",
-      "author": "Teddy Baldassarre (seller)",
-      "license": "Seller photo, identification only",
-      "source": "https://teddybaldassarre.com/products/club-campus-38-night",
-      "note": "Seller photo from Teddy Baldassarre product JSON; no free photo found."
-    },
-    "nomos-glashutte-orion-35": {
-      "file": "images/nomos-glashutte-orion-35.jpg",
-      "title": "NOMOS Glashütte Orion",
-      "author": "Berlinerblau",
-      "license": "CC BY-SA 4.0",
-      "source": "https://commons.wikimedia.org/w/index.php?curid=80882011",
-      "note": "Wikimedia Commons, via Openverse; cropped square."
-    },
-    "nomos-glashutte-club-36-701": {
-      "file": "images/nomos-glashutte-club-36-701.jpg",
-      "title": "Club White Dial 36mm (701.1)",
-      "author": "Teddy Baldassarre (seller)",
-      "license": "Seller photo, identification only",
-      "source": "https://teddybaldassarre.com/products/club-white-dial-36mm-stainless-steel-back",
-      "note": "Seller photo from Teddy Baldassarre product JSON; no free photo found."
-    },
-    "nomos-glashutte-orion-33-319": {
-      "file": "images/nomos-glashutte-orion-33-319.jpg",
-      "title": "NOMOS Glashütte Orion",
-      "author": "Berlinerblau",
-      "license": "CC BY-SA 4.0",
-      "source": "https://commons.wikimedia.org/w/index.php?curid=80882011",
-      "note": "Nearest sibling: Orion 35 photo (same family), Wikimedia Commons via Openverse; cropped square."
-    },
-    "omega-geneve-vintage": {
-      "file": "images/omega-geneve-vintage.jpg",
-      "title": "Vintage Omega Men's 17-Jewel Wrist Watch, Swiss-Made",
-      "author": "France1978",
-      "license": "CC BY-SA 2.0",
-      "source": "https://www.flickr.com/photos/51764518@N02/13827062045",
-      "note": "Nearest sibling: a plain 1950s-60s Omega 17-jewel steel dress watch of the kind sold in the Geneve-era basic line, not a Geneve-signed piece. Found via Openverse, cropped square, 560 px (not upscaled). Replace with a Geneve photo later."
-    },
-    "omega-constellation-c-case-168-0056": {
-      "file": "images/omega-constellation-c-case-168-0056.jpg",
-      "title": "Omega Constellation (calibre 1012)",
-      "author": "JingKe888",
-      "license": "CC BY 2.0",
-      "source": "https://www.flickr.com/photos/96214671@N08/50065865131",
-      "note": "Nearest sibling: gold-plated C-case Constellation automatic, cal. 1012. The 168.0056 is the same C-case family with cal. 1011. Found via Openverse, cropped square."
-    },
-    "omega-seamaster-automatic-vintage": {
-      "file": "images/omega-seamaster-automatic-vintage.jpg",
-      "title": "1971 Omega Seamaster DeVille 1",
-      "author": "thombo2",
-      "license": "CC BY 2.0",
-      "source": "https://www.flickr.com/photos/17383471@N00/188365974",
-      "note": "Nearest sibling: a 1971 Seamaster De Ville automatic, a vintage Seamaster-signed automatic dress watch. Black-and-white photo found via Openverse, cropped square, 640 px (not upscaled). Wikimedia Commons originals were rate-limited (HTTP 429) all session."
-    },
-    "omega-de-ville-prestige-quartz-34-4510": {
-      "file": "images/omega-de-ville-prestige-quartz-34-4510.jpg",
-      "title": "1971 Omega Seamaster DeVille 1",
-      "author": "thombo2",
-      "license": "CC BY 2.0",
-      "source": "https://www.flickr.com/photos/17383471@N00/188365974",
-      "note": "Nearest sibling in the De Ville family: a 1971 Seamaster De Ville automatic, not the 4510 Prestige quartz. No free photo of the 4510 was found, and Wikimedia was rate-limited. Replace later."
-    },
-    "omega-de-ville-automatic-vintage-166-0161": {
-      "file": "images/omega-de-ville-automatic-vintage-166-0161.jpg",
-      "title": "1971 Omega Seamaster DeVille 1",
-      "author": "thombo2",
-      "license": "CC BY 2.0",
-      "source": "https://www.flickr.com/photos/17383471@N00/188365974",
-      "note": "A 1971 Seamaster De Ville automatic, the same family as 166.0161 and 166.020. Black-and-white photo found via Openverse, cropped square, 640 px."
-    },
-    "orient-star-contemporary-three-hand-re-bq0002l": {
-      "file": "images/orient-star-contemporary-three-hand-re-bq0002l.jpg",
-      "title": "Orient Star - Classic",
-      "author": "David Guinea",
-      "license": "CC BY-SA 4.0",
-      "source": "https://commons.wikimedia.org/w/index.php?curid=35671675",
-      "note": "Family photo (Orient Star Classic with power-reserve); no free photo of this exact reference found"
-    },
-    "orient-star-m45-f7-small-second-re-bs0002s": {
-      "file": "images/orient-star-m45-f7-small-second-re-bs0002s.jpg",
-      "title": "Orient Star - Classic",
-      "author": "David Guinea",
-      "license": "CC BY-SA 4.0",
-      "source": "https://commons.wikimedia.org/w/index.php?curid=35671675",
-      "note": "Family photo (Orient Star Classic with power-reserve); no free photo of this exact reference found"
-    },
-    "orient-star-m34-f7-semi-skeleton-re-by0010l": {
-      "file": "images/orient-star-m34-f7-semi-skeleton-re-by0010l.jpg",
-      "title": "Orient Star - Classic",
-      "author": "David Guinea",
-      "license": "CC BY-SA 4.0",
-      "source": "https://commons.wikimedia.org/w/index.php?curid=35671675",
-      "note": "Family photo (Orient Star Classic with power-reserve); no free photo of this exact reference found"
-    },
-    "orient-star-contemporary-mechanical-moon-phase-re-ay0002s": {
-      "file": "images/orient-star-contemporary-mechanical-moon-phase-re-ay0002s.jpg",
-      "title": "Orient Star - Classic",
-      "author": "David Guinea",
-      "license": "CC BY-SA 4.0",
-      "source": "https://commons.wikimedia.org/w/index.php?curid=35671675",
-      "note": "Family photo (Orient Star Classic with power-reserve); no free photo of this exact reference found"
-    },
-    "oris-big-crown-pointer-date-40mm-01-754-7741": {
-      "file": "images/oris-big-crown-pointer-date-40mm-01-754-7741.jpg",
-      "title": "Oris Big Crown Pointer Date 40mm, blue dial on bracelet (01 754 7785 4065)",
-      "author": "Teddy Baldassarre",
-      "license": "Seller photo, identification only",
-      "source": "https://teddybaldassarre.com/products/big-crown-pointer-date-40mm-blue-on-leather-strap",
-      "note": "Last resort: no free-licence photo of a current-generation Pointer Date on Openverse; Commons only had Oris press images (excluded) and its API returned 429 this run."
-    },
-    "oris-big-crown-pointer-date-earlier-refs-7543-7628-7629": {
-      "file": "images/oris-big-crown-pointer-date-earlier-refs-7543-7628-7629.jpg",
-      "title": "Oris Big Crown Pointer Date 7629-40 (Wristler listing photo)",
-      "author": "wristler.eu",
-      "license": "Seller photo, identification only",
-      "source": "https://wristler.eu/watches/244773-oris-big-crown-pointer-date",
-      "note": "Last resort: Openverse/Wikimedia Commons had no usable free photo of this model (Commons API/upload host returned 429 throughout this run). Listing photo shows the 7629 pointer day-date variant on bracelet; image is only 506 px, saved at crop size without upscaling."
-    },
-    "oris-big-crown-propilot-big-day-date-44mm-01-752-7760": {
-      "file": "images/oris-big-crown-propilot-big-day-date-44mm-01-752-7760.jpg",
-      "title": "Oris Big Crown ProPilot Big Day Date 01 752 7760 4164 (Wristler listing photo)",
-      "author": "wristler.eu",
-      "license": "Seller photo, identification only",
-      "source": "https://wristler.eu/watches/155394-oris-big-crown-propilot-altimeter",
-      "note": "Last resort: Openverse/Wikimedia Commons had no usable free photo of this model (Commons API/upload host returned 429 throughout this run). Image is only 506 px, saved at crop size without upscaling."
-    },
-    "oris-artelier-complication-01-581-7592": {
-      "file": "images/oris-artelier-complication-01-581-7592.jpg",
-      "title": "Oris Artelier Complication 01 581 7592 (Wristler listing photo)",
-      "author": "wristler.eu",
-      "license": "Seller photo, identification only",
-      "source": "https://wristler.eu/watches/221388-oris-artelier-complication",
-      "note": "Last resort: Openverse/Wikimedia Commons had no usable free photo of this model (Commons API/upload host returned 429 throughout this run). Commons has only an Oris press image of the Artelier (excluded). Image is 506 px, saved at crop size without upscaling."
-    },
-    "paulin-modul-mechanical": {
-      "file": "images/paulin-modul-mechanical.jpg",
-      "title": "Modul E Auto 39mm",
-      "author": "Teddy Baldassarre (seller)",
-      "license": "Seller photo, identification only",
-      "source": "https://teddybaldassarre.com/products/modul-e-auto-39mm",
-      "note": "Nearest sibling (Modul E automatic), seller photo from Teddy Baldassarre product JSON; no free photo found (Openverse 0 hits)."
-    },
-    "paulin-oh-no-automatic-39mm": {
-      "file": "images/paulin-oh-no-automatic-39mm.jpg",
-      "title": "OH no Auto Red 39mm",
-      "author": "Teddy Baldassarre (seller)",
-      "license": "Seller photo, identification only",
-      "source": "https://teddybaldassarre.com/products/oh-no-auto-39mm",
-      "note": "Seller photo from Teddy Baldassarre product JSON; no free photo found."
-    },
-    "paulin-modul-automatic-39mm": {
-      "file": "images/paulin-modul-automatic-39mm.jpg",
-      "title": "Modul E Auto 39mm",
-      "author": "Teddy Baldassarre (seller)",
-      "license": "Seller photo, identification only",
-      "source": "https://teddybaldassarre.com/products/modul-e-auto-39mm",
-      "note": "Seller photo from Teddy Baldassarre product JSON; no free photo found."
-    },
-    "seiko-presage-urushi-sarx029": {
-      "file": "images/seiko-presage-urushi-sarx029.jpg",
-      "title": "Seiko Presage SARX029 (pre-owned listing photo)",
-      "author": "Seriouswatches (seller listing photo)",
-      "license": "Seller photo, identification only",
-      "source": "https://www.seriouswatches.com/products/seiko-presage-sarx029-pre-owned",
-      "note": "Last resort: no free-licence photo found (Openverse empty; Commons API rate-limited 429). Listing is sold; photo for identification only."
-    },
-    "seiko-presage-classic-series-40-2mm-spb463": {
-      "file": "images/seiko-presage-classic-series-40-2mm-spb463.jpg",
-      "title": "Seiko Presage Classic Series SPB463J (Wamada product photo)",
-      "author": "Wamada Jewellery (seller listing photo)",
-      "license": "Seller photo, identification only",
-      "source": "https://wamadajewellery.com.au/products/seiko-presage-classic-series-automatic-mens-watch-spb463j",
-      "note": "Last resort: no free-licence Presage photo found; retailer catalogue image, identification only."
-    },
-    "seiko-presage-sharp-edged-spb167": {
-      "file": "images/seiko-presage-sharp-edged-spb167.jpg",
-      "title": "Seiko Presage SPB167J (Wamada product photo)",
-      "author": "Wamada Jewellery (seller listing photo)",
-      "license": "Seller photo, identification only",
-      "source": "https://wamadajewellery.com.au/products/seiko-presage-automatic-watch-spb167j",
-      "note": "Last resort: no free-licence photo found; retailer catalogue image (669 px), identification only. Wamada listing currently unavailable."
-    },
-    "seiko-presage-classic-series-40-2mm-spb465": {
-      "file": "images/seiko-presage-classic-series-40-2mm-spb465.jpg",
-      "title": "Seiko Presage Classic Series SPB465J (Wamada product photo)",
-      "author": "Wamada Jewellery (seller listing photo)",
-      "license": "Seller photo, identification only",
-      "source": "https://wamadajewellery.com.au/products/seiko-presage-classic-series-automatic-mens-watch-spb465j-grey-dial",
-      "note": "Last resort: no free-licence Presage photo found; retailer catalogue image, identification only."
-    },
-    "sinn-556-i-556-010": {
-      "file": "images/sinn-556-i-556-010.jpg",
-      "title": "Sinn 556 I (Define Watches Noosa product photo)",
-      "author": "definewatches.com.au",
-      "license": "Seller photo, identification only",
-      "source": "https://definewatches.com.au/shop/sinn/556-i/",
-      "note": "Last resort: Openverse/Wikimedia Commons had no usable free photo of this model (Commons API/upload host returned 429 throughout this run). Freely licensed Flickr 556i photos (Mario A. P., CC BY-SA 2.0) were all lifestyle shots with the watch too small to crop or under 700 px short side."
-    },
-    "sinn-556-a-556-014": {
-      "file": "images/sinn-556-a-556-014.jpg",
-      "title": "Sinn 556 A (Define Watches Noosa product photo)",
-      "author": "definewatches.com.au",
-      "license": "Seller photo, identification only",
-      "source": "https://definewatches.com.au/shop/sinn/556-a/",
-      "note": "Last resort: Openverse/Wikimedia Commons had no usable free photo of this model (Commons API/upload host returned 429 throughout this run)."
-    },
-    "sinn-104-st-sa-104-010": {
-      "file": "images/sinn-104-st-sa-104-010.jpg",
-      "title": "Sinn 104 St Sa I Classic Pilot (Define Watches Noosa product photo)",
-      "author": "definewatches.com.au",
-      "license": "Seller photo, identification only",
-      "source": "https://definewatches.com.au/shop/sinn/instrument-watches/104-st-sa-i-classic-pilot/",
-      "note": "Last resort: Openverse/Wikimedia Commons had no usable free photo of this model (Commons API/upload host returned 429 throughout this run)."
-    },
-    "sinn-434-st-34mm-434-010": {
-      "file": "images/sinn-434-st-34mm-434-010.jpg",
-      "title": "Sinn 434 St S (Define Watches Noosa product photo)",
-      "author": "definewatches.com.au",
-      "license": "Seller photo, identification only",
-      "source": "https://definewatches.com.au/shop/sinn/434-st-s/",
-      "note": "Last resort: Openverse/Wikimedia Commons had no usable free photo of this model (Commons API/upload host returned 429 throughout this run)."
-    },
-    "sinn-556-i-mother-of-pearl-556-0105": {
-      "file": "images/sinn-556-i-mother-of-pearl-556-0105.jpg",
-      "title": "Sinn 556 I Mother-of-pearl S (Define Watches Noosa product photo)",
-      "author": "definewatches.com.au",
-      "license": "Seller photo, identification only",
-      "source": "https://definewatches.com.au/shop/sinn/556-i-pearl-s/",
-      "note": "Last resort: Openverse/Wikimedia Commons had no usable free photo of this model (Commons API/upload host returned 429 throughout this run)."
-    },
-    "studio-underd0g-02series-pink-lem0nade-02plcb": {
-      "file": "images/studio-underd0g-02series-pink-lem0nade-02plcb.jpg",
-      "title": "Studio Underd0g 02SERIES Pink Lemonade",
-      "author": "Time+Tide shop",
-      "license": "Seller photo, identification only",
-      "source": "https://shop.timeandtidewatches.com/products/studio-underd0g-pink-lemonade",
-      "note": "Openverse (2 queries) and Wikimedia Commons returned no free-licence Studio Underd0g photos (Commons then rate-limited); seller product photo from a listing fetched today, cropped square."
-    },
-    "studio-underd0g-02series-steffany-blue-02sbmi": {
-      "file": "images/studio-underd0g-02series-steffany-blue-02sbmi.jpg",
-      "title": "Studio Underd0g 02SERIES Steffany Blue",
-      "author": "Time+Tide shop",
-      "license": "Seller photo, identification only",
-      "source": "https://shop.timeandtidewatches.com/products/studio-underd0g-steffany-blue",
-      "note": "Openverse (2 queries) and Wikimedia Commons returned no free-licence Studio Underd0g photos (Commons then rate-limited); seller product photo from a listing fetched today, cropped square. Photo shows the Gen1 (02BLB) dial, visually near-identical."
-    },
-    "studio-underd0g-02series-red-l0lly-02rlb": {
-      "file": "images/studio-underd0g-02series-red-l0lly-02rlb.jpg",
-      "title": "Studio Underd0g 02SERIES Gen 2 Red L0lly",
-      "author": "Time+Tide shop",
-      "license": "Seller photo, identification only",
-      "source": "https://shop.timeandtidewatches.com/products/studio-underd0g-02series-red-l0lly",
-      "note": "Openverse (2 queries) and Wikimedia Commons returned no free-licence Studio Underd0g photos (Commons then rate-limited); seller product photo from a listing fetched today, cropped square."
-    },
-    "studio-underd0g-02series-nightshade-02nibu": {
-      "file": "images/studio-underd0g-02series-nightshade-02nibu.jpg",
-      "title": "Studio Underd0g 02SERIES Gen 2 Nightshade",
-      "author": "Time+Tide shop",
-      "license": "Seller photo, identification only",
-      "source": "https://shop.timeandtidewatches.com/products/studio-underd0g-02series-nightshade",
-      "note": "Openverse (2 queries) and Wikimedia Commons returned no free-licence Studio Underd0g photos (Commons then rate-limited); seller product photo from a listing fetched today, cropped square."
-    },
-    "studio-underd0g-02series-mim0sa-fears-02mig": {
-      "file": "images/studio-underd0g-02series-mim0sa-fears-02mig.jpg",
-      "title": "Fears x Studio Underd0g The Mim0sa",
-      "author": "Studio Underd0g (underd0g.com shop)",
-      "license": "Seller photo, identification only",
-      "source": "https://underd0g.com/products/02mig_ea",
-      "note": "Openverse (2 queries) and Wikimedia Commons returned no free-licence Studio Underd0g photos (Commons then rate-limited); seller product photo from a listing fetched today, cropped square."
-    },
-    "tissot-prx-powermatic-80-40mm-t1374071104100": {
-      "file": "images/tissot-prx-powermatic-80-40mm-t1374071104100.jpg",
-      "title": "Teddy Baldassarre product photo, PRX Powermatic 80 40mm blue",
-      "author": "Teddy Baldassarre",
-      "license": "Seller photo, identification only",
-      "source": "https://teddybaldassarre.com/products/prx-automatic-powermatic-80",
-      "note": "No usable free photo: the only Commons PRX shots are a photographed catalogue print (Tissot_PRX.jpg) and store-display photos; Wikimedia upload server returned 429 today. Replace with a free photo later."
-    },
-    "tissot-prx-powermatic-80-40mm-t1374071105100": {
-      "file": "images/tissot-prx-powermatic-80-40mm-t1374071105100.jpg",
-      "title": "Teddy Baldassarre product photo, PRX Powermatic 80 40mm black",
-      "author": "Teddy Baldassarre",
-      "license": "Seller photo, identification only",
-      "source": "https://teddybaldassarre.com/products/prx-automatic-powermatic-80-black",
-      "note": "No usable free photo of the PRX Powermatic 80 found today (Commons PRX image is a photographed catalogue print). Replace later."
-    },
-    "tissot-gentleman-powermatic-80-silicium-40mm-t1274071104100": {
-      "file": "images/tissot-gentleman-powermatic-80-silicium-40mm-t1274071104100.jpg",
-      "title": "Teddy Baldassarre product photo, Gentleman Powermatic 80 Silicium blue",
-      "author": "Teddy Baldassarre",
-      "license": "Seller photo, identification only",
-      "source": "https://teddybaldassarre.com/products/gentleman-powermatic-80-silicium-blue-dial",
-      "note": "Openverse and Commons had no Gentleman photos (Commons intitle search returns James Tissot paintings)."
-    },
-    "tissot-ballade-powermatic-80-cosc-39mm-t1564081103300": {
-      "file": "images/tissot-ballade-powermatic-80-cosc-39mm-t1564081103300.jpg",
-      "title": "Tissot Ballade 01",
-      "author": "Ustas (Wikimedia Commons)",
-      "license": "CC BY-SA 3.0",
-      "source": "https://commons.wikimedia.org/w/index.php?curid=132250",
-      "note": "Nearest sibling: an earlier-generation two-tone Ballade (blue dial) on the wrist, not the current 39mm COSC silver. Free licence; via Openverse."
-    },
-    "tissot-le-locle-powermatic-80-39-3mm-t0064071104300": {
-      "file": "images/tissot-le-locle-powermatic-80-39-3mm-t0064071104300.jpg",
-      "title": "Teddy Baldassarre product photo, Le Locle Powermatic 80 blue",
-      "author": "Teddy Baldassarre",
-      "license": "Seller photo, identification only",
-      "source": "https://teddybaldassarre.com/products/le-locle-powermatic-80-blue-dial",
-      "note": "Openverse \"Le Locle\" results are museum pieces from the 1950s-70s or the factory; no free photo of the current model."
-    },
-    "tudor-princess-date-92514": {
-      "file": "images/tudor-princess-date-92514.jpg",
-      "title": "Tudor Prince 92514 23mm steel black (Everywatch listing)",
-      "author": "minico_01 (eBay seller, via Everywatch)",
-      "license": "Seller photo, identification only",
-      "source": "https://everywatch.com/tudor/prince/92514/watch-34823480",
-      "note": "Last resort. The free Commons sibling (Prince Date-Day 76200) could not be downloaded because of Wikimedia HTTP 429."
-    },
-    "tudor-prince-date-32mm-72033": {
-      "file": "images/tudor-prince-date-32mm-72033.jpg",
-      "title": "Tudor Prince 72033 32mm champagne (Everywatch listing)",
-      "author": "aydos-25 (eBay seller, via Everywatch)",
-      "license": "Seller photo, identification only",
-      "source": "https://everywatch.com/tudor/prince/72033/watch-34822658",
-      "note": "Last resort. Wikimedia was rate-limited (HTTP 429)."
-    },
-    "tudor-princess-date-92500": {
-      "file": "images/tudor-princess-date-92500.jpg",
-      "title": "Tudor Prince 92500 23mm steel silver (Everywatch listing)",
-      "author": "closer0924 (eBay seller, via Everywatch)",
-      "license": "Seller photo, identification only",
-      "source": "https://everywatch.com/tudor/prince/92500/watch-34822610",
-      "note": "Last resort. Wikimedia was rate-limited (HTTP 429)."
-    },
-    "tudor-prince-date-32mm-72000": {
-      "file": "images/tudor-prince-date-32mm-72000.jpg",
-      "title": "Tudor Prince 72000 32mm steel silver (Everywatch listing)",
-      "author": "Closer (dealer, via Everywatch)",
-      "license": "Seller photo, identification only",
-      "source": "https://everywatch.com/tudor/prince/72000/watch-34825744",
-      "note": "Last resort. Wikimedia was rate-limited (HTTP 429)."
-    },
-    "tudor-prince-oysterdate-34mm-74033": {
-      "file": "images/tudor-prince-oysterdate-34mm-74033.jpg",
-      "title": "Tudor Prince 72033 32mm champagne (Everywatch listing)",
-      "author": "aydos-25 (eBay seller, via Everywatch)",
-      "license": "Seller photo, identification only",
-      "source": "https://everywatch.com/tudor/prince/72033/watch-34822658",
-      "note": "Last resort, sibling: the 32 mm 72033 two-tone Prince Oysterdate. The 74033 listing photo was a small wrist-free shot on a warranty card showing a serial number, so it was not used."
-    }
+ "_comment": "Images shown for each watch. Owner may override with an image URL on a watchlist entry. The routine must add an entry here for every model it publishes (ROUTINE_PROMPT step 1E), freely licensed where possible.",
+ "images": {
+  "rolex-126610ln": {
+   "file": "images/rolex-126610ln.jpg",
+   "title": "Rolex Submariner Professional.JPG",
+   "author": "Dr.K.",
+   "license": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Rolex_Submariner_Professional.JPG",
+   "note": "Representative photo of the model family from Wikimedia Commons, not necessarily this exact reference."
+  },
+  "omega-speedmaster-hesalite": {
+   "file": "images/omega-speedmaster-hesalite.jpg",
+   "title": "OMEGA-Speedmaster-Professional-Front (cropped).jpg",
+   "author": "Torsten Bolten",
+   "license": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:OMEGA-Speedmaster-Professional-Front_(cropped).jpg",
+   "note": "Representative photo of the model family from Wikimedia Commons, not necessarily this exact reference."
+  },
+  "tudor-bb58-79030n": {
+   "file": "images/tudor-bb58-79030n.jpg",
+   "title": "Tudor Black Bay 54 ref. m79000n-0001.jpg",
+   "author": "EMore98",
+   "license": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Tudor_Black_Bay_54_ref._m79000n-0001.jpg",
+   "note": "Nearest freely licensed sibling: a Black Bay 54, same steel case and black dial family as the Fifty-Eight. No free photo of the 79030N exists yet."
+  },
+  "cartier-santos-medium-wssa0029": {
+   "file": "images/cartier-santos-medium-wssa0029.jpg",
+   "title": "Cartier Santos wristwatch.jpg",
+   "author": "Pittigrilli",
+   "license": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Cartier_Santos_wristwatch.jpg",
+   "note": "Representative photo of the model family from Wikimedia Commons, not necessarily this exact reference."
+  },
+  "christopher-ward-c63-sealander-automatic-39mm": {
+   "file": "images/christopher-ward-c63-sealander-automatic-39mm.jpg",
+   "title": "Christopher Ward C63 Sealander GMT white on bracelet 1",
+   "author": "Mario A. P.",
+   "license": "CC BY-SA 2.0",
+   "source": "https://www.flickr.com/photos/99058495@N00/51890070725",
+   "note": "Nearest sibling: C63 Sealander GMT (same case family), Flickr via Openverse; cropped square."
+  },
+  "christopher-ward-c63-sealander-automatic-36mm": {
+   "file": "images/christopher-ward-c63-sealander-automatic-36mm.jpg",
+   "title": "Christopher Ward C63 Sealander GMT white on bracelet 1",
+   "author": "Mario A. P.",
+   "license": "CC BY-SA 2.0",
+   "source": "https://www.flickr.com/photos/99058495@N00/51890070725",
+   "note": "Nearest sibling: C63 Sealander GMT (same case family), Flickr via Openverse; cropped square."
+  },
+  "christopher-ward-the-twelve-40mm": {
+   "file": "images/christopher-ward-the-twelve-40mm.jpg",
+   "title": "The Twelve 40mm Glacier Blue (pre-owned)",
+   "author": "Serious Watches (seller)",
+   "license": "Seller photo, identification only",
+   "source": "https://www.seriouswatches.com/products/christopher-ward-the-twelve-40mm-glacier-blue-pre-owned-pre1916",
+   "note": "No free-licence Twelve photo found (Openverse 0 hits); seller photo from Serious Watches product feed fetched today."
+  },
+  "christopher-ward-the-twelve-36mm": {
+   "file": "images/christopher-ward-the-twelve-36mm.jpg",
+   "title": "The Twelve 36mm Nordic Blue (pre-owned)",
+   "author": "Serious Watches (seller)",
+   "license": "Seller photo, identification only",
+   "source": "https://www.seriouswatches.com/products/christopher-ward-the-twelve-36mm-nordic-blue-pre-owned-pre1996",
+   "note": "No free-licence Twelve photo found (Openverse 0 hits); seller photo from Serious Watches product feed fetched today."
+  },
+  "christopher-ward-the-twelve-38mm": {
+   "file": "images/christopher-ward-the-twelve-38mm.jpg",
+   "title": "Twelve 38 Ice Cream (pre-owned)",
+   "author": "Serious Watches (seller)",
+   "license": "Seller photo, identification only",
+   "source": "https://www.seriouswatches.com/products/christopher-ward-twelve-38-ice-cream-pre-owned-pre1784",
+   "note": "No free-licence Twelve photo found (Openverse 0 hits); seller photo from Serious Watches product feed fetched today."
+  },
+  "frederique-constant-classics-quartz-40mm-fc-220": {
+   "file": "images/frederique-constant-classics-quartz-40mm-fc-220.jpg",
+   "title": "Wamada Jewellery product photo, Classics Quartz Date blue on leather 40mm (FC-220N5B6)",
+   "author": "Wamada Jewellery",
+   "license": "Seller photo, identification only",
+   "source": "https://wamadajewellery.com.au/products/frederique-constant-classics-quartz-date-blue-on-leather-40mm",
+   "note": "Openverse returned one FC Classics photo (683px short side, below 700px minimum); Commons search rate-limited."
+  },
+  "frederique-constant-classics-carree-ladies-23mm-fc-200mc": {
+   "file": "images/frederique-constant-classics-carree-ladies-23mm-fc-200mc.jpg",
+   "title": "Teddy Baldassarre product photo, Classics Carrée Ladies 23mm silver",
+   "author": "Teddy Baldassarre",
+   "license": "Seller photo, identification only",
+   "source": "https://teddybaldassarre.com/products/classics-carree-ladies-23mm-silver-on-bracelet",
+   "note": "No free photo found."
+  },
+  "frederique-constant-classics-art-deco-round-fc-200mp-ar": {
+   "file": "images/frederique-constant-classics-art-deco-round-fc-200mp-ar.jpg",
+   "title": "Wamada Jewellery product photo, Classics Art Deco Round Ladies FC-200MPW2AR6B",
+   "author": "Wamada Jewellery",
+   "license": "Seller photo, identification only",
+   "source": "https://wamadajewellery.com.au/products/frederique-constant-classics-art-deco-round-ladies-quartz-watch",
+   "note": "No free photo found."
+  },
+  "frederique-constant-classics-business-timer-fc-270": {
+   "file": "images/frederique-constant-classics-business-timer-fc-270.jpg",
+   "title": "Wamada Jewellery product photo, Classics Business Timer FC-270M4P6",
+   "author": "Wamada Jewellery",
+   "license": "Seller photo, identification only",
+   "source": "https://wamadajewellery.com.au/products/frederique-constant-classics-business-timer-quartz-watch",
+   "note": "No free photo found."
+  },
+  "frederique-constant-classics-index-automatic-40mm-fc-303": {
+   "file": "images/frederique-constant-classics-index-automatic-40mm-fc-303.jpg",
+   "title": "Teddy Baldassarre product photo, Classics Index Automatic 40mm blue",
+   "author": "Teddy Baldassarre",
+   "license": "Seller photo, identification only",
+   "source": "https://teddybaldassarre.com/products/classics-index-automatic-blue-dial-on-bracelet",
+   "note": "Openverse \"Frederique Constant Classic Automatic\" (Flickr, CC BY) is 1024x683, below the 700px minimum."
+  },
+  "iwc-vintage-automatic-pellaton-cal-85x": {
+   "file": "images/iwc-vintage-automatic-pellaton-cal-85x.jpg",
+   "title": "IWC Automatic 803A 35mm steel silver (Everywatch listing)",
+   "author": "Timeanagram (dealer, via Everywatch)",
+   "license": "Seller photo, identification only",
+   "source": "https://everywatch.com/iwc/automatic/803a/watch-34730489",
+   "note": "Last resort: an 803A from the carried family. The free Commons IWC cal. 89 sibling could not be downloaded because of Wikimedia HTTP 429."
+  },
+  "king-seiko-45ks-hi-beat-4502-7001": {
+   "file": "images/king-seiko-45ks-hi-beat-4502-7001.jpg",
+   "title": "Seiko King Diashock 25 Jewels, 2. Modell 1967",
+   "author": "Dnalor 01",
+   "license": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/w/index.php?curid=34915197",
+   "note": "Nearest sibling: 1967 King Seiko 2nd model (44-9990); no free photo of a 45KS found"
+  },
+  "king-seiko-56ks-hi-beat-5626": {
+   "file": "images/king-seiko-56ks-hi-beat-5626.jpg",
+   "title": "Seiko King Diashock 25 Jewels, 2. Modell 1967",
+   "author": "Dnalor 01",
+   "license": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/w/index.php?curid=34915197",
+   "note": "Nearest sibling: 1967 King Seiko 2nd model (44-9990); no free photo of a 56KS found"
+  },
+  "king-seiko-ksk-37mm-reissue-spb279": {
+   "file": "images/king-seiko-ksk-37mm-reissue-spb279.jpg",
+   "title": "Seiko King Diashock 25 Jewels, 2. Modell 1967",
+   "author": "Dnalor 01",
+   "license": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/w/index.php?curid=34915197",
+   "note": "Nearest sibling: the 1960s King Seiko 2nd-model design the KSK re-creation is based on; no free photo of the modern SPB279 found"
+  },
+  "king-seiko-44ks-2nd-model-44-2000": {
+   "file": "images/king-seiko-44ks-2nd-model-44-2000.jpg",
+   "title": "Seiko King Diashock 25 Jewels, 2. Modell 1967",
+   "author": "Dnalor 01",
+   "license": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/w/index.php?curid=34915197",
+   "note": "Same generation (2nd model, 44-9990 reference shown)"
+  },
+  "longines-la-grande-classique-automatic-38mm-l4-918-4": {
+   "file": "images/longines-la-grande-classique-automatic-38mm-l4-918-4.jpg",
+   "title": "Teddy Baldassarre product photo, La Grande Classique de Longines 24mm white",
+   "author": "Teddy Baldassarre",
+   "license": "Seller photo, identification only",
+   "source": "https://teddybaldassarre.com/products/la-grande-classique-de-longines-24mm-white-on-bracelet",
+   "note": "Nearest sibling (24mm quartz La Grande Classique), seller photo. Openverse La Grande Classique hits were dealer adverts (Johnson Watch Co), rejected."
+  },
+  "longines-master-collection-38-5mm-l2-628-4-78-6": {
+   "file": "images/longines-master-collection-38-5mm-l2-628-4-78-6.jpg",
+   "title": "My brand new Longines Master Collection watch",
+   "author": "NGHI TRAN (Flickr)",
+   "license": "CC BY 2.0",
+   "source": "https://www.flickr.com/photos/33203464@N00/1400338145",
+   "note": "Nearest sibling: Master Collection chronograph (black-and-white photo), not the three-hand 38.5mm. Via Openverse."
+  },
+  "longines-conquest-38mm-l3-720-4": {
+   "file": "images/longines-conquest-38mm-l3-720-4.jpg",
+   "title": "Teddy Baldassarre product photo, Conquest 38mm black",
+   "author": "Teddy Baldassarre",
+   "license": "Seller photo, identification only",
+   "source": "https://teddybaldassarre.com/products/conquest-2023-38mm-black",
+   "note": "Free Commons photo \"Longines Conquest 2024\" (EMore98, CC BY-SA 4.0) exists but upload.wikimedia.org returned 429 on every try today; swap it in on a later run."
+  },
+  "longines-master-collection-big-date-l2-676-4-78-3": {
+   "file": "images/longines-master-collection-big-date-l2-676-4-78-3.jpg",
+   "title": "My brand new Longines Master Collection watch",
+   "author": "NGHI TRAN (Flickr)",
+   "license": "CC BY 2.0",
+   "source": "https://www.flickr.com/photos/33203464@N00/1400338145",
+   "note": "Nearest sibling: Master Collection chronograph (shared family photo). Via Openverse."
+  },
+  "longines-conquest-41mm-l3-830-4": {
+   "file": "images/longines-conquest-41mm-l3-830-4.jpg",
+   "title": "Teddy Baldassarre product photo, Conquest 41mm sunray blue",
+   "author": "Teddy Baldassarre",
+   "license": "Seller photo, identification only",
+   "source": "https://teddybaldassarre.com/products/conquest-2023-sunray-blue",
+   "note": "Commons \"Longines Conquest 2024\" is a free candidate but was rate-limited (429) today."
+  },
+  "meistersinger-neo-36mm-automatic-ne908n": {
+   "file": "images/meistersinger-neo-36mm-automatic-ne908n.jpg",
+   "title": "MeisterSinger Neo 36mm NE908N, blue on velour strap",
+   "author": "Teddy Baldassarre",
+   "license": "Seller photo, identification only",
+   "source": "https://teddybaldassarre.com/products/ne908n-2025",
+   "note": "Last resort: no free-licence Neo photo on Openverse; Commons API and upload host returned 429 throughout this run."
+  },
+  "meistersinger-yaara-q-36mm-yaq917s": {
+   "file": "images/meistersinger-yaara-q-36mm-yaq917s.jpg",
+   "title": "MeisterSinger Yaara Q YAQ917S (Define Watches Noosa product photo)",
+   "author": "definewatches.com.au",
+   "license": "Seller photo, identification only",
+   "source": "https://definewatches.com.au/shop/meistersinger/meistersinger-yaara-q-steel-blue-silver-yaq917s/",
+   "note": "Last resort: Openverse/Wikimedia Commons had no usable free photo of this model (Commons API/upload host returned 429 throughout this run)."
+  },
+  "meistersinger-perigraph-43mm-am1008": {
+   "file": "images/meistersinger-perigraph-43mm-am1008.jpg",
+   "title": "MeisterSinger Perigraph 43mm AM1008 (Define Watches Noosa product photo)",
+   "author": "definewatches.com.au",
+   "license": "Seller photo, identification only",
+   "source": "https://definewatches.com.au/shop/meistersinger/meistersinger-perigraph-sunburst-blue-43mm/",
+   "note": "Last resort: Openverse/Wikimedia Commons had no usable free photo of this model (Commons API/upload host returned 429 throughout this run)."
+  },
+  "meistersinger-phanero-35mm-ph307g": {
+   "file": "images/meistersinger-phanero-35mm-ph307g.jpg",
+   "title": "MeisterSinger Phanero PH307G (Define Watches Noosa product photo)",
+   "author": "definewatches.com.au",
+   "license": "Seller photo, identification only",
+   "source": "https://definewatches.com.au/shop/meistersinger/phanero-ph307g-35mm/",
+   "note": "Last resort: Openverse/Wikimedia Commons had no usable free photo of this model (Commons API/upload host returned 429 throughout this run)."
+  },
+  "meistersinger-neo-quartz-36mm-nq203": {
+   "file": "images/meistersinger-neo-quartz-36mm-nq203.jpg",
+   "title": "MeisterSinger Neo Quartz NQ203 (Define Watches Noosa product photo)",
+   "author": "definewatches.com.au",
+   "license": "Seller photo, identification only",
+   "source": "https://definewatches.com.au/shop/meistersinger/neo-f-quartz-nefq203-36mm/",
+   "note": "Last resort: Openverse/Wikimedia Commons had no usable free photo of this model (Commons API/upload host returned 429 throughout this run)."
+  },
+  "nomos-glashutte-club-campus-36": {
+   "file": "images/nomos-glashutte-club-campus-36.jpg",
+   "title": "Club Campus 36mm Endless Blue (717)",
+   "author": "Teddy Baldassarre (seller)",
+   "license": "Seller photo, identification only",
+   "source": "https://teddybaldassarre.com/products/club-campus-endless-blue-steel-back",
+   "note": "No free-licence photo found (Openverse 0 hits, Commons rate-limited); seller photo from Teddy Baldassarre product JSON."
+  },
+  "nomos-glashutte-club-campus-38": {
+   "file": "images/nomos-glashutte-club-campus-38.jpg",
+   "title": "Club Campus 38 Night (736)",
+   "author": "Teddy Baldassarre (seller)",
+   "license": "Seller photo, identification only",
+   "source": "https://teddybaldassarre.com/products/club-campus-38-night",
+   "note": "Seller photo from Teddy Baldassarre product JSON; no free photo found."
+  },
+  "nomos-glashutte-orion-35": {
+   "file": "images/nomos-glashutte-orion-35.jpg",
+   "title": "NOMOS Glashütte Orion",
+   "author": "Berlinerblau",
+   "license": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/w/index.php?curid=80882011",
+   "note": "Wikimedia Commons, via Openverse; cropped square."
+  },
+  "nomos-glashutte-club-36-701": {
+   "file": "images/nomos-glashutte-club-36-701.jpg",
+   "title": "Club White Dial 36mm (701.1)",
+   "author": "Teddy Baldassarre (seller)",
+   "license": "Seller photo, identification only",
+   "source": "https://teddybaldassarre.com/products/club-white-dial-36mm-stainless-steel-back",
+   "note": "Seller photo from Teddy Baldassarre product JSON; no free photo found."
+  },
+  "nomos-glashutte-orion-33-319": {
+   "file": "images/nomos-glashutte-orion-33-319.jpg",
+   "title": "NOMOS Glashütte Orion",
+   "author": "Berlinerblau",
+   "license": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/w/index.php?curid=80882011",
+   "note": "Nearest sibling: Orion 35 photo (same family), Wikimedia Commons via Openverse; cropped square."
+  },
+  "omega-geneve-vintage": {
+   "file": "images/omega-geneve-vintage.jpg",
+   "title": "Vintage Omega Men's 17-Jewel Wrist Watch, Swiss-Made",
+   "author": "France1978",
+   "license": "CC BY-SA 2.0",
+   "source": "https://www.flickr.com/photos/51764518@N02/13827062045",
+   "note": "Nearest sibling: a plain 1950s-60s Omega 17-jewel steel dress watch of the kind sold in the Geneve-era basic line, not a Geneve-signed piece. Found via Openverse, cropped square, 560 px (not upscaled). Replace with a Geneve photo later."
+  },
+  "omega-constellation-c-case-168-0056": {
+   "file": "images/omega-constellation-c-case-168-0056.jpg",
+   "title": "Omega Constellation (calibre 1012)",
+   "author": "JingKe888",
+   "license": "CC BY 2.0",
+   "source": "https://www.flickr.com/photos/96214671@N08/50065865131",
+   "note": "Nearest sibling: gold-plated C-case Constellation automatic, cal. 1012. The 168.0056 is the same C-case family with cal. 1011. Found via Openverse, cropped square."
+  },
+  "omega-seamaster-automatic-vintage": {
+   "file": "images/omega-seamaster-automatic-vintage.jpg",
+   "title": "1971 Omega Seamaster DeVille 1",
+   "author": "thombo2",
+   "license": "CC BY 2.0",
+   "source": "https://www.flickr.com/photos/17383471@N00/188365974",
+   "note": "Nearest sibling: a 1971 Seamaster De Ville automatic, a vintage Seamaster-signed automatic dress watch. Black-and-white photo found via Openverse, cropped square, 640 px (not upscaled). Wikimedia Commons originals were rate-limited (HTTP 429) all session."
+  },
+  "omega-de-ville-prestige-quartz-34-4510": {
+   "file": "images/omega-de-ville-prestige-quartz-34-4510.jpg",
+   "title": "1971 Omega Seamaster DeVille 1",
+   "author": "thombo2",
+   "license": "CC BY 2.0",
+   "source": "https://www.flickr.com/photos/17383471@N00/188365974",
+   "note": "Nearest sibling in the De Ville family: a 1971 Seamaster De Ville automatic, not the 4510 Prestige quartz. No free photo of the 4510 was found, and Wikimedia was rate-limited. Replace later."
+  },
+  "omega-de-ville-automatic-vintage-166-0161": {
+   "file": "images/omega-de-ville-automatic-vintage-166-0161.jpg",
+   "title": "1971 Omega Seamaster DeVille 1",
+   "author": "thombo2",
+   "license": "CC BY 2.0",
+   "source": "https://www.flickr.com/photos/17383471@N00/188365974",
+   "note": "A 1971 Seamaster De Ville automatic, the same family as 166.0161 and 166.020. Black-and-white photo found via Openverse, cropped square, 640 px."
+  },
+  "orient-star-contemporary-three-hand-re-bq0002l": {
+   "file": "images/orient-star-contemporary-three-hand-re-bq0002l.jpg",
+   "title": "Orient Star - Classic",
+   "author": "David Guinea",
+   "license": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/w/index.php?curid=35671675",
+   "note": "Family photo (Orient Star Classic with power-reserve); no free photo of this exact reference found"
+  },
+  "orient-star-m45-f7-small-second-re-bs0002s": {
+   "file": "images/orient-star-m45-f7-small-second-re-bs0002s.jpg",
+   "title": "Orient Star - Classic",
+   "author": "David Guinea",
+   "license": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/w/index.php?curid=35671675",
+   "note": "Family photo (Orient Star Classic with power-reserve); no free photo of this exact reference found"
+  },
+  "orient-star-m34-f7-semi-skeleton-re-by0010l": {
+   "file": "images/orient-star-m34-f7-semi-skeleton-re-by0010l.jpg",
+   "title": "Orient Star - Classic",
+   "author": "David Guinea",
+   "license": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/w/index.php?curid=35671675",
+   "note": "Family photo (Orient Star Classic with power-reserve); no free photo of this exact reference found"
+  },
+  "orient-star-contemporary-mechanical-moon-phase-re-ay0002s": {
+   "file": "images/orient-star-contemporary-mechanical-moon-phase-re-ay0002s.jpg",
+   "title": "Orient Star - Classic",
+   "author": "David Guinea",
+   "license": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/w/index.php?curid=35671675",
+   "note": "Family photo (Orient Star Classic with power-reserve); no free photo of this exact reference found"
+  },
+  "oris-big-crown-pointer-date-40mm-01-754-7741": {
+   "file": "images/oris-big-crown-pointer-date-40mm-01-754-7741.jpg",
+   "title": "Oris Big Crown Pointer Date 40mm, blue dial on bracelet (01 754 7785 4065)",
+   "author": "Teddy Baldassarre",
+   "license": "Seller photo, identification only",
+   "source": "https://teddybaldassarre.com/products/big-crown-pointer-date-40mm-blue-on-leather-strap",
+   "note": "Last resort: no free-licence photo of a current-generation Pointer Date on Openverse; Commons only had Oris press images (excluded) and its API returned 429 this run."
+  },
+  "oris-big-crown-pointer-date-earlier-refs-7543-7628-7629": {
+   "file": "images/oris-big-crown-pointer-date-earlier-refs-7543-7628-7629.jpg",
+   "title": "Oris Big Crown Pointer Date 7629-40 (Wristler listing photo)",
+   "author": "wristler.eu",
+   "license": "Seller photo, identification only",
+   "source": "https://wristler.eu/watches/244773-oris-big-crown-pointer-date",
+   "note": "Last resort: Openverse/Wikimedia Commons had no usable free photo of this model (Commons API/upload host returned 429 throughout this run). Listing photo shows the 7629 pointer day-date variant on bracelet; image is only 506 px, saved at crop size without upscaling."
+  },
+  "oris-big-crown-propilot-big-day-date-44mm-01-752-7760": {
+   "file": "images/oris-big-crown-propilot-big-day-date-44mm-01-752-7760.jpg",
+   "title": "Oris Big Crown ProPilot Big Day Date 01 752 7760 4164 (Wristler listing photo)",
+   "author": "wristler.eu",
+   "license": "Seller photo, identification only",
+   "source": "https://wristler.eu/watches/155394-oris-big-crown-propilot-altimeter",
+   "note": "Last resort: Openverse/Wikimedia Commons had no usable free photo of this model (Commons API/upload host returned 429 throughout this run). Image is only 506 px, saved at crop size without upscaling."
+  },
+  "oris-artelier-complication-01-581-7592": {
+   "file": "images/oris-artelier-complication-01-581-7592.jpg",
+   "title": "Oris Artelier Complication 01 581 7592 (Wristler listing photo)",
+   "author": "wristler.eu",
+   "license": "Seller photo, identification only",
+   "source": "https://wristler.eu/watches/221388-oris-artelier-complication",
+   "note": "Last resort: Openverse/Wikimedia Commons had no usable free photo of this model (Commons API/upload host returned 429 throughout this run). Commons has only an Oris press image of the Artelier (excluded). Image is 506 px, saved at crop size without upscaling."
+  },
+  "paulin-modul-mechanical": {
+   "file": "images/paulin-modul-mechanical.jpg",
+   "title": "Modul E Auto 39mm",
+   "author": "Teddy Baldassarre (seller)",
+   "license": "Seller photo, identification only",
+   "source": "https://teddybaldassarre.com/products/modul-e-auto-39mm",
+   "note": "Nearest sibling (Modul E automatic), seller photo from Teddy Baldassarre product JSON; no free photo found (Openverse 0 hits)."
+  },
+  "paulin-oh-no-automatic-39mm": {
+   "file": "images/paulin-oh-no-automatic-39mm.jpg",
+   "title": "OH no Auto Red 39mm",
+   "author": "Teddy Baldassarre (seller)",
+   "license": "Seller photo, identification only",
+   "source": "https://teddybaldassarre.com/products/oh-no-auto-39mm",
+   "note": "Seller photo from Teddy Baldassarre product JSON; no free photo found."
+  },
+  "paulin-modul-automatic-39mm": {
+   "file": "images/paulin-modul-automatic-39mm.jpg",
+   "title": "Modul E Auto 39mm",
+   "author": "Teddy Baldassarre (seller)",
+   "license": "Seller photo, identification only",
+   "source": "https://teddybaldassarre.com/products/modul-e-auto-39mm",
+   "note": "Seller photo from Teddy Baldassarre product JSON; no free photo found."
+  },
+  "seiko-presage-urushi-sarx029": {
+   "file": "images/seiko-presage-urushi-sarx029.jpg",
+   "title": "Seiko Presage SARX029 (pre-owned listing photo)",
+   "author": "Seriouswatches (seller listing photo)",
+   "license": "Seller photo, identification only",
+   "source": "https://www.seriouswatches.com/products/seiko-presage-sarx029-pre-owned",
+   "note": "Last resort: no free-licence photo found (Openverse empty; Commons API rate-limited 429). Listing is sold; photo for identification only."
+  },
+  "seiko-presage-classic-series-40-2mm-spb463": {
+   "file": "images/seiko-presage-classic-series-40-2mm-spb463.jpg",
+   "title": "Seiko Presage Classic Series SPB463J (Wamada product photo)",
+   "author": "Wamada Jewellery (seller listing photo)",
+   "license": "Seller photo, identification only",
+   "source": "https://wamadajewellery.com.au/products/seiko-presage-classic-series-automatic-mens-watch-spb463j",
+   "note": "Last resort: no free-licence Presage photo found; retailer catalogue image, identification only."
+  },
+  "seiko-presage-sharp-edged-spb167": {
+   "file": "images/seiko-presage-sharp-edged-spb167.jpg",
+   "title": "Seiko Presage SPB167J (Wamada product photo)",
+   "author": "Wamada Jewellery (seller listing photo)",
+   "license": "Seller photo, identification only",
+   "source": "https://wamadajewellery.com.au/products/seiko-presage-automatic-watch-spb167j",
+   "note": "Last resort: no free-licence photo found; retailer catalogue image (669 px), identification only. Wamada listing currently unavailable."
+  },
+  "seiko-presage-classic-series-40-2mm-spb465": {
+   "file": "images/seiko-presage-classic-series-40-2mm-spb465.jpg",
+   "title": "Seiko Presage Classic Series SPB465J (Wamada product photo)",
+   "author": "Wamada Jewellery (seller listing photo)",
+   "license": "Seller photo, identification only",
+   "source": "https://wamadajewellery.com.au/products/seiko-presage-classic-series-automatic-mens-watch-spb465j-grey-dial",
+   "note": "Last resort: no free-licence Presage photo found; retailer catalogue image, identification only."
+  },
+  "sinn-556-i-556-010": {
+   "file": "images/sinn-556-i-556-010.jpg",
+   "title": "Sinn 556 I (Define Watches Noosa product photo)",
+   "author": "definewatches.com.au",
+   "license": "Seller photo, identification only",
+   "source": "https://definewatches.com.au/shop/sinn/556-i/",
+   "note": "Last resort: Openverse/Wikimedia Commons had no usable free photo of this model (Commons API/upload host returned 429 throughout this run). Freely licensed Flickr 556i photos (Mario A. P., CC BY-SA 2.0) were all lifestyle shots with the watch too small to crop or under 700 px short side."
+  },
+  "sinn-556-a-556-014": {
+   "file": "images/sinn-556-a-556-014.jpg",
+   "title": "Sinn 556 A (Define Watches Noosa product photo)",
+   "author": "definewatches.com.au",
+   "license": "Seller photo, identification only",
+   "source": "https://definewatches.com.au/shop/sinn/556-a/",
+   "note": "Last resort: Openverse/Wikimedia Commons had no usable free photo of this model (Commons API/upload host returned 429 throughout this run)."
+  },
+  "sinn-104-st-sa-104-010": {
+   "file": "images/sinn-104-st-sa-104-010.jpg",
+   "title": "Sinn 104 St Sa I Classic Pilot (Define Watches Noosa product photo)",
+   "author": "definewatches.com.au",
+   "license": "Seller photo, identification only",
+   "source": "https://definewatches.com.au/shop/sinn/instrument-watches/104-st-sa-i-classic-pilot/",
+   "note": "Last resort: Openverse/Wikimedia Commons had no usable free photo of this model (Commons API/upload host returned 429 throughout this run)."
+  },
+  "sinn-434-st-34mm-434-010": {
+   "file": "images/sinn-434-st-34mm-434-010.jpg",
+   "title": "Sinn 434 St S (Define Watches Noosa product photo)",
+   "author": "definewatches.com.au",
+   "license": "Seller photo, identification only",
+   "source": "https://definewatches.com.au/shop/sinn/434-st-s/",
+   "note": "Last resort: Openverse/Wikimedia Commons had no usable free photo of this model (Commons API/upload host returned 429 throughout this run)."
+  },
+  "sinn-556-i-mother-of-pearl-556-0105": {
+   "file": "images/sinn-556-i-mother-of-pearl-556-0105.jpg",
+   "title": "Sinn 556 I Mother-of-pearl S (Define Watches Noosa product photo)",
+   "author": "definewatches.com.au",
+   "license": "Seller photo, identification only",
+   "source": "https://definewatches.com.au/shop/sinn/556-i-pearl-s/",
+   "note": "Last resort: Openverse/Wikimedia Commons had no usable free photo of this model (Commons API/upload host returned 429 throughout this run)."
+  },
+  "studio-underd0g-02series-pink-lem0nade-02plcb": {
+   "file": "images/studio-underd0g-02series-pink-lem0nade-02plcb.jpg",
+   "title": "Studio Underd0g 02SERIES Pink Lemonade",
+   "author": "Time+Tide shop",
+   "license": "Seller photo, identification only",
+   "source": "https://shop.timeandtidewatches.com/products/studio-underd0g-pink-lemonade",
+   "note": "Openverse (2 queries) and Wikimedia Commons returned no free-licence Studio Underd0g photos (Commons then rate-limited); seller product photo from a listing fetched today, cropped square."
+  },
+  "studio-underd0g-02series-steffany-blue-02sbmi": {
+   "file": "images/studio-underd0g-02series-steffany-blue-02sbmi.jpg",
+   "title": "Studio Underd0g 02SERIES Steffany Blue",
+   "author": "Time+Tide shop",
+   "license": "Seller photo, identification only",
+   "source": "https://shop.timeandtidewatches.com/products/studio-underd0g-steffany-blue",
+   "note": "Openverse (2 queries) and Wikimedia Commons returned no free-licence Studio Underd0g photos (Commons then rate-limited); seller product photo from a listing fetched today, cropped square. Photo shows the Gen1 (02BLB) dial, visually near-identical."
+  },
+  "studio-underd0g-02series-red-l0lly-02rlb": {
+   "file": "images/studio-underd0g-02series-red-l0lly-02rlb.jpg",
+   "title": "Studio Underd0g 02SERIES Gen 2 Red L0lly",
+   "author": "Time+Tide shop",
+   "license": "Seller photo, identification only",
+   "source": "https://shop.timeandtidewatches.com/products/studio-underd0g-02series-red-l0lly",
+   "note": "Openverse (2 queries) and Wikimedia Commons returned no free-licence Studio Underd0g photos (Commons then rate-limited); seller product photo from a listing fetched today, cropped square."
+  },
+  "studio-underd0g-02series-nightshade-02nibu": {
+   "file": "images/studio-underd0g-02series-nightshade-02nibu.jpg",
+   "title": "Studio Underd0g 02SERIES Gen 2 Nightshade",
+   "author": "Time+Tide shop",
+   "license": "Seller photo, identification only",
+   "source": "https://shop.timeandtidewatches.com/products/studio-underd0g-02series-nightshade",
+   "note": "Openverse (2 queries) and Wikimedia Commons returned no free-licence Studio Underd0g photos (Commons then rate-limited); seller product photo from a listing fetched today, cropped square."
+  },
+  "studio-underd0g-02series-mim0sa-fears-02mig": {
+   "file": "images/studio-underd0g-02series-mim0sa-fears-02mig.jpg",
+   "title": "Fears x Studio Underd0g The Mim0sa",
+   "author": "Studio Underd0g (underd0g.com shop)",
+   "license": "Seller photo, identification only",
+   "source": "https://underd0g.com/products/02mig_ea",
+   "note": "Openverse (2 queries) and Wikimedia Commons returned no free-licence Studio Underd0g photos (Commons then rate-limited); seller product photo from a listing fetched today, cropped square."
+  },
+  "tissot-prx-powermatic-80-40mm-t1374071104100": {
+   "file": "images/tissot-prx-powermatic-80-40mm-t1374071104100.jpg",
+   "title": "Teddy Baldassarre product photo, PRX Powermatic 80 40mm blue",
+   "author": "Teddy Baldassarre",
+   "license": "Seller photo, identification only",
+   "source": "https://teddybaldassarre.com/products/prx-automatic-powermatic-80",
+   "note": "No usable free photo: the only Commons PRX shots are a photographed catalogue print (Tissot_PRX.jpg) and store-display photos; Wikimedia upload server returned 429 today. Replace with a free photo later."
+  },
+  "tissot-prx-powermatic-80-40mm-t1374071105100": {
+   "file": "images/tissot-prx-powermatic-80-40mm-t1374071105100.jpg",
+   "title": "Teddy Baldassarre product photo, PRX Powermatic 80 40mm black",
+   "author": "Teddy Baldassarre",
+   "license": "Seller photo, identification only",
+   "source": "https://teddybaldassarre.com/products/prx-automatic-powermatic-80-black",
+   "note": "No usable free photo of the PRX Powermatic 80 found today (Commons PRX image is a photographed catalogue print). Replace later."
+  },
+  "tissot-gentleman-powermatic-80-silicium-40mm-t1274071104100": {
+   "file": "images/tissot-gentleman-powermatic-80-silicium-40mm-t1274071104100.jpg",
+   "title": "Teddy Baldassarre product photo, Gentleman Powermatic 80 Silicium blue",
+   "author": "Teddy Baldassarre",
+   "license": "Seller photo, identification only",
+   "source": "https://teddybaldassarre.com/products/gentleman-powermatic-80-silicium-blue-dial",
+   "note": "Openverse and Commons had no Gentleman photos (Commons intitle search returns James Tissot paintings)."
+  },
+  "tissot-ballade-powermatic-80-cosc-39mm-t1564081103300": {
+   "file": "images/tissot-ballade-powermatic-80-cosc-39mm-t1564081103300.jpg",
+   "title": "Tissot Ballade 01",
+   "author": "Ustas (Wikimedia Commons)",
+   "license": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/w/index.php?curid=132250",
+   "note": "Nearest sibling: an earlier-generation two-tone Ballade (blue dial) on the wrist, not the current 39mm COSC silver. Free licence; via Openverse."
+  },
+  "tissot-le-locle-powermatic-80-39-3mm-t0064071104300": {
+   "file": "images/tissot-le-locle-powermatic-80-39-3mm-t0064071104300.jpg",
+   "title": "Teddy Baldassarre product photo, Le Locle Powermatic 80 blue",
+   "author": "Teddy Baldassarre",
+   "license": "Seller photo, identification only",
+   "source": "https://teddybaldassarre.com/products/le-locle-powermatic-80-blue-dial",
+   "note": "Openverse \"Le Locle\" results are museum pieces from the 1950s-70s or the factory; no free photo of the current model."
+  },
+  "tudor-princess-date-92514": {
+   "file": "images/tudor-princess-date-92514.jpg",
+   "title": "Tudor Prince 92514 23mm steel black (Everywatch listing)",
+   "author": "minico_01 (eBay seller, via Everywatch)",
+   "license": "Seller photo, identification only",
+   "source": "https://everywatch.com/tudor/prince/92514/watch-34823480",
+   "note": "Last resort. The free Commons sibling (Prince Date-Day 76200) could not be downloaded because of Wikimedia HTTP 429."
+  },
+  "tudor-prince-date-32mm-72033": {
+   "file": "images/tudor-prince-date-32mm-72033.jpg",
+   "title": "Tudor Prince 72033 32mm champagne (Everywatch listing)",
+   "author": "aydos-25 (eBay seller, via Everywatch)",
+   "license": "Seller photo, identification only",
+   "source": "https://everywatch.com/tudor/prince/72033/watch-34822658",
+   "note": "Last resort. Wikimedia was rate-limited (HTTP 429)."
+  },
+  "tudor-princess-date-92500": {
+   "file": "images/tudor-princess-date-92500.jpg",
+   "title": "Tudor Prince 92500 23mm steel silver (Everywatch listing)",
+   "author": "closer0924 (eBay seller, via Everywatch)",
+   "license": "Seller photo, identification only",
+   "source": "https://everywatch.com/tudor/prince/92500/watch-34822610",
+   "note": "Last resort. Wikimedia was rate-limited (HTTP 429)."
+  },
+  "tudor-prince-date-32mm-72000": {
+   "file": "images/tudor-prince-date-32mm-72000.jpg",
+   "title": "Tudor Prince 72000 32mm steel silver (Everywatch listing)",
+   "author": "Closer (dealer, via Everywatch)",
+   "license": "Seller photo, identification only",
+   "source": "https://everywatch.com/tudor/prince/72000/watch-34825744",
+   "note": "Last resort. Wikimedia was rate-limited (HTTP 429)."
+  },
+  "tudor-prince-oysterdate-34mm-74033": {
+   "file": "images/tudor-prince-oysterdate-34mm-74033.jpg",
+   "title": "Tudor Prince 72033 32mm champagne (Everywatch listing)",
+   "author": "aydos-25 (eBay seller, via Everywatch)",
+   "license": "Seller photo, identification only",
+   "source": "https://everywatch.com/tudor/prince/72033/watch-34822658",
+   "note": "Last resort, sibling: the 32 mm 72033 two-tone Prince Oysterdate. The 74033 listing photo was a small wrist-free shot on a warranty card showing a serial number, so it was not used."
+  },
+  "iwc-ingenieur-jumbo-quartz-528379": {
+   "file": "images/iwc-ingenieur-jumbo-quartz-528379.jpg",
+   "title": "IWC Ingenieur",
+   "author": "bfishadow",
+   "license": "CC BY 2.0",
+   "source": "https://www.flickr.com/photos/61368956@N00/4602031396",
+   "note": "Nearest sibling: an Ingenieur chronograph from the same family, not the 528379 Jumbo quartz. Found via Openverse."
+  },
+  "nomos-glashutte-tangente-33": {
+   "file": "images/nomos-glashutte-tangente-33.jpg",
+   "title": "NOMOS Tangente 33 (listing photo)",
+   "author": "Wamada Jewellery (seller listing photo)",
+   "license": "Seller photo, identification only",
+   "source": "https://wamadajewellery.com.au/products/nomos-tangente-33",
+   "note": "Last resort: Wikimedia rate-limited (429) and Openverse failed; replace with a free photo later."
+  },
+  "orient-star-avant-garde-skeleton-rk-av0a03b": {
+   "file": "images/orient-star-avant-garde-skeleton-rk-av0a03b.jpg",
+   "title": "Orient Star Avant-Garde Skeleton RE-AV0A03B (listing photo)",
+   "author": "Skywatches (seller listing photo)",
+   "license": "Seller photo, identification only",
+   "source": "https://skywatches.com.sg/products/re-av0a03b00b",
+   "note": "Last resort: free Orient Star photos found were dial macros or other models; 550 px source."
+  },
+  "paulin-neo-automatic-38mm": {
+   "file": "images/paulin-neo-automatic-38mm.jpg",
+   "title": "Paulin Neo A silver (listing photo)",
+   "author": "Paulin (seller listing photo)",
+   "license": "Seller photo, identification only",
+   "source": "https://paulinwatches.com/products/neo-a-1",
+   "note": "Last resort: no free-licence Paulin photo on Openverse."
+  },
+  "seiko-presage-baby-snowflake-sarx055": {
+   "file": "images/seiko-presage-baby-snowflake-sarx055.jpg",
+   "title": "Seiko Presage SARX055 (listing photo)",
+   "author": "r/Watchexchange seller, via WatchRecon thumbnail",
+   "license": "Seller photo, identification only",
+   "source": "https://www.reddit.com/r/Watchexchange/comments/1xiau7e/wts_seiko_presage_baby_grand_seiko_snowflake/",
+   "note": "Last resort, small (280 px) private-seller photo; replace with a free photo when one turns up."
   }
+ }
 }
