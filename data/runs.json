@@ -22,6 +22,19 @@
    "auction": 5,
    "fetches": 165,
    "report": "reports/2026-11-03.md"
+  },
+  {
+   "date": "2026-11-03",
+   "type": "daily",
+   "status": "partial",
+   "brands": 17,
+   "models": 70,
+   "new": 630,
+   "drops": 0,
+   "deals": 119,
+   "auction": 2,
+   "fetches": 374,
+   "report": "reports/2026-11-03.md"
   }
  ]
 }

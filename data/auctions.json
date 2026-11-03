@@ -84,6 +84,32 @@
    "status": "sold",
    "note": "Circa 2018, bracelet, warranty and box; result HK$56,250 from search summary only, not on fetched page; past sale (c.2020)",
    "first_seen": "2026-11-03"
+  },
+  "https://www.catawiki.com/en/l/105204508-meistersinger-perigraph-swiss-automatic-open-date-new-men-2026": {
+   "watch_id": "meistersinger-perigraph-43mm-am1008",
+   "house": "Catawiki",
+   "sale": "Catawiki watch auction (Perigraph, new, 2026)",
+   "lot": "105204508",
+   "date": null,
+   "estimate_low": 1800,
+   "estimate_high": 2000,
+   "currency": "EUR",
+   "result": null,
+   "status": "upcoming",
+   "first_seen": "2026-11-03"
+  },
+  "https://www.catawiki.com/en/l/105602381-sinn-556-556-010-men-2025": {
+   "watch_id": "sinn-556-i-556-010",
+   "house": "Catawiki",
+   "sale": "Catawiki watch auction H-10117",
+   "lot": "105602381",
+   "date": null,
+   "estimate_low": null,
+   "estimate_high": null,
+   "currency": "EUR",
+   "result": null,
+   "status": "upcoming",
+   "first_seen": "2026-11-03"
   }
  }
 }
