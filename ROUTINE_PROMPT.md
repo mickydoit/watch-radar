@@ -44,7 +44,7 @@ For each brand in `focus.brands`, with an **effort floor of at least 6 distinct 
 - Tag every model with one `style` from `styles_available`: `diver` (rotating dive bezel, 200 m+), `chronograph` (chrono pushers), `gmt` (second time zone or world time), `pilot` (flieger, large numerals, pilot heritage), `field` (military or field heritage, small plain dial), `dress` (thin, plain dial, leather, little or no lume), `sport` (integrated bracelet or sporty non-diver, for example Tissot PRX, Aquaracer), `vintage` (reissue or heritage re-edition), `everyday` (anything else). One style per model, the dominant one.
 - Count in-band models per style for the brand (`styles_seen`) **before** filtering. Then, if `focus.styles[brand]` is non-empty, keep only the models whose `style` is in it; say in the brand note what the filter removed.
 - Choose the models to carry forward: every model already tracked that still has a listing in the last 14 days, plus the new models with the most in-band listings, up to **5 models per brand**. Say in the notes which models you dropped or added.
-- For each carried model record: `source`, `url`, `title`, `price`, `currency`, `price_aud`, `condition` (new | unworn | excellent | good | fair | unknown), `full_set`, `seller_type`, `seller_country`, `year`, `source_quality`, `first_seen`, `last_seen`, keyed by a listing key (URL without query string, lower-cased, or `source:id`).
+- For each carried model record: `source`, `url`, `title`, `price`, `currency`, `price_aud`, `condition` (new | unworn | excellent | good | fair | unknown), `full_set`, `seller_type`, `seller_country`, `year`, `source_quality`, `first_seen`, `last_seen`, `status` (see 1E), keyed by a listing key (URL without query string, lower-cased, or `source:id`).
 
 ### B. Benchmark and deals, per model
 
@@ -64,7 +64,16 @@ Treat each active entry as a model with the entry's `id`, using its `condition`,
 
 For each tracked model, search Phillips, Sotheby's, Christie's, Bonhams, Antiquorum, Everywatch, Catawiki, Leonard Joel and Lawsons. Record upcoming lots in `data/auctions.json` keyed by URL (`watch_id`, `house`, `sale`, `date`, `lot`, `estimate_low`, `estimate_high`, `currency`, `status: upcoming`, `first_seen`). On weekly runs resolve past lots to `sold` (set `result` to the hammer price in the lot's `currency`) or `unsold`. `date` is ISO or null, never free text.
 
-### E. A photo for every model (required)
+### E. Has it sold? (every run)
+
+Every listing in `data/seen.json` carries `status`: `active`, `sold`, `removed` or `unverified`, plus `checked` (the date you last looked) and, when sold, `sold_date` (the day you first saw it gone) and `sold_price_aud` (its last asking price, the best proxy you have).
+
+1. **Deals are checked before they are published.** For every listing you intend to put in `deals` or `price_drops`, fetch its page once today. "Sold", "sold out", "out of stock", "no longer available", "ended", a redirect to a category page, or HTTP 404/410 means it is not a deal: set `status: "sold"` (or `removed` when the page is gone without saying sold) and leave it out. A page that cannot be read (403, challenge, snippet-only listing) gets `status: "unverified"` and may still be published, marked so the owner knows. Only `active` or `unverified` listings go in `deals`.
+2. **Listings that vanished are re-checked.** Take the listings seen in the last 30 days that today's research did not find again, deals first, newest first, and re-fetch up to 40 of them per run (one fetch each, no retries). Classify them the same way. A listing that is simply still for sale gets `status: "active"` and `last_seen` = today.
+3. **Sold prices are evidence.** Append `date,watch_id,source,sold_aud,<price>,AUD,1,<url>` to `data/prices.csv` for each listing newly marked sold, and put the last 14 days of sold listings for each model in `latest.json` under `sold[]`. They are last asking prices, not hammer prices; say so in the report. Do not fold them into the asking benchmark.
+4. Listings older than 30 days that were never re-found stay `unverified` until the 90-day expiry; do not spend fetches on them.
+
+### F. A photo for every model (required)
 
 Every id in `latest.json`'s `watches[]` should have a photo: either `image` on its watchlist entry or an entry in `data/images.json` whose `file` exists in `images/`. A missing file counts as no photo. Do this as **one serial pass from the main agent after all research is in**, never inside parallel research agents: Wikimedia and Openverse rate-limit by IP, and six agents hitting them at once got the whole session throttled (HTTP 429) for an hour. Pause at least 2 seconds between requests to the same host, and after one 429 from a host stop using that host for the rest of the run and move down the ladder. The whole photo phase has a **budget of 15 minutes**; when it runs out, publish with what you have, leave the remaining models without a photo, list them in one note, and let the next run try again. Work down this ladder, stop at the first hit, and spend up to 6 fetches per model:
 
@@ -81,14 +90,14 @@ Expect 10 to 20 fetches per brand and 60 to 300 per run depending on how many br
 
 ## 2. Update memory
 
-1. Merge today's listings into `data/seen.json` under `listings[watch_id][key]`: new keys get `first_seen` = today; existing keys get `last_seen` = today, the updated price, and `was_aud` on a drop. Delete keys whose `last_seen` is more than 90 days ago.
+1. Merge today's listings into `data/seen.json` under `listings[watch_id][key]`: new keys get `first_seen` = today and `status: "active"`; existing keys get `last_seen` = today, the updated price, and `was_aud` on a drop; apply the statuses from step 1E. Delete keys whose `last_seen` is more than 90 days ago, and sold or removed keys 30 days after `sold_date`.
 2. Append today's rows to `data/prices.csv`.
 3. Write `data/auctions.json` back.
 4. Write `reports/YYYY-MM-DD.md`: run type, rates, per brand the models carried/added/dropped and why, each model's benchmark and basis, every deal with its flag and reasoning, drops, sources that failed, replicas dropped, fetch count.
 
 ## 3. Publish: `data/latest.json` and `data/runs.json`
 
-Before writing `latest.json`, check that every `watches[].id` has a photo (step 1E). If some are missing and the photo budget is not spent, go back for them; if the budget is spent, publish anyway and name the models without a photo in one note. Never let photos delay the data by more than the budget. Say in the run notes how many photos you added.
+Before writing `latest.json`, check that every `watches[].id` has a photo (step 1F). If some are missing and the photo budget is not spent, go back for them; if the budget is spent, publish anyway and name the models without a photo in one note. Never let photos delay the data by more than the budget. Say in the run notes how many photos you added.
 
 `data/latest.json`:
 
@@ -109,18 +118,20 @@ Before writing `latest.json`, check that every `watches[].id` has a photo (step 
      "benchmark_aud": 4750, "benchmark_basis": "today's median (n=30); fewer than 3 days of history",
      "asking_min": 4015, "asking_median": 4754, "asking_n": 30, "watchcharts_market": 4209, "ebay_sold_median": null, "below_market_count": 3}
   ],
-  "deals": [ {"watch_id": "...", "key": "...", "title": "...", "url": "...", "price": 0, "currency": "USD", "price_aud": 0, "condition": "...", "full_set": true, "seller_type": "dealer", "seller_country": "US", "source": "...", "source_quality": "page", "benchmark_aud": 0, "below_market_pct": 0.0, "flag": "clean", "why": "...", "first_seen": "2026-11-04"} ],
+  "deals": [ {"watch_id": "...", "key": "...", "title": "...", "url": "...", "price": 0, "currency": "USD", "price_aud": 0, "condition": "...", "full_set": true, "seller_type": "dealer", "seller_country": "US", "source": "...", "source_quality": "page", "benchmark_aud": 0, "below_market_pct": 0.0, "flag": "clean", "availability": "active", "why": "...", "first_seen": "2026-11-04"} ],
+  "sold": [ {"watch_id": "...", "key": "...", "title": "...", "url": "...", "price_aud": 0, "source": "...", "seller_type": "dealer", "first_seen": "2026-10-20", "sold_date": "2026-11-04"} ],
   "price_drops": [ ],
   "auction_changes": [ ]
 }
 ```
 
 - `status` is `ok`, `partial`, `failed` (set `failure`) or `idle` (nothing selected).
+- `deals[].availability` is `active` (page read today and still for sale) or `unverified` (page could not be read); sold listings never appear in `deals`. `sold[]` lists listings that went from active to sold in the last 14 days, newest first, at most 6 per model.
 - Types matter: prices, percentages and counts are JSON numbers (never strings like `"4,015"`), unknowns are `null`, dates are `YYYY-MM-DD`. The site renders what you write without a human in between.
 - `watches` lists every model carried this run (brand models and specific references), active ones first, with `source: "brand"` or `"reference"` and the band its benchmark falls in.
 - `brands` has one entry per selected brand, in the owner's order, even when nothing was found (then `listings_in_band: 0` and a note). `styles_seen` counts in-band models by style before any style filter, so the owner can see what narrowing would do; `styles` is the filter that was applied (empty list = none).
 
-`data/runs.json` is `{"runs": [...]}`; append `{"date", "type", "status", "brands", "models", "new", "drops", "deals", "auction", "fetches", "report"}`.
+`data/runs.json` is `{"runs": [...]}`; append `{"date", "type", "status", "brands", "models", "new", "drops", "deals", "sold", "auction", "fetches", "report"}`.
 
 ## 4. Commit and push
 
