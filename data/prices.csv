@@ -10,3 +10,22 @@ date,watch_id,source,metric,value,currency,n,url
 2026-11-03,cartier-santos-medium-wssa0029,mixed,asking_min,10702,AUD,3,
 2026-11-03,cartier-santos-medium-wssa0029,mixed,asking_median,11395,AUD,3,
 2026-11-03,cartier-santos-medium-wssa0029,mixed,asking_median_good,11106,AUD,2,
+2026-11-03,rolex-126610ln,mixed,asking_min,20584,AUD,24,
+2026-11-03,rolex-126610ln,mixed,asking_median,22274,AUD,24,
+2026-11-03,rolex-126610ln,mixed,asking_median_good,21929,AUD,6,
+2026-11-03,rolex-126610ln,WatchCharts,watchcharts_market,19501,AUD,1,https://watchcharts.com/watch_model/22556-rolex-submariner-date-126610ln/overview
+2026-11-03,rolex-126610ln,Chrono24,chrono24_trend,21101,AUD,1,https://www.chrono24.com.au/rolex/ref-126610ln.htm
+2026-11-03,omega-speedmaster-hesalite,mixed,asking_min,7424,AUD,26,
+2026-11-03,omega-speedmaster-hesalite,mixed,asking_median,9198,AUD,26,
+2026-11-03,omega-speedmaster-hesalite,mixed,asking_median_good,9670,AUD,14,
+2026-11-03,omega-speedmaster-hesalite,WatchCharts,watchcharts_market,7975,AUD,1,https://watchcharts.com/watch_model/30920-omega-speedmaster-professional-moonwatch-310-30-42-50-01-001/overview
+2026-11-03,tudor-bb58-79030n,mixed,asking_min,4015,AUD,30,
+2026-11-03,tudor-bb58-79030n,mixed,asking_median,5596,AUD,30,
+2026-11-03,tudor-bb58-79030n,mixed,asking_median_good,4754,AUD,2,
+2026-11-03,tudor-bb58-79030n,WatchCharts,watchcharts_market,4209,AUD,1,https://watchcharts.ca/watch_model/326-tudor-black-bay-58-79030n/overview
+2026-11-03,tudor-bb58-79030n,eBay sold,ebay_sold_median,4478,AUD,1,https://www.ebay.de/itm/276961738488
+2026-11-03,cartier-santos-medium-wssa0029,mixed,asking_min,8635,AUD,48,
+2026-11-03,cartier-santos-medium-wssa0029,mixed,asking_median,11830,AUD,48,
+2026-11-03,cartier-santos-medium-wssa0029,mixed,asking_median_good,11806,AUD,9,
+2026-11-03,cartier-santos-medium-wssa0029,WatchCharts,watchcharts_market,9524,AUD,1,https://watchcharts.com/watch_model/35440-cartier-santos-medium-wssa0029/overview
+2026-11-03,cartier-santos-medium-wssa0029,eBay sold,ebay_sold_median,9281,AUD,3,https://www.ebay.com/sch/i.html?_nkw=WSSA0029&LH_Sold=1&LH_Complete=1

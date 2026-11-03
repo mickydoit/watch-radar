@@ -11,6 +11,17 @@
    "auction": 1,
    "fetches": 37,
    "report": "reports/2026-11-03.md"
+  },
+  {
+   "date": "2026-11-03",
+   "type": "daily",
+   "status": "partial",
+   "new": 4,
+   "drops": 0,
+   "deals": 10,
+   "auction": 5,
+   "fetches": 165,
+   "report": "reports/2026-11-03.md"
   }
  ]
 }
