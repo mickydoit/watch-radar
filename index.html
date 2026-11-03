@@ -49,7 +49,7 @@ img{display:block;max-width:100%}
 a:hover .roll span,button:hover .roll span{transform:translateY(-100%)}
 
 /* grid */
-.grid{display:grid;grid-template-columns:repeat(12,1fr);column-gap:0;padding:0 var(--g)}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:0;padding:0 var(--g)}
 .c1{grid-column:1/4}.c4{grid-column:4/8}.c8{grid-column:8/11}.c11{grid-column:11/13}
 .span-l{grid-column:1/8}.span-r{grid-column:8/13}
 
@@ -93,7 +93,8 @@ main{padding-top:128px;min-height:100vh}
 .tile .im img{width:100%;height:100%;object-fit:cover;transform:scale(1.001);transition:transform 1.1s var(--ease)}
 .tile:hover .im img{transform:scale(1.04)}
 .tile .im .ph{position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(40px,5vw,72px);font-weight:300;letter-spacing:-.04em;color:var(--ink-3)}
-.tile .under{display:flex;justify-content:space-between;margin-top:10px;height:12px}
+.tile .under{display:flex;justify-content:space-between;gap:12px;margin-top:10px;height:12px}
+.tile .under span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.tile .under span:last-child{flex:0 0 auto;white-space:nowrap}
 .gal.reveal .tile .im{clip-path:inset(0 0 100% 0)}
 .gal .hint{position:absolute;right:var(--g);top:-28px}
 
@@ -118,7 +119,7 @@ main{padding-top:128px;min-height:100vh}
 .brand{margin:0 0 clamp(96px,16vh,200px)}
 .brand .page-h{margin-bottom:clamp(40px,7vh,80px)}
 .model{align-items:start;margin:0 0 clamp(72px,10vh,120px)}
-.model .pic{grid-column:1/4;position:sticky;top:112px}
+.model .pic{grid-column:1/4;position:sticky;top:112px;min-width:0}
 .model .pic .im{aspect-ratio:4/5;background:var(--bg-2);overflow:hidden;position:relative}
 .model .pic img{width:100%;height:100%;object-fit:cover}
 .model .pic .ph{position:absolute;inset:0;display:grid;place-items:center;font-size:72px;font-weight:300;letter-spacing:-.04em;color:var(--ink-3)}
@@ -126,7 +127,7 @@ main{padding-top:128px;min-height:100vh}
 .model .pic .credit a:hover{color:var(--ink)}
 .model .body{grid-column:8/13}
 .model .body .f24.up{margin:0 0 28px}
-.model .body .f24.up .r{color:var(--ink-2);margin-left:14px}
+.model .body .f24.up .r{color:var(--ink-2);margin-left:14px;overflow-wrap:anywhere}
 .nl{margin:0;padding:0;list-style:none}
 .nl li{display:grid;grid-template-columns:52px 1fr auto;gap:0 12px;padding:6px 0;align-items:baseline}
 .nl li .k{color:var(--ink)}
@@ -148,10 +149,12 @@ main{padding-top:128px;min-height:100vh}
 .tip b{font-weight:400;display:block;margin-bottom:2px;text-transform:uppercase;font-size:11px}
 .model .sub-h{margin:44px 0 10px;display:flex;justify-content:space-between}
 .model .mini{border-top:1px solid var(--hair)}
-.model .mini a{display:grid;grid-template-columns:1fr auto;gap:4px 20px;padding:14px 0;border-bottom:1px solid var(--hair);align-items:baseline}
-.model .mini a .f12{color:var(--ink-2);grid-column:1;margin-top:2px}
-.model .mini a .f16{grid-column:1}
-.model .mini a .pr{grid-column:2;grid-row:1/span 2;text-align:right;white-space:nowrap}
+.model .mini a{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"t p" "m p";gap:4px 20px;padding:14px 0;border-bottom:1px solid var(--hair);align-items:baseline;transition:background .2s}
+.model .mini a .f12{color:var(--ink-2);grid-area:m;margin-top:2px}
+.model .mini a .f16{grid-area:t;min-width:0}
+.model .mini a .pr{grid-area:p;text-align:right;white-space:nowrap}
+.model .mini a[aria-current="true"]{background:var(--bg-2);box-shadow:0 0 0 10px var(--bg-2)}
+.model .mini a[aria-current="true"] .th{border-color:var(--ink)}
 .model .mini a .pr span{display:block;color:var(--good);margin-top:6px}
 details summary{list-style:none;cursor:pointer;display:inline-block;color:var(--ink-2)}
 details summary::-webkit-details-marker{display:none}
@@ -160,7 +163,7 @@ table{width:100%;border-collapse:collapse;margin-top:14px;font-size:14px}
 th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--hair);font-weight:400}
 th{color:var(--ink-2);font-size:11px;text-transform:uppercase;letter-spacing:0}
 td.num,th.num{text-align:right}
-@media (max-width:900px){.model .pic{grid-column:1/13;position:static;max-width:360px}.model .body{grid-column:1/13;margin-top:28px}}
+@media (max-width:900px){.model .pic{grid-column:1/13;position:static;max-width:none}.model .pic .im{aspect-ratio:1/1}.model .body{grid-column:1/13;margin-top:28px}.model .body .f24.up{font-size:19px}.model .body .f24.up .r{display:block;margin:6px 0 0;font-size:14px}.model .mini a{grid-template-areas:"t p" "m m";align-items:start;gap:6px 14px}.model .mini a .f16{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:15px;line-height:1.3}}
 
 /* overlays: menu + focus (contact-style) */
 .overlay{position:fixed;inset:0;z-index:30;background:var(--bg);display:none;overflow:auto;padding-top:128px;padding-bottom:80px}
@@ -187,14 +190,17 @@ td.num,th.num{text-align:right}
 .model .pic:hover .nav,.model .pic .nav:focus-visible{opacity:1}
 .model .pic .cap{display:grid;grid-template-columns:1fr auto;gap:4px 14px;margin-top:10px;text-transform:uppercase;letter-spacing:.04em}
 .model .pic .cap .lab{grid-column:1/3;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.model .pic .cap a{color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.model .pic .cap a:hover{color:var(--ink)}.model .pic .cap .n{text-align:right}
-.model .pic .thumbs{display:flex;gap:8px;margin-top:12px;overflow-x:auto;scrollbar-width:none}
+.model .pic .thumbs{display:flex;gap:8px;margin-top:12px;overflow-x:auto;scrollbar-width:none;min-width:0;max-width:100%}
 .model .pic .thumbs::-webkit-scrollbar{display:none}
 .model .pic .thumbs button{flex:0 0 auto;width:52px;height:52px;padding:0;border:1px solid var(--hair);background:var(--panel,transparent);cursor:pointer;opacity:.6;transition:opacity .2s,border-color .2s}
 .model .pic .thumbs button img{width:100%;height:100%;object-fit:cover;display:block}
 .model .pic .thumbs button:hover,.model .pic .thumbs button[aria-current="true"]{opacity:1;border-color:var(--ink)}
-.mini a .th{width:44px;height:44px;object-fit:cover;flex:0 0 auto;border:1px solid var(--hair);background:var(--bg)}
-.mini a.has-im{display:grid;grid-template-columns:44px 1fr auto;column-gap:16px;align-items:center}
-.mini a.has-im .f16:first-of-type{grid-column:2}.mini a.has-im .f12{grid-column:2}.mini a.has-im .pr{grid-column:3;grid-row:1/3}
+.mini a .th{grid-area:th;width:44px;height:44px;object-fit:cover;border:1px solid var(--hair);background:var(--bg);transition:border-color .2s}
+.mini a.has-im{grid-template-columns:44px minmax(0,1fr) auto;grid-template-areas:"th t p" "th m p";column-gap:16px;align-items:center}
+@media (max-width:900px){.mini a.has-im{grid-template-areas:"th t p" "th m m";grid-template-columns:52px minmax(0,1fr) auto;align-items:start}.mini a .th{width:52px;height:52px}}
+.pic .im img,.tile .im img{transition:opacity .25s}
+.tile .im .dots{position:absolute;right:12px;bottom:14px;display:flex;gap:5px;z-index:2}
+.tile .im .dots i{width:5px;height:5px;border-radius:50%;background:var(--bg);opacity:.5}.tile .im .dots i[aria-current="true"]{opacity:1}
 @media (max-width:900px){.model .pic .nav{opacity:1}}
 .tile .im .nav{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;border:1px solid var(--hair);background:var(--bg);color:var(--ink);font:inherit;font-size:14px;cursor:pointer;opacity:0;transition:opacity .2s;z-index:2}
 .tile .im .nav.prev{left:10px}.tile .im .nav.next{right:10px}
@@ -345,6 +351,8 @@ const variantOf = (l, w) => { if (l.variant) return l.variant; let t = String(l.
 function listingOf(d) { const byKey = (state.seen[d.watch_id] || {})[d.key]; if (byKey) return byKey; for (const l of Object.values(state.seen[d.watch_id] || {})) if (l.url && l.url === d.url) return l; return null; }
 const thumbOf = d => d.image_url || (listingOf(d) || {}).image_url || null;
 function viewsOf(w, im) { const views = []; if (im) views.push({ src: im.src, label: 'Representative', sub: im.credit ? 'Photo ' + im.credit.author + ', ' + im.credit.license : '', href: im.credit ? im.credit.source : null }); recentMatches(w.id).filter(l => l.image_url).slice(0, 8).forEach(l => views.push({ src: l.image_url, label: variantOf(l, w), sub: [srcName(l.source), fmtAUD(l.price_aud)].filter(Boolean).join(' · '), href: linkOf(l), key: l.key })); return views; }
+function swapImg(img, src) { if (img.src === src) return; img.style.opacity = '0'; setTimeout(() => { img.src = src; const done = () => { img.style.opacity = '1'; }; img.onload = done; setTimeout(done, 250); }, 110); }
+function swipe(elm, onLeft, onRight) { let x0 = null, y0 = null; elm.addEventListener('pointerdown', e => { x0 = e.clientX; y0 = e.clientY; }); elm.addEventListener('pointerup', e => { if (x0 == null) return; const dx = e.clientX - x0, dy = e.clientY - y0; x0 = null; if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) { e.preventDefault(); e.stopPropagation(); dx < 0 ? onLeft() : onRight(); } }); }
 const hasLink = l => /^https?:\/\//.test(String(l.url || '')) && !OVERVIEW.test(l.url);
 const linkOf = l => hasLink(l) ? l.url : 'https://duckduckgo.com/?q=' + encodeURIComponent((l.title || '') + ' ' + (/ebay/i.test(l.source || '') ? 'ebay' : /watchpatrol|reddit/i.test(l.source || '') ? 'watchexchange' : ''));
 
@@ -430,11 +438,13 @@ function renderToday() {
   const ws = watches(); $('#gal').style.display = ws.length ? '' : 'none';
   ws.forEach((w, i) => { const im = imageOf(w); const n = deals.filter(d => d.watch_id === w.id).length; const views = viewsOf(w, im); let cur = 0;
     const imgEl = views.length ? el('img', { src: views[0].src, alt: w.brand + ' ' + w.model, loading: 'lazy', onerror: () => { const k = views.findIndex(x => x.src === imgEl.src); if (k >= 0) { views.splice(k, 1); if (views.length) setView(Math.min(cur, views.length - 1)); } } }) : el('div', { class: 'ph' }, (w.brand || '').slice(0, 1));
+    if (views.length > 1) setTimeout(() => { const im = imgEl.parentElement; if (im) swipe(im, () => setView(cur + 1), () => setView(cur - 1)); }, 0);
     const counter = el('span', { class: 'muted' }, pad(i + 1)); const variant = el('span', { class: 'variant muted' }, '');
-    const setView = (k, e) => { if (e) { e.preventDefault(); e.stopPropagation(); } cur = (k + views.length) % views.length; imgEl.src = views[cur].src; counter.textContent = views.length > 1 ? pad(cur + 1) + ' / ' + pad(views.length) : pad(i + 1); variant.textContent = cur ? views[cur].label : ''; };
+    const dots = el('span', { class: 'dots' }); views.forEach((v, k) => dots.append(el('i', { 'aria-current': String(k === 0) })));
+    const setView = (k, e) => { if (e) { e.preventDefault(); e.stopPropagation(); } cur = (k + views.length) % views.length; swapImg(imgEl, views[cur].src); [...dots.children].forEach((d, j) => d.setAttribute('aria-current', String(j === cur))); counter.textContent = views.length > 1 ? pad(cur + 1) + ' / ' + pad(views.length) : pad(i + 1); variant.textContent = cur ? views[cur].label : ''; };
     track.append(el('a', { class: 'tile' + (views.length > 1 ? ' multi' : ''), href: '#watches', onclick: e => { e.preventDefault(); show('watches'); setTimeout(() => { const t = document.getElementById('w-' + w.id); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50); } },
     el('div', { class: 'cap f12' }, el('span', {}, w.brand), counter),
-    el('div', { class: 'im', style: 'transition-delay:' + (i * 90) + 'ms' }, imgEl, views.length > 1 ? el('button', { type: 'button', class: 'nav prev', 'aria-label': 'Previous', onclick: e => setView(cur - 1, e) }, '←') : null, views.length > 1 ? el('button', { type: 'button', class: 'nav next', 'aria-label': 'Next', onclick: e => setView(cur + 1, e) }, '→') : null, views.length > 1 ? variant : null),
+    el('div', { class: 'im', style: 'transition-delay:' + (i * 90) + 'ms' }, imgEl, views.length > 1 ? el('button', { type: 'button', class: 'nav prev', 'aria-label': 'Previous', onclick: e => setView(cur - 1, e) }, '←') : null, views.length > 1 ? el('button', { type: 'button', class: 'nav next', 'aria-label': 'Next', onclick: e => setView(cur + 1, e) }, '→') : null, views.length > 1 ? variant : null, views.length > 1 ? dots : null),
     el('div', { class: 'under f12' }, el('span', {}, (w.model || '').toUpperCase()), el('span', { class: 'muted' }, w.asking_min != null ? 'from ' + fmtAUD(w.asking_min) : n ? n + ' under' : '')))); });
   $('#dealsLab').style.display = L.run_date ? '' : 'none';
   if (deals.length) deals.forEach((d, i) => host.append(dealRow(d, i))); else if (L.run_date) host.append(el('div', { class: 'empty f16 muted' }, 'No listing sits under its benchmark today.'));
@@ -461,14 +471,16 @@ function renderWatches() {
       const imgEl = views.length ? el('img', { src: views[0].src, alt: w.brand + ' ' + w.model, loading: 'lazy', onerror: () => { const v = views.find(x => x.src === imgEl.src); if (v) dropView(v); } }) : el('div', { class: 'ph' }, (w.brand || '').slice(0, 1));
       const capL = el('span', { class: 'lab' }), capS = el('a', { class: 'muted', target: '_blank', rel: 'noopener' }), capN = el('span', { class: 'muted n' });
       const strip = el('div', { class: 'thumbs' }); let cur = 0;
-      const setView = i => { if (!views.length) return; cur = (i + views.length) % views.length; const v = views[cur]; imgEl.src = v.src; capL.textContent = v.label; capS.textContent = v.sub; if (v.href) capS.href = v.href; else capS.removeAttribute('href'); capN.textContent = views.length > 1 ? pad(cur + 1) + ' / ' + pad(views.length) : ''; [...strip.children].forEach((t, k) => t.setAttribute('aria-current', String(k === cur))); };
+      const rows = [];
+      const setView = i => { if (!views.length) return; cur = (i + views.length) % views.length; const v = views[cur]; swapImg(imgEl, v.src); rows.forEach(r => r.setAttribute('aria-current', String(!!v.key && r.dataset.key === v.key))); capL.textContent = v.label; capS.textContent = v.sub; if (v.href) capS.href = v.href; else capS.removeAttribute('href'); capN.textContent = views.length > 1 ? pad(cur + 1) + ' / ' + pad(views.length) : ''; [...strip.children].forEach((t, k) => t.setAttribute('aria-current', String(k === cur))); };
       const dropView = v => { const k = views.indexOf(v); if (k < 0) return; views.splice(k, 1); const btn = strip.children[k]; if (btn) btn.remove(); if (!views.length) { pic.classList.remove('multi'); imgEl.replaceWith(el('div', { class: 'ph' }, (w.brand || '').slice(0, 1))); return; } if (views.length === 1) { pic.classList.remove('multi'); strip.remove(); } setView(Math.min(cur, views.length - 1)); };
       views.forEach((v, k) => strip.append(el('button', { type: 'button', title: v.label, onclick: () => setView(views.indexOf(v)) }, el('img', { src: v.src, alt: v.label, onerror: () => dropView(v) }))));
       pic = el('div', { class: 'pic' + (views.length > 1 ? ' multi' : '') },
-        el('div', { class: 'im' }, imgEl, views.length > 1 ? el('button', { type: 'button', class: 'nav prev', 'aria-label': 'Previous', onclick: () => setView(cur - 1) }, '←') : null, views.length > 1 ? el('button', { type: 'button', class: 'nav next', 'aria-label': 'Next', onclick: () => setView(cur + 1) }, '→') : null),
+        el('div', { class: 'im', tabindex: views.length > 1 ? '0' : null, onkeydown: e => { if (e.key === 'ArrowLeft') { e.preventDefault(); setView(cur - 1); } if (e.key === 'ArrowRight') { e.preventDefault(); setView(cur + 1); } } }, imgEl, views.length > 1 ? el('button', { type: 'button', class: 'nav prev', 'aria-label': 'Previous', onclick: () => setView(cur - 1) }, '←') : null, views.length > 1 ? el('button', { type: 'button', class: 'nav next', 'aria-label': 'Next', onclick: () => setView(cur + 1) }, '→') : null),
         views.length ? el('div', { class: 'cap f12' }, capL, capS, capN) : null,
         views.length > 1 ? strip : null);
-      setView(0); w._setView = key => { const k = views.findIndex(v => v.key === key); if (k >= 0) setView(k); };
+      if (views.length > 1) swipe(pic.querySelector('.im'), () => setView(cur + 1), () => setView(cur - 1));
+      setView(0); w._setView = key => { const k = views.findIndex(v => v.key === key); if (k >= 0) setView(k); }; w._rows = rows;
       const med = series(w.id, 'asking_median'), prev = med.at(-2), last = med.at(-1); const change = prev && last ? pct(last.value, prev.value) : null;
       const nl = el('ul', { class: 'nl f24 light' });
       const li = (n, k, v, sub, cls) => nl.append(el('li', {}, el('span', { class: 'muted' }, n + '.'), el('span', { class: 'k' }, k), el('span', { class: 'v ' + (cls || '') }, v, sub ? el('small', {}, sub) : null)));
@@ -481,7 +493,7 @@ function renderWatches() {
       const data = SERIES.map(s => ({ ...s, pts: series(w.id, s.metric) })).filter(s => s.pts.length >= 2);
       if (data.length) { body.append(el('div', { class: 'chart-h f12' }, el('span', { class: 'muted' }, 'Asking prices'), el('div', { class: 'legend muted' }, ...data.map(s => el('span', {}, el('i', { style: 'background:' + s.color }), s.label)))), lineChart(data, w.ceiling)); const dates = [...new Set(data.flatMap(s => s.pts.map(p => p.date)))].sort().reverse().slice(0, 30); body.append(el('details', {}, el('summary', { class: 'f12' }, 'Table →'), el('table', {}, el('thead', {}, el('tr', {}, el('th', {}, 'Date'), ...data.map(s => el('th', { class: 'num' }, s.label)))), el('tbody', {}, ...dates.map(d => el('tr', {}, el('td', {}, fmtDate(d)), ...data.map(s => { const p = s.pts.find(q => q.date === d); return el('td', { class: 'num' }, p ? fmtAUD(p.value) : '—'); }))))))); }
       const matches = allMatches.slice(0, 6);
-      if (matches.length) { body.append(el('div', { class: 'sub-h f12 muted' }, el('span', {}, 'Listings'), el('span', {}, 'last 14 days'))); const mini = el('div', { class: 'mini' }); matches.forEach(l => mini.append(el('a', { href: linkOf(l), target: '_blank', rel: 'noopener', class: (hasLink(l) ? '' : 'nolink') + (l.image_url ? ' has-im' : ''), onmouseenter: () => { if (l.image_url && w._setView) w._setView(l.key); }, onfocus: () => { if (l.image_url && w._setView) w._setView(l.key); } }, l.image_url ? el('img', { class: 'th', src: l.image_url, alt: '', loading: 'lazy', onerror: e => e.target.remove() }) : null, el('span', { class: 'f16' }, l.title || l.url), el('span', { class: 'f12' }, [l.condition && l.condition !== 'unknown' ? l.condition : null, l.full_set ? 'full set' : null, [srcName(l.source), l.seller_country].filter(Boolean).join(' '), fmtDate(l.first_seen), hasLink(l) ? null : 'no direct link, opens a search'].filter(Boolean).join(' · ')), el('span', { class: 'pr f16' }, fmtAUD(l.price_aud) + (l.source_quality === 'snippet' ? ' ≈' : ''), num(l.below_market_pct) > 0 ? el('span', { class: 'f12' }, '−' + num(l.below_market_pct).toFixed(0) + '%') : null)))); body.append(mini); }
+      if (matches.length) { body.append(el('div', { class: 'sub-h f12 muted' }, el('span', {}, 'Listings'), el('span', {}, 'last 14 days'))); const mini = el('div', { class: 'mini' }); matches.forEach(l => mini.append(el('a', { href: linkOf(l), target: '_blank', rel: 'noopener', 'data-key': l.key || '', class: (hasLink(l) ? '' : 'nolink') + (l.image_url ? ' has-im' : ''), onmouseenter: () => { if (l.image_url && w._setView) w._setView(l.key); }, onfocus: () => { if (l.image_url && w._setView) w._setView(l.key); } }, l.image_url ? el('img', { class: 'th', src: l.image_url, alt: '', loading: 'lazy', onerror: e => e.target.remove() }) : null, el('span', { class: 'f16' }, l.title || l.url), el('span', { class: 'f12' }, [l.condition && l.condition !== 'unknown' ? l.condition : null, l.full_set ? 'full set' : null, [srcName(l.source), l.seller_country].filter(Boolean).join(' '), fmtDate(l.first_seen), hasLink(l) ? null : 'no direct link, opens a search'].filter(Boolean).join(' · ')), el('span', { class: 'pr f16' }, fmtAUD(l.price_aud) + (l.source_quality === 'snippet' ? ' ≈' : ''), num(l.below_market_pct) > 0 ? el('span', { class: 'f12' }, '−' + num(l.below_market_pct).toFixed(0) + '%') : null)))); body.append(mini); if (w._rows) { w._rows.push(...mini.querySelectorAll('a[data-key]')); if (w._setView) { const first = w._rows.find(r => r.getAttribute('aria-current') === 'true'); if (!first && views[0] && views[0].key) w._setView(views[0].key); } } }
       const sold = recentSold(w.id).slice(0, 4);
       if (sold.length) { body.append(el('div', { class: 'sub-h f12 muted' }, el('span', {}, 'Sold'), el('span', {}, 'last 14 days, last asking price'))); const mini = el('div', { class: 'mini sold' }); sold.forEach(l => mini.append(el('a', { href: linkOf(l), target: '_blank', rel: 'noopener', class: (hasLink(l) ? '' : 'nolink') + (thumbOf(l) ? ' has-im' : '') }, thumbOf(l) ? el('img', { class: 'th', src: thumbOf(l), alt: '', loading: 'lazy', onerror: e => e.target.remove() }) : null, el('span', { class: 'f16' }, l.title || l.url), el('span', { class: 'f12' }, [srcName(l.source), l.seller_type === 'private' ? 'private' : null, l.sold_date ? 'gone ' + fmtDate(l.sold_date) : null].filter(Boolean).join(' · ')), el('span', { class: 'pr f16' }, fmtAUD(l.sold_price_aud != null ? l.sold_price_aud : l.price_aud))))); body.append(mini); }
       const lots = Object.entries(state.auctions).map(([url, a]) => ({ url, ...a })).filter(a => a.watch_id === w.id && a.status === 'upcoming').sort((a, b) => (a.date || '').localeCompare(b.date || ''));
