@@ -1,5 +1,5 @@
 {
   "_comment": "Where the site saves settings and the routine reads them. Supabase URL and publishable (anon) key are public by design; writes need the password checked server-side. Empty url = the site falls back to saving straight to GitHub with a token.",
-  "supabase_url": "",
-  "supabase_key": ""
+  "supabase_url": "https://xyilyuhwyrgxkcfbmayz.supabase.co",
+  "supabase_key": "sb_publishable_gIfEfHK3uvXfuliY9BPCIw_6R9oN-nw"
 }
