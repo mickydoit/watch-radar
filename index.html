@@ -124,8 +124,11 @@ h1 em{font-style:normal;color:var(--ink-2)}
 .tag.paused{color:var(--ink-3)}
 
 /* ---- watch sections ---- */
-.watch{display:grid;grid-template-columns:minmax(260px,5fr) 7fr;gap:48px clamp(32px,6vw,96px);padding:72px 0;border-top:1px solid var(--hair);align-items:start}
-.watch:first-of-type{border-top:0;padding-top:0}
+.brand-h{margin:96px 0 8px;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 40px}
+.brand-h:first-child{margin-top:0}
+.brand-h h2{font-size:clamp(24px,2.4vw,32px);font-weight:300;margin:0;letter-spacing:.02em}
+.brand-h p{font-size:14px;color:var(--ink-2);max-width:52ch;margin:0;line-height:1.6}
+.watch{display:grid;grid-template-columns:minmax(260px,5fr) 7fr;gap:48px clamp(32px,6vw,96px);padding:56px 0;border-top:1px solid var(--hair);align-items:start}
 .watch.paused{opacity:.55}
 .photo{aspect-ratio:4/5;background:var(--panel);overflow:hidden;position:relative;position:sticky;top:88px}
 .photo img{width:100%;height:100%;object-fit:cover}
@@ -185,6 +188,17 @@ td.num,th.num{text-align:right}
 .runs .mid{font-size:13px;color:var(--ink-2);letter-spacing:.02em}
 @media (max-width:640px){.kv{grid-template-columns:1fr;gap:4px 0}.kv dd{margin-bottom:12px}}
 
+/* ---- focus pickers ---- */
+.pick{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));border-top:1px solid var(--hair);border-left:1px solid var(--hair)}
+.pick button{display:flex;align-items:center;gap:14px;padding:16px 18px;border-right:1px solid var(--hair);border-bottom:1px solid var(--hair);font-size:15px;color:var(--ink-2);min-height:58px}
+.pick button:hover{color:var(--ink);background:var(--panel)}
+.pick button i{width:14px;height:14px;border:1px solid var(--hair-2);flex:0 0 auto;display:grid;place-items:center;transition:all .12s}
+.pick button[aria-pressed="true"]{color:var(--ink)}
+.pick button[aria-pressed="true"] i{background:var(--ink);border-color:var(--ink)}
+.pick button[aria-pressed="true"] i::after{content:"";width:5px;height:8px;border:solid var(--paper);border-width:0 1.5px 1.5px 0;transform:translateY(-1px) rotate(45deg)}
+.pick button small{margin-left:auto;font-size:11px;letter-spacing:.08em;color:var(--ink-3)}
+.pickall{display:flex;gap:24px;align-items:center;margin:16px 0 0}
+.pickall .caps{margin-left:auto}
 /* ---- watchlist editor ---- */
 .focus{display:flex;flex-wrap:wrap;gap:6px 28px;margin:0 0 40px}
 .chip{font-size:13px;letter-spacing:.08em;color:var(--ink-2);padding:6px 0;border-bottom:1px solid transparent}
@@ -233,7 +247,7 @@ footer .credits{margin-top:10px;font-size:11.5px;color:var(--ink-3)}
 <div class="bar"><div class="wrap in">
   <div class="wordmark">WATCH <span>RADAR</span></div>
   <nav class="anchors" id="anchors">
-    <a href="#today">Today</a><a href="#watches">Watches</a><a href="#auctions">Auctions</a><a href="#runs">Runs</a><a href="#watchlist">Watchlist</a>
+    <a href="#today">Today</a><a href="#watches">Watches</a><a href="#auctions">Auctions</a><a href="#runs">Runs</a><a href="#focus">Focus</a>
   </nav>
   <div class="r">
     <span class="status pending" id="status"><span class="dot"></span><span class="txt" id="statusText">Loading</span></span>
@@ -266,16 +280,22 @@ footer .credits{margin-top:10px;font-size:11.5px;color:var(--ink-3)}
     <div class="notes" id="runNotes"></div><div class="runs" id="runList"></div>
   </section>
 
-  <section id="watchlist">
-    <div class="sec-h"><h1>Watchlist</h1><p class="note">Choose what gets researched. Switch brands on or off, pause or edit a reference, add a new one. Saved to the repository and picked up by the next run.</p></div>
-    <h3 class="caps" style="margin:0 0 16px">Focus by brand</h3>
-    <div class="focus" id="brandFocus"></div>
-    <div id="wlForm"></div>
-    <div class="rows" id="wlList"></div>
+  <section id="focus">
+    <div class="sec-h"><h1>Focus</h1><p class="note">Choose the brands and the price range the agent researches. Saved to the repository and used by the next morning's run, which picks the models with the most stock in your range for each brand.</p></div>
+    <h3 class="caps" style="margin:0 0 18px">Brands</h3>
+    <div class="pick" id="brandPick"></div>
+    <div class="pickall"><button class="link" id="brandAll">Select all</button><button class="link" id="brandNone">Clear</button><span class="caps" id="brandCount"></span></div>
+    <h3 class="caps" style="margin:56px 0 18px">Price range, AUD</h3>
+    <div class="pick" id="bandPick"></div>
+    <details id="refsBox" style="margin-top:72px"><summary>Specific references, optional</summary>
+      <p class="note" style="font-size:14px;color:var(--ink-2);max-width:60ch;margin:18px 0 28px">A particular watch you want tracked exactly, regardless of brand focus or price range.</p>
+      <div id="wlForm"></div>
+      <div class="rows" id="wlList"></div>
+      <p style="margin:18px 0 0"><button class="btn" id="addBtn">+ Add a reference</button></p>
+    </details>
     <div class="savebar" id="savebar">
       <span class="msg" id="saveMsg">No unsaved changes</span>
       <span style="display:flex;gap:12px;flex-wrap:wrap">
-        <button class="btn" id="addBtn">+ Add a reference</button>
         <button class="btn primary" id="saveBtn" disabled>Save to repository</button>
       </span>
     </div>
@@ -327,12 +347,12 @@ $('#theme').onclick = () => {
 };
 
 // ---- data ----
-const state = { latest: null, prices: [], seen: {}, auctions: {}, runs: [], wl: null, images: {}, wlDirty: false, editing: null, repo: '' };
+const state = { latest: null, prices: [], seen: {}, auctions: {}, runs: [], wl: null, focus: null, images: {}, wlDirty: false, focusDirty: false, editing: null, repo: '' };
 async function load() {
   const bust = '?t=' + Math.floor(Date.now() / 6e4);
   const j = async p => { const r = await fetch(p + bust, { cache: 'no-store' }); if (!r.ok) throw new Error(p + ' ' + r.status); return r.json(); };
   const t = async p => { const r = await fetch(p + bust, { cache: 'no-store' }); if (!r.ok) throw new Error(p + ' ' + r.status); return r.text(); };
-  const [latest, prices, seen, auctions, runs, wl, images] = await Promise.all([
+  const [latest, prices, seen, auctions, runs, wl, images, focus] = await Promise.all([
     j('data/latest.json'),
     t('data/prices.csv').then(parseCSV).catch(() => []),
     j('data/seen.json').catch(() => ({ listings: {} })),
@@ -340,9 +360,11 @@ async function load() {
     j('data/runs.json').catch(() => ({ runs: [] })),
     j('data/watchlist.json').catch(() => null),
     j('data/images.json').catch(() => ({ images: {} })),
+    j('data/focus.json').catch(() => null),
   ]);
   Object.assign(state, { latest, prices, seen: seen.listings || {}, auctions: auctions.lots || {}, runs: runs.runs || [], images: images.images || {} });
   state.wl = wl && Array.isArray(wl.watches) ? wl : { defaults: { currency: 'AUD', markets: ['worldwide'], home_country: 'Australia' }, watches: (latest.watches || []).map(w => ({ id: w.id, brand: w.brand, model: w.model, reference: w.reference, ceiling: w.ceiling, condition: ['unworn', 'excellent'], full_set: false, markets: ['worldwide'], active: true })) };
+  state.focus = focus && Array.isArray(focus.brands_available) ? focus : { currency: 'AUD', brands_available: [], bands_available: [[300, 1000], [1000, 2000], [2000, 2500], [2500, 4000]], brands: [], bands: [], updated: null };
   state.repo = latest.repo_url || `https://github.com/${REPO.owner}/${REPO.name}`;
 }
 function parseCSV(text) {
@@ -361,7 +383,9 @@ function parseCSV(text) {
 // ---- derived ----
 function watches() {
   const stats = new Map((state.latest.watches || []).map(w => [w.id, w]));
-  return state.wl.watches.map(w => ({ ...stats.get(w.id), ...w, active: w.active !== false }));
+  const refs = state.wl.watches.map(w => ({ ...stats.get(w.id), ...w, active: w.active !== false, source: 'reference' }));
+  const found = (state.latest.watches || []).filter(w => w.source !== 'reference' && !state.wl.watches.some(r => r.id === w.id)).map(w => ({ ...w, active: w.active !== false }));
+  return [...found, ...refs];
 }
 function watchMeta(id) { return watches().find(w => w.id === id) || (state.latest.watches || []).find(w => w.id === id) || { id, brand: '', model: id, reference: '' }; }
 function imageOf(w) { if (w.image) return { src: w.image }; const i = state.images[w.id]; return i ? { src: i.file, credit: i } : null; }
@@ -392,14 +416,16 @@ function render() {
     else { pill.classList.add(L.status === 'partial' ? 'stale' : 'fresh'); txt.textContent = (L.status === 'partial' ? 'Partial · ' : 'Updated · ') + when; }
   }
   const b = $('#banner'); b.hidden = true;
-  const examples = watches().filter(w => w.example && w.active);
-  if (examples.length) { b.hidden = false; b.innerHTML = ''; b.append('The list still holds ' + examples.length + ' of Claude’s example watches. ', el('a', { href: '#watchlist' }, 'Replace them in the watchlist'), '.'); }
+  const F = state.focus;
+  if (!F.brands.length && !state.wl.watches.length) { b.hidden = false; b.innerHTML = ''; b.append('Nothing is selected for research yet. ', el('a', { href: '#focus' }, 'Choose brands and a price range'), ' and save; tomorrow morning\u2019s run uses them.'); }
+  else if (L.status === 'idle') { b.hidden = false; b.textContent = 'The last run found nothing selected. Save a focus below and the next run will research it.'; }
   else if (L.status === 'failed' && L.failure) { b.hidden = false; b.textContent = 'Last run did not complete: ' + L.failure; }
+  else if (F.updated && L.run_date && F.updated > L.run_date) { b.hidden = false; b.textContent = 'Focus changed since the last run. Tomorrow morning\u2019s run researches the new selection.'; }
   $('#repoLink').href = state.repo; $('#reportsLink').href = state.repo + '/tree/main/reports';
   $('#footLeft').textContent = 'Asking prices as listed, converted to AUD' + (L.fx && L.fx.USD_AUD ? ' at USD ' + L.fx.USD_AUD : '') + '. Updated by a daily cloud routine.';
   const creds = Object.values(state.images).filter(i => i.author); const c = $('#credits'); c.innerHTML = '';
   if (creds.length) { c.append('Photos: '); creds.forEach((i, k) => { c.append(el('a', { href: i.source, target: '_blank', rel: 'noopener' }, i.author), ' (' + i.license + ')' + (k < creds.length - 1 ? ', ' : '.')); }); c.append(' Representative photos of each model family, not the exact reference.'); }
-  renderToday(); renderWatches(); renderAuctions(); renderRuns(); renderWatchlist();
+  renderToday(); renderWatches(); renderAuctions(); renderRuns(); renderFocus(); renderWatchlist();
 }
 
 function flagTag(f) {
@@ -443,8 +469,11 @@ function renderToday() {
 function renderWatches() {
   const host = $('#watchList'); host.innerHTML = '';
   const ws = watches();
-  if (!ws.length) { host.append(el('div', { class: 'empty' }, 'No watches yet. Add one in the watchlist below.')); return; }
+  if (!ws.length) { host.append(el('div', { class: 'empty' }, state.focus.brands.length ? 'The models the agent finds for your brands appear here after the next run.' : 'Choose brands in Focus below; the models the agent finds appear here.')); return; }
+  const brandNotes = new Map((state.latest.brands || []).map(b => [b.name, b]));
+  let lastBrand = null;
   for (const w of ws) {
+    if (w.brand !== lastBrand) { const bn = brandNotes.get(w.brand); host.append(el('div', { class: 'brand-h' }, el('h2', {}, w.brand), bn ? el('p', {}, (bn.listings_in_band != null ? bn.listings_in_band + ' listings in your range. ' : '') + (bn.note || '')) : null)); lastBrand = w.brand; }
     const im = imageOf(w);
     const photo = el('div', { class: 'photo' },
       im ? el('img', { src: im.src, alt: w.brand + ' ' + w.model, loading: 'lazy' }) : el('div', { class: 'ph', html: '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40"/><path d="M50 22v28l18 12"/></svg>' }),
@@ -570,15 +599,26 @@ function renderRuns() {
 // ---- watchlist editor ----
 const CONDS = ['new', 'unworn', 'excellent', 'good', 'fair'];
 const MARKETS = ['worldwide', 'au', 'eu', 'us', 'uk', 'jp'];
-function markDirty(d = true) { state.wlDirty = d; $('#saveBtn').disabled = !d; const m = $('#saveMsg'); m.className = 'msg'; m.textContent = d ? 'Unsaved changes. Save to the repository to apply them at the next run.' : 'No unsaved changes'; }
-function renderWatchlist() {
-  const wl = state.wl, host = $('#wlList'), bf = $('#brandFocus'); host.innerHTML = ''; bf.innerHTML = '';
-  const brands = [...new Set(wl.watches.map(w => w.brand).filter(Boolean))].sort();
-  if (!brands.length) bf.append(el('span', { style: 'color:var(--ink-3);font-size:14px' }, 'Add a reference to start'));
-  for (const b of brands) {
-    const mine = wl.watches.filter(w => w.brand === b), on = mine.some(w => w.active !== false);
-    bf.append(el('button', { class: 'chip' + (on ? '' : ' off'), 'aria-pressed': String(on), title: on ? 'Pause research on every ' + b : 'Resume research on every ' + b, onclick: () => { mine.forEach(w => w.active = !on); markDirty(); render(); } }, b + ' · ' + mine.filter(w => w.active !== false).length + '/' + mine.length));
+function markDirty(d = true, which = 'wl') { if (which === 'all') { state.wlDirty = d; state.focusDirty = d; } else if (which === 'wl') state.wlDirty = d; else state.focusDirty = d; const any = state.wlDirty || state.focusDirty; $('#saveBtn').disabled = !any; const m = $('#saveMsg'); m.className = 'msg'; m.textContent = any ? 'Unsaved changes. Save to the repository to apply them at the next run.' : 'No unsaved changes'; }
+const fmtBand = b => 'A$' + b[0].toLocaleString('en-AU') + ' \u2013 ' + b[1].toLocaleString('en-AU');
+function renderFocus() {
+  const F = state.focus, bp = $('#brandPick'), dp = $('#bandPick'); bp.innerHTML = ''; dp.innerHTML = '';
+  const counts = new Map((state.latest.brands || []).map(b => [b.name, b.models ? b.models.length : 0]));
+  for (const b of F.brands_available) {
+    const on = F.brands.includes(b);
+    bp.append(el('button', { 'aria-pressed': String(on), onclick: () => { F.brands = on ? F.brands.filter(x => x !== b) : F.brands_available.filter(x => x === b || F.brands.includes(x)); markDirty(true, 'focus'); renderFocus(); } }, el('i'), b, counts.get(b) ? el('small', {}, counts.get(b) + ' models') : null));
   }
+  $('#brandCount').textContent = F.brands.length ? F.brands.length + ' of ' + F.brands_available.length + ' selected' : 'none selected';
+  for (const band of F.bands_available) {
+    const on = F.bands.some(x => x[0] === band[0] && x[1] === band[1]);
+    dp.append(el('button', { 'aria-pressed': String(on), onclick: () => { F.bands = on ? F.bands.filter(x => !(x[0] === band[0] && x[1] === band[1])) : [...F.bands, band].sort((a, c) => a[0] - c[0]); markDirty(true, 'focus'); renderFocus(); } }, el('i'), fmtBand(band)));
+  }
+}
+$('#brandAll').onclick = () => { state.focus.brands = [...state.focus.brands_available]; markDirty(true, 'focus'); renderFocus(); };
+$('#brandNone').onclick = () => { state.focus.brands = []; markDirty(true, 'focus'); renderFocus(); };
+function renderWatchlist() {
+  const wl = state.wl, host = $('#wlList'); host.innerHTML = '';
+  if (!wl.watches.length) host.append(el('div', { style: 'padding:14px 0;color:var(--ink-3);font-size:14px;border-top:1px solid var(--hair)' }, 'No specific references.'));
   wl.watches.forEach((w, i) => {
     const on = w.active !== false;
     const meta = [(w.condition || []).join('/'), w.full_set ? 'box & papers required' : 'any set', w.ceiling ? 'ceiling ' + fmtAUD(w.ceiling) : 'no ceiling', (w.markets || ['worldwide']).join('/'), w.example ? 'example' : null].filter(Boolean).join('  ·  ');
@@ -629,7 +669,7 @@ function renderForm() {
   }
   host.append(f); f.scrollIntoView({ behavior: 'smooth', block: 'start' }); if (isNew) { const first = f.querySelector('input'); if (first) first.focus({ preventScroll: true }); }
 }
-$('#addBtn').onclick = () => { state.editing = 'new'; renderForm(); };
+$('#addBtn').onclick = () => { $('#refsBox').open = true; state.editing = 'new'; renderForm(); };
 
 function token() { return store.get('radar-gh-token'); }
 function renderTokenBox(force) {
@@ -648,23 +688,30 @@ function renderTokenBox(force) {
   ));
   inp.focus();
 }
+async function putFile(path, obj, message) {
+  const api = `https://api.github.com/repos/${REPO.owner}/${REPO.name}/contents/${path}`;
+  const headers = { Authorization: 'Bearer ' + token(), Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
+  const cur = await fetch(api + '?ref=' + REPO.branch, { headers });
+  if (cur.status === 401) throw new Error('GitHub rejected the token (401). Forget it below and create a new one.');
+  if (cur.status === 403) throw new Error('The token cannot write to this repository (403). Check it has Contents read and write on ' + REPO.name + '.');
+  const sha = cur.ok ? (await cur.json()).sha : undefined;
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(obj, null, 2) + '\n')));
+  const r = await fetch(api, { method: 'PUT', headers, body: JSON.stringify({ message, content, sha, branch: REPO.branch }) });
+  if (!r.ok) { const t = await r.text(); throw new Error('GitHub refused the save (' + r.status + '). ' + t.slice(0, 160)); }
+}
 async function save() {
   if (!token()) { renderTokenBox(true); return; }
   const btn = $('#saveBtn'), msg = $('#saveMsg');
-  btn.disabled = true; msg.className = 'msg'; msg.textContent = 'Saving…';
-  const api = `https://api.github.com/repos/${REPO.owner}/${REPO.name}/contents/${REPO.path}`;
-  const headers = { Authorization: 'Bearer ' + token(), Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
+  btn.disabled = true; msg.className = 'msg'; msg.textContent = 'Saving\u2026';
   try {
-    const cur = await fetch(api + '?ref=' + REPO.branch, { headers });
-    if (cur.status === 401) throw new Error('GitHub rejected the token (401). Forget it below and create a new one.');
-    if (cur.status === 403 || cur.status === 404) throw new Error('The token cannot see this repository (' + cur.status + '). Check it has Contents read and write on ' + REPO.name + '.');
-    const sha = cur.ok ? (await cur.json()).sha : undefined;
-    const out = { _comment: 'The watchlist. Edited from the Watch Radar site or by hand. The routine reads it at the start of every run; entries with active:false are skipped.', defaults: state.wl.defaults, watches: state.wl.watches };
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify(out, null, 2) + '\n')));
-    const summary = state.wl.watches.filter(w => w.active !== false).length + ' active of ' + state.wl.watches.length;
-    const r = await fetch(api, { method: 'PUT', headers, body: JSON.stringify({ message: 'watchlist: ' + summary + ' (edited on the site)', content, sha, branch: REPO.branch }) });
-    if (!r.ok) { const t = await r.text(); throw new Error('GitHub refused the save (' + r.status + '). ' + t.slice(0, 160)); }
-    markDirty(false); msg.className = 'msg ok'; msg.textContent = 'Saved. The next run (07:00 Brisbane) uses this list. The site refreshes within a few minutes.';
+    if (state.focusDirty) {
+      const F = state.focus; F.updated = new Date().toISOString().slice(0, 10);
+      await putFile('data/focus.json', { _comment: 'Research focus, edited from the site. The routine researches every selected brand within the selected AUD price bands at the next run.', currency: F.currency || 'AUD', brands_available: F.brands_available, bands_available: F.bands_available, brands: F.brands, bands: F.bands, updated: F.updated }, 'focus: ' + F.brands.length + ' brands, ' + F.bands.length + ' bands (edited on the site)');
+    }
+    if (state.wlDirty) {
+      await putFile('data/watchlist.json', { _comment: 'Specific references to track in addition to the brand focus in data/focus.json. Optional. Entries with active:false are skipped.', defaults: state.wl.defaults, watches: state.wl.watches }, 'watchlist: ' + state.wl.watches.length + ' references (edited on the site)');
+    }
+    markDirty(false, 'all'); msg.className = 'msg ok'; msg.textContent = 'Saved. Tomorrow\u2019s 07:00 Brisbane run researches this selection. The site itself refreshes within a few minutes.'; render();
   } catch (e) { msg.className = 'msg err'; msg.textContent = e.message; btn.disabled = false; }
 }
 $('#saveBtn').onclick = save;

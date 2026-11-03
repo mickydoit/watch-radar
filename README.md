@@ -1,6 +1,6 @@
 # watch-radar
 
-A daily research agent that scans the market for a short list of specific watches, works out what each one is really asking across marketplaces, dealers and grey-market sites, and shows the listings priced **below that market** on a small web app.
+A daily research agent that scans the market for the **watch brands and price bands you choose**, works out what each model it finds is really asking across marketplaces, dealers and grey-market sites, and shows the listings priced **below that market** on a small web app.
 
 **Site:** https://mickydoit.github.io/watch-radar/ (GitHub Pages, served from this repo's `main`).
 
@@ -10,7 +10,8 @@ It runs as a Claude Code **scheduled cloud routine** every morning at 07:00 Bris
 
 | Path | Purpose |
 |---|---|
-| `data/watchlist.json` | What the agent researches. Edit it from the site's **Watchlist** tab (brand on/off, pause, edit, add) or by hand. Entries with `active: false` are skipped. |
+| `data/focus.json` | **The main control.** Which brands (from a fixed list of 22) and which AUD price bands the agent researches. Set from the site's Focus section. |
+| `data/watchlist.json` | Optional specific references to track exactly, in addition to the brand focus. Edited from the site or by hand. |
 | `ROUTINE_PROMPT.md` | The agent's instructions. The routine itself only says "follow this file", so behaviour changes are a commit here, not a routine edit. |
 | `index.html` | The web app. Static, no build step; reads the `data/` files directly. |
 | `data/latest.json` | What the site shows: today's benchmark per watch, ranked below-market deals with flags, price drops, auction changes, run notes. |
@@ -22,7 +23,11 @@ It runs as a Claude Code **scheduled cloud routine** every morning at 07:00 Bris
 | `reports/YYYY-MM-DD.md` | Full record of each run. The email is the summary; this is the detail. |
 | `docs/specs/` | Design note. |
 
-## Editing the watchlist
+## Choosing what gets researched
+
+Open the site's **Focus** section, tick the brands and the price bands you care about, and press Save. The next 07:00 run researches those brands inside those bands, picks up to five models per brand with the most stock, benchmarks each, and lists what sits under market. Specific references can be added underneath if you want a particular watch tracked regardless of band.
+
+## Editing the reference list
 
 Open the site's **Watchlist** section. You can switch whole brands on or off, pause or resume a reference, edit its criteria, add a new one, or remove one. Saving writes `data/watchlist.json` back to this repo through the GitHub API using a fine-grained personal access token that you create once (repository: this one; permission: Contents, read and write). The token is kept only in your browser's local storage and is sent only to api.github.com. The next run uses the new list. Editing the JSON by hand and pushing works too. Keep each `id` stable; it keys the data files.
 

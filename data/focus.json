@@ -1,0 +1,9 @@
+{
+  "_comment": "Research focus, edited from the site's Focus section. The routine researches every selected brand within the selected AUD price bands at the next run. Brand names are canonical; the routine knows their aliases.",
+  "currency": "AUD",
+  "brands_available": ["anOrdain", "Christopher Ward", "Doxa", "Frederique Constant", "Hamilton", "IWC", "King Seiko", "Longines", "MeisterSinger", "Mido", "NOMOS Glashütte", "Omega", "Orient", "Oris", "Paulin", "Seiko", "Sinn", "Studio Underd0g", "Tissot", "Tudor", "Unimatic", "Zenith"],
+  "bands_available": [[300, 1000], [1000, 2000], [2000, 2500], [2500, 4000]],
+  "brands": [],
+  "bands": [],
+  "updated": null
+}
