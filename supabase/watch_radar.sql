@@ -20,7 +20,7 @@ drop policy if exists "watch_radar public read" on public.watch_radar_settings;
 create policy "watch_radar public read" on public.watch_radar_settings for select to anon, authenticated using (true);
 
 create or replace function public.watch_radar_check(p_password text)
-returns boolean language plpgsql security definer set search_path = public as $$
+returns boolean language plpgsql security definer set search_path = public, extensions as $$
 declare h text;
 begin
   select hash into h from watch_radar_secrets where key = 'password';
@@ -29,7 +29,7 @@ begin
 end $$;
 
 create or replace function public.watch_radar_save(p_password text, p_id text, p_data jsonb)
-returns jsonb language plpgsql security definer set search_path = public as $$
+returns jsonb language plpgsql security definer set search_path = public, extensions as $$
 begin
   if not watch_radar_check(p_password) then raise exception 'wrong password' using errcode = '28000'; end if;
   if p_id not in ('focus', 'watchlist') then raise exception 'unknown setting %', p_id; end if;
@@ -39,7 +39,7 @@ begin
 end $$;
 
 create or replace function public.watch_radar_set_password(p_old text, p_new text)
-returns boolean language plpgsql security definer set search_path = public as $$
+returns boolean language plpgsql security definer set search_path = public, extensions as $$
 begin
   if length(coalesce(p_new, '')) < 8 then raise exception 'password must be at least 8 characters'; end if;
   if exists (select 1 from watch_radar_secrets where key = 'password') and not watch_radar_check(p_old) then
