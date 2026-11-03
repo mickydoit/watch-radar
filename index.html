@@ -286,15 +286,17 @@ footer .runs div{display:flex;gap:16px;padding:6px 0;border-top:1px solid var(--
 const REPO = { owner: 'mickydoit', name: 'watch-radar', branch: 'main' };
 const $ = (s, r = document) => r.querySelector(s);
 const el = (tag, attrs = {}, ...kids) => { const n = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) { if (k === 'class') n.className = v; else if (k === 'html') n.innerHTML = v; else if (k.startsWith('on')) n.addEventListener(k.slice(2), v); else if (v != null) n.setAttribute(k, v); } for (const k of kids) if (k != null) n.append(k.nodeType ? k : document.createTextNode(String(k))); return n; };
-const fmtAUD = v => v == null || isNaN(v) ? '—' : 'A$' + Math.round(v).toLocaleString('en-AU');
-const fmtMoney = (v, c) => v == null || isNaN(v) ? (c ? 'POA' : '—') : (c || '') + ' ' + Math.round(v).toLocaleString('en-AU');
-const fmtDate = d => { if (!d) return '—'; const [y, m, dd] = d.split('-').map(Number); return new Date(Date.UTC(y, m - 1, dd)).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', timeZone: 'UTC' }); };
-const fmtLong = d => { if (!d) return ''; const [y, m, dd] = d.split('-').map(Number); return new Date(Date.UTC(y, m - 1, dd)).toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC' }); };
-const daysAgo = d => { if (!d) return Infinity; const t = Date.UTC(...d.split('-').map((x, i) => i === 1 ? x - 1 : +x)); return (Date.now() - t) / 864e5; };
+const num = v => { if (typeof v === 'string') v = parseFloat(v.replace(/[^0-9.\-]/g, '')); return v == null || typeof v !== 'number' || isNaN(v) ? null : v; };
+const fmtAUD = v => { v = num(v); return v == null ? '—' : 'A$' + Math.round(v).toLocaleString('en-AU'); };
+const fmtMoney = (v, c) => { v = num(v); return v == null ? (c ? 'POA' : '—') : (c || '') + ' ' + Math.round(v).toLocaleString('en-AU'); };
+const fmtDate = d => { if (!d) return '—'; if (!/^\d{4}-\d{2}-\d{2}/.test(String(d))) return String(d); const [y, m, dd] = String(d).split('-').map(Number); return new Date(Date.UTC(y, m - 1, dd)).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', timeZone: 'UTC' }); };
+const fmtLong = d => { if (!d) return ''; if (!/^\d{4}-\d{2}-\d{2}/.test(String(d))) return String(d); const [y, m, dd] = String(d).split('-').map(Number); return new Date(Date.UTC(y, m - 1, dd)).toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC' }); };
+const daysAgo = d => { if (!d || !/^\d{4}-\d{2}-\d{2}/.test(String(d))) return Infinity; const t = Date.UTC(...d.split('-').map((x, i) => i === 1 ? x - 1 : +x)); return (Date.now() - t) / 864e5; };
 const pct = (a, b) => (a == null || b == null || !b) ? null : (a - b) / b * 100;
 const label = w => (w.brand + ' ' + (w.reference || w.model)).trim();
 const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const pad = n => String(n).padStart(2, '0');
+const brisbaneDate = iso => { try { const p = new Intl.DateTimeFormat('en-CA', { timeZone: 'Australia/Brisbane', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date(iso)); const g = t => p.find(x => x.type === t).value; return g('year') + '-' + g('month') + '-' + g('day'); } catch (e) { return String(iso).slice(0, 10); } };
 const store = { get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} } };
 const SRC = { 'WatchCharts Marketplace': 'WatchCharts', 'eBay US': 'eBay', 'eBay AU': 'eBay', 'eBay UK': 'eBay' };
 const srcName = s => SRC[s] || s || '';
@@ -335,22 +337,23 @@ async function load() {
   state.focus = focus && Array.isArray(focus.brands_available) ? focus : { currency: 'AUD', brands_available: [], bands_available: [[300, 1000], [1000, 2000], [2000, 2500], [2500, 4000]], brands: [], bands: [], updated: null };
   state.repo = latest.repo_url || `https://github.com/${REPO.owner}/${REPO.name}`;
   state.backend = backend && backend.supabase_url ? backend : null;
-  if (state.backend) { try { const r = await fetch(state.backend.supabase_url + '/rest/v1/watch_radar_settings?select=id,data,updated_at', { headers: { apikey: state.backend.supabase_key } }); if (r.ok) for (const row of await r.json()) { if (row.id === 'focus' && row.data && Array.isArray(row.data.brands)) state.focus = { ...state.focus, ...row.data, updated: row.updated_at ? row.updated_at.slice(0, 10) : state.focus.updated }; if (row.id === 'watchlist' && row.data && Array.isArray(row.data.watches)) state.wl = row.data; } } catch (e) {} }
+  if (state.backend) { try { const r = await fetch(state.backend.supabase_url + '/rest/v1/watch_radar_settings?select=id,data,updated_at', { headers: { apikey: state.backend.supabase_key } }); if (r.ok) for (const row of await r.json()) { if (row.id === 'focus' && row.data && Array.isArray(row.data.brands)) state.focus = { ...state.focus, ...row.data, updated: row.updated_at ? brisbaneDate(row.updated_at) : state.focus.updated }; if (row.id === 'watchlist' && row.data && Array.isArray(row.data.watches)) state.wl = row.data; } } catch (e) {} }
 }
 function parseCSV(text) { const lines = text.trim().split(/\r?\n/); if (lines.length < 2) return []; const h = lines[0].split(','); return lines.slice(1).filter(Boolean).map(l => { const cells = []; let cur = '', q = false; for (const ch of l) { if (ch === '"') q = !q; else if (ch === ',' && !q) { cells.push(cur); cur = ''; } else cur += ch; } cells.push(cur); const o = {}; h.forEach((k, i) => o[k.trim()] = (cells[i] || '').trim()); o.value = o.value === '' ? null : Number(o.value); o.n = o.n === '' ? null : Number(o.n); return o; }); }
 function watches() { const stats = new Map((state.latest.watches || []).map(w => [w.id, w])); const refs = state.wl.watches.map(w => ({ ...stats.get(w.id), ...w, active: w.active !== false, source: 'reference' })); const found = (state.latest.watches || []).filter(w => w.source !== 'reference' && !state.wl.watches.some(r => r.id === w.id)).map(w => ({ ...w, active: w.active !== false })); return [...found, ...refs]; }
-function watchMeta(id) { return watches().find(w => w.id === id) || (state.latest.watches || []).find(w => w.id === id) || { id, brand: '', model: id, reference: '' }; }
+function watchMeta(id) { return watches().find(w => w.id === id) || (state.latest.watches || []).find(w => w.id === id) || { id, brand: '', model: String(id).replace(/-/g, ' '), reference: '' }; }
 function imageOf(w) { if (w.image) return { src: w.image }; const i = state.images[w.id]; return i ? { src: i.file, credit: i } : null; }
-function series(id, metric) { const m = new Map(); for (const r of state.prices) if (r.watch_id === id && r.metric === metric && r.value != null) m.set(r.date, r.value); return [...m.entries()].sort((a, b) => a[0] < b[0] ? -1 : 1).map(([date, value]) => ({ date, value })); }
+function series(id, metric) { const m = new Map(); for (const r of state.prices) { if (r.watch_id !== id || r.metric !== metric || r.value == null || isNaN(r.value) || !/^\d{4}-\d{2}-\d{2}$/.test(r.date)) continue; const cur = m.get(r.date); if (!cur || (r.n || 0) >= (cur.n || 0)) m.set(r.date, { value: r.value, n: r.n }); } return [...m.entries()].map(([d, v]) => [d, v.value]).sort((a, b) => a[0] < b[0] ? -1 : 1).map(([date, value]) => ({ date, value })); }
 function allSeen() { const out = []; for (const [wid, byKey] of Object.entries(state.seen)) for (const [key, l] of Object.entries(byKey || {})) out.push({ watch_id: wid, key, ...l }); return out; }
 function recentMatches(wid) { return allSeen().filter(l => l.watch_id === wid && l.match !== false && daysAgo(l.first_seen) <= 14).sort((a, b) => (b.first_seen || '').localeCompare(a.first_seen || '') || (a.price_aud || 0) - (b.price_aud || 0)); }
 
 // render
 function render() {
+  if (!state.latest) return;
   const L = state.latest, F = state.focus;
   $('#repoLink').href = state.repo; $('#reportsLink').href = state.repo + '/tree/main/reports';
   $('#footLeft').textContent = 'Asking prices as listed, converted to AUD' + (L.fx && L.fx.USD_AUD ? ' at USD ' + L.fx.USD_AUD : '') + '. Benchmark is the median asking price across the market, smoothed over 30 days.';
-  renderToday(); renderWatches(); renderAuctions(); renderFocus(); renderWatchlist(); renderFooter(); renderMenu();
+  for (const fn of [renderToday, renderWatches, renderAuctions, renderFocus, renderWatchlist, renderFooter, renderMenu]) { try { fn(); } catch (e) { console.error(fn.name, e); } }
 }
 function flag(d, isNew, drop) { if (drop) return el('span', { class: 'flag f12 drop' }, 'Drop'); if (d.flag === 'verify') return el('span', { class: 'flag f12 verify', title: 'Unusually cheap, private seller or incomplete set. Check before you trust it.' }, 'Verify'); if (d.flag === 'grey-new') return el('span', { class: 'flag f12 grey', title: 'New from a grey-market dealer, without an authorised-dealer warranty.' }, 'Grey'); if (isNew) return el('span', { class: 'flag f12 new' }, 'New'); return null; }
 function dealRow(d, i, opts = {}) {
@@ -360,14 +363,14 @@ function dealRow(d, i, opts = {}) {
     el('span', { class: 'n f12 muted' }, pad(i + 1)),
     el('span', { class: 't f24 light' }, flag(d, isNew, opts.drop), d.title || d.url),
     el('span', { class: 'm f12 muted' }, meta),
-    el('span', { class: 'p f16' }, fmtAUD(d.price_aud) + (d.source_quality === 'snippet' ? ' ≈' : ''), opts.drop && d.was_aud ? el('span', { class: 'was f12' }, fmtAUD(d.was_aud)) : (d.below_market_pct != null ? el('span', { class: 'pct f12' }, '−' + d.below_market_pct.toFixed(0) + '% vs market') : null)));
+    el('span', { class: 'p f16' }, fmtAUD(d.price_aud) + (d.source_quality === 'snippet' ? ' ≈' : ''), opts.drop && d.was_aud ? el('span', { class: 'was f12' }, fmtAUD(d.was_aud)) : (num(d.below_market_pct) != null ? el('span', { class: 'pct f12' }, '−' + num(d.below_market_pct).toFixed(0) + '% vs market') : null)));
 }
 function renderToday() {
   const L = state.latest, F = state.focus, host = $('#deals'), track = $('#track'); host.innerHTML = ''; track.innerHTML = '';
-  const deals = (L.deals || []).slice().sort((a, b) => (b.below_market_pct || 0) - (a.below_market_pct || 0)); const drops = L.price_drops || [];
+  const deals = (L.deals || []).slice().sort((a, b) => (num(b.below_market_pct) || 0) - (num(a.below_market_pct) || 0)); const drops = L.price_drops || [];
   $('#todayDate').textContent = L.run_date ? fmtLong(L.run_date) : 'No run yet';
   const nothing = !F.brands.length && !state.wl.watches.length;
-  $('#todayNote').innerHTML = ''; $('#todayNote').append(nothing ? 'Nothing selected yet. ' : L.status === 'failed' ? 'The last run did not complete. ' : F.updated && L.run_date && F.updated > L.run_date ? 'Focus changed since the last run. ' : 'A daily benchmark across the market. ', nothing ? el('a', { href: '#', style: 'border-bottom:1px solid currentColor', onclick: e => { e.preventDefault(); openOverlay('focus'); } }, 'Choose brands') : null);
+  $('#todayNote').innerHTML = ''; $('#todayNote').append(nothing ? 'Nothing selected yet. ' : L.status === 'failed' ? 'The last run did not complete. ' : F.updated && L.run_date && F.updated > L.run_date ? 'Focus changed since the last run. ' : 'A daily benchmark across the market. '); if (nothing) $('#todayNote').append(el('a', { href: '#', style: 'border-bottom:1px solid currentColor', onclick: e => { e.preventDefault(); openOverlay('focus'); } }, 'Choose brands'));
   const nW = new Set(deals.map(d => d.watch_id)).size;
   $('#todayH').textContent = !L.run_date || L.status === 'idle' ? 'nothing yet' : deals.length ? deals.length + ' under market' : 'nothing under market';
   // gallery
@@ -388,10 +391,10 @@ function renderWatches() {
   const host = $('#watchList'); host.innerHTML = '';
   const ws = watches();
   if (!ws.length) { host.append(el('div', { class: 'grid page-h' }, el('h1', { class: 'f90 span-l' }, 'watches'), el('div', { class: 'span-r sub f12' }, el('p', {}, 'Nothing tracked yet'), el('p', { class: 'muted' }, state.focus.brands.length ? 'The models the agent finds appear here after the next run' : 'Choose brands in Focus')))); return; }
-  const brandNotes = new Map((state.latest.brands || []).map(b => [b.name, b]));
+  const brandNotes = new Map((state.latest.brands || []).map(b => [String(b.name || '').toLowerCase(), b]));
   const byBrand = new Map(); ws.forEach(w => { if (!byBrand.has(w.brand)) byBrand.set(w.brand, []); byBrand.get(w.brand).push(w); });
   for (const [brand, list] of byBrand) {
-    const bn = brandNotes.get(brand);
+    const bn = brandNotes.get(String(brand || '').toLowerCase());
     const sec = el('section', { class: 'brand' });
     sec.append(el('div', { class: 'grid page-h' }, el('h1', { class: 'f90 span-l' }, (brand || '').toLowerCase()), el('div', { class: 'span-r sub f12' }, el('p', {}, list.length + (list.length === 1 ? ' model tracked' : ' models tracked')), bn && bn.listings_in_band != null ? el('p', { class: 'muted' }, bn.listings_in_band + ' listings in your range') : null)));
     for (const w of list) {
@@ -409,7 +412,7 @@ function renderWatches() {
       const data = SERIES.map(s => ({ ...s, pts: series(w.id, s.metric) })).filter(s => s.pts.length >= 2);
       if (data.length) { body.append(el('div', { class: 'chart-h f12' }, el('span', { class: 'muted' }, 'Asking prices'), el('div', { class: 'legend muted' }, ...data.map(s => el('span', {}, el('i', { style: 'background:' + s.color }), s.label)))), lineChart(data, w.ceiling)); const dates = [...new Set(data.flatMap(s => s.pts.map(p => p.date)))].sort().reverse().slice(0, 30); body.append(el('details', {}, el('summary', { class: 'f12' }, 'Table →'), el('table', {}, el('thead', {}, el('tr', {}, el('th', {}, 'Date'), ...data.map(s => el('th', { class: 'num' }, s.label)))), el('tbody', {}, ...dates.map(d => el('tr', {}, el('td', {}, fmtDate(d)), ...data.map(s => { const p = s.pts.find(q => q.date === d); return el('td', { class: 'num' }, p ? fmtAUD(p.value) : '—'); }))))))); }
       const matches = recentMatches(w.id).slice(0, 4);
-      if (matches.length) { body.append(el('div', { class: 'sub-h f12 muted' }, el('span', {}, 'Listings'), el('span', {}, 'last 14 days'))); const mini = el('div', { class: 'mini' }); matches.forEach(l => mini.append(el('a', { href: l.url, target: '_blank', rel: 'noopener' }, el('span', { class: 'f16' }, l.title || l.url), el('span', { class: 'f12' }, [l.condition && l.condition !== 'unknown' ? l.condition : null, l.full_set ? 'full set' : null, [srcName(l.source), l.seller_country].filter(Boolean).join(' '), fmtDate(l.first_seen)].filter(Boolean).join(' · ')), el('span', { class: 'pr f16' }, fmtAUD(l.price_aud) + (l.source_quality === 'snippet' ? ' ≈' : ''), l.below_market_pct != null && l.below_market_pct > 0 ? el('span', { class: 'f12' }, '−' + l.below_market_pct.toFixed(0) + '%') : null)))); body.append(mini); }
+      if (matches.length) { body.append(el('div', { class: 'sub-h f12 muted' }, el('span', {}, 'Listings'), el('span', {}, 'last 14 days'))); const mini = el('div', { class: 'mini' }); matches.forEach(l => mini.append(el('a', { href: l.url, target: '_blank', rel: 'noopener' }, el('span', { class: 'f16' }, l.title || l.url), el('span', { class: 'f12' }, [l.condition && l.condition !== 'unknown' ? l.condition : null, l.full_set ? 'full set' : null, [srcName(l.source), l.seller_country].filter(Boolean).join(' '), fmtDate(l.first_seen)].filter(Boolean).join(' · ')), el('span', { class: 'pr f16' }, fmtAUD(l.price_aud) + (l.source_quality === 'snippet' ? ' ≈' : ''), num(l.below_market_pct) > 0 ? el('span', { class: 'f12' }, '−' + num(l.below_market_pct).toFixed(0) + '%') : null)))); body.append(mini); }
       const lots = Object.entries(state.auctions).map(([url, a]) => ({ url, ...a })).filter(a => a.watch_id === w.id && a.status === 'upcoming').sort((a, b) => (a.date || '').localeCompare(b.date || ''));
       if (lots.length) { body.append(el('div', { class: 'sub-h f12 muted' }, el('span', {}, 'At auction'))); const mini = el('div', { class: 'mini' }); lots.forEach(a => mini.append(el('a', { href: a.url, target: '_blank', rel: 'noopener' }, el('span', { class: 'f16' }, [a.house, a.sale, a.lot ? 'lot ' + a.lot : null].filter(Boolean).join(' · ')), el('span', { class: 'f12' }, a.date ? fmtDate(a.date) : ''), el('span', { class: 'pr f16' }, a.estimate_low != null ? fmtMoney(a.estimate_low, a.currency) + (a.estimate_high != null ? '–' + Math.round(a.estimate_high).toLocaleString('en-AU') : '') : 'Estimate TBC')))); body.append(mini); }
       sec.append(el('article', { class: 'grid model', id: 'w-' + w.id }, pic, body));
@@ -457,7 +460,7 @@ function lineChart(data, ceiling) {
 // footer
 function renderFooter() {
   const L = state.latest, host = $('#footRun'); host.innerHTML = '';
-  if (L.run_date) { const d = el('details', {}, el('summary', {}, 'Last run ' + fmtDate(L.run_date) + (L.run_at_local ? ' at ' + L.run_at_local : '') + ' · ' + (L.status || '') + (L.fetches != null ? ' · ' + L.fetches + ' pages read' : '') + ' →')); const ns = L.notes || []; if (ns.length) d.append(el('ul', {}, ...ns.map(x => el('li', {}, x)))); const runs = [...state.runs].sort((a, b) => (b.date || '').localeCompare(a.date || '')).slice(0, 30); if (runs.length) d.append(el('div', { class: 'runs' }, ...runs.map(r => el('div', {}, el('span', {}, fmtDate(r.date)), el('span', {}, [r.type, r.status, r.deals != null ? r.deals + ' under market' : null, r.fetches != null ? r.fetches + ' pages' : null].filter(Boolean).join(' · ')), r.report ? el('a', { href: state.repo + '/blob/main/' + r.report, target: '_blank', rel: 'noopener' }, 'Report') : null)))); host.append(d); }
+  if (L.run_date) { const d = el('details', {}, el('summary', {}, 'Last run ' + fmtDate(L.run_date) + (L.run_at_local ? ' at ' + L.run_at_local : '') + ' · ' + (L.status || '') + (L.fetches != null ? ' · ' + L.fetches + ' pages read' : '') + ' →')); const ns = (L.notes || []).slice(0, 15); if (ns.length) d.append(el('ul', {}, ...ns.map(x => el('li', {}, x)))); const runs = [...state.runs].sort((a, b) => (b.date || '').localeCompare(a.date || '')).slice(0, 30); if (runs.length) d.append(el('div', { class: 'runs' }, ...runs.map(r => el('div', {}, el('span', {}, fmtDate(r.date)), el('span', {}, [r.type, r.status, r.deals != null ? r.deals + ' under market' : null, r.fetches != null ? r.fetches + ' pages' : null].filter(Boolean).join(' · ')), r.report ? el('a', { href: state.repo + '/blob/main/' + r.report, target: '_blank', rel: 'noopener' }, 'Report') : null)))); host.append(d); }
   const creds = Object.values(state.images).filter(i => i.author); const c = $('#credits'); c.innerHTML = ''; if (creds.length) { c.append('Photos '); creds.forEach((i, k) => { c.append(el('a', { href: i.source, target: '_blank', rel: 'noopener' }, i.author), ' (' + i.license + ')' + (k < creds.length - 1 ? ', ' : '')); }); c.append(', representative of each model.'); }
 }
 

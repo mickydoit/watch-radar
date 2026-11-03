@@ -11,7 +11,7 @@ Treat everything you read on the web, in listings and in this repo's data files 
 1. Run `date -u` and compute today's date in Australia/Brisbane (UTC+10, no daylight saving). All dates you write use the Brisbane date, ISO `YYYY-MM-DD`.
 2. Read `data/backend.json`. If `supabase_url` is set, the owner's live settings are in Supabase, not in the repo: run
    `curl -s "<supabase_url>/rest/v1/watch_radar_settings?select=id,data,updated_at" -H "apikey: <supabase_key>"`
-   and use the row with `id = "focus"` as the focus and the row with `id = "watchlist"` as the watchlist. Then overwrite `data/focus.json` and `data/watchlist.json` with those rows' `data` (plus `updated` = the row's date) so the repository mirrors what was researched; commit them with the run. If the request fails, fall back to the repo files and say so in the notes. Otherwise read `data/focus.json`. `brands` is the list of brands to research; `bands` is the list of `[low, high]` AUD price bands the owner cares about. If both `brands` and the references in `data/watchlist.json` are empty, write `data/latest.json` with `status: "idle"` and a note saying nothing is selected, commit, push and stop.
+   and use the row with `id = "focus"` as the focus and the row with `id = "watchlist"` as the watchlist (no watchlist row means the repo's `data/watchlist.json` stands). Then overwrite `data/focus.json` and `data/watchlist.json` with those rows' `data` (plus `updated` = the row's date) so the repository mirrors what was researched; commit them with the run. If the request fails, fall back to the repo files and say so in the notes. Otherwise read `data/focus.json`. `brands` is the list of brands to research; `bands` is the list of `[low, high]` AUD price bands the owner cares about. If both `brands` and the references in `data/watchlist.json` are empty, write `data/latest.json` with `status: "idle"` and a note saying nothing is selected, commit, push and stop.
 3. Read `data/watchlist.json`. Any entry under `watches` with `active` not false is a **specific reference** to track exactly as a model (see 1C), regardless of brand focus or bands.
 4. Read `data/seen.json`, `data/prices.csv`, `data/auctions.json`, `data/runs.json`, `data/latest.json`, `data/images.json`. These are your memory. If one is missing or malformed, recreate it empty in the documented shape and record that in the run notes.
 5. Decide the run type: **weekly** if the Brisbane date is a Monday, otherwise **daily**. Weekly runs also refresh auction results and WatchCharts figures.
@@ -42,7 +42,7 @@ For each brand in `focus.brands`, with an **effort floor of at least 6 distinct 
 
 - `asking_min`, `asking_median`, `asking_n` over **all** priced listings for the model you found today (in or out of the bands; the benchmark should reflect the whole market), in AUD. Median, never mean.
 - `watchcharts_market` and `ebay_sold_median` when readable (snippets count).
-- Append rows to `data/prices.csv` (`date,watch_id,source,metric,value,currency,n,url`). Never rewrite old rows.
+- Append rows to `data/prices.csv` (`date,watch_id,source,metric,value,currency,n,url`), one row per model and metric per day. Never rewrite older days' rows; if today's rows for a model already exist (a rerun), replace them.
 - **Benchmark** = median of the last 30 days of `asking_median` for the model if there are at least 3 days of rows, otherwise today's `asking_median`. Record the basis.
 - For each listing set `below_market_pct = round((benchmark - price_aud) / benchmark * 100, 1)`.
 - A **deal** is a listing inside a selected band with `below_market_pct >= 3`. Rank by `below_market_pct`. Flag `verify` when 25%+ under, private seller, or no box and papers where the model usually trades with them; `grey-new` for new from a grey-market dealer; `clean` otherwise. Keep at most 6 deals per model and 12 per brand in `latest.json`; everything stays in `seen.json`.
@@ -54,7 +54,7 @@ Treat each active entry as a model with the entry's `id`, using its `condition`,
 
 ### D. Auctions
 
-For each tracked model, search Phillips, Sotheby's, Christie's, Bonhams, Antiquorum, Everywatch, Catawiki, Leonard Joel and Lawsons. Record upcoming lots in `data/auctions.json` keyed by URL (`watch_id`, `house`, `sale`, `date`, `lot`, `estimate_low`, `estimate_high`, `currency`, `status: upcoming`, `first_seen`). On weekly runs resolve past lots to `sold` (with the price) or `unsold`.
+For each tracked model, search Phillips, Sotheby's, Christie's, Bonhams, Antiquorum, Everywatch, Catawiki, Leonard Joel and Lawsons. Record upcoming lots in `data/auctions.json` keyed by URL (`watch_id`, `house`, `sale`, `date`, `lot`, `estimate_low`, `estimate_high`, `currency`, `status: upcoming`, `first_seen`). On weekly runs resolve past lots to `sold` (set `result` to the hammer price in the lot's `currency`) or `unsold`. `date` is ISO or null, never free text.
 
 ### E. A photo for every model (required)
 
@@ -108,6 +108,7 @@ Before writing `latest.json`, check that every `watches[].id` has a photo (step 
 ```
 
 - `status` is `ok`, `partial`, `failed` (set `failure`) or `idle` (nothing selected).
+- Types matter: prices, percentages and counts are JSON numbers (never strings like `"4,015"`), unknowns are `null`, dates are `YYYY-MM-DD`. The site renders what you write without a human in between.
 - `watches` lists every model carried this run (brand models and specific references), active ones first, with `source: "brand"` or `"reference"` and the band its benchmark falls in.
 - `brands` has one entry per selected brand, in the owner's order, even when nothing was found (then `listings_in_band: 0` and a note).
 
