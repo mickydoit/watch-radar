@@ -50,6 +50,25 @@
    "auction": 0,
    "fetches": 707,
    "report": "reports/2026-11-04.md"
+  },
+  {
+   "run_id": "2026-11-04T2035",
+   "date": "2026-11-04",
+   "type": "hourly",
+   "status": "ok",
+   "brands": 17,
+   "models": 74,
+   "new": 738,
+   "drops": 43,
+   "deals": 154,
+   "sold": 4,
+   "auction": 0,
+   "fetches": 1119,
+   "coverage": {
+    "sources": 130,
+    "reached": 91
+   },
+   "report": "reports/2026-11-04.md"
   }
  ]
 }
