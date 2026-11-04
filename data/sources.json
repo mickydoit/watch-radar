@@ -1,2481 +1,2553 @@
 {
-  "_comment": "Every seller the routine must reach. recipe: shopify|woocommerce feeds are pulled by tools/sweep.py (feed template, {page} and {brand}); html sources the agent searches and fetches for every selected brand every run (search template or a site-scoped web search); snippet sources block the fetcher, so only search snippets. brands 'auto' = decided by the feed's vendor field or the search. status is maintained by the sweep and the routine: last_status ok|blocked|empty|error, last_ok, last_listings, last_checked. Never delete an entry; set its status instead.",
-  "updated": "2026-11-04",
-  "sources": [
-    {
-      "id": "teddy",
-      "name": "Teddy Baldassarre",
-      "domain": "teddybaldassarre.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "authorised",
-      "recipe": "shopify",
-      "feed": "https://teddybaldassarre.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 1362,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      },
-      "note": "2,500+ products over 10+ pages; the ivory MeisterSinger Neo was missed on 3 Nov when paging stopped early"
-    },
-    {
-      "id": "wamada",
-      "name": "Wamada Jewellery",
-      "domain": "wamadajewellery.com.au",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "authorised",
-      "recipe": "shopify",
-      "feed": "https://wamadajewellery.com.au/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 819,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "timeandtide",
-      "name": "Time+Tide shop",
-      "domain": "shop.timeandtidewatches.com",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "authorised",
-      "recipe": "shopify",
-      "feed": "https://shop.timeandtidewatches.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 355,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "windup",
-      "name": "Wind-Up Watch Shop",
-      "domain": "windupwatchshop.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "authorised",
-      "recipe": "shopify",
-      "feed": "https://windupwatchshop.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 144,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "watchdirect",
-      "name": "Watch Direct",
-      "domain": "watchdirect.com.au",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "grey",
-      "recipe": "shopify",
-      "feed": "https://watchdirect.com.au/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 236,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "starbuy",
-      "name": "Starbuy",
-      "domain": "starbuy.com.au",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "grey",
-      "recipe": "shopify",
-      "feed": "https://starbuy.com.au/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 470,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "shiels",
-      "name": "Shiels",
-      "domain": "www.shiels.com.au",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "authorised",
-      "recipe": "shopify",
-      "feed": "https://www.shiels.com.au/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 223,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "hardybrothers",
-      "name": "Hardy Brothers",
-      "domain": "www.hardybrothers.com.au",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "authorised",
-      "recipe": "shopify",
-      "feed": "https://www.hardybrothers.com.au/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 62,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "kennedy",
-      "name": "Kennedy",
-      "domain": "www.kennedy.com.au",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "authorised",
-      "recipe": "shopify",
-      "feed": "https://www.kennedy.com.au/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 208,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "salera",
-      "name": "Salera's",
-      "domain": "www.salera.com.au",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "authorised",
-      "recipe": "shopify",
-      "feed": "https://www.salera.com.au/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 446,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "watchkingdom",
-      "name": "Watch Kingdom",
-      "domain": "watchkingdom.com.au",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "grey",
-      "recipe": "shopify",
-      "feed": "https://watchkingdom.com.au/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 1,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "watchvault",
-      "name": "WatchVault",
-      "domain": "watchvault.com.au",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "preowned",
-      "recipe": "shopify",
-      "feed": "https://watchvault.com.au/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 748,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "watchexchangeau",
-      "name": "Watch Exchange Australia",
-      "domain": "www.watchexchange.com.au",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "preowned",
-      "recipe": "shopify",
-      "feed": "https://www.watchexchange.com.au/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 0,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "fivefortyfive",
-      "name": "Five Forty Five",
-      "domain": "fivefortyfive.nz",
-      "country": "NZ",
-      "currency": "NZD",
-      "tier": "authorised",
-      "recipe": "shopify",
-      "feed": "https://fivefortyfive.nz/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "error",
-        "last_listings": 647,
-        "last_checked": "2026-11-04"
-      }
-    },
-    {
-      "id": "gnomon",
-      "name": "Gnomon Watches",
-      "domain": "gnomonwatches.com",
-      "country": "SG",
-      "currency": "USD",
-      "tier": "authorised",
-      "recipe": "shopify",
-      "feed": "https://gnomonwatches.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 361,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "skywatches",
-      "name": "Skywatches",
-      "domain": "skywatches.com.sg",
-      "country": "SG",
-      "currency": "SGD",
-      "tier": "authorised",
-      "recipe": "shopify",
-      "feed": "https://skywatches.com.sg/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "error",
-        "last_listings": 536,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "nomad",
-      "name": "Nomad Watch Works",
-      "domain": "nomadwatchworks.com",
-      "country": "SG",
-      "currency": "SGD",
-      "tier": "authorised",
-      "recipe": "shopify",
-      "feed": "https://nomadwatchworks.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 0,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "exquisite",
-      "name": "Exquisite Timepieces",
-      "domain": "exquisitetimepieces.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "authorised",
-      "recipe": "shopify",
-      "feed": "https://exquisitetimepieces.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 2970,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "longisland",
-      "name": "Long Island Watch",
-      "domain": "www.longislandwatch.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "authorised",
-      "recipe": "shopify",
-      "feed": "https://www.longislandwatch.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 2340,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "topper",
-      "name": "Topper Jewelers",
-      "domain": "www.topperjewelers.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "authorised",
-      "recipe": "shopify",
-      "feed": "https://www.topperjewelers.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 1000,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "azzi",
-      "name": "Azzi Jewelers",
-      "domain": "azzijewelers.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "authorised",
-      "recipe": "shopify",
-      "feed": "https://azzijewelers.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 1037,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "chpremier",
-      "name": "CH Premier",
-      "domain": "chpremier.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "grey",
-      "recipe": "shopify",
-      "feed": "https://chpremier.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 2632,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "ashford",
-      "name": "Ashford",
-      "domain": "www.ashford.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "grey",
-      "recipe": "shopify",
-      "feed": "https://www.ashford.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "partial",
-        "last_listings": 53,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "watchoutz",
-      "name": "Watchoutz",
-      "domain": "watchoutz.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "grey",
-      "recipe": "shopify",
-      "feed": "https://watchoutz.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 861,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "hodinkeeshop",
-      "name": "Hodinkee Shop",
-      "domain": "shop.hodinkee.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "preowned",
-      "recipe": "shopify",
-      "feed": "https://shop.hodinkee.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "partial",
-        "last_listings": 2472,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "analogshift",
-      "name": "Analog:Shift",
-      "domain": "www.analogshift.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "preowned",
-      "recipe": "shopify",
-      "feed": "https://www.analogshift.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "partial",
-        "last_listings": 927,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "investmentwatches",
-      "name": "Investment Watches",
-      "domain": "investmentwatches.com",
-      "country": "UK",
-      "currency": "GBP",
-      "tier": "preowned",
-      "recipe": "shopify",
-      "feed": "https://investmentwatches.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 170,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "prideandpinion",
-      "name": "Pride and Pinion",
-      "domain": "prideandpinion.com",
-      "country": "UK",
-      "currency": "GBP",
-      "tier": "preowned",
-      "recipe": "shopify",
-      "feed": "https://prideandpinion.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 100,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "jura",
-      "name": "Jura Watches",
-      "domain": "www.jurawatches.co.uk",
-      "country": "UK",
-      "currency": "GBP",
-      "tier": "authorised",
-      "recipe": "shopify",
-      "feed": "https://www.jurawatches.co.uk/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "partial",
-        "last_listings": 434,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "watchnation",
-      "name": "Watch Nation",
-      "domain": "www.watchnation.com",
-      "country": "UK",
-      "currency": "GBP",
-      "tier": "grey",
-      "recipe": "shopify",
-      "feed": "https://www.watchnation.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "skipped",
-        "last_listings": 0,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "watchgecko",
-      "name": "WatchGecko",
-      "domain": "watchgecko.com",
-      "country": "UK",
-      "currency": "GBP",
-      "tier": "authorised",
-      "recipe": "shopify",
-      "feed": "https://watchgecko.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "skipped",
-        "last_listings": 0,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "seriouswatches",
-      "name": "Serious Watches",
-      "domain": "seriouswatches.com",
-      "country": "NL",
-      "currency": "EUR",
-      "tier": "authorised",
-      "recipe": "shopify",
-      "feed": "https://seriouswatches.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "skipped",
-        "last_listings": 0,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "uhrinstinkt",
-      "name": "Uhrinstinkt",
-      "domain": "www.uhrinstinkt.de",
-      "country": "DE",
-      "currency": "EUR",
-      "tier": "grey",
-      "recipe": "shopify",
-      "feed": "https://www.uhrinstinkt.de/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "skipped",
-        "last_listings": 0,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "montredo",
-      "name": "Montredo",
-      "domain": "www.montredo.com",
-      "country": "DE",
-      "currency": "EUR",
-      "tier": "grey",
-      "recipe": "shopify",
-      "feed": "https://www.montredo.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "skipped",
-        "last_listings": 0,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "zeitauktion",
-      "name": "Zeitauktion",
-      "domain": "www.zeitauktion.com",
-      "country": "DE",
-      "currency": "EUR",
-      "tier": "preowned",
-      "recipe": "shopify",
-      "feed": "https://www.zeitauktion.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "skipped",
-        "last_listings": 0,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "paulin",
-      "name": "Paulin (direct)",
-      "domain": "www.paulinwatches.com",
-      "country": "UK",
-      "currency": "GBP",
-      "tier": "microbrand",
-      "recipe": "shopify",
-      "feed": "https://www.paulinwatches.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "skipped",
-        "last_listings": 0,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "anordain",
-      "name": "anOrdain (direct)",
-      "domain": "anordain.com",
-      "country": "UK",
-      "currency": "GBP",
-      "tier": "microbrand",
-      "recipe": "shopify",
-      "feed": "https://anordain.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "skipped",
-        "last_listings": 0,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "underd0g",
-      "name": "Studio Underd0g (direct)",
-      "domain": "underd0g.com",
-      "country": "UK",
-      "currency": "GBP",
-      "tier": "microbrand",
-      "recipe": "shopify",
-      "feed": "https://underd0g.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "skipped",
-        "last_listings": 0,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "unimatic",
-      "name": "Unimatic (direct)",
-      "domain": "www.unimaticwatches.com",
-      "country": "IT",
-      "currency": "EUR",
-      "tier": "microbrand",
-      "recipe": "shopify",
-      "feed": "https://www.unimaticwatches.com/products.json?limit=250&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "skipped",
-        "last_listings": 0,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "define",
-      "name": "Define Watches, Noosa",
-      "domain": "definewatches.com.au",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "authorised",
-      "recipe": "woocommerce",
-      "feed": "https://definewatches.com.au/wp-json/wc/store/v1/products?search={brand}&per_page=100&page={page}",
-      "search": null,
-      "price_multiplier": 1.1,
-      "brands": "auto",
-      "status": {
-        "last_status": "skipped",
-        "last_listings": 0,
-        "last_checked": "2026-11-04"
-      },
-      "note": "prices.price is cents EX-GST: 290909 = A$3,200 on the shelf"
-    },
-    {
-      "id": "gregory",
-      "name": "Gregory Jewellers",
-      "domain": "www.gregoryjewellers.com.au",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "authorised",
-      "recipe": "woocommerce",
-      "feed": "https://www.gregoryjewellers.com.au/wp-json/wc/store/v1/products?search={brand}&per_page=100&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "skipped",
-        "last_listings": 0,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      },
-      "note": "check one product page against the API price before trusting GST handling"
-    },
-    {
-      "id": "kalmar",
-      "name": "Kalmar Antiques",
-      "domain": "www.kalmarantiques.com.au",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "preowned",
-      "recipe": "woocommerce",
-      "feed": "https://www.kalmarantiques.com.au/wp-json/wc/store/v1/products?search={brand}&per_page=100&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "skipped",
-        "last_listings": 0,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "zaeger",
-      "name": "Zaeger",
-      "domain": "zaeger.com.au",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "authorised",
-      "recipe": "woocommerce",
-      "feed": "https://zaeger.com.au/wp-json/wc/store/v1/products?search={brand}&per_page=100&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "skipped",
-        "last_listings": 0,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "swisswatchdealer",
-      "name": "Swiss Watch Dealer",
-      "domain": "swisswatchdealer.com.au",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "grey",
-      "recipe": "woocommerce",
-      "feed": "https://swisswatchdealer.com.au/wp-json/wc/store/v1/products?search={brand}&per_page=100&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "skipped",
-        "last_listings": 0,
-        "last_checked": "2026-11-04"
-      }
-    },
-    {
-      "id": "christiesnz",
-      "name": "Christies Jewellery (NZ)",
-      "domain": "christies.co.nz",
-      "country": "NZ",
-      "currency": "NZD",
-      "tier": "authorised",
-      "recipe": "woocommerce",
-      "feed": "https://christies.co.nz/wp-json/wc/store/v1/products?search={brand}&per_page=100&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "skipped",
-        "last_listings": 0,
-        "last_checked": "2026-11-04"
-      }
-    },
-    {
-      "id": "meistersinger",
-      "name": "MeisterSinger (direct)",
-      "domain": "www.meistersinger.com",
-      "country": "DE",
-      "currency": "EUR",
-      "tier": "microbrand",
-      "recipe": "woocommerce",
-      "feed": "https://www.meistersinger.com/wp-json/wc/store/v1/products?search={brand}&per_page=100&page={page}",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "skipped",
-        "last_listings": 0,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "watchrecon",
-      "name": "WatchRecon (Reddit r/Watchexchange and forums)",
-      "domain": "www.watchrecon.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "aggregator",
-      "recipe": "html",
-      "feed": null,
-      "search": "https://www.watchrecon.com/?query={brand}",
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 140
-      },
-      "note": "cards carry the Reddit link and an image_id thumbnail; Reddit itself blocks the fetcher"
-    },
-    {
-      "id": "wristler",
-      "name": "Wristler",
-      "domain": "www.wristler.eu",
-      "country": "NL",
-      "currency": "EUR",
-      "tier": "aggregator",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 169
-      }
-    },
-    {
-      "id": "everywatch",
-      "name": "Everywatch",
-      "domain": "www.everywatch.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "aggregator",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 6
-      },
-      "note": "serves og:image to the cloud fetcher"
-    },
-    {
-      "id": "bezel",
-      "name": "Bezel",
-      "domain": "shop.getbezel.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "preowned",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 0
-      }
-    },
-    {
-      "id": "bobs",
-      "name": "Bob's Watches",
-      "domain": "www.bobswatches.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "preowned",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 14
-      }
-    },
-    {
-      "id": "1916",
-      "name": "The 1916 Company",
-      "domain": "www.the1916company.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "preowned",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 16
-      }
-    },
-    {
-      "id": "crownandcaliber",
-      "name": "Crown & Caliber",
-      "domain": "www.crownandcaliber.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "preowned",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 0
-      }
-    },
-    {
-      "id": "subdial",
-      "name": "Subdial",
-      "domain": "www.subdial.com",
-      "country": "UK",
-      "currency": "GBP",
-      "tier": "preowned",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "blocked",
-        "last_checked": "2026-11-04"
-      }
-    },
-    {
-      "id": "tropical",
-      "name": "Tropical Watch",
-      "domain": "www.tropicalwatch.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "preowned",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {}
-    },
-    {
-      "id": "ewc",
-      "name": "European Watch Company",
-      "domain": "www.europeanwatch.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "preowned",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 1
-      }
-    },
-    {
-      "id": "govberg",
-      "name": "Govberg",
-      "domain": "www.govbergwatches.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "preowned",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "blocked",
-        "last_checked": "2026-11-04"
-      }
-    },
-    {
-      "id": "watchbox",
-      "name": "WatchBox",
-      "domain": "www.thewatchbox.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "preowned",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {}
-    },
-    {
-      "id": "hodinkee",
-      "name": "Hodinkee pre-owned",
-      "domain": "www.hodinkee.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "preowned",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {}
-    },
-    {
-      "id": "jomashop",
-      "name": "Jomashop",
-      "domain": "www.jomashop.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "grey",
-      "recipe": "html",
-      "feed": null,
-      "search": "https://www.jomashop.com/catalogsearch/result/?q={brand}",
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "blocked",
-        "last_checked": "2026-11-04"
-      }
-    },
-    {
-      "id": "prestigetime",
-      "name": "Prestige Time",
-      "domain": "www.prestigetime.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "grey",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 1
-      }
-    },
-    {
-      "id": "authenticwatches",
-      "name": "Authentic Watches",
-      "domain": "www.authenticwatches.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "grey",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 0
-      }
-    },
-    {
-      "id": "watchmaxx",
-      "name": "WatchMaxx",
-      "domain": "watchmaxx.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "grey",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 29
-      },
-      "note": "exposes og:image"
-    },
-    {
-      "id": "luxurybazaar",
-      "name": "Luxury Bazaar",
-      "domain": "luxurybazaar.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "grey",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 0
-      }
-    },
-    {
-      "id": "feldmar",
-      "name": "Feldmar Watch",
-      "domain": "www.feldmarwatch.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "authorised",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {}
-    },
-    {
-      "id": "islandwatch",
-      "name": "Island Watch",
-      "domain": "www.islandwatch.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "authorised",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "blocked",
-        "last_checked": "2026-11-04"
-      }
-    },
-    {
-      "id": "nywatchstore",
-      "name": "NY Watch Store",
-      "domain": "nywatchstore.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "grey",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 1
-      }
-    },
-    {
-      "id": "creation",
-      "name": "Creation Watches",
-      "domain": "www.creationwatches.com",
-      "country": "SG",
-      "currency": "USD",
-      "tier": "grey",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "blocked",
-        "last_checked": "2026-11-04"
-      }
-    },
-    {
-      "id": "chronext",
-      "name": "Chronext",
-      "domain": "www.chronext.com",
-      "country": "DE",
-      "currency": "EUR",
-      "tier": "grey",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 0
-      }
-    },
-    {
-      "id": "watchdeal",
-      "name": "Watchdeal",
-      "domain": "www.watchdeal.de",
-      "country": "DE",
-      "currency": "EUR",
-      "tier": "grey",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "blocked",
-        "last_checked": "2026-11-04"
-      }
-    },
-    {
-      "id": "steiner",
-      "name": "Steiner Juwelier",
-      "domain": "steiner-juwelier.com",
-      "country": "AT",
-      "currency": "EUR",
-      "tier": "authorised",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 1
-      }
-    },
-    {
-      "id": "helveti",
-      "name": "Helveti",
-      "domain": "helveti.eu",
-      "country": "CZ",
-      "currency": "EUR",
-      "tier": "authorised",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 5
-      }
-    },
-    {
-      "id": "maier",
-      "name": "Maier",
-      "domain": "en.maier.fr",
-      "country": "FR",
-      "currency": "EUR",
-      "tier": "authorised",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_checked": "2026-11-04",
-        "last_listings": 1,
-        "last_status": "ok",
-        "last_ok": "2026-11-04"
-      }
-    },
-    {
-      "id": "goldsmiths",
-      "name": "Goldsmiths",
-      "domain": "www.goldsmiths.co.uk",
-      "country": "UK",
-      "currency": "GBP",
-      "tier": "authorised",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 5
-      }
-    },
-    {
-      "id": "beaverbrooks",
-      "name": "Beaverbrooks",
-      "domain": "www.beaverbrooks.co.uk",
-      "country": "UK",
-      "currency": "GBP",
-      "tier": "authorised",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "blocked",
-        "last_checked": "2026-11-04"
-      }
-    },
-    {
-      "id": "ernestjones",
-      "name": "Ernest Jones",
-      "domain": "www.ernestjones.co.uk",
-      "country": "UK",
-      "currency": "GBP",
-      "tier": "authorised",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 1
-      }
-    },
-    {
-      "id": "watchcouk",
-      "name": "Watch.co.uk",
-      "domain": "www.watch.co.uk",
-      "country": "UK",
-      "currency": "GBP",
-      "tier": "grey",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "blocked",
-        "last_checked": "2026-11-04"
-      }
-    },
-    {
-      "id": "swisstimepieces",
-      "name": "Swiss Time Pieces",
-      "domain": "swisstimepieces.co.uk",
-      "country": "UK",
-      "currency": "GBP",
-      "tier": "preowned",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {}
-    },
-    {
-      "id": "gressive",
-      "name": "Gressive",
-      "domain": "gressive.jp",
-      "country": "JP",
-      "currency": "JPY",
-      "tier": "authorised",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 10
-      }
-    },
-    {
-      "id": "hrd",
-      "name": "HRD (JP)",
-      "domain": "hrd-web.com",
-      "country": "JP",
-      "currency": "JPY",
-      "tier": "grey",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "blocked",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 1
-      }
-    },
-    {
-      "id": "wosau",
-      "name": "Watches of Switzerland Australia",
-      "domain": "www.watchesofswitzerland.com.au",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "authorised",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "blocked",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 3
-      }
-    },
-    {
-      "id": "hourglass",
-      "name": "The Hour Glass",
-      "domain": "www.thehourglass.com",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "authorised",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {}
-    },
-    {
-      "id": "myer",
-      "name": "Myer",
-      "domain": "www.myer.com.au",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "authorised",
-      "recipe": "html",
-      "feed": null,
-      "search": "https://www.myer.com.au/b/{brand}",
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 8
-      },
-      "note": "search page is a bot check; brand and product pages read"
-    },
-    {
-      "id": "davidjones",
-      "name": "David Jones",
-      "domain": "www.davidjones.com",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "authorised",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_checked": "2026-11-04",
-        "last_status": "blocked"
-      }
-    },
-    {
-      "id": "grays",
-      "name": "Grays",
-      "domain": "www.graysonline.com",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "auction",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "blocked",
-        "last_checked": "2026-11-04"
-      }
-    },
-    {
-      "id": "vintagewatchco",
-      "name": "Vintage Watch Co",
-      "domain": "vintagewatchco.com.au",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "preowned",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "blocked",
-        "last_checked": "2026-11-04"
-      }
-    },
-    {
-      "id": "watchcollectorsau",
-      "name": "Watch Collectors Australia",
-      "domain": "www.watchcollectorsaustralia.com.au",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "preowned",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "blocked",
-        "last_checked": "2026-11-04"
-      }
-    },
-    {
-      "id": "cw",
-      "name": "Christopher Ward (direct)",
-      "domain": "www.christopherward.com",
-      "country": "UK",
-      "currency": "GBP",
-      "tier": "microbrand",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_listings": 18,
-        "last_ok": "2026-11-04"
-      },
-      "note": "product pages served; search by model name"
-    },
-    {
-      "id": "sinn",
-      "name": "Sinn (direct)",
-      "domain": "www.sinn.de",
-      "country": "DE",
-      "currency": "EUR",
-      "tier": "microbrand",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "blocked",
-        "last_checked": "2026-11-04"
-      }
-    },
-    {
-      "id": "nomos",
-      "name": "NOMOS Glashütte (direct)",
-      "domain": "www.nomos-glashuette.com",
-      "country": "DE",
-      "currency": "EUR",
-      "tier": "microbrand",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "blocked",
-        "last_checked": "2026-11-04"
-      }
-    },
-    {
-      "id": "oris",
-      "name": "Oris (direct)",
-      "domain": "www.oris.ch",
-      "country": "CH",
-      "currency": "CHF",
-      "tier": "microbrand",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 1
-      }
-    },
-    {
-      "id": "tissot",
-      "name": "Tissot (direct)",
-      "domain": "www.tissotwatches.com",
-      "country": "CH",
-      "currency": "AUD",
-      "tier": "microbrand",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 1
-      }
-    },
-    {
-      "id": "hamilton",
-      "name": "Hamilton (direct)",
-      "domain": "www.hamiltonwatch.com",
-      "country": "CH",
-      "currency": "AUD",
-      "tier": "microbrand",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {}
-    },
-    {
-      "id": "seikoboutique",
-      "name": "Seiko Boutique Australia",
-      "domain": "www.seikoboutique.com.au",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "authorised",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 5
-      }
-    },
-    {
-      "id": "leonardjoel",
-      "name": "Leonard Joel",
-      "domain": "www.leonardjoel.com.au",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "auction",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {}
-    },
-    {
-      "id": "lawsons",
-      "name": "Lawsons",
-      "domain": "www.lawsons.com.au",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "auction",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {}
-    },
-    {
-      "id": "chrono24",
-      "name": "Chrono24 (.com.au, .com)",
-      "domain": "www.chrono24.com.au",
-      "country": "DE",
-      "currency": "AUD",
-      "tier": "aggregator",
-      "recipe": "snippet",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "blocked",
-        "last_checked": "2026-11-04"
-      }
-    },
-    {
-      "id": "ebay",
-      "name": "eBay (.com.au, .com, .co.uk; sold items too)",
-      "domain": "www.ebay.com.au",
-      "country": "US",
-      "currency": "AUD",
-      "tier": "aggregator",
-      "recipe": "snippet",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 1
-      }
-    },
-    {
-      "id": "watchcharts",
-      "name": "WatchCharts",
-      "domain": "watchcharts.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "aggregator",
-      "recipe": "snippet",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {}
-    },
-    {
-      "id": "catawiki",
-      "name": "Catawiki",
-      "domain": "www.catawiki.com",
-      "country": "NL",
-      "currency": "EUR",
-      "tier": "auction",
-      "recipe": "snippet",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "blocked",
-        "last_checked": "2026-11-04"
-      }
-    },
-    {
-      "id": "watchpatrol",
-      "name": "WatchPatrol",
-      "domain": "www.watchpatrol.net",
-      "country": "DE",
-      "currency": "EUR",
-      "tier": "aggregator",
-      "recipe": "snippet",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "blocked",
-        "last_checked": "2026-11-04"
-      }
-    },
-    {
-      "id": "watchfinder",
-      "name": "Watchfinder",
-      "domain": "www.watchfinder.com",
-      "country": "UK",
-      "currency": "GBP",
-      "tier": "preowned",
-      "recipe": "snippet",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {}
-    },
-    {
-      "id": "watchesofmayfair",
-      "name": "Watches of Mayfair",
-      "domain": "www.watchesofmayfair.com",
-      "country": "UK",
-      "currency": "GBP",
-      "tier": "preowned",
-      "recipe": "snippet",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {}
-    },
-    {
-      "id": "houseofwatches",
-      "name": "House of Watches",
-      "domain": "www.houseofwatches.co.uk",
-      "country": "UK",
-      "currency": "GBP",
-      "tier": "grey",
-      "recipe": "snippet",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "blocked",
-        "last_checked": "2026-11-04"
-      }
-    },
-    {
-      "id": "watchbuys",
-      "name": "WatchBuys (Sinn US)",
-      "domain": "www.watchbuys.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "authorised",
-      "recipe": "snippet",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {}
-    },
-    {
-      "id": "bqwatches",
-      "name": "BQ Watches",
-      "domain": "bqwatches.com",
-      "country": "UK",
-      "currency": "GBP",
-      "tier": "preowned",
-      "recipe": "snippet",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {}
-    },
-    {
-      "id": "watchchest",
-      "name": "Watch Chest",
-      "domain": "watchchest.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "preowned",
-      "recipe": "snippet",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {}
-    },
-    {
-      "id": "reddit",
-      "name": "Reddit r/Watchexchange (read via WatchRecon)",
-      "domain": "www.reddit.com",
-      "country": "US",
-      "currency": "USD",
-      "tier": "aggregator",
-      "recipe": "snippet",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {}
-    },
-    {
-      "id": "kibblewatches",
-      "name": "kibblewatches.co.uk",
-      "domain": "kibblewatches.co.uk",
-      "country": null,
-      "currency": null,
-      "tier": "dealer",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 21
-      },
-      "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
-    },
-    {
-      "id": "collecting",
-      "name": "collecting.com",
-      "domain": "collecting.com",
-      "country": null,
-      "currency": null,
-      "tier": "dealer",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 1
-      },
-      "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
-    },
-    {
-      "id": "righttime",
-      "name": "righttime.com",
-      "domain": "righttime.com",
-      "country": null,
-      "currency": null,
-      "tier": "dealer",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 3
-      },
-      "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
-    },
-    {
-      "id": "wristies",
-      "name": "wristies.com.au",
-      "domain": "wristies.com.au",
-      "country": null,
-      "currency": null,
-      "tier": "dealer",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 1
-      },
-      "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
-    },
-    {
-      "id": "hannoush",
-      "name": "hannoush.com",
-      "domain": "hannoush.com",
-      "country": null,
-      "currency": null,
-      "tier": "dealer",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 1
-      },
-      "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
-    },
-    {
-      "id": "littleswitzerland",
-      "name": "littleswitzerland.com",
-      "domain": "littleswitzerland.com",
-      "country": null,
-      "currency": null,
-      "tier": "dealer",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 2
-      },
-      "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
-    },
-    {
-      "id": "birminghamluxurywatches",
-      "name": "birminghamluxurywatches.com",
-      "domain": "birminghamluxurywatches.com",
-      "country": null,
-      "currency": null,
-      "tier": "dealer",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 1
-      },
-      "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
-    },
-    {
-      "id": "dumarko",
-      "name": "dumarko.com",
-      "domain": "dumarko.com",
-      "country": null,
-      "currency": null,
-      "tier": "dealer",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 1
-      },
-      "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
-    },
-    {
-      "id": "thewristwatcher",
-      "name": "thewristwatcher.co.uk",
-      "domain": "thewristwatcher.co.uk",
-      "country": null,
-      "currency": null,
-      "tier": "dealer",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 1
-      },
-      "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
-    },
-    {
-      "id": "oliverjewellery",
-      "name": "oliverjewellery.ca",
-      "domain": "oliverjewellery.ca",
-      "country": null,
-      "currency": null,
-      "tier": "dealer",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 1
-      },
-      "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
-    },
-    {
-      "id": "lepage",
-      "name": "lepage.fr",
-      "domain": "lepage.fr",
-      "country": null,
-      "currency": null,
-      "tier": "dealer",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 0
-      },
-      "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
-    },
-    {
-      "id": "rasin",
-      "name": "rasin.co.jp",
-      "domain": "rasin.co.jp",
-      "country": null,
-      "currency": null,
-      "tier": "dealer",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 0
-      },
-      "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
-    },
-    {
-      "id": "wallacebishop",
-      "name": "wallacebishop.com.au",
-      "domain": "wallacebishop.com.au",
-      "country": null,
-      "currency": null,
-      "tier": "dealer",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 6
-      },
-      "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
-    },
-    {
-      "id": "watsonsjewellers",
-      "name": "watsonsjewellers.com.au",
-      "domain": "watsonsjewellers.com.au",
-      "country": null,
-      "currency": null,
-      "tier": "dealer",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 3
-      },
-      "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
-    },
-    {
-      "id": "timepiece",
-      "name": "timepiece.com",
-      "domain": "timepiece.com",
-      "country": null,
-      "currency": null,
-      "tier": "dealer",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 3
-      },
-      "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
-    },
-    {
-      "id": "seikowatches",
-      "name": "seikowatches.com.au",
-      "domain": "seikowatches.com.au",
-      "country": null,
-      "currency": null,
-      "tier": "dealer",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 1
-      },
-      "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
-    },
-    {
-      "id": "thewatchpreserve",
-      "name": "thewatchpreserve.com",
-      "domain": "thewatchpreserve.com",
-      "country": null,
-      "currency": null,
-      "tier": "dealer",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 3
-      },
-      "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
-    },
-    {
-      "id": "mappinandwebb",
-      "name": "mappinandwebb.com",
-      "domain": "mappinandwebb.com",
-      "country": null,
-      "currency": null,
-      "tier": "dealer",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 1
-      },
-      "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
-    },
-    {
-      "id": "thewatchsource",
-      "name": "thewatchsource.co.uk",
-      "domain": "thewatchsource.co.uk",
-      "country": null,
-      "currency": null,
-      "tier": "dealer",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 1
-      },
-      "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
-    },
-    {
-      "id": "precisionwatches",
-      "name": "precisionwatches.com",
-      "domain": "precisionwatches.com",
-      "country": null,
-      "currency": null,
-      "tier": "dealer",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 1
-      },
-      "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
-    },
-    {
-      "id": "cdpeacock",
-      "name": "cdpeacock.com",
-      "domain": "cdpeacock.com",
-      "country": null,
-      "currency": null,
-      "tier": "dealer",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 0
-      },
-      "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
-    },
-    {
-      "id": "betteridge",
-      "name": "betteridge.com",
-      "domain": "betteridge.com",
-      "country": null,
-      "currency": null,
-      "tier": "dealer",
-      "recipe": "html",
-      "feed": null,
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04",
-        "last_listings": 1
-      },
-      "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
-    },
-    {
-      "id": "wosuk",
-      "name": "Watches of Switzerland UK",
-      "domain": "watches-of-switzerland.co.uk",
-      "country": "GB",
-      "currency": "GBP",
-      "tier": "authorised",
-      "recipe": "html",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 1,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      },
-      "note": "Added 2026-11-04 by research pass"
-    },
-    {
-      "id": "ocarat",
-      "name": "Ocarat",
-      "domain": "ocarat.com",
-      "country": "FR",
-      "currency": "EUR",
-      "tier": "authorised",
-      "recipe": "html",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 4,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      },
-      "note": "Added 2026-11-04 by research pass"
-    },
-    {
-      "id": "arbitro",
-      "name": "Arbitro",
-      "domain": "en.arbitro.shop",
-      "country": "DE",
-      "currency": "USD",
-      "tier": "preowned",
-      "recipe": "html",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 1,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      },
-      "note": "Added 2026-11-04 by research pass"
-    },
-    {
-      "id": "michaelhill",
-      "name": "Michael Hill",
-      "domain": "michaelhill.com.au",
-      "country": "AU",
-      "currency": "AUD",
-      "tier": "authorised",
-      "recipe": "html",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 1,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      },
-      "note": "Added 2026-11-04 by research pass"
-    },
-    {
-      "id": "handt",
-      "name": "H&T",
-      "domain": "handt.co.uk",
-      "country": "GB",
-      "currency": "GBP",
-      "tier": "preowned",
-      "recipe": "html",
-      "search": null,
-      "price_multiplier": 1.0,
-      "brands": "auto",
-      "status": {
-        "last_status": "ok",
-        "last_listings": 5,
-        "last_checked": "2026-11-04",
-        "last_ok": "2026-11-04"
-      },
-      "note": "Added 2026-11-04 by research pass"
-    }
-  ]
+ "_comment": "Every seller the routine must reach. recipe: shopify|woocommerce feeds are pulled by tools/sweep.py (feed template, {page} and {brand}); html sources the agent searches and fetches for every selected brand every run (search template or a site-scoped web search); snippet sources block the fetcher, so only search snippets. brands 'auto' = decided by the feed's vendor field or the search. status is maintained by the sweep and the routine: last_status ok|blocked|empty|error, last_ok, last_listings, last_checked. Never delete an entry; set its status instead.",
+ "updated": "2026-11-05",
+ "sources": [
+  {
+   "id": "teddy",
+   "name": "Teddy Baldassarre",
+   "domain": "teddybaldassarre.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "authorised",
+   "recipe": "shopify",
+   "feed": "https://teddybaldassarre.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 1364,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   },
+   "note": "2,500+ products over 10+ pages; the ivory MeisterSinger Neo was missed on 3 Nov when paging stopped early"
+  },
+  {
+   "id": "wamada",
+   "name": "Wamada Jewellery",
+   "domain": "wamadajewellery.com.au",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "authorised",
+   "recipe": "shopify",
+   "feed": "https://wamadajewellery.com.au/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 819,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "timeandtide",
+   "name": "Time+Tide shop",
+   "domain": "shop.timeandtidewatches.com",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "authorised",
+   "recipe": "shopify",
+   "feed": "https://shop.timeandtidewatches.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 355,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "windup",
+   "name": "Wind-Up Watch Shop",
+   "domain": "windupwatchshop.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "authorised",
+   "recipe": "shopify",
+   "feed": "https://windupwatchshop.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 144,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "watchdirect",
+   "name": "Watch Direct",
+   "domain": "watchdirect.com.au",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "grey",
+   "recipe": "shopify",
+   "feed": "https://watchdirect.com.au/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 236,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "starbuy",
+   "name": "Starbuy",
+   "domain": "starbuy.com.au",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "grey",
+   "recipe": "shopify",
+   "feed": "https://starbuy.com.au/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 1,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "shiels",
+   "name": "Shiels",
+   "domain": "www.shiels.com.au",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "authorised",
+   "recipe": "shopify",
+   "feed": "https://www.shiels.com.au/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 224,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "hardybrothers",
+   "name": "Hardy Brothers",
+   "domain": "www.hardybrothers.com.au",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "authorised",
+   "recipe": "shopify",
+   "feed": "https://www.hardybrothers.com.au/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 62,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "kennedy",
+   "name": "Kennedy",
+   "domain": "www.kennedy.com.au",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "authorised",
+   "recipe": "shopify",
+   "feed": "https://www.kennedy.com.au/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 208,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "salera",
+   "name": "Salera's",
+   "domain": "www.salera.com.au",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "authorised",
+   "recipe": "shopify",
+   "feed": "https://www.salera.com.au/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 446,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "watchkingdom",
+   "name": "Watch Kingdom",
+   "domain": "watchkingdom.com.au",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "grey",
+   "recipe": "shopify",
+   "feed": "https://watchkingdom.com.au/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 1,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "watchvault",
+   "name": "WatchVault",
+   "domain": "watchvault.com.au",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "preowned",
+   "recipe": "shopify",
+   "feed": "https://watchvault.com.au/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 748,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "watchexchangeau",
+   "name": "Watch Exchange Australia",
+   "domain": "www.watchexchange.com.au",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "preowned",
+   "recipe": "shopify",
+   "feed": "https://www.watchexchange.com.au/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 0,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "fivefortyfive",
+   "name": "Five Forty Five",
+   "domain": "fivefortyfive.nz",
+   "country": "NZ",
+   "currency": "NZD",
+   "tier": "authorised",
+   "recipe": "shopify",
+   "feed": "https://fivefortyfive.nz/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 2,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "gnomon",
+   "name": "Gnomon Watches",
+   "domain": "gnomonwatches.com",
+   "country": "SG",
+   "currency": "USD",
+   "tier": "authorised",
+   "recipe": "shopify",
+   "feed": "https://gnomonwatches.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 361,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "skywatches",
+   "name": "Skywatches",
+   "domain": "skywatches.com.sg",
+   "country": "SG",
+   "currency": "SGD",
+   "tier": "authorised",
+   "recipe": "shopify",
+   "feed": "https://skywatches.com.sg/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 2295,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "nomad",
+   "name": "Nomad Watch Works",
+   "domain": "nomadwatchworks.com",
+   "country": "SG",
+   "currency": "SGD",
+   "tier": "authorised",
+   "recipe": "shopify",
+   "feed": "https://nomadwatchworks.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 0,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "exquisite",
+   "name": "Exquisite Timepieces",
+   "domain": "exquisitetimepieces.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "authorised",
+   "recipe": "shopify",
+   "feed": "https://exquisitetimepieces.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 2971,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "longisland",
+   "name": "Long Island Watch",
+   "domain": "www.longislandwatch.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "authorised",
+   "recipe": "shopify",
+   "feed": "https://www.longislandwatch.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 2340,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "topper",
+   "name": "Topper Jewelers",
+   "domain": "www.topperjewelers.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "authorised",
+   "recipe": "shopify",
+   "feed": "https://www.topperjewelers.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 1000,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "azzi",
+   "name": "Azzi Jewelers",
+   "domain": "azzijewelers.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "authorised",
+   "recipe": "shopify",
+   "feed": "https://azzijewelers.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 1037,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "chpremier",
+   "name": "CH Premier",
+   "domain": "chpremier.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "grey",
+   "recipe": "shopify",
+   "feed": "https://chpremier.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 2632,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "ashford",
+   "name": "Ashford",
+   "domain": "www.ashford.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "grey",
+   "recipe": "shopify",
+   "feed": "https://www.ashford.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "partial",
+    "last_listings": 47,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "watchoutz",
+   "name": "Watchoutz",
+   "domain": "watchoutz.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "grey",
+   "recipe": "shopify",
+   "feed": "https://watchoutz.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 4,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "hodinkeeshop",
+   "name": "Hodinkee Shop",
+   "domain": "shop.hodinkee.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "preowned",
+   "recipe": "shopify",
+   "feed": "https://shop.hodinkee.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "partial",
+    "last_listings": 2002,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "analogshift",
+   "name": "Analog:Shift",
+   "domain": "www.analogshift.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "preowned",
+   "recipe": "shopify",
+   "feed": "https://www.analogshift.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "partial",
+    "last_listings": 437,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "investmentwatches",
+   "name": "Investment Watches",
+   "domain": "investmentwatches.com",
+   "country": "UK",
+   "currency": "GBP",
+   "tier": "preowned",
+   "recipe": "shopify",
+   "feed": "https://investmentwatches.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "partial",
+    "last_listings": 111,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "prideandpinion",
+   "name": "Pride and Pinion",
+   "domain": "prideandpinion.com",
+   "country": "UK",
+   "currency": "GBP",
+   "tier": "preowned",
+   "recipe": "shopify",
+   "feed": "https://prideandpinion.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 101,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "jura",
+   "name": "Jura Watches",
+   "domain": "www.jurawatches.co.uk",
+   "country": "UK",
+   "currency": "GBP",
+   "tier": "authorised",
+   "recipe": "shopify",
+   "feed": "https://www.jurawatches.co.uk/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 497,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "watchnation",
+   "name": "Watch Nation",
+   "domain": "www.watchnation.com",
+   "country": "UK",
+   "currency": "GBP",
+   "tier": "grey",
+   "recipe": "shopify",
+   "feed": "https://www.watchnation.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 939,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "watchgecko",
+   "name": "WatchGecko",
+   "domain": "watchgecko.com",
+   "country": "UK",
+   "currency": "GBP",
+   "tier": "authorised",
+   "recipe": "shopify",
+   "feed": "https://watchgecko.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 38,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "seriouswatches",
+   "name": "Serious Watches",
+   "domain": "seriouswatches.com",
+   "country": "NL",
+   "currency": "EUR",
+   "tier": "authorised",
+   "recipe": "shopify",
+   "feed": "https://seriouswatches.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 2,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "uhrinstinkt",
+   "name": "Uhrinstinkt",
+   "domain": "www.uhrinstinkt.de",
+   "country": "DE",
+   "currency": "EUR",
+   "tier": "grey",
+   "recipe": "shopify",
+   "feed": "https://www.uhrinstinkt.de/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 2730,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "montredo",
+   "name": "Montredo",
+   "domain": "www.montredo.com",
+   "country": "DE",
+   "currency": "EUR",
+   "tier": "grey",
+   "recipe": "shopify",
+   "feed": "https://www.montredo.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 2709,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "zeitauktion",
+   "name": "Zeitauktion",
+   "domain": "www.zeitauktion.com",
+   "country": "DE",
+   "currency": "EUR",
+   "tier": "preowned",
+   "recipe": "shopify",
+   "feed": "https://www.zeitauktion.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 3589,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "paulin",
+   "name": "Paulin (direct)",
+   "domain": "www.paulinwatches.com",
+   "country": "UK",
+   "currency": "GBP",
+   "tier": "microbrand",
+   "recipe": "shopify",
+   "feed": "https://www.paulinwatches.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 115,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "anordain",
+   "name": "anOrdain (direct)",
+   "domain": "anordain.com",
+   "country": "UK",
+   "currency": "GBP",
+   "tier": "microbrand",
+   "recipe": "shopify",
+   "feed": "https://anordain.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 2,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "underd0g",
+   "name": "Studio Underd0g (direct)",
+   "domain": "underd0g.com",
+   "country": "UK",
+   "currency": "GBP",
+   "tier": "microbrand",
+   "recipe": "shopify",
+   "feed": "https://underd0g.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 40,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "unimatic",
+   "name": "Unimatic (direct)",
+   "domain": "www.unimaticwatches.com",
+   "country": "IT",
+   "currency": "EUR",
+   "tier": "microbrand",
+   "recipe": "shopify",
+   "feed": "https://www.unimaticwatches.com/products.json?limit=250&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 0,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "define",
+   "name": "Define Watches, Noosa",
+   "domain": "definewatches.com.au",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "authorised",
+   "recipe": "woocommerce",
+   "feed": "https://definewatches.com.au/wp-json/wc/store/v1/products?search={brand}&per_page=100&page={page}",
+   "search": null,
+   "price_multiplier": 1.1,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 622,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   },
+   "note": "prices.price is cents EX-GST: 290909 = A$3,200 on the shelf"
+  },
+  {
+   "id": "gregory",
+   "name": "Gregory Jewellers",
+   "domain": "www.gregoryjewellers.com.au",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "authorised",
+   "recipe": "woocommerce",
+   "feed": "https://www.gregoryjewellers.com.au/wp-json/wc/store/v1/products?search={brand}&per_page=100&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 828,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   },
+   "note": "check one product page against the API price before trusting GST handling"
+  },
+  {
+   "id": "kalmar",
+   "name": "Kalmar Antiques",
+   "domain": "www.kalmarantiques.com.au",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "preowned",
+   "recipe": "woocommerce",
+   "feed": "https://www.kalmarantiques.com.au/wp-json/wc/store/v1/products?search={brand}&per_page=100&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "error",
+    "last_listings": 19,
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04"
+   }
+  },
+  {
+   "id": "zaeger",
+   "name": "Zaeger",
+   "domain": "zaeger.com.au",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "authorised",
+   "recipe": "woocommerce",
+   "feed": "https://zaeger.com.au/wp-json/wc/store/v1/products?search={brand}&per_page=100&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 17,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "swisswatchdealer",
+   "name": "Swiss Watch Dealer",
+   "domain": "swisswatchdealer.com.au",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "grey",
+   "recipe": "woocommerce",
+   "feed": "https://swisswatchdealer.com.au/wp-json/wc/store/v1/products?search={brand}&per_page=100&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 48,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "christiesnz",
+   "name": "Christies Jewellery (NZ)",
+   "domain": "christies.co.nz",
+   "country": "NZ",
+   "currency": "NZD",
+   "tier": "authorised",
+   "recipe": "woocommerce",
+   "feed": "https://christies.co.nz/wp-json/wc/store/v1/products?search={brand}&per_page=100&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 659,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "meistersinger",
+   "name": "MeisterSinger (direct)",
+   "domain": "www.meistersinger.com",
+   "country": "DE",
+   "currency": "EUR",
+   "tier": "microbrand",
+   "recipe": "woocommerce",
+   "feed": "https://www.meistersinger.com/wp-json/wc/store/v1/products?search={brand}&per_page=100&page={page}",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 2,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "watchrecon",
+   "name": "WatchRecon (Reddit r/Watchexchange and forums)",
+   "domain": "www.watchrecon.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "aggregator",
+   "recipe": "html",
+   "feed": null,
+   "search": "https://www.watchrecon.com/?query={brand}",
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05",
+    "last_listings": 140
+   },
+   "note": "cards carry the Reddit link and an image_id thumbnail; Reddit itself blocks the fetcher"
+  },
+  {
+   "id": "wristler",
+   "name": "Wristler",
+   "domain": "www.wristler.eu",
+   "country": "NL",
+   "currency": "EUR",
+   "tier": "aggregator",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05",
+    "last_listings": 24
+   }
+  },
+  {
+   "id": "everywatch",
+   "name": "Everywatch",
+   "domain": "www.everywatch.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "aggregator",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 6
+   },
+   "note": "serves og:image to the cloud fetcher"
+  },
+  {
+   "id": "bezel",
+   "name": "Bezel",
+   "domain": "shop.getbezel.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "preowned",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05",
+    "last_listings": 0
+   }
+  },
+  {
+   "id": "bobs",
+   "name": "Bob's Watches",
+   "domain": "www.bobswatches.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "preowned",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05",
+    "last_listings": 1
+   }
+  },
+  {
+   "id": "1916",
+   "name": "The 1916 Company",
+   "domain": "www.the1916company.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "preowned",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "blocked",
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-04",
+    "last_listings": 16
+   }
+  },
+  {
+   "id": "crownandcaliber",
+   "name": "Crown & Caliber",
+   "domain": "www.crownandcaliber.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "preowned",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 0
+   }
+  },
+  {
+   "id": "subdial",
+   "name": "Subdial",
+   "domain": "www.subdial.com",
+   "country": "UK",
+   "currency": "GBP",
+   "tier": "preowned",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "blocked",
+    "last_checked": "2026-11-04"
+   }
+  },
+  {
+   "id": "tropical",
+   "name": "Tropical Watch",
+   "domain": "www.tropicalwatch.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "preowned",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {}
+  },
+  {
+   "id": "ewc",
+   "name": "European Watch Company",
+   "domain": "www.europeanwatch.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "preowned",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05",
+    "last_listings": 1
+   }
+  },
+  {
+   "id": "govberg",
+   "name": "Govberg",
+   "domain": "www.govbergwatches.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "preowned",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "blocked",
+    "last_checked": "2026-11-04"
+   }
+  },
+  {
+   "id": "watchbox",
+   "name": "WatchBox",
+   "domain": "www.thewatchbox.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "preowned",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {}
+  },
+  {
+   "id": "hodinkee",
+   "name": "Hodinkee pre-owned",
+   "domain": "www.hodinkee.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "preowned",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {}
+  },
+  {
+   "id": "jomashop",
+   "name": "Jomashop",
+   "domain": "www.jomashop.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "grey",
+   "recipe": "html",
+   "feed": null,
+   "search": "https://www.jomashop.com/catalogsearch/result/?q={brand}",
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "blocked",
+    "last_checked": "2026-11-04"
+   }
+  },
+  {
+   "id": "prestigetime",
+   "name": "Prestige Time",
+   "domain": "www.prestigetime.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "grey",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 1
+   }
+  },
+  {
+   "id": "authenticwatches",
+   "name": "Authentic Watches",
+   "domain": "www.authenticwatches.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "grey",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 0
+   }
+  },
+  {
+   "id": "watchmaxx",
+   "name": "WatchMaxx",
+   "domain": "watchmaxx.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "grey",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05",
+    "last_listings": 1
+   },
+   "note": "exposes og:image"
+  },
+  {
+   "id": "luxurybazaar",
+   "name": "Luxury Bazaar",
+   "domain": "luxurybazaar.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "grey",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 0
+   }
+  },
+  {
+   "id": "feldmar",
+   "name": "Feldmar Watch",
+   "domain": "www.feldmarwatch.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "authorised",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {}
+  },
+  {
+   "id": "islandwatch",
+   "name": "Island Watch",
+   "domain": "www.islandwatch.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "authorised",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "blocked",
+    "last_checked": "2026-11-04"
+   }
+  },
+  {
+   "id": "nywatchstore",
+   "name": "NY Watch Store",
+   "domain": "nywatchstore.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "grey",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 1
+   }
+  },
+  {
+   "id": "creation",
+   "name": "Creation Watches",
+   "domain": "www.creationwatches.com",
+   "country": "SG",
+   "currency": "USD",
+   "tier": "grey",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "blocked",
+    "last_checked": "2026-11-04"
+   }
+  },
+  {
+   "id": "chronext",
+   "name": "Chronext",
+   "domain": "www.chronext.com",
+   "country": "DE",
+   "currency": "EUR",
+   "tier": "grey",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 0
+   }
+  },
+  {
+   "id": "watchdeal",
+   "name": "Watchdeal",
+   "domain": "www.watchdeal.de",
+   "country": "DE",
+   "currency": "EUR",
+   "tier": "grey",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "blocked",
+    "last_checked": "2026-11-04"
+   }
+  },
+  {
+   "id": "steiner",
+   "name": "Steiner Juwelier",
+   "domain": "steiner-juwelier.com",
+   "country": "AT",
+   "currency": "EUR",
+   "tier": "authorised",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 1
+   }
+  },
+  {
+   "id": "helveti",
+   "name": "Helveti",
+   "domain": "helveti.eu",
+   "country": "CZ",
+   "currency": "EUR",
+   "tier": "authorised",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05",
+    "last_listings": 4
+   }
+  },
+  {
+   "id": "maier",
+   "name": "Maier",
+   "domain": "en.maier.fr",
+   "country": "FR",
+   "currency": "EUR",
+   "tier": "authorised",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_checked": "2026-11-05",
+    "last_listings": 2,
+    "last_status": "ok",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "goldsmiths",
+   "name": "Goldsmiths",
+   "domain": "www.goldsmiths.co.uk",
+   "country": "UK",
+   "currency": "GBP",
+   "tier": "authorised",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 5
+   }
+  },
+  {
+   "id": "beaverbrooks",
+   "name": "Beaverbrooks",
+   "domain": "www.beaverbrooks.co.uk",
+   "country": "UK",
+   "currency": "GBP",
+   "tier": "authorised",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-05",
+    "last_listings": 1,
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "ernestjones",
+   "name": "Ernest Jones",
+   "domain": "www.ernestjones.co.uk",
+   "country": "UK",
+   "currency": "GBP",
+   "tier": "authorised",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 1
+   }
+  },
+  {
+   "id": "watchcouk",
+   "name": "Watch.co.uk",
+   "domain": "www.watch.co.uk",
+   "country": "UK",
+   "currency": "GBP",
+   "tier": "grey",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-05",
+    "last_listings": 1,
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "swisstimepieces",
+   "name": "Swiss Time Pieces",
+   "domain": "swisstimepieces.co.uk",
+   "country": "UK",
+   "currency": "GBP",
+   "tier": "preowned",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {}
+  },
+  {
+   "id": "gressive",
+   "name": "Gressive",
+   "domain": "gressive.jp",
+   "country": "JP",
+   "currency": "JPY",
+   "tier": "authorised",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05",
+    "last_listings": 6
+   }
+  },
+  {
+   "id": "hrd",
+   "name": "HRD (JP)",
+   "domain": "hrd-web.com",
+   "country": "JP",
+   "currency": "JPY",
+   "tier": "grey",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "blocked",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 1
+   }
+  },
+  {
+   "id": "wosau",
+   "name": "Watches of Switzerland Australia",
+   "domain": "www.watchesofswitzerland.com.au",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "authorised",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "blocked",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 3
+   }
+  },
+  {
+   "id": "hourglass",
+   "name": "The Hour Glass",
+   "domain": "www.thehourglass.com",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "authorised",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {}
+  },
+  {
+   "id": "myer",
+   "name": "Myer",
+   "domain": "www.myer.com.au",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "authorised",
+   "recipe": "html",
+   "feed": null,
+   "search": "https://www.myer.com.au/b/{brand}",
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05",
+    "last_listings": 9
+   },
+   "note": "search page is a bot check; brand and product pages read"
+  },
+  {
+   "id": "davidjones",
+   "name": "David Jones",
+   "domain": "www.davidjones.com",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "authorised",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_checked": "2026-11-04",
+    "last_status": "blocked"
+   }
+  },
+  {
+   "id": "grays",
+   "name": "Grays",
+   "domain": "www.graysonline.com",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "auction",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "blocked",
+    "last_checked": "2026-11-04"
+   }
+  },
+  {
+   "id": "vintagewatchco",
+   "name": "Vintage Watch Co",
+   "domain": "vintagewatchco.com.au",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "preowned",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "blocked",
+    "last_checked": "2026-11-04"
+   }
+  },
+  {
+   "id": "watchcollectorsau",
+   "name": "Watch Collectors Australia",
+   "domain": "www.watchcollectorsaustralia.com.au",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "preowned",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "blocked",
+    "last_checked": "2026-11-04"
+   }
+  },
+  {
+   "id": "cw",
+   "name": "Christopher Ward (direct)",
+   "domain": "www.christopherward.com",
+   "country": "UK",
+   "currency": "GBP",
+   "tier": "microbrand",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_listings": 18,
+    "last_ok": "2026-11-04"
+   },
+   "note": "product pages served; search by model name"
+  },
+  {
+   "id": "sinn",
+   "name": "Sinn (direct)",
+   "domain": "www.sinn.de",
+   "country": "DE",
+   "currency": "EUR",
+   "tier": "microbrand",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "blocked",
+    "last_checked": "2026-11-04"
+   }
+  },
+  {
+   "id": "nomos",
+   "name": "NOMOS Glashütte (direct)",
+   "domain": "www.nomos-glashuette.com",
+   "country": "DE",
+   "currency": "EUR",
+   "tier": "microbrand",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "blocked",
+    "last_checked": "2026-11-04"
+   }
+  },
+  {
+   "id": "oris",
+   "name": "Oris (direct)",
+   "domain": "www.oris.ch",
+   "country": "CH",
+   "currency": "CHF",
+   "tier": "microbrand",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 1
+   }
+  },
+  {
+   "id": "tissot",
+   "name": "Tissot (direct)",
+   "domain": "www.tissotwatches.com",
+   "country": "CH",
+   "currency": "AUD",
+   "tier": "microbrand",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 1
+   }
+  },
+  {
+   "id": "hamilton",
+   "name": "Hamilton (direct)",
+   "domain": "www.hamiltonwatch.com",
+   "country": "CH",
+   "currency": "AUD",
+   "tier": "microbrand",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {}
+  },
+  {
+   "id": "seikoboutique",
+   "name": "Seiko Boutique Australia",
+   "domain": "www.seikoboutique.com.au",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "authorised",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 5
+   }
+  },
+  {
+   "id": "leonardjoel",
+   "name": "Leonard Joel",
+   "domain": "www.leonardjoel.com.au",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "auction",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {}
+  },
+  {
+   "id": "lawsons",
+   "name": "Lawsons",
+   "domain": "www.lawsons.com.au",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "auction",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {}
+  },
+  {
+   "id": "chrono24",
+   "name": "Chrono24 (.com.au, .com)",
+   "domain": "www.chrono24.com.au",
+   "country": "DE",
+   "currency": "AUD",
+   "tier": "aggregator",
+   "recipe": "snippet",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "blocked",
+    "last_checked": "2026-11-05"
+   }
+  },
+  {
+   "id": "ebay",
+   "name": "eBay (.com.au, .com, .co.uk; sold items too)",
+   "domain": "www.ebay.com.au",
+   "country": "US",
+   "currency": "AUD",
+   "tier": "aggregator",
+   "recipe": "snippet",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05",
+    "last_listings": 5
+   }
+  },
+  {
+   "id": "watchcharts",
+   "name": "WatchCharts",
+   "domain": "watchcharts.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "aggregator",
+   "recipe": "snippet",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {}
+  },
+  {
+   "id": "catawiki",
+   "name": "Catawiki",
+   "domain": "www.catawiki.com",
+   "country": "NL",
+   "currency": "EUR",
+   "tier": "auction",
+   "recipe": "snippet",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "blocked",
+    "last_checked": "2026-11-05"
+   }
+  },
+  {
+   "id": "watchpatrol",
+   "name": "WatchPatrol",
+   "domain": "www.watchpatrol.net",
+   "country": "DE",
+   "currency": "EUR",
+   "tier": "aggregator",
+   "recipe": "snippet",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-05",
+    "last_listings": 8,
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "watchfinder",
+   "name": "Watchfinder",
+   "domain": "www.watchfinder.com",
+   "country": "UK",
+   "currency": "GBP",
+   "tier": "preowned",
+   "recipe": "snippet",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {}
+  },
+  {
+   "id": "watchesofmayfair",
+   "name": "Watches of Mayfair",
+   "domain": "www.watchesofmayfair.com",
+   "country": "UK",
+   "currency": "GBP",
+   "tier": "preowned",
+   "recipe": "snippet",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {}
+  },
+  {
+   "id": "houseofwatches",
+   "name": "House of Watches",
+   "domain": "www.houseofwatches.co.uk",
+   "country": "UK",
+   "currency": "GBP",
+   "tier": "grey",
+   "recipe": "snippet",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "blocked",
+    "last_checked": "2026-11-04"
+   }
+  },
+  {
+   "id": "watchbuys",
+   "name": "WatchBuys (Sinn US)",
+   "domain": "www.watchbuys.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "authorised",
+   "recipe": "snippet",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 1,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   }
+  },
+  {
+   "id": "bqwatches",
+   "name": "BQ Watches",
+   "domain": "bqwatches.com",
+   "country": "UK",
+   "currency": "GBP",
+   "tier": "preowned",
+   "recipe": "snippet",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {}
+  },
+  {
+   "id": "watchchest",
+   "name": "Watch Chest",
+   "domain": "watchchest.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "preowned",
+   "recipe": "snippet",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {}
+  },
+  {
+   "id": "reddit",
+   "name": "Reddit r/Watchexchange (read via WatchRecon)",
+   "domain": "www.reddit.com",
+   "country": "US",
+   "currency": "USD",
+   "tier": "aggregator",
+   "recipe": "snippet",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "blocked",
+    "last_checked": "2026-11-05"
+   }
+  },
+  {
+   "id": "kibblewatches",
+   "name": "kibblewatches.co.uk",
+   "domain": "kibblewatches.co.uk",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 21
+   },
+   "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
+  },
+  {
+   "id": "collecting",
+   "name": "collecting.com",
+   "domain": "collecting.com",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 1
+   },
+   "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
+  },
+  {
+   "id": "righttime",
+   "name": "righttime.com",
+   "domain": "righttime.com",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 3
+   },
+   "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
+  },
+  {
+   "id": "wristies",
+   "name": "wristies.com.au",
+   "domain": "wristies.com.au",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 1
+   },
+   "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
+  },
+  {
+   "id": "hannoush",
+   "name": "hannoush.com",
+   "domain": "hannoush.com",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 1
+   },
+   "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
+  },
+  {
+   "id": "littleswitzerland",
+   "name": "littleswitzerland.com",
+   "domain": "littleswitzerland.com",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 2
+   },
+   "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
+  },
+  {
+   "id": "birminghamluxurywatches",
+   "name": "birminghamluxurywatches.com",
+   "domain": "birminghamluxurywatches.com",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 1
+   },
+   "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
+  },
+  {
+   "id": "dumarko",
+   "name": "dumarko.com",
+   "domain": "dumarko.com",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 1
+   },
+   "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
+  },
+  {
+   "id": "thewristwatcher",
+   "name": "thewristwatcher.co.uk",
+   "domain": "thewristwatcher.co.uk",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05",
+    "last_listings": 1
+   },
+   "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
+  },
+  {
+   "id": "oliverjewellery",
+   "name": "oliverjewellery.ca",
+   "domain": "oliverjewellery.ca",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 1
+   },
+   "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
+  },
+  {
+   "id": "lepage",
+   "name": "lepage.fr",
+   "domain": "lepage.fr",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05",
+    "last_listings": 1
+   },
+   "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
+  },
+  {
+   "id": "rasin",
+   "name": "rasin.co.jp",
+   "domain": "rasin.co.jp",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "blocked",
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-04",
+    "last_listings": 0
+   },
+   "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
+  },
+  {
+   "id": "wallacebishop",
+   "name": "wallacebishop.com.au",
+   "domain": "wallacebishop.com.au",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 6
+   },
+   "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
+  },
+  {
+   "id": "watsonsjewellers",
+   "name": "watsonsjewellers.com.au",
+   "domain": "watsonsjewellers.com.au",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 3
+   },
+   "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
+  },
+  {
+   "id": "timepiece",
+   "name": "timepiece.com",
+   "domain": "timepiece.com",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05",
+    "last_listings": 4
+   },
+   "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
+  },
+  {
+   "id": "seikowatches",
+   "name": "seikowatches.com.au",
+   "domain": "seikowatches.com.au",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 1
+   },
+   "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
+  },
+  {
+   "id": "thewatchpreserve",
+   "name": "thewatchpreserve.com",
+   "domain": "thewatchpreserve.com",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05",
+    "last_listings": 3
+   },
+   "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
+  },
+  {
+   "id": "mappinandwebb",
+   "name": "mappinandwebb.com",
+   "domain": "mappinandwebb.com",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 1
+   },
+   "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
+  },
+  {
+   "id": "thewatchsource",
+   "name": "thewatchsource.co.uk",
+   "domain": "thewatchsource.co.uk",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 1
+   },
+   "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
+  },
+  {
+   "id": "precisionwatches",
+   "name": "precisionwatches.com",
+   "domain": "precisionwatches.com",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 1
+   },
+   "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
+  },
+  {
+   "id": "cdpeacock",
+   "name": "cdpeacock.com",
+   "domain": "cdpeacock.com",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 0
+   },
+   "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
+  },
+  {
+   "id": "betteridge",
+   "name": "betteridge.com",
+   "domain": "betteridge.com",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "feed": null,
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04",
+    "last_listings": 1
+   },
+   "note": "Added 2026-11-04 by run 2026-11-04T2035: gave listings in a research pass."
+  },
+  {
+   "id": "wosuk",
+   "name": "Watches of Switzerland UK",
+   "domain": "watches-of-switzerland.co.uk",
+   "country": "GB",
+   "currency": "GBP",
+   "tier": "authorised",
+   "recipe": "html",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 1,
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04"
+   },
+   "note": "Added 2026-11-04 by research pass"
+  },
+  {
+   "id": "ocarat",
+   "name": "Ocarat",
+   "domain": "ocarat.com",
+   "country": "FR",
+   "currency": "EUR",
+   "tier": "authorised",
+   "recipe": "html",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 4,
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04"
+   },
+   "note": "Added 2026-11-04 by research pass"
+  },
+  {
+   "id": "arbitro",
+   "name": "Arbitro",
+   "domain": "en.arbitro.shop",
+   "country": "DE",
+   "currency": "USD",
+   "tier": "preowned",
+   "recipe": "html",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 1,
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04"
+   },
+   "note": "Added 2026-11-04 by research pass"
+  },
+  {
+   "id": "michaelhill",
+   "name": "Michael Hill",
+   "domain": "michaelhill.com.au",
+   "country": "AU",
+   "currency": "AUD",
+   "tier": "authorised",
+   "recipe": "html",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 1,
+    "last_checked": "2026-11-04",
+    "last_ok": "2026-11-04"
+   },
+   "note": "Added 2026-11-04 by research pass"
+  },
+  {
+   "id": "handt",
+   "name": "H&T",
+   "domain": "handt.co.uk",
+   "country": "GB",
+   "currency": "GBP",
+   "tier": "preowned",
+   "recipe": "html",
+   "search": null,
+   "price_multiplier": 1.0,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 1,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   },
+   "note": "Added 2026-11-04 by research pass"
+  },
+  {
+   "id": "lunns",
+   "name": "lunns.com",
+   "domain": "lunns.com",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "search": null,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 1,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   },
+   "note": "added by run 2026-11-05T0701"
+  },
+  {
+   "id": "graysantiques",
+   "name": "graysantiques.com",
+   "domain": "graysantiques.com",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "search": null,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 1,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   },
+   "note": "added by run 2026-11-05T0701"
+  },
+  {
+   "id": "antiques-atlas",
+   "name": "antiques-atlas.com",
+   "domain": "antiques-atlas.com",
+   "country": null,
+   "currency": null,
+   "tier": "dealer",
+   "recipe": "html",
+   "search": null,
+   "brands": "auto",
+   "status": {
+    "last_status": "ok",
+    "last_listings": 1,
+    "last_checked": "2026-11-05",
+    "last_ok": "2026-11-05"
+   },
+   "note": "added by run 2026-11-05T0701"
+  }
+ ]
 }
