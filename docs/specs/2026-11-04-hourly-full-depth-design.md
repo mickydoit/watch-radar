@@ -1,5 +1,7 @@
 # watch-radar: hourly full-depth research, condensed into one list
 
+> **Status 4 Nov 2026, evening:** built and run once hourly, then the owner reverted the cadence to **once a day at 07:00 Brisbane** on usage grounds. The registry, feed sweep, coverage reporting, New chips and the condensed deal pool stay; only the schedule changed.
+
 Date: 4 November 2026. Decided by the owner in chat; the "how" is Claude's call unless marked otherwise.
 
 ## Intent

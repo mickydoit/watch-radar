@@ -467,7 +467,7 @@ function render() {
 function flag(d, isNew, drop) { if (drop) return el('span', { class: 'flag f12 drop' }, 'Drop'); if (d.flag === 'verify') return el('span', { class: 'flag f12 verify', title: 'Unusually cheap, private seller or incomplete set. Check before you trust it.' }, 'Verify'); if (d.flag === 'grey-new') return el('span', { class: 'flag f12 grey', title: 'New from a grey-market dealer, without an authorised-dealer warranty.' }, 'Grey'); if (isNew) return el('span', { class: 'flag f12 new' }, 'New'); return null; }
 // A deal is new when its listing was first recorded within 24 hours of this run; older data has only first_seen (a date).
 function newSince(d) { const L = state.latest || {}; if (d.first_seen_at) { const t = Date.parse(d.first_seen_at), ref = L.run_at_utc ? Date.parse(L.run_at_utc) : Date.now(); return !isNaN(t) && !isNaN(ref) && ref - t <= 86400000 && ref - t >= -3600000; } return !!L.run_date && d.first_seen === L.run_date; }
-function cadence(L) { if (!L.run_at_local) return 'A benchmark across the market. '; const n = num(L.runs_today); return 'Updated ' + L.run_at_local + (n > 1 ? ' after ' + n + ' runs today' : '') + '; the next run is at 35 past the hour. '; }
+function cadence(L) { if (!L.run_at_local) return 'A benchmark across the market. '; const n = num(L.runs_today); return 'Updated ' + L.run_at_local + (n > 1 ? ' after ' + n + ' runs today' : '') + '; the radar runs once a day at 07:00 Brisbane. '; }
 const unverified = d => d.availability === 'unverified' ? el('span', { class: 'flag f12 unv', title: 'The listing page could not be read today, so it may already have sold.' }, 'Unverified') : null;
 function dealRow(d, i, opts = {}) {
   const w = watchMeta(d.watch_id); const isNew = newSince(d);
