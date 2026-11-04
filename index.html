@@ -270,13 +270,50 @@ footer ul{margin:12px 0 0;padding:0;list-style:none;max-width:70ch}
 footer li{padding:8px 0;border-top:1px solid var(--hair);font-size:14px;line-height:1.5;color:var(--ink-2)}
 footer .runs div{display:flex;gap:16px;padding:6px 0;border-top:1px solid var(--hair);font-size:12px;text-transform:uppercase}
 @media (max-width:900px){footer .l,footer .r{grid-column:1/13}}
+/* owner marks on unverified deals */
+.marks{display:grid;grid-template-columns:repeat(12,1fr);padding:0 0 20px;margin-top:-6px}
+.marks:last-child{border-bottom:1px solid var(--hair)}
+.marks .in{grid-column:2/13;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;min-height:14px}
+.marks .in .lab{color:var(--ink-3)}
+.marks .in button{text-transform:uppercase;font-size:12px;letter-spacing:.02em;border-bottom:1px solid var(--hair);padding-bottom:2px;transition:border-color .2s,color .2s}
+.marks .in button:hover{border-color:var(--ink)}
+.marks .in button.danger:hover{color:var(--red);border-color:var(--red)}
+.marks .in .msg{color:var(--ink-2)}.marks .in .msg.err{color:var(--red)}
+.marks .pw{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.marks .pw input[type=password]{width:180px;padding:4px 0;font-size:14px;letter-spacing:0}
+.marks .pw label{display:flex;gap:8px;align-items:center;color:var(--ink-2)}
+.marks .pw label input{width:12px;height:12px;appearance:none;border:1px solid var(--ink-3);border-radius:50%;padding:0;margin:0}
+.marks .pw label input:checked{background:var(--green);border-color:var(--green);box-shadow:inset 0 0 0 2px var(--bg)}
+.unv-div{display:flex;justify-content:space-between;gap:16px;padding:48px 0 16px}
+.unv-div span+span{color:var(--ink-2);text-align:right}
+@media (max-width:900px){.marks{grid-template-columns:1fr}.marks .in{grid-column:1}.unv-div{flex-direction:column;gap:8px}.unv-div span+span{text-align:left}}
+/* search */
+.search-box{padding:0 var(--g)}
+#searchInput{font-size:clamp(40px,7vw,96px);line-height:1.1;letter-spacing:-.04em;font-weight:400;padding:0 0 14px;border-bottom:1px solid var(--ink);-webkit-appearance:none}
+#searchInput::placeholder{color:var(--ink-3)}
+#searchInput::-webkit-search-cancel-button,#searchInput::-webkit-search-decoration{display:none;-webkit-appearance:none}
+.sr{padding:0 var(--g);margin-top:48px}
+.sr .lab{display:flex;justify-content:space-between;margin:40px 0 14px}
+.sr .lab:first-child{margin-top:0}
+.sr .row{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:16px;align-items:center;width:100%;padding:12px 0;border-top:1px solid var(--hair);text-decoration:none;text-align:left;color:inherit}
+.sr .row:last-child{border-bottom:1px solid var(--hair)}
+.sr .row .mid{min-width:0}
+.sr .row:hover .t{text-decoration:underline;text-underline-offset:3px}
+.sr .row .th{width:56px;height:56px;object-fit:cover;border:1px solid var(--hair);background:var(--bg)}
+.sr .row .th.ref{opacity:.45;filter:grayscale(1)}
+.sr .row .ph{width:56px;height:56px;display:block;background:var(--bg-2)}
+.sr .row .t{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sr .row .m{display:block;margin-top:6px;color:var(--ink-2)}
+.sr .row .pr{white-space:nowrap;text-align:right}
+.sr .row.sold .pr{text-decoration:line-through;color:var(--ink-3)}
+.sr .empty{padding:24px 0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
 </style>
 </head>
 <body>
 <header class="top grid">
   <a class="c1 f12" href="#today" id="homeLink">Watch<br>Radar</a>
   <a class="c4 mark" href="#today" aria-label="Watch Radar"><svg viewBox="0 0 72 40"><path d="M6 32c6-14 14-24 22-26 6-1 7 5 3 12-4 8-9 14-14 18 10-8 20-10 30-10 6 0 10 2 14 6"/><circle cx="60" cy="31" r="1.2" fill="currentColor" stroke="none"/></svg></a>
-  <nav class="c8 f12"><button id="menuBtn"><span class="roll"><span>Menu</span><span>Menu</span></span></button><button id="focusBtn"><span class="roll"><span>Focus</span><span>Focus</span></span></button></nav>
+  <nav class="c8 f12"><button id="menuBtn"><span class="roll"><span>Menu</span><span>Menu</span></span></button><button id="focusBtn"><span class="roll"><span>Focus</span><span>Focus</span></span></button><button id="searchBtn"><span class="roll"><span>Search</span><span>Search</span></span></button></nav>
   <div class="c11 f12 time"><div>Local time</div><div><b id="clock">— . —</b></div></div>
   <button class="circle" id="theme" aria-label="Toggle light and dark"><i></i></button>
 </header>
@@ -319,6 +356,12 @@ footer .runs div{display:flex;gap:16px;padding:6px 0;border-top:1px solid var(--
       <div id="tokenbox"></div>
     </div>
   </div>
+</div>
+
+<div class="overlay" id="search">
+  <button class="close" id="searchClose" aria-label="Close"><svg viewBox="0 0 12 12"><path d="M1 1l10 10M11 1L1 11"/></svg></button>
+  <div class="search-box"><input id="searchInput" type="search" placeholder="search" autocomplete="off" spellcheck="false" aria-label="Search the site"></div>
+  <div class="sr" id="searchResults"></div>
 </div>
 
 <footer class="f12">
@@ -369,34 +412,37 @@ tick(); setInterval(tick, 15000);
 // views + overlays
 const VIEWS = ['today', 'watches', 'auctions'];
 function show(v) { if (!VIEWS.includes(v)) v = 'today'; VIEWS.forEach(id => $('#' + id).classList.toggle('on', id === v)); closeOverlays(); window.scrollTo({ top: 0, behavior: 'instant' }); if (location.hash !== '#' + v) history.replaceState(null, '', '#' + v); if (v === 'today') revealGallery(); renderMenu(); }
-function closeOverlays() { $('#menu').classList.remove('on'); $('#focus').classList.remove('on'); document.body.style.overflow = ''; }
+function closeOverlays() { $('#menu').classList.remove('on'); $('#focus').classList.remove('on'); $('#search').classList.remove('on'); document.body.style.overflow = ''; }
 function openOverlay(id) { closeOverlays(); $('#' + id).classList.add('on'); document.body.style.overflow = 'hidden'; }
 $('#menuBtn').onclick = () => openOverlay('menu'); $('#menuClose').onclick = closeOverlays;
 $('#focusBtn').onclick = () => { openOverlay('focus'); }; $('#focusClose').onclick = closeOverlays;
-window.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlays(); });
+function openSearch() { openOverlay('search'); renderSearch(); setTimeout(() => $('#searchInput').focus({ preventScroll: true }), 30); }
+$('#searchBtn').onclick = openSearch; $('#searchClose').onclick = closeOverlays; $('#searchInput').addEventListener('input', renderSearch);
+window.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlays(); const tag = (e.target && e.target.tagName) || ''; if (e.key === '/' && !e.metaKey && !e.ctrlKey && !e.altKey && !/^(INPUT|TEXTAREA|SELECT)$/.test(tag) && !(e.target && e.target.isContentEditable)) { e.preventDefault(); openSearch(); } });
 window.addEventListener('hashchange', () => show(location.hash.slice(1)));
 $('#homeLink').onclick = e => { e.preventDefault(); show('today'); };
 function renderMenu() {
   const host = $('#menuList'); host.innerHTML = '';
   const cur = VIEWS.find(id => $('#' + id).classList.contains('on'));
   for (const [id, name] of [['today', 'today'], ['watches', 'watches'], ['auctions', 'auctions']]) host.append(el('button', { class: id === cur ? 'on' : '', onclick: () => show(id) }, name));
-  host.append(el('button', { onclick: () => openOverlay('focus') }, 'focus'));
+  host.append(el('button', { onclick: () => openOverlay('focus') }, 'focus'), el('button', { onclick: openSearch }, 'search'));
   const L = state.latest; $('#menuRun').textContent = L && L.run_date ? 'Last run ' + fmtDate(L.run_date) + (L.run_at_local ? ', ' + L.run_at_local : '') : '';
 }
 
 // data
-const state = { latest: null, prices: [], seen: {}, auctions: {}, runs: [], wl: null, focus: null, images: {}, backend: null, wlDirty: false, focusDirty: false, editing: null, boxOpen: false, pw: null, repo: '' };
+const state = { latest: null, prices: [], seen: {}, auctions: {}, runs: [], wl: null, focus: null, images: {}, marks: { listings: {} }, backend: null, wlDirty: false, focusDirty: false, editing: null, boxOpen: false, pw: null, repo: '' };
 async function load() {
   const bust = '?t=' + Math.floor(Date.now() / 6e4);
   const j = async p => { const r = await fetch(p + bust, { cache: 'no-store' }); if (!r.ok) throw new Error(p + ' ' + r.status); return r.json(); };
   const t = async p => { const r = await fetch(p + bust, { cache: 'no-store' }); if (!r.ok) throw new Error(p + ' ' + r.status); return r.text(); };
-  const [latest, prices, seen, auctions, runs, wl, images, focus, backend] = await Promise.all([j('data/latest.json'), t('data/prices.csv').then(parseCSV).catch(() => []), j('data/seen.json').catch(() => ({ listings: {} })), j('data/auctions.json').catch(() => ({ lots: {} })), j('data/runs.json').catch(() => ({ runs: [] })), j('data/watchlist.json').catch(() => null), j('data/images.json').catch(() => ({ images: {} })), j('data/focus.json').catch(() => null), j('data/backend.json').catch(() => ({}))]);
+  const [latest, prices, seen, auctions, runs, wl, images, focus, backend, marks] = await Promise.all([j('data/latest.json'), t('data/prices.csv').then(parseCSV).catch(() => []), j('data/seen.json').catch(() => ({ listings: {} })), j('data/auctions.json').catch(() => ({ lots: {} })), j('data/runs.json').catch(() => ({ runs: [] })), j('data/watchlist.json').catch(() => null), j('data/images.json').catch(() => ({ images: {} })), j('data/focus.json').catch(() => null), j('data/backend.json').catch(() => ({})), j('data/marks.json').catch(() => null)]);
   Object.assign(state, { latest, prices, seen: seen.listings || {}, auctions: auctions.lots || {}, runs: runs.runs || [], images: images.images || {} });
   state.wl = wl && Array.isArray(wl.watches) ? wl : { defaults: { currency: 'AUD', markets: ['worldwide'], home_country: 'Australia' }, watches: [] };
   state.focus = focus && Array.isArray(focus.brands_available) ? focus : { currency: 'AUD', brands_available: [], bands_available: [[300, 1000], [1000, 2000], [2000, 2500], [2500, 4000]], brands: [], bands: [], styles: {}, updated: null };
+  state.marks = marks && marks.listings && typeof marks.listings === 'object' && !Array.isArray(marks.listings) ? { listings: marks.listings } : { listings: {} };
   state.repo = latest.repo_url || `https://github.com/${REPO.owner}/${REPO.name}`;
   state.backend = backend && backend.supabase_url ? backend : null;
-  if (state.backend) { try { const r = await fetch(state.backend.supabase_url + '/rest/v1/watch_radar_settings?select=id,data,updated_at', { headers: { apikey: state.backend.supabase_key } }); if (r.ok) for (const row of await r.json()) { if (row.id === 'focus' && row.data && Array.isArray(row.data.brands)) state.focus = { ...state.focus, ...row.data, updated: row.updated_at ? brisbaneDate(row.updated_at) : state.focus.updated }; if (row.id === 'watchlist' && row.data && Array.isArray(row.data.watches)) state.wl = row.data; } } catch (e) {} }
+  if (state.backend) { try { const r = await fetch(state.backend.supabase_url + '/rest/v1/watch_radar_settings?select=id,data,updated_at', { headers: { apikey: state.backend.supabase_key } }); if (r.ok) for (const row of await r.json()) { if (row.id === 'focus' && row.data && Array.isArray(row.data.brands)) state.focus = { ...state.focus, ...row.data, updated: row.updated_at ? brisbaneDate(row.updated_at) : state.focus.updated }; if (row.id === 'watchlist' && row.data && Array.isArray(row.data.watches)) state.wl = row.data; if (row.id === 'marks' && row.data && row.data.listings && typeof row.data.listings === 'object' && !Array.isArray(row.data.listings)) state.marks = { listings: row.data.listings }; } } catch (e) {} }
   const F = state.focus; if (!Array.isArray(F.styles_available) || !F.styles_available.length) F.styles_available = STYLES_DEFAULT; F.styles = F.styles && typeof F.styles === 'object' && !Array.isArray(F.styles) ? F.styles : {}; for (const b of Object.keys(F.styles)) { F.styles[b] = Array.isArray(F.styles[b]) ? F.styles[b].filter(x => F.styles_available.includes(x)) : []; if (!F.styles[b].length) delete F.styles[b]; }
 }
 function parseCSV(text) { const lines = text.trim().split(/\r?\n/); if (lines.length < 2) return []; const h = lines[0].split(','); return lines.slice(1).filter(Boolean).map(l => { const cells = []; let cur = '', q = false; for (const ch of l) { if (ch === '"') q = !q; else if (ch === ',' && !q) { cells.push(cur); cur = ''; } else cur += ch; } cells.push(cur); const o = {}; h.forEach((k, i) => o[k.trim()] = (cells[i] || '').trim()); o.value = o.value === '' ? null : Number(o.value); o.n = o.n === '' ? null : Number(o.n); return o; }); }
@@ -405,8 +451,9 @@ function watchMeta(id) { return watches().find(w => w.id === id) || (state.lates
 function imageOf(w) { if (w.image) return { src: w.image }; const i = state.images[w.id]; return i ? { src: i.file, credit: i } : null; }
 function series(id, metric) { const m = new Map(); for (const r of state.prices) { if (r.watch_id !== id || r.metric !== metric || r.value == null || isNaN(r.value) || !/^\d{4}-\d{2}-\d{2}$/.test(r.date)) continue; const cur = m.get(r.date); if (!cur || (r.n || 0) >= (cur.n || 0)) m.set(r.date, { value: r.value, n: r.n }); } return [...m.entries()].map(([d, v]) => [d, v.value]).sort((a, b) => a[0] < b[0] ? -1 : 1).map(([date, value]) => ({ date, value })); }
 function allSeen() { const out = []; for (const [wid, byKey] of Object.entries(state.seen)) for (const [key, l] of Object.entries(byKey || {})) out.push({ watch_id: wid, key, ...l }); return out; }
-const gone = l => l.status === 'sold' || l.status === 'removed';
-function recentSold(wid) { const fromSeen = allSeen().filter(l => l.watch_id === wid && l.status === 'sold' && daysAgo(l.sold_date || l.checked || l.last_seen) <= 14); const fromLatest = (state.latest.sold || []).filter(l => l.watch_id === wid); const m = new Map(); [...fromLatest, ...fromSeen].forEach(l => { if (!m.has(l.key || l.url)) m.set(l.key || l.url, l); }); return [...m.values()].sort((a, b) => (b.sold_date || '').localeCompare(a.sold_date || '')); }
+const ownerMark = l => { const m = state.marks.listings || {}; return (l.key && m[l.key]) || (l.url && m[l.url]) || null; };
+const gone = l => l.status === 'sold' || l.status === 'removed' || !!ownerMark(l);
+function recentSold(wid) { const fromSeen = allSeen().filter(l => l.watch_id === wid && l.status === 'sold' && daysAgo(l.sold_date || l.checked || l.last_seen) <= 14); const fromLatest = (state.latest.sold || []).filter(l => l.watch_id === wid); const fromMarks = Object.entries(state.marks.listings || {}).filter(([k, x]) => x && x.status === 'sold' && x.watch_id === wid && daysAgo(x.date) <= 14).map(([key, x]) => ({ key, ...x, sold_date: x.date, sold_price_aud: x.price_aud, owner: true })); const m = new Map(); [...fromMarks, ...fromLatest, ...fromSeen].forEach(l => { if (!m.has(l.key || l.url)) m.set(l.key || l.url, l); }); return [...m.values()].sort((a, b) => (b.sold_date || '').localeCompare(a.sold_date || '')); }
 function recentMatches(wid) { return allSeen().filter(l => l.watch_id === wid && l.match !== false && !gone(l) && daysAgo(l.first_seen) <= 14).sort((a, b) => (b.first_seen || '').localeCompare(a.first_seen || '') || (a.price_aud || 0) - (b.price_aud || 0)); }
 
 // render
@@ -423,21 +470,49 @@ function dealRow(d, i, opts = {}) {
   const w = watchMeta(d.watch_id); const isNew = state.latest.run_date && d.first_seen === state.latest.run_date;
   const meta = [label(w), d.condition && d.condition !== 'unknown' ? d.condition : null, d.full_set ? 'full set' : null, d.seller_type === 'private' ? 'private seller' : null, [srcName(d.source), d.seller_country].filter(Boolean).join(' '), d.first_seen ? fmtDate(d.first_seen) : null, hasLink(d) ? null : 'no direct link, opens a search'].filter(Boolean).join(' · ');
   const own = thumbOf(d), th = own || refThumb(d.watch_id);
-  return el('a', { class: 'lrow' + (hasLink(d) ? '' : ' nolink') + (th ? ' has-im' : ''), href: linkOf(d), target: '_blank', rel: 'noopener', title: d.why || '' },
+  return el('a', { class: 'lrow' + (hasLink(d) ? '' : ' nolink') + (th ? ' has-im' : '') + (opts.drop ? ' drop' : ''), href: linkOf(d), target: '_blank', rel: 'noopener', title: d.why || '', 'data-key': d.key || d.url || '' },
     el('span', { class: 'n f12 muted' }, pad(i + 1)),
     el('span', { class: 't f24 light' }, th ? thumbEl(th, !own) : null, el('span', { class: 'tt' }, flag(d, isNew, opts.drop), unverified(d), d.title || d.url)),
     el('span', { class: 'm f12 muted' }, meta),
     el('span', { class: 'p f16' }, fmtAUD(d.price_aud) + (d.source_quality === 'snippet' ? ' ≈' : ''), opts.drop && d.was_aud ? el('span', { class: 'was f12' }, fmtAUD(d.was_aud)) : (num(d.below_market_pct) != null ? el('span', { class: 'pct f12' }, '−' + num(d.below_market_pct).toFixed(0) + '% vs market') : null)));
 }
+function marksRow(d) {
+  const msg = el('span', { class: 'msg f12' }); const inner = el('div', { class: 'in f12' }); const row = el('div', { class: 'marks' }, inner);
+  const buttons = () => { inner.innerHTML = ''; inner.append(el('span', { class: 'lab' }, 'Still for sale?'), el('button', { type: 'button', onclick: () => go('sold') }, 'Sold'), el('button', { type: 'button', class: 'danger', onclick: () => go('gone') }, 'Gone'), msg); };
+  const askPw = status => { inner.innerHTML = ''; const inp = el('input', { type: 'password', placeholder: 'Password', autocomplete: 'current-password' }); const rem = el('input', { type: 'checkbox' }); const unlock = () => { if (!inp.value) return; state.pw = inp.value; if (rem.checked) store.set('radar-pw', inp.value); buttons(); go(status); }; inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); unlock(); } }); inner.append(el('div', { class: 'pw' }, inp, el('button', { type: 'button', onclick: unlock }, 'Unlock'), el('label', {}, rem, 'Remember'), el('button', { type: 'button', onclick: buttons }, 'Cancel'))); inp.focus({ preventScroll: true }); };
+  const go = async status => { if (state.backend && !password()) return askPw(status); if (!state.backend && !token()) { msg.className = 'msg f12 err'; msg.textContent = 'Open Focus and add a GitHub token first.'; return; } msg.className = 'msg f12'; msg.textContent = 'Saving…'; try { await markListing(d, status); } catch (e) { msg.className = 'msg f12 err'; msg.textContent = e.message; if (/wrong password/i.test(e.message)) { state.pw = null; store.set('radar-pw', null); askPw(status); } } };
+  buttons(); return row;
+}
+async function markListing(d, status) {
+  const key = d.key || d.url; if (!key) throw new Error('This listing has no key to mark.');
+  const listings = { ...(state.marks.listings || {}), [key]: { status, date: brisbaneDate(new Date().toISOString()), watch_id: d.watch_id, title: d.title || null, url: d.url || null, source: d.source || null, price_aud: num(d.price_aud) } }; const doc = { listings };
+  if (state.backend) await rpc('watch_radar_save', { p_password: password(), p_id: 'marks', p_data: doc }); else await putFile('data/marks.json', { _comment: 'Listings the owner marked sold or gone on the site; the routine treats them as final.', ...doc }, 'marks: ' + status + ' ' + String(d.title || key).slice(0, 60));
+  state.marks = doc; render();
+}
+function renderSearch() {
+  const host = $('#searchResults'); host.innerHTML = ''; if (!state.latest) return;
+  const q = $('#searchInput').value.trim().toLowerCase(); const toks = q.split(/\s+/).filter(Boolean); if (!toks.length) return;
+  const hit = parts => { const h = parts.filter(Boolean).join(' ').toLowerCase(); return toks.every(t => h.includes(t)); };
+  const models = watches().filter(w => hit([w.brand, w.model, w.reference, w.id, w.style, ...(w.aliases || [])])).slice(0, 12);
+  const listings = allSeen().filter(l => !gone(l)).filter(l => { const w = watchMeta(l.watch_id); return hit([l.title, l.variant, l.source, w.brand, w.model, w.reference]); }).sort((a, b) => (b.first_seen || '').localeCompare(a.first_seen || '')).slice(0, 12);
+  const sold = [], seenKeys = new Set(); for (const w of watches()) for (const l of recentSold(w.id)) { const k = l.key || l.url; if (seenKeys.has(k)) continue; seenKeys.add(k); if (hit([l.title, l.variant, l.source, w.brand, w.model])) sold.push({ ...l, _w: w }); } sold.splice(8);
+  const goModel = w => { show('watches'); setTimeout(() => { const t = document.getElementById('w-' + w.id); if (t) t.scrollIntoView({ behavior: 'instant', block: 'start' }); }, 50); };
+  const thumb = (src, ref) => src ? el('img', { class: 'th' + (ref ? ' ref' : ''), src, alt: '', loading: 'lazy', onerror: e => e.target.replaceWith(el('span', { class: 'ph' })) }) : el('span', { class: 'ph' });
+  const lab = (a, b) => el('div', { class: 'lab f12 muted' }, el('span', {}, a), el('span', {}, b));
+  if (models.length) { host.append(lab('Models', String(models.length))); models.forEach(w => { const im = imageOf(w); host.append(el('button', { type: 'button', class: 'row sr-model', onclick: () => goModel(w) }, thumb(im ? im.src : null), el('span', { class: 'mid' }, el('span', { class: 't f16' }, (w.brand ? w.brand + ' ' : '') + (w.model || '')), el('span', { class: 'm f12' }, [w.reference, w.style].filter(Boolean).join(' · '))), el('span', { class: 'pr f16' }, w.asking_min != null ? 'from ' + fmtAUD(w.asking_min) : ''))); }); }
+  if (listings.length) { host.append(lab('Listings', 'newest first')); listings.forEach(l => { const w = watchMeta(l.watch_id); const own = thumbOf(l); host.append(el('a', { class: 'row sr-listing' + (hasLink(l) ? '' : ' nolink'), href: linkOf(l), target: '_blank', rel: 'noopener' }, thumb(own || refThumb(l.watch_id), !own), el('span', { class: 'mid' }, el('span', { class: 't f16' }, l.title || l.url), el('span', { class: 'm f12' }, [label(w), srcName(l.source), fmtDate(l.first_seen)].filter(Boolean).join(' · '))), el('span', { class: 'pr f16' }, fmtAUD(l.price_aud)))); }); }
+  if (sold.length) { host.append(lab('Sold', 'last asking price')); sold.forEach(l => { const own = thumbOf(l); host.append(el('a', { class: 'row sold sr-sold' + (hasLink(l) ? '' : ' nolink'), href: linkOf(l), target: '_blank', rel: 'noopener' }, thumb(own || refThumb(l.watch_id), !own), el('span', { class: 'mid' }, el('span', { class: 't f16' }, l.title || l.url), el('span', { class: 'm f12' }, [label(l._w), srcName(l.source), l.sold_date ? 'gone ' + fmtDate(l.sold_date) : null, l.owner ? 'marked by you' : null].filter(Boolean).join(' · '))), el('span', { class: 'pr f16' }, fmtAUD(l.sold_price_aud != null ? l.sold_price_aud : l.price_aud)))); }); }
+  if (!models.length && !listings.length && !sold.length) host.append(el('div', { class: 'empty f16 muted' }, 'Nothing on the site matches “' + q + '”.'));
+}
 function renderToday() {
   const L = state.latest, F = state.focus, host = $('#deals'), track = $('#track'); host.innerHTML = ''; track.innerHTML = '';
-  const deals = (L.deals || []).slice().sort((a, b) => (num(b.below_market_pct) || 0) - (num(a.below_market_pct) || 0)); const drops = L.price_drops || [];
+  const byPct = (a, b) => (num(b.below_market_pct) || 0) - (num(a.below_market_pct) || 0); const live = (L.deals || []).filter(d => !ownerMark(d)); const deals = [...live.filter(d => d.availability !== 'unverified').sort(byPct), ...live.filter(d => d.availability === 'unverified').sort(byPct)]; const drops = (L.price_drops || []).filter(d => !ownerMark(d));
   $('#todayDate').textContent = L.run_date ? fmtLong(L.run_date) : 'No run yet';
   const nothing = !F.brands.length && !state.wl.watches.length;
   $('#todayNote').innerHTML = ''; $('#todayNote').append(nothing ? 'Nothing selected yet. ' : L.status === 'failed' ? 'The last run did not complete. ' : F.updated && L.run_date && F.updated > L.run_date ? 'Focus changed since the last run. ' : 'A daily benchmark across the market. '); if (nothing) $('#todayNote').append(el('a', { href: '#', style: 'border-bottom:1px solid currentColor', onclick: e => { e.preventDefault(); openOverlay('focus'); } }, 'Choose brands'));
   const nW = new Set(deals.map(d => d.watch_id)).size;
   $('#todayH').textContent = !L.run_date || L.status === 'idle' ? 'nothing yet' : deals.length ? deals.length + ' under market' : 'nothing under market';
-  const soldN = (L.sold || []).length; if (soldN) $('#todayNote').append(soldN + ' listing' + (soldN === 1 ? '' : 's') + ' seen earlier ' + (soldN === 1 ? 'has' : 'have') + ' since sold.');
+  const soldKeys = new Set((L.sold || []).map(l => l.key || l.url)); const soldN = soldKeys.size + Object.entries(state.marks.listings || {}).filter(([k, x]) => x && x.status === 'sold' && daysAgo(x.date) <= 14 && !soldKeys.has(k)).length; if (soldN) $('#todayNote').append(soldN + ' listing' + (soldN === 1 ? '' : 's') + ' seen earlier ' + (soldN === 1 ? 'has' : 'have') + ' since sold.');
   // gallery
   const ws = watches(); $('#gal').style.display = ws.length ? '' : 'none';
   ws.forEach((w, i) => { const im = imageOf(w); const n = deals.filter(d => d.watch_id === w.id).length; const views = viewsOf(w, im); let cur = 0;
@@ -451,7 +526,7 @@ function renderToday() {
     el('div', { class: 'im', style: 'transition-delay:' + (i * 90) + 'ms' }, imgEl, views.length > 1 ? el('button', { type: 'button', class: 'nav prev', 'aria-label': 'Previous', onclick: e => setView(cur - 1, e) }, '←') : null, views.length > 1 ? el('button', { type: 'button', class: 'nav next', 'aria-label': 'Next', onclick: e => setView(cur + 1, e) }, '→') : null, views.length > 1 ? variant : null, views.length > 1 ? dots : null),
     el('div', { class: 'under f12' }, el('span', {}, (w.model || '').toUpperCase()), el('span', { class: 'muted' }, w.asking_min != null ? 'from ' + fmtAUD(w.asking_min) : n ? n + ' under' : '')))); });
   $('#dealsLab').style.display = L.run_date ? '' : 'none';
-  if (deals.length) deals.forEach((d, i) => host.append(dealRow(d, i))); else if (L.run_date) host.append(el('div', { class: 'empty f16 muted' }, 'No listing sits under its benchmark today.'));
+  if (deals.length) { let divided = false; deals.forEach((d, i) => { if (d.availability === 'unverified' && !divided) { divided = true; host.append(el('div', { class: 'unv-div f12' }, el('span', {}, 'Could not be re-checked today'), el('span', {}, 'Open the listing and have a look, then mark it'))); } host.append(dealRow(d, i)); if (d.availability === 'unverified') host.append(marksRow(d)); }); } else if (L.run_date) host.append(el('div', { class: 'empty f16 muted' }, 'No listing sits under its benchmark today.'));
   if (drops.length) { host.append(el('div', { class: 'sec-lab f12', style: 'padding:0' }, 'Price drops')); drops.forEach((d, i) => host.append(dealRow(d, i, { drop: true }))); }
 }
 function revealGallery() { const g = $('#gal'); g.classList.add('reveal'); requestAnimationFrame(() => requestAnimationFrame(() => g.classList.remove('reveal'))); }
@@ -499,7 +574,7 @@ function renderWatches() {
       const matches = allMatches.slice(0, 6);
       if (matches.length) { body.append(el('div', { class: 'sub-h f12 muted' }, el('span', {}, 'Listings'), el('span', {}, 'last 14 days'))); const mini = el('div', { class: 'mini' }); matches.forEach(l => { const ref = l.image_url ? null : (im ? im.src : null); const go = () => { if (!w._setView) return; if (l.image_url) w._setView(l.key); else if (ref) w._setView(null); }; mini.append(el('a', { href: linkOf(l), target: '_blank', rel: 'noopener', 'data-key': l.key || '', class: (hasLink(l) ? '' : 'nolink') + (l.image_url || ref ? ' has-im' : ''), onmouseenter: go, onfocus: go }, l.image_url ? thumbEl(l.image_url, false) : ref ? thumbEl(ref, true) : null, el('span', { class: 'f16' }, l.title || l.url), el('span', { class: 'f12' }, [l.condition && l.condition !== 'unknown' ? l.condition : null, l.full_set ? 'full set' : null, [srcName(l.source), l.seller_country].filter(Boolean).join(' '), fmtDate(l.first_seen), hasLink(l) ? null : 'no direct link, opens a search', l.image_url ? null : ref ? 'reference photo' : null].filter(Boolean).join(' · ')), el('span', { class: 'pr f16' }, fmtAUD(l.price_aud) + (l.source_quality === 'snippet' ? ' ≈' : ''), num(l.below_market_pct) > 0 ? el('span', { class: 'f12' }, '−' + num(l.below_market_pct).toFixed(0) + '%') : null))); }); body.append(mini); if (w._rows) { w._rows.push(...mini.querySelectorAll('a[data-key]')); if (w._setView) { const first = w._rows.find(r => r.getAttribute('aria-current') === 'true'); if (!first && views[0] && views[0].key) w._setView(views[0].key); } } }
       const sold = recentSold(w.id).slice(0, 4);
-      if (sold.length) { body.append(el('div', { class: 'sub-h f12 muted' }, el('span', {}, 'Sold'), el('span', {}, 'last 14 days, last asking price'))); const mini = el('div', { class: 'mini sold' }); sold.forEach(l => mini.append(el('a', { href: linkOf(l), target: '_blank', rel: 'noopener', class: (hasLink(l) ? '' : 'nolink') + (thumbOf(l) ? ' has-im' : '') }, thumbOf(l) ? el('img', { class: 'th', src: thumbOf(l), alt: '', loading: 'lazy', onerror: e => e.target.remove() }) : null, el('span', { class: 'f16' }, l.title || l.url), el('span', { class: 'f12' }, [srcName(l.source), l.seller_type === 'private' ? 'private' : null, l.sold_date ? 'gone ' + fmtDate(l.sold_date) : null].filter(Boolean).join(' · ')), el('span', { class: 'pr f16' }, fmtAUD(l.sold_price_aud != null ? l.sold_price_aud : l.price_aud))))); body.append(mini); }
+      if (sold.length) { body.append(el('div', { class: 'sub-h f12 muted' }, el('span', {}, 'Sold'), el('span', {}, 'last 14 days, last asking price'))); const mini = el('div', { class: 'mini sold' }); sold.forEach(l => mini.append(el('a', { href: linkOf(l), target: '_blank', rel: 'noopener', class: (hasLink(l) ? '' : 'nolink') + (thumbOf(l) ? ' has-im' : '') }, thumbOf(l) ? el('img', { class: 'th', src: thumbOf(l), alt: '', loading: 'lazy', onerror: e => e.target.remove() }) : null, el('span', { class: 'f16' }, l.title || l.url), el('span', { class: 'f12' }, [srcName(l.source), l.seller_type === 'private' ? 'private' : null, l.sold_date ? 'gone ' + fmtDate(l.sold_date) : null, l.owner ? 'marked by you' : null].filter(Boolean).join(' · ')), el('span', { class: 'pr f16' }, fmtAUD(l.sold_price_aud != null ? l.sold_price_aud : l.price_aud))))); body.append(mini); }
       const lots = Object.entries(state.auctions).map(([url, a]) => ({ url, ...a })).filter(a => a.watch_id === w.id && a.status === 'upcoming').sort((a, b) => (a.date || '').localeCompare(b.date || ''));
       if (lots.length) { body.append(el('div', { class: 'sub-h f12 muted' }, el('span', {}, 'At auction'))); const mini = el('div', { class: 'mini' }); lots.forEach(a => mini.append(el('a', { href: a.url, target: '_blank', rel: 'noopener' }, el('span', { class: 'f16' }, [a.house, a.sale, a.lot ? 'lot ' + a.lot : null].filter(Boolean).join(' · ')), el('span', { class: 'f12' }, a.date ? fmtDate(a.date) : ''), el('span', { class: 'pr f16' }, a.estimate_low != null ? fmtMoney(a.estimate_low, a.currency) + (a.estimate_high != null ? '–' + Math.round(a.estimate_high).toLocaleString('en-AU') : '') : 'Estimate TBC')))); body.append(mini); }
       sec.append(el('article', { class: 'grid model', id: 'w-' + w.id }, pic, body));

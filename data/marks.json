@@ -1,0 +1,4 @@
+{
+  "_comment": "Listings the owner marked sold or gone on the site (mirror of the Supabase `marks` row). Keyed by listing key or url. The routine treats these as final: never a deal again; sold keeps its last asking price as evidence.",
+  "listings": {}
+}

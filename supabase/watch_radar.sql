@@ -6,7 +6,7 @@
 create extension if not exists pgcrypto;
 
 create table if not exists public.watch_radar_settings (
-  id text primary key,                -- 'focus' | 'watchlist'
+  id text primary key,                -- 'focus' | 'watchlist' | 'marks'
   data jsonb not null,
   updated_at timestamptz not null default now()
 );
@@ -32,7 +32,7 @@ create or replace function public.watch_radar_save(p_password text, p_id text, p
 returns jsonb language plpgsql security definer set search_path = public, extensions as $$
 begin
   if not watch_radar_check(p_password) then raise exception 'wrong password' using errcode = '28000'; end if;
-  if p_id not in ('focus', 'watchlist') then raise exception 'unknown setting %', p_id; end if;
+  if p_id not in ('focus', 'watchlist', 'marks') then raise exception 'unknown setting %', p_id; end if;
   insert into watch_radar_settings (id, data, updated_at) values (p_id, p_data, now())
   on conflict (id) do update set data = excluded.data, updated_at = now();
   return jsonb_build_object('ok', true, 'id', p_id, 'updated_at', now());
