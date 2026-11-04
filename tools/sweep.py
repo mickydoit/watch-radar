@@ -6,9 +6,14 @@ Standard library only. Run from the repository root:
 
     python3 tools/sweep.py [--rates '{"USD_AUD":1.43,...}'] [--out data/sweep.json]
                            [--sources data/sources.json] [--focus data/focus.json]
+                           [--deadline 480]
 
 Shopify throttles products.json per client across every store it hosts, so Shopify
-requests are spaced at least one second apart globally and 429s wait for Retry-After.
+requests are spaced at least one second apart globally, one 429 pauses every Shopify
+worker for Retry-After (capped at 60 s), a source gives up after three 429s and the
+whole sweep stops asking Shopify after six. The sweep stops itself at --deadline
+seconds (default 480) and writes its output after every source, so a kill or a slow
+network still leaves data/sweep.json usable; sources it never reached are "skipped".
 """
 from __future__ import annotations
 
@@ -16,6 +21,7 @@ import argparse
 import concurrent.futures as cf
 import html
 import json
+import os
 import re
 import sys
 import threading
@@ -30,7 +36,10 @@ TIMEOUT = 20
 MAX_PAGES = 40
 PAGE_PAUSE = 0.4
 SHOPIFY_GAP = 1.0
-MAX_429 = 3
+MAX_429 = 3            # per source, across its pages
+MAX_GLOBAL_429 = 6     # across the whole sweep; past this every unfinished Shopify source is "throttled"
+MAX_RETRY_AFTER = 60.0
+DEFAULT_DEADLINE = 480.0
 
 # Canonical brand -> lower-case aliases that may appear in a vendor field or at the start of a title.
 ALIASES = {
@@ -71,10 +80,14 @@ def _has(alias: str, text: str, at_start: bool) -> bool:
     return re.search(pat, text) is not None
 
 
-def match_brand(vendor: str, title: str, brands: list) -> str | None:
-    """Return the selected brand this product belongs to, or None."""
-    v = (vendor or "").lower().strip()
-    t = (title or "").lower().strip()
+def match_brand(vendor: str, title: str, brands: list, anywhere: bool = False) -> str | None:
+    """Return the selected brand this product belongs to, or None.
+
+    The brand must sit in the vendor field or at the start of the title, unless
+    `anywhere` is set (a feed that was already queried for that brand): then a whole-word
+    hit anywhere in the title counts. Shadowed names (King Seiko under Seiko) still win."""
+    v = html.unescape(vendor or "").lower().strip()
+    t = html.unescape(title or "").lower().strip()
     combined = v + " " + t
     # Longest alias first so "King Seiko" is decided before "Seiko".
     ordered = sorted(brands, key=lambda b: -max(len(a) for a in ALIASES.get(b, [b.lower()])))
@@ -83,7 +96,7 @@ def match_brand(vendor: str, title: str, brands: list) -> str | None:
         if any(s in combined for s in SHADOWS.get(brand, [])):
             continue
         for a in aliases:
-            if _has(a, v, False) or _has(a, t, True):
+            if _has(a, v, False) or _has(a, t, not anywhere):
                 return brand
     return None
 
@@ -187,6 +200,28 @@ def woo_listings(product: dict, source: dict, brand: str, rates: dict, bands: li
 
 _shopify_lock = threading.Lock()
 _shopify_last = [0.0]
+_shopify_until = [0.0]   # monotonic time before which no Shopify request may go out (set by a 429)
+GLOBAL_429 = [0]
+_deadline = [None]
+
+
+def reset_throttle() -> None:
+    _shopify_last[0] = 0.0
+    _shopify_until[0] = 0.0
+    GLOBAL_429[0] = 0
+
+
+def set_deadline(monotonic_at) -> None:
+    """Absolute time.monotonic() value after which no request is made; None disables it."""
+    _deadline[0] = monotonic_at
+
+
+def past_deadline() -> bool:
+    return _deadline[0] is not None and time.monotonic() >= _deadline[0]
+
+
+class Deadline(Exception):
+    pass
 
 
 def pause(seconds: float) -> None:
@@ -195,7 +230,8 @@ def pause(seconds: float) -> None:
 
 def _shopify_slot() -> None:
     with _shopify_lock:
-        wait = SHOPIFY_GAP - (time.monotonic() - _shopify_last[0])
+        now = time.monotonic()
+        wait = max(SHOPIFY_GAP - (now - _shopify_last[0]), _shopify_until[0] - now)
         if wait > 0:
             time.sleep(wait)
         _shopify_last[0] = time.monotonic()
@@ -205,21 +241,40 @@ class Blocked(Exception):
     pass
 
 
-def fetch_json(url: str, shopify: bool = False) -> dict:
-    tries = 0
+def _retry_after(headers) -> float:
+    try:
+        secs = float(headers.get("Retry-After") or 30)
+    except (TypeError, ValueError):
+        secs = 30.0
+    return min(max(secs, 1.0), MAX_RETRY_AFTER)
+
+
+def fetch_json(url: str, shopify: bool = False, state: dict | None = None) -> dict:
+    """GET a JSON document. `state` is the calling source's dict; its "429" count persists across pages."""
+    state = state if state is not None else {}
     while True:
+        if past_deadline():
+            raise Deadline()
         if shopify:
+            if GLOBAL_429[0] >= MAX_GLOBAL_429:
+                raise Blocked("throttled: sweep-wide 429 budget spent")
             _shopify_slot()
         req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "application/json"})
         try:
             with urllib.request.urlopen(req, timeout=TIMEOUT) as f:
                 return json.loads(f.read().decode("utf-8", "replace"))
         except urllib.error.HTTPError as e:
-            if e.code == 429 and tries < MAX_429:
-                tries += 1
-                pause(float(e.headers.get("Retry-After") or 30))
+            if e.code == 429:
+                state["429"] = state.get("429", 0) + 1
+                GLOBAL_429[0] += 1
+                if state["429"] >= MAX_429 or GLOBAL_429[0] >= MAX_GLOBAL_429:
+                    raise Blocked("HTTP 429 (throttled)") from None
+                wait = _retry_after(e.headers)
+                if shopify:
+                    _shopify_until[0] = max(_shopify_until[0], time.monotonic() + wait)
+                pause(wait)
                 continue
-            if e.code in (401, 403, 429, 430):
+            if e.code in (401, 403, 430):
                 raise Blocked(f"HTTP {e.code}") from None
             raise
 
@@ -239,24 +294,29 @@ def sweep_source(source: dict, brands: list, rates: dict, bands: list) -> tuple:
     listings = []
     recipe = source.get("recipe")
     parse = shopify_listings if recipe == "shopify" else woo_listings
+    state = {}
     try:
         for brand_q, template in _page_urls(source, brands):
             for page in range(1, MAX_PAGES + 1):
-                data = fetch_json(template.replace("{page}", str(page)), shopify=(recipe == "shopify"))
+                if past_deadline():
+                    raise Deadline()
+                data = fetch_json(template.replace("{page}", str(page)), shopify=(recipe == "shopify"), state=state)
                 products = data.get("products") if isinstance(data, dict) else data
                 if not products:
                     break
                 cov["pages"] += 1
                 cov["products"] += len(products)
                 for p in products:
-                    brand = match_brand(p.get("vendor") or "", p.get("title") or p.get("name") or "", brands)
+                    title = re.sub(r"<[^>]+>", "", p.get("title") or p.get("name") or "")
+                    brand = match_brand(p.get("vendor") or "", title, brands, anywhere=brand_q is not None)
                     if brand is None:
                         continue
                     rows = parse(p, source, brand, rates, bands)
                     listings.extend(rows)
-                if len(products) < 2 and recipe == "woocommerce":
-                    pass
                 pause(PAGE_PAUSE)
+    except Deadline:
+        cov["status"] = "partial" if cov["pages"] else "skipped"
+        cov["error"] = "deadline"
     except Blocked as e:
         cov["status"] = "blocked"
         cov["error"] = str(e)
@@ -293,6 +353,7 @@ def run(argv=None) -> int:
     ap.add_argument("--sources", default="data/sources.json")
     ap.add_argument("--focus", default="data/focus.json")
     ap.add_argument("--workers", type=int, default=4)
+    ap.add_argument("--deadline", type=float, default=DEFAULT_DEADLINE, help="seconds after which no more requests are made (0 = none)")
     args = ap.parse_args(argv)
 
     with open(args.focus, encoding="utf-8") as f:
@@ -309,41 +370,57 @@ def run(argv=None) -> int:
         rates, rates_source = fetch_rates()
 
     started = datetime.now(timezone.utc)
+    reset_throttle()
+    set_deadline(time.monotonic() + args.deadline if args.deadline and args.deadline > 0 else None)
     coverage = {}
     listings = []
-    if brands and sources:
-        with cf.ThreadPoolExecutor(max_workers=args.workers) as ex:
-            futures = {ex.submit(sweep_source, s, brands, rates, bands): s for s in sources}
-            for fut in cf.as_completed(futures):
-                s = futures[fut]
-                rows, cov = fut.result()
-                coverage[s["id"]] = cov
-                listings.extend(rows)
-    today = started.strftime("%Y-%m-%d")
-    for s in registry.get("sources", []):
-        cov = coverage.get(s["id"])
-        if cov:
-            st = s.setdefault("status", {})
-            st["last_status"] = cov["status"]
-            st["last_listings"] = cov["listings"]
-            st["last_checked"] = today
-            if cov["status"] == "ok":
-                st["last_ok"] = today
-    listings.sort(key=lambda r: (r["brand"], r["price_aud"] if r["price_aud"] is not None else 10**9))
-    out = {
-        "ran_at": started.strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "seconds": int((datetime.now(timezone.utc) - started).total_seconds()),
-        "rates": rates,
-        "rates_source": rates_source,
-        "focus": {"brands": brands, "bands": bands},
-        "listings": listings,
-        "coverage": coverage,
-    }
-    with open(args.out, "w", encoding="utf-8") as f:
-        json.dump(out, f, ensure_ascii=False, indent=1)
-    with open(args.sources, "w", encoding="utf-8") as f:
-        json.dump(registry, f, ensure_ascii=False, indent=2)
-        f.write("\n")
+
+    def write_out(final: bool) -> dict:
+        rows = sorted(listings, key=lambda r: (r["brand"], r["price_aud"] if r["price_aud"] is not None else 10**9))
+        out = {
+            "ran_at": started.strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "seconds": int((datetime.now(timezone.utc) - started).total_seconds()),
+            "complete": final,
+            "deadline_seconds": args.deadline,
+            "rates": rates,
+            "rates_source": rates_source,
+            "focus": {"brands": brands, "bands": bands},
+            "listings": rows,
+            "coverage": coverage,
+        }
+        tmp = args.out + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(out, f, ensure_ascii=False, indent=1)
+        os.replace(tmp, args.out)
+        return out
+
+    out = write_out(False)
+    try:
+        if brands and sources:
+            with cf.ThreadPoolExecutor(max_workers=args.workers) as ex:
+                futures = {ex.submit(sweep_source, s, brands, rates, bands): s for s in sources}
+                for fut in cf.as_completed(futures):
+                    s = futures[fut]
+                    rows, cov = fut.result()
+                    coverage[s["id"]] = cov
+                    listings.extend(rows)
+                    write_out(False)
+    finally:
+        today = started.strftime("%Y-%m-%d")
+        for s in registry.get("sources", []):
+            cov = coverage.get(s["id"])
+            if cov:
+                st = s.setdefault("status", {})
+                st["last_status"] = cov["status"]
+                st["last_listings"] = cov["listings"]
+                st["last_checked"] = today
+                if cov["status"] == "ok":
+                    st["last_ok"] = today
+        out = write_out(True)
+        with open(args.sources, "w", encoding="utf-8") as f:
+            json.dump(registry, f, ensure_ascii=False, indent=2)
+            f.write("\n")
+    listings = out["listings"]
     ok = sum(1 for c in coverage.values() if c["status"] == "ok")
     inb = sum(1 for r in listings if r["in_band"])
     print(f"sweep: {len(sources)} feeds, {ok} ok, {len(listings)} listings for {len(brands)} brands, {inb} in band, {out['seconds']} s, rates from {rates_source}")

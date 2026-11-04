@@ -1,2 +1,4 @@
 .superpowers/
 __pycache__/
+data/sweep.json
+data/sweep.json.tmp

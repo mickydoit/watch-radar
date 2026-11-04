@@ -1,6 +1,17 @@
 """Tests for tools/sweep.py. Run: python3 -m unittest tools.test_sweep -v"""
+import contextlib
+import email.message
+import io
+import json
+import os
+import tempfile
+import time
 import unittest
+import urllib.error
+import warnings
 from unittest import mock
+
+warnings.filterwarnings("ignore", category=ResourceWarning, message=".*HTTPError.*")
 
 from tools import sweep
 
@@ -30,6 +41,13 @@ class MatchBrand(unittest.TestCase):
 
     def test_unselected_brand_is_none(self):
         self.assertIsNone(sweep.match_brand("Rolex", "Submariner", BRANDS))
+
+    def test_anywhere_matches_brand_inside_title_when_asked(self):
+        brands = BRANDS + ["Omega"]
+        self.assertIsNone(sweep.match_brand("", "Pre-Owned Omega Seamaster", brands))
+        self.assertEqual(sweep.match_brand("", "Pre-Owned Omega Seamaster", brands, anywhere=True), "Omega")
+        self.assertEqual(sweep.match_brand("", "1965 King Seiko 44KS", brands, anywhere=True), "King Seiko")
+        self.assertIsNone(sweep.match_brand("", "1965 King Seiko 44KS", ["Seiko"], anywhere=True))
 
 
 class Money(unittest.TestCase):
@@ -102,6 +120,149 @@ class Woo(unittest.TestCase):
         self.assertEqual(out[0]["url"], "https://definewatches.com.au/product/sinn-556-i/")
         self.assertFalse(out[0]["in_band"])
         self.assertTrue(out[0]["available"])
+
+
+def _http_error(code, retry_after=None):
+    h = email.message.Message()
+    if retry_after is not None:
+        h["Retry-After"] = str(retry_after)
+    return urllib.error.HTTPError("https://x/products.json", code, "Too Many Requests", h, io.BytesIO(b""))
+
+
+class Throttle(unittest.TestCase):
+    def setUp(self):
+        sweep.reset_throttle()
+        sweep.set_deadline(None)
+        self.sleep = mock.patch.object(sweep.time, "sleep").start()   # the Shopify slot's own gap sleep
+        self.addCleanup(mock.patch.stopall)
+
+    def test_429_gives_up_after_three_per_source(self):
+        state = {}
+        with mock.patch("urllib.request.urlopen", side_effect=_http_error(429, 1)), mock.patch.object(sweep, "pause") as p:
+            with self.assertRaises(sweep.Blocked):
+                sweep.fetch_json("https://x/products.json?page=1", shopify=True, state=state)
+        self.assertEqual(p.call_count, 2)   # waits after the 1st and 2nd 429; the 3rd ends the source
+
+    def test_429_count_carries_across_pages_of_one_source(self):
+        state = {}
+        calls = [0]
+        def side(req, timeout=None):
+            calls[0] += 1
+            if calls[0] in (1, 2):
+                raise _http_error(429, 1)
+            if calls[0] == 3:
+                return io.BytesIO(b'{"products": []}')
+            raise _http_error(429, 1)
+        with mock.patch("urllib.request.urlopen", side_effect=side), mock.patch.object(sweep, "pause") as p:
+            sweep.fetch_json("https://x/products.json?page=1", shopify=True, state=state)  # 2 x 429 then ok
+            with self.assertRaises(sweep.Blocked):
+                sweep.fetch_json("https://x/products.json?page=2", shopify=True, state=state)  # 3rd 429 ends the source
+        self.assertEqual(p.call_count, 2)
+
+    def test_retry_after_is_capped_at_60_seconds(self):
+        with mock.patch("urllib.request.urlopen", side_effect=_http_error(429, 3600)), mock.patch.object(sweep, "pause") as p:
+            with self.assertRaises(sweep.Blocked):
+                sweep.fetch_json("https://x/products.json", shopify=True, state={})
+        self.assertEqual(p.call_args_list[0].args[0], 60)
+
+    def test_global_429_budget_blocks_every_shopify_source(self):
+        sweep.GLOBAL_429[0] = sweep.MAX_GLOBAL_429
+        with mock.patch("urllib.request.urlopen") as u:
+            with self.assertRaises(sweep.Blocked) as cm:
+                sweep.fetch_json("https://y/products.json", shopify=True, state={})
+        self.assertEqual(u.call_count, 0)
+        self.assertIn("throttled", str(cm.exception))
+
+    def test_429_pauses_every_shopify_worker(self):
+        with mock.patch("urllib.request.urlopen", side_effect=_http_error(429, 5)), mock.patch.object(sweep, "pause"):
+            with self.assertRaises(sweep.Blocked):
+                sweep.fetch_json("https://x/products.json", shopify=True, state={})
+        self.sleep.reset_mock()
+        sweep._shopify_slot()
+        self.assertTrue(self.sleep.called)
+        self.assertGreater(self.sleep.call_args.args[0], 3.5)
+
+
+class Deadline(unittest.TestCase):
+    def setUp(self):
+        sweep.reset_throttle()
+
+    def tearDown(self):
+        sweep.set_deadline(None)
+
+    def test_past_deadline_skips_source_without_fetching(self):
+        sweep.set_deadline(time.monotonic() - 1)
+        src = dict(SHOP, feed="https://teddybaldassarre.com/products.json?limit=250&page={page}")
+        with mock.patch.object(sweep, "fetch_json") as f:
+            listings, cov = sweep.sweep_source(src, BRANDS, RATES, BANDS)
+        self.assertEqual(f.call_count, 0)
+        self.assertEqual(cov["status"], "skipped")
+        self.assertEqual(cov["error"], "deadline")
+
+    def test_deadline_mid_source_keeps_pages_already_read(self):
+        sweep.set_deadline(time.monotonic() + 3600)
+        src = dict(SHOP, feed="https://teddybaldassarre.com/products.json?limit=250&page={page}")
+        def first_page_then_expire(url, shopify=False, state=None):
+            sweep.set_deadline(time.monotonic() - 1)
+            return {"products": [PRODUCT]}
+        with mock.patch.object(sweep, "fetch_json", side_effect=first_page_then_expire), mock.patch.object(sweep, "pause"):
+            listings, cov = sweep.sweep_source(src, BRANDS + ["MeisterSinger"], RATES, BANDS)
+        self.assertEqual(cov["status"], "partial")
+        self.assertEqual(cov["error"], "deadline")
+        self.assertEqual(cov["pages"], 1)
+        self.assertEqual(len(listings), 2)
+
+
+class WooMatching(unittest.TestCase):
+    def test_woo_matches_brand_anywhere_in_title_and_unescapes_entities(self):
+        src = dict(DEFINE, id="kalmar", feed="https://www.kalmarantiques.com.au/wp-json/wc/store/v1/products?search={brand}&per_page=100&page={page}")
+        def product(i, name):
+            return dict(WOO, id=i, name=name)
+        pages = {
+            "Omega": [[product(1, "Pre-Owned Omega Seamaster"), product(2, "Omega NATO strap")], []],
+            "Frederique Constant": [[product(3, "Fr&eacute;d&eacute;rique Constant Classics")], []],
+        }
+        def fetch(url, shopify=False, state=None):
+            import urllib.parse
+            q = urllib.parse.unquote(url.split("search=")[1].split("&")[0])
+            return pages[q].pop(0)
+        with mock.patch.object(sweep, "fetch_json", side_effect=fetch), mock.patch.object(sweep, "pause"):
+            listings, cov = sweep.sweep_source(src, ["Omega", "Frederique Constant"], RATES, BANDS)
+        titles = sorted((r["brand"], r["title"]) for r in listings)
+        self.assertIn(("Omega", "Pre-Owned Omega Seamaster"), titles)
+        self.assertIn(("Frederique Constant", "Frédérique Constant Classics"), titles)
+
+
+class RunOutput(unittest.TestCase):
+    def test_run_writes_output_after_each_source(self):
+        d = tempfile.mkdtemp()
+        srcs = os.path.join(d, "sources.json"); focus = os.path.join(d, "focus.json"); out = os.path.join(d, "sweep.json")
+        a = dict(SHOP, id="a", feed="https://a/products.json?page={page}")
+        b = dict(SHOP, id="b", feed="https://b/products.json?page={page}")
+        with open(srcs, "w") as f:
+            json.dump({"sources": [a, b]}, f)
+        with open(focus, "w") as f:
+            json.dump({"brands": ["Seiko"], "bands": BANDS}, f)
+        seen = {}
+        def fake_source(source, brands, rates, bands):
+            if source["id"] == "b":   # a finished first; its coverage must reach the file while b is still running
+                for _ in range(200):
+                    cov = {}
+                    if os.path.exists(out):
+                        with open(out) as f:
+                            cov = json.load(f)["coverage"]
+                    if cov:
+                        break
+                    time.sleep(0.01)
+                seen["partial"] = cov
+            return [], {"status": "empty", "products": 0, "listings": 0, "pages": 0, "error": None}
+        with mock.patch.object(sweep, "sweep_source", side_effect=fake_source), contextlib.redirect_stdout(io.StringIO()):
+            sweep.run(["--rates", json.dumps(RATES), "--out", out, "--sources", srcs, "--focus", focus, "--workers", "1"])
+        self.assertEqual(set(seen["partial"]), {"a"})
+        with open(out) as f:
+            final = json.load(f)
+        self.assertEqual(set(final["coverage"]), {"a", "b"})
+        self.assertIn("deadline_seconds", final)
 
 
 class Coverage(unittest.TestCase):
