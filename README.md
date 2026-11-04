@@ -4,7 +4,7 @@ A daily research agent that scans the market for the **watch brands and price ba
 
 **Site:** https://mickydoit.github.io/watch-radar/ (GitHub Pages, served from this repo's `main`).
 
-It runs as a Claude Code **scheduled cloud routine** every morning at 07:00 Brisbane. Each run clones this repo, reads `data/watchlist.json`, gathers every listing it can find for each reference, computes a median benchmark (like-for-like on condition, smoothed over 30 days), flags listings under it, records price history and auction lots, writes `data/latest.json`, commits and pushes. Pages redeploys on the push. Nothing is emailed and no mail account is attached.
+It runs as a Claude Code **scheduled cloud routine** every hour at 35 past; the 07:35 Brisbane run is the daily run that also fetches photos and auction lots. Each run clones this repo, reads `data/watchlist.json`, gathers every listing it can find for each reference, computes a median benchmark (like-for-like on condition, smoothed over 30 days), flags listings under it, records price history and auction lots, writes `data/latest.json`, commits and pushes. Pages redeploys on the push. Nothing is emailed and no mail account is attached.
 
 ## Files
 
@@ -25,7 +25,7 @@ It runs as a Claude Code **scheduled cloud routine** every morning at 07:00 Bris
 
 ## Choosing what gets researched
 
-Open the site's **Focus** section, tick the brands and the price bands you care about, and press Save, then enter the Watch Radar password. Settings live in a small Supabase table (`supabase/watch_radar.sql`); the password is checked by the database, writes go through a server-side function, and the routine reads the same table each morning and mirrors it into `data/focus.json` and `data/watchlist.json`. If `data/backend.json` has no database URL, the site falls back to saving straight to GitHub with a fine-grained token. The next 07:00 run researches those brands inside those bands, picks up to five models per brand with the most stock, benchmarks each, and lists what sits under market. Specific references can be added underneath if you want a particular watch tracked regardless of band.
+Open the site's **Focus** section, tick the brands and the price bands you care about, and press Save, then enter the Watch Radar password. Settings live in a small Supabase table (`supabase/watch_radar.sql`); the password is checked by the database, writes go through a server-side function, and the routine reads the same table each run and mirrors it into `data/focus.json` and `data/watchlist.json`. If `data/backend.json` has no database URL, the site falls back to saving straight to GitHub with a fine-grained token. The next run researches those brands inside those bands, picks up to five models per brand with the most stock, benchmarks each, and lists what sits under market. Specific references can be added underneath if you want a particular watch tracked regardless of band.
 
 ## Editing the reference list
 
