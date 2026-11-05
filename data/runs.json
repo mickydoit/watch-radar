@@ -107,6 +107,25 @@
     "reached": 65
    },
    "report": "reports/2026-11-05.md"
+  },
+  {
+   "run_id": "2026-11-06T0714",
+   "date": "2026-11-06",
+   "type": "daily",
+   "status": "partial",
+   "brands": 17,
+   "models": 75,
+   "new": 51,
+   "drops": 9,
+   "deals": 153,
+   "sold": 70,
+   "auction": 0,
+   "fetches": 310,
+   "coverage": {
+    "sources": 138,
+    "reached": 29
+   },
+   "report": "reports/2026-11-06.md"
   }
  ]
 }
