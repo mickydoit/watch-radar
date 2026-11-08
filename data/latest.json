@@ -67,7 +67,15 @@
    ]
   ]
  },
- "fx": {},
+ "fx": {
+  "CHF_AUD": 1.777,
+  "EUR_AUD": 1.625,
+  "GBP_AUD": 1.948,
+  "HKD_AUD": 0.186,
+  "JPY_AUD": 0.009,
+  "SGD_AUD": 1.136,
+  "USD_AUD": 1.455
+ },
  "fetches": 0,
  "pushed": true,
  "notes": [
