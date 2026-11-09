@@ -1,10 +1,10 @@
 # watch-radar
 
-A daily research agent that scans the market for the **watch brands and price bands you choose**, works out what each model it finds is really asking across marketplaces, dealers and grey-market sites, and shows the listings priced **below that market** on a small web app.
+A research agent, run on request, that scans the market for the **watch brands and price bands you choose**, works out what each model it finds is really asking across marketplaces, dealers and grey-market sites, and shows the listings priced **below that market** on a small web app.
 
 **Site:** https://mickydoit.github.io/watch-radar/ (GitHub Pages, served from this repo's `main`).
 
-It runs as a Claude Code **scheduled cloud routine** every morning at 07:00 Brisbane, with photos and auction lots fetched on the same run. Each run clones this repo, reads `data/watchlist.json`, gathers every listing it can find for each reference, computes a median benchmark (like-for-like on condition, smoothed over 30 days), flags listings under it, records price history and auction lots, writes `data/latest.json`, commits and pushes. Pages redeploys on the push. Nothing is emailed and no mail account is attached.
+It runs as a Claude Code **cloud routine with no schedule**: the owner starts it by hand (Run now at claude.ai/code/routines) whenever a fresh scan is wanted, with photos and auction lots fetched on the same run. Each run clones this repo, reads `data/watchlist.json`, gathers every listing it can find for each reference, computes a median benchmark (like-for-like on condition, smoothed over 30 days), flags listings under it, records price history and auction lots, writes `data/latest.json`, commits and pushes. Pages redeploys on the push. Nothing is emailed and no mail account is attached.
 
 ## Files
 
